@@ -16,7 +16,7 @@ body{
   color: rgb(0, 0, 0);
   height: 100vh;
   width: 100vw;
-  background-image: url(/frontEnd/assets/img/background2.png);
+  background-image: url("../img/background2.png");
   background-size: cover;
   background-repeat: no-repeat;
   font-family:'sfpro';
