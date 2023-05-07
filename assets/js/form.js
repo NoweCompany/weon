@@ -1,0 +1,85 @@
+const form         = document.querySelector('.form');
+const inpEmail     = document.querySelector('#email');
+const inpPassword  = document.querySelector('#password');
+const conteinerMsg = document.querySelector('.msg')
+const url = 'https://instrutorcerto.com.br'
+const urlWebsite   = document.location.href.split('/').slice(0, -1).join('/')
+
+import Logado from './modules/Logado.js'
+
+window.addEventListener('load', async e => {
+  const logado = new Logado()
+  if(await logado.userLogado()){
+    console.log('chamei 2');
+    return window.location.assign(`${urlWebsite}/pages/home.html`)
+  }else{
+    return
+  }
+})
+
+class FormLogin{
+    constructor(email, password){
+        this.crateJsonBody(this.email, this.password)
+        this.email = email;
+        this.password = password;
+    }
+    crateJsonBody(){
+      const obj = 
+      {
+        email: this.email,
+        password: this.password
+      }
+      
+
+      return this.body = JSON.stringify(obj)
+    }
+
+    validate(){
+      return true
+    };
+
+    msg(msg){
+        conteinerMsg.classList.add('errors')
+        return conteinerMsg.innerHTML = msg
+    };
+
+    async postApi(){
+        try{
+          if(!this.validate()) return this.msg('Valores inválidos')
+          const body = this.crateJsonBody()
+          const response = await fetch(url + '/token', 
+            {
+              method: "POST",
+              headers: 
+                {
+                  "Content-Type": "application/json",
+                },
+              body: body
+                  
+          });
+          const data = await response.json();
+          return data;
+        }catch(e){
+            this.msg(e);
+        }
+    };
+
+    async init(){
+      const response = await this.postApi();
+      if(response.errors){
+        this.msg(response.errors);
+      }else{
+        const token = response.token;
+        const maxAge = 60*60*24*7
+        document.cookie = `token=${token};max-age=${maxAge}; path=/`;
+        window.location.reload()
+      }
+    };
+}
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = new FormLogin(inpEmail.value, inpPassword.value);
+    form.init()
+    return
+})

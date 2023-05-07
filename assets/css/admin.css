@@ -1,0 +1,361 @@
+@font-face {
+  font-family: sfpro;
+  src: url(../../SF-Pro-Display-Medium.otf);
+}
+
+body{
+margin-top: 50px;
+  color: rgb(0, 0, 0);
+  height: 100vh;
+  width: 100vw;
+  background-image: url(/frontEnd/assets/img/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family:'sfpro';
+  overflow-x: hidden;
+}
+
+.conteiner{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Estilo para telas menores */
+@media screen and (max-width: 100px) {
+  .container {
+    width: 100%;
+  }
+}
+ 
+.imagem-pequena {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 10%;
+  overflow: hidden;
+  width: 100px;
+  height: 10 0px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.imagem-pequena img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:40%;
+}
+
+
+.bolas {
+  position: fixed;
+  top: 2%;
+  right: 1%;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.bola {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.bola:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.imagem {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+ /* Estilização da barra de rolagem */
+ ::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Estilização do botão de rolagem */
+::-webkit-scrollbar-button {
+  display: none; /* Oculta o botão de rolagem */
+}
+
+/* Estilização do trilho da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #000000; /* Cor de fundo do trilho */
+  
+}
+
+/* Estilização do "polegar" da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Cor do "polegar" */
+  border-radius: 10px; /* Borda arredondada do "polegar" */
+}
+
+/* Estilização do "polegar" quando estiver "hovered" (passando o mouse) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(255, 255, 255); /* Cor do "polegar" quando "hovered" */
+}
+
+
+    nav{
+        background: rgba(255, 255, 255, 0.566);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        height: 8%;
+      }
+      
+      
+      .menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .menu li {
+        margin: 0 1rem;
+      }
+      
+      .menu li a {
+        color: #303030;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: bold;
+        padding: 1rem;
+        transition: color 0.3s;
+        
+      }
+
+      #selecionado{
+        color: #4469aa;
+       
+      }
+      
+      .menu li a:hover {
+        color: #555;
+      }
+      
+      .toggle {
+        font-size: 1.5rem;
+        color: #000000;
+        cursor: pointer;
+        padding: 1rem;
+      }
+
+      .btns{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      @media (max-width: 768px) {
+        .menu {
+          display: none;
+        }
+        
+        .toggle {
+          display: block;
+        }
+        
+        nav {
+          background: none;
+          padding: 0;
+        }
+        
+        nav ul {
+          width: 100%;
+          flex-direction: column;
+          position: absolute;
+          top: 5rem;
+          left: 0;
+          background: rgba(255, 255, 255, 0.493);
+          text-align: center;
+          display: none;
+        }
+        
+        nav ul li {
+          margin: 0.5rem 0;
+        }
+        
+        nav ul li a {
+          font-size: 1.5rem;
+          padding: 1rem;
+        }
+        
+        nav.active ul {
+          display: block;
+        }
+      }
+      ::selection {
+        color: rgb(33, 72, 180);
+      }
+    
+      /* Estilização da barra de rolagem */
+    ::-webkit-scrollbar {
+        width: 10px; /* Largura da barra de rolagem */
+      }
+      
+      /* Estilização do botão de rolagem */
+      ::-webkit-scrollbar-button {
+        display: none; /* Oculta o botão de rolagem */
+      }
+      
+      /* Estilização do trilho da barra de rolagem */
+      ::-webkit-scrollbar-track {
+        background-color: #000000; /* Cor de fundo do trilho */
+       
+      }
+      
+      /* Estilização do "polegar" da barra de rolagem */
+      ::-webkit-scrollbar-thumb {
+        background-color: #ffffff; /* Cor do "polegar" */
+        border-radius: 10px; /* Borda arredondada do "polegar" */
+      }
+      
+      /* Estilização do "polegar" quando estiver "hovered" (passando o mouse) */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(255, 255, 255); /* Cor do "polegar" quando "hovered" */
+      }
+    
+
+    /* barra lateral */
+    .button-container.hide {
+      display: none;
+    }
+    
+    .button-container {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      margin-top: 20px;
+    }
+    
+    .button {
+      padding: 5px 5px;
+      background: rgba(255, 255, 255, 0.566);
+      color: #000000;
+      border: none;
+      font-size: 30px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .modal-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translate(-100%, -50%);
+      background: rgba(255, 255, 255, 0.566);
+      width: 200px;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: transform 0.4s ease-in-out;
+      padding-top: 10px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
+    }
+    
+    .modal.show {
+      transform: translate(0, -50%);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .modal-title {
+      font-size: 20px;
+      margin: 0;
+    }
+    
+    .modal-close {
+      padding: 5px 10px;
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .modal-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-button {
+     
+      background-color: #000000;
+      color: #fff;
+      border: none;
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      margin: 10px;
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+
+    .modal-button:hover{
+      transform: scale(1.1);
+    }
+
+    
+    .button:hover{
+    background-color: #000000;
+    color: #fff;
+    }

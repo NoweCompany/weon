@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/frontEnd/assets/img/icon.ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/frontEnd/assets/css/contas.css">
+    <title>weon</title>
+</head>
+<body>
+
+  <a href="tabela.html"><img class="icon" src="/frontEnd/assets/img/seta-esquerda.png"></a>
+
+  <div class="imagem-pequena">
+    <img src="/frontEnd/assets/img/icone preto.png" alt="Imagem Pequena">
+  </div>
+
+
+  <nav>
+    <div class="logo"></div>
+    <ul class="menu">
+      <li><a id="selecionado" href="tabela.html">| Drive |</a></li>
+      <li><a href="admin.html">| Admin |</a></li>
+      <li><a href="dashboard.html">| Dashboard |</a></li>
+      <li id="sair"><a href="">| Sair |</a></li>
+      <div class="bolas">
+        <div class="bola">
+          <div class="imagem" style="background-image: url('/frontEnd/assets/img/do-utilizador.png')"></div>
+        </div>
+    
+    </ul>
+    <div class="toggle"><i class="fas fa-bars"></i></div>
+  </nav>
+
+    <form id="formCad">
+        <h1> Cadastrar contas </h1>
+        <div>
+          <label for="documento">Documento:</label>
+          <input  type="text" id="documento" name="documento">
+        </div>
+        <div>
+          <label for="fornecedor">Fornecedor:</label>
+          <input  type="text" id="fornecedor" name="fornecedor">
+        </div>
+        <div>
+          <label for="dataPagamento">Data de Pagamento:</label>
+          <input  type="date" id="dataPagamento" name="dataPagamento">
+        </div>
+        <div>
+          <label for="dataVencimento">Data de Vencimento:</label>
+          <input  type="date" id="dataVencimento" name="dataVencimento">
+        </div>
+        <div>
+          <label for="valor">Valor:</label>
+          <input  type="number" id="valor" name="valor" step="0.01" min="0">
+        </div>
+        <div>
+          <label for="banco">Banco:</label>
+          <select id="banco" name="banco">
+            <option value="">Selecione</option>
+            <option value="Itaú">Itaú</option>
+            <option value="Bradesco">Bradesco</option>
+            <option value="Nubank">Nubank</option>
+          </select>
+        </div>
+        <div>
+          <label for="formaPagamento">Forma de Pagamento:</label>
+          <select id="formaPagamento" name="formaPagamento">
+            <option value="">Selecione</option>
+            <option value="boleto">Boleto</option>
+            <option value="cartao">Cartão de Crédito</option>
+            <option value="transferencia">Transferência Bancária</option>
+          </select>
+        </div>
+        <div>
+          <label for="observacao">Observação:</label>
+          <textarea id="observacao" name="observacao"></textarea>
+        </div>
+        <center> 
+        <div> 
+          <input  class='btn' type="submit" value="Enviar">
+        </div>
+    </center>
+      </form>      
+    <script type="module" src="./assets/js/modules/Logado.js"></script>
+    <script type="module" src="../assets/js/contasInsert.js"></script>
+</body>
+</html>

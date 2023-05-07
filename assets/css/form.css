@@ -1,0 +1,136 @@
+
+@font-face {
+  font-family: 'sfpro';
+  src: url(/frontEnd/SF-Pro-Display-Medium.otf);
+}
+
+*{
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body{
+  color: rgb(0, 0, 0);
+  height: 100vh;
+  width: 100vw;
+  background-image: url(/frontEnd/assets/img/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family:'sfpro';
+ 
+
+}
+
+.conteiner{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.errors{
+  background-color: rgba(255, 134, 134, 0.414);
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+
+
+}
+
+h1{
+  margin-bottom: 5%;
+}
+
+form {
+  margin: -10%;
+  max-width: 400px;
+  padding: 70px;
+  background-color: rgba(255, 255, 255, 0.238);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(65, 65, 65, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  align-items: center;
+  position: absolute;
+  position: fixed;
+  
+
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.inputlogin, select {
+  width: 280px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  background-color: #fff;
+  align-items: center;
+  
+}
+
+.btn {
+  display: inline-block;
+  padding: 4px 20px;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background-color: black;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.3s ease;
+  align-items: center;
+ 
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+::selection {
+  color: rgb(33, 72, 180);
+}
+
+.imagem {
+  display: block;
+  margin: 0 auto;
+  max-width:25%;
+  height: auto;
+  position: relative;
+  top: -100px; /* ajuste a altura conforme necessário */
+}
+
+  
+.imagem-pequena {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 10%;
+  overflow: hidden;
+  width: 100px;
+  height: 10 0px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.imagem-pequena img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
