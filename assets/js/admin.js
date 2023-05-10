@@ -1,8 +1,22 @@
 const menuaLteral = document.querySelector('.modal-body')
 const url = 'https://instrutorcerto.com.br'
+const urlWebsite   = document.location.href
 
 const predefinicao = document.querySelector('#predefinicao')
 const conteiner = document.querySelector('.conteiner')
+const conteinerMsg = document.querySelector('#msg')
+
+import Logado from "./modules/Logado.js";
+
+window.addEventListener('load', async (e) => {
+    conteinerMsg.innerHTML = ''
+    const logado = new Logado()
+    if(!(await logado.userLogado())){
+      return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`)
+    }else{
+      return
+    }
+})
 
 class Admin{
     constructor(){
@@ -11,8 +25,10 @@ class Admin{
     }
 
     async init(){
+        conteinerMsg.innerHTML = ''
+        conteiner.innerHTML = ''
         await this.event()
-        //this.predefinicao()
+        //this.preset.predefinicao()
     }
 
     async event(){
@@ -28,23 +44,16 @@ class Admin{
 
 class Preset{
     async predefinicao(){
-        conteiner.innerHTML = ''
-        conteiner.innerHTML = `
-        <table>
-            <thead>
-            <tr id="thead">
-                <th>Nome</th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
-  
-            </tbody>
-        </table>`
-
         this.creteTablePresets()
 
     }
     
+    msg(msg){
+        conteinerMsg.classList.remove('msg')
+        conteinerMsg.classList.add('active')
+        conteinerMsg.textContent = msg
+    }
+
     maiorLength(data){
         let maiorLength = 0
 
@@ -57,14 +66,63 @@ class Preset{
         return maiorLength
     }
 
-    async creteTablePresets(){
-        const tbody = document.querySelector('#tbody')
-        const thead = document.querySelector('#thead')
+    event(){
+        document.addEventListener('click', (e) => {
+            const el = e.target
+            const id = el.getAttribute('id')
+            if( id === 'createPreset')  this.rederFormPreset()
+            if( id === 'cancelPresetForm') this.predefinicao()
+            if( id === 'createPresetForm') this.createPreset()
+        })
+    }
 
+    async createPreset(){
+        
+    }   
+
+    rederFormPreset(){
+        conteiner.innerHTML = `
+        <form id="formPreset">
+        <h1> Criar Predefinição </h1>
+        <div>
+          <label for="name">Nome</label>
+          <input type="text" id="name">
+        </div>
+      </form>   
+        <div class="cont-btn-form-preset">
+            <button class="modal-button" id="cancelPresetForm"> Cancelar </button>
+            <button class="modal-button" id="createPresetForm"> Criar </button>
+        </div>
+        `
+    }
+
+    rederTable(){
+        conteiner.innerHTML = `
+        <table>
+            <thead>
+            <tr id="thead">
+                <th>Nome</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+  
+            </tbody>
+        </table>
+        <button id="createPreset" class="modal-button">Criar</button>
+        `
+    }
+
+    async creteTablePresets(){
         const data = await this.getApiPresets()
 
         //validar
-        if(!data) return alert('erro')
+        if(data.msg) return this.msg(data.msg)
+
+        this.rederTable()
+        this.event()
+
+        const tbody = document.querySelector('#tbody')
+        const thead = document.querySelector('#thead')
 
         //retorna a lengtn do maior array de 'filds'
         const maiorLength = this.maiorLength(data)
@@ -72,7 +130,7 @@ class Preset{
        //thead enumerado
         for (let i = 0; i <= maiorLength; i++) {
             const th = document.createElement('th')
-            const thText = document.createTextNode(`${i}`)
+            const thText = document.createTextNode(`${i+1}`)
     
             th.appendChild(thText)  
             thead.appendChild(th)
@@ -115,8 +173,18 @@ class Preset{
 }
 
 class Campos{
+        
+    msg(msg){
+        conteinerMsg.classList.remove('msg')
+        conteinerMsg.classList.add('active')
+        conteinerMsg.textContent = msg
+    }
+
     campos(){
-        conteiner.innerHTML = ''
+        if(conteinerMsg.classList.contains('active')){
+            conteinerMsg.classList.remove('active')
+            conteinerMsg.classList.add('msg')
+        }
         conteiner.innerHTML = '<h1>Campos</h1>'
     }
 }
