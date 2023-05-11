@@ -16,6 +16,10 @@
       
 }
 
+:root {
+  scroll-behavior: smooth;
+}
+
 .conteiner{
     display: flex;
     align-items: center;

@@ -15,6 +15,11 @@ margin-top: 50px;
   overflow-x: hidden;
 }
 
+:root {
+  scroll-behavior: smooth;
+}
+
+
 /* Estilo para telas menores */
 @media screen and (max-width: 100px) {
   .container {

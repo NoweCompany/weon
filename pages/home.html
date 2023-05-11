@@ -7,38 +7,49 @@
     <title>Home - weon  </title>
     <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 </head>
 <body>
+<!-- logo nowe -->
  <div class="imagem-pequena">
         <img src="../assets/img/icone preto.png" alt="Imagem Pequena">
       </div>
 
+<!-- logo weon -->
+
       <div class="image-container">
-		<img class="img" src="../assets/img/nbackground2.png" alt="weon"/>
+		<img class="img" src="../assets/img/weon sem fundo branco.png" alt="weon"/>
     <div class="word"> 
+<div class="tracking-in-expand"> 
+
       <h1> Seja bem-vindo </h1>
       </div>
 	</div>
-
-  <nav>
-    <div class="logo"></div>
-    <ul class="menu">
-      <li><a href="cadastro.html">| Cadastro |</a></li>
-      <li><a id="selecionado" href="tabela.html">| Drive |</a></li>
-      <li><a href="dashboard.html">| Dashboard |</a></li>
-      <li><a href="admin.html">| Admin |</a></li>
-      <div class="bolas">
-        <div class="bola">
-          <div class="imagem" style="background-image: url('../assets/img/do-utilizador.png')"></div>
+</div>
+<nav>
+  <ul>
+    <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
+    <li><a href="./contas.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+    <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+    <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+    <li class="user-icon">
+      <span><i class="fas solid fa-user"></i></span>
+      <div class="options-window">
+        <div class="options">
+          <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
+          
+          <a href="#"> <i class="fa-solid fa-right-from-bracket"></i></a> 
         </div>
-    
-    </ul>
-    <div class="toggle"><i class="fas fa-bars"></i></div>
-  </nav>
-
+      </div>
+    </li>
+  </ul>
+</nav>
+         
+<script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
       <script type="module" src="../assets/js/modules/Logado.js"></script>
       <script type="module" src="../assets/js/home.js"></script>
+      
 </nav>
 </body>
 </html>
