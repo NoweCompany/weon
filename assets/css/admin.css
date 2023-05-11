@@ -5,10 +5,9 @@
 
 body{
 margin-top: 50px;
-  color: rgb(0, 0, 0);
+background-color: #2e578b;
   height: 100vh;
   width: 100vw;
-  background-image: url("../img/background2.png");
   background-size: cover;
   background-repeat: no-repeat;
   font-family:'sfpro';

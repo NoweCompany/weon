@@ -14,11 +14,10 @@
     overflow-x: hidden;
   }
   
-  .conteiner{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  :root {
+    scroll-behavior: smooth;
   }
+  
   
   /* Estilo para telas menores */
   @media screen and (max-width: 100px) {
@@ -53,7 +52,6 @@
     height:40%;
   }
   
- 
   
    /* Estilização da barra de rolagem */
    ::-webkit-scrollbar {
@@ -82,11 +80,132 @@
     background-color: rgb(255, 255, 255); /* Cor do "polegar" quando "hovered" */
   }
   
-
-        ::selection {
-          color: rgb(33, 72, 180);
-        }
-      
+  
+  nav {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: -99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    justify-content: space-between;
+  }
+  
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  li:last-child {
+    margin-right: 0;
+  }
+  
+  li a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+    font-family: "sfpro";
+  
+  }
+  
+  .user-icon {
+  position: fixed;
+   top: 10px;
+  right: 3%;
+  align-items: center;
+  }
+  
+  .user-icon span {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .options-window {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    transition: opacity 0.3s;
+  }
+  
+  .user-icon:hover .options-window {
+    display: block;
+    opacity: 1;
+    
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .options a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  }
+  
+  .options a:hover {
+  background-color: #ddd;
+  }
+  
+  
+  li a {
+  /* Restante das propriedades CSS */
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s;
+  }
+  
+  li a:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4469aa;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+  }
+  
+  li a:hover {
+  color: #4469aa;
+  }
+  
+  li a:hover:before {
+  transform: scaleX(1);
+  }
+  
+  
+  li {
+  /* Restante das propriedades CSS */
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: bottom;
+  }
         /* Estilização da barra de rolagem */
       ::-webkit-scrollbar {
           width: 10px; /* Largura da barra de rolagem */
@@ -155,7 +274,7 @@
         transform: translate(-100%, -50%);
         background: rgba(255, 255, 255, 0.566);
         width: 200px;
-        height: 80%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -191,6 +310,7 @@
         background-color: #ff0000;
         color: #fff;
         border: none;
+        margin-top: 50%;
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
@@ -227,130 +347,57 @@
       .button:hover{
       background-color: #000000;
       color: #fff;
-      } 
-      
-      nav {
-        background-color: #ffffff;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-        width: 100%;
-        text-align: center;
-        position: relative;
-        z-index: -99999;
-        position: fixed;
-        top: 0;
-        left: 0;
       }
-    
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        justify-content: space-between;
-      }
-    
-      li {
-        display: inline-block;
-        margin-right: 10px;
-      }
-    
-      li:last-child {
-        margin-right: 0;
-      }
-    
-      li a {
-        display: block;
-        color: #000000;
-        text-align: center;
-        padding: 20px 30px;
-        text-decoration: none;
-        font-family: "sfpro";
-      
-      }
-    
-      .user-icon {
-      position: fixed;
-       top: 10px;
-      right: 3%;
-      align-items: center;
-    }
-    
-      .user-icon span {
-        display: inline-block;
-        padding: 10px;
-        cursor: pointer;
-      }
-    
-      .options-window {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        padding: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        transition: opacity 0.3s;
-      }
-    
-      .user-icon:hover .options-window {
-        display: block;
-        opacity: 1;
-        
-      }
-    
-      .options {
+  
+      .conteiner{
+        margin-top: 5%;
+  
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
-    
-      .options a {
-      display: block;
-      color: #000000;
-      padding: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-    
-    .options a:hover {
-      background-color: #ddd;
-    }
-    
-    
-    li a {
-      /* Restante das propriedades CSS */
-      position: relative;
-      overflow: hidden;
-      transition: color 0.3s;
-    }
-    
-    li a:before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #4469aa;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-    
-    li a:hover {
-      color: #4469aa;
-    }
-    
-    li a:hover:before {
-      transform: scaleX(1);
-    }
-    
-    
-    li {
-      /* Restante das propriedades CSS */
-      display: inline-block;
-      margin-right: 10px;
-      vertical-align: bottom;
-    }
+  
+      .active {
+        display: block;
+        color: #ffffff;
+        background-color: #c96060;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 20px;
+      }
+      .msg{
+        display: none;
+      }
+      table {
+        border-collapse: collapse;
+        width: 70%;
+        margin-bottom: 1rem;
+        color: #000000;
+      }
+      
+      th, td {
+        text-align: center;
+        padding: .5rem;
+        
+      }
+      /* nome do cabeçalho  */
+      th{
+        background-color: #4469aa;
+        color: rgb(255, 255, 255);   
+        
+      }
+      
+      /* background linha */
+      tr {
+        background-color: #efefef;
+      }
+  
+      /* Form preset */
+  
+      .cont-btn-form-preset{
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        column-gap: 30px;
+      }
