@@ -54,42 +54,6 @@ margin-top: 50px;
 }
 
 
-.bolas {
-  position: fixed;
-  top: 2%;
-  right: 1%;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.bola {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.bola:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.imagem {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-}
-
  /* Estilização da barra de rolagem */
  ::-webkit-scrollbar {
   width: 10px; /* Largura da barra de rolagem */
@@ -118,105 +82,131 @@ margin-top: 50px;
 }
 
 
-    nav{
-        background: rgba(255, 255, 255, 0.566);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        height: 8%;
-      }
-      
-      
-      .menu {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      
-      .menu li {
-        margin: 0 1rem;
-      }
-      
-      .menu li a {
-        color: #303030;
-        text-decoration: none;
-        font-size: 1.3rem;
-        font-weight: bold;
-        padding: 1rem;
-        transition: color 0.3s;
-        
-      }
+nav {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: -99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-      #selecionado{
-        color: #4469aa;
-       
-      }
-      
-      .menu li a:hover {
-        color: #555;
-      }
-      
-      .toggle {
-        font-size: 1.5rem;
-        color: #000000;
-        cursor: pointer;
-        padding: 1rem;
-      }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  justify-content: space-between;
+}
 
-      .btns{
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      @media (max-width: 768px) {
-        .menu {
-          display: none;
-        }
-        
-        .toggle {
-          display: block;
-        }
-        
-        nav {
-          background: none;
-          padding: 0;
-        }
-        
-        nav ul {
-          width: 100%;
-          flex-direction: column;
-          position: absolute;
-          top: 5rem;
-          left: 0;
-          background: rgba(255, 255, 255, 0.493);
-          text-align: center;
-          display: none;
-        }
-        
-        nav ul li {
-          margin: 0.5rem 0;
-        }
-        
-        nav ul li a {
-          font-size: 1.5rem;
-          padding: 1rem;
-        }
-        
-        nav.active ul {
-          display: block;
-        }
-      }
-      ::selection {
-        color: rgb(33, 72, 180);
-      }
-    
+li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+li:last-child {
+  margin-right: 0;
+}
+
+li a {
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 20px 30px;
+  text-decoration: none;
+  font-family: "sfpro";
+
+}
+
+.user-icon {
+position: fixed;
+ top: 10px;
+right: 3%;
+align-items: center;
+}
+
+.user-icon span {
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options-window {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  transition: opacity 0.3s;
+}
+
+.user-icon:hover .options-window {
+  display: block;
+  opacity: 1;
+  
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.options a {
+display: block;
+color: #000000;
+padding: 5px;
+text-decoration: none;
+transition: background-color 0.3s;
+}
+
+.options a:hover {
+background-color: #ddd;
+}
+
+
+li a {
+/* Restante das propriedades CSS */
+position: relative;
+overflow: hidden;
+transition: color 0.3s;
+}
+
+li a:before {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 2px;
+background-color: #4469aa;
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.3s;
+}
+
+li a:hover {
+color: #4469aa;
+}
+
+li a:hover:before {
+transform: scaleX(1);
+}
+
+
+li {
+/* Restante das propriedades CSS */
+display: inline-block;
+margin-right: 10px;
+vertical-align: bottom;
+}
       /* Estilização da barra de rolagem */
     ::-webkit-scrollbar {
         width: 10px; /* Largura da barra de rolagem */

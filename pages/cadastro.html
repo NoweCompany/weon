@@ -9,18 +9,22 @@
 </head>
 <body>
   <nav>
-    <div class="logo"></div>
-    <ul class="menu">
-      <li><a id="selecionado" href="cadastro.html"> Cadastro </a></li>
-      <li><a href="tabela.html"> Drive </a></li>
-      <li><a href="dashboard.html"> Dashboard </a></li>
-      <li><a  href="admin.html"> Admin </a></li>
-      <div class="bolas">
-        <div class="bola">
-          <div class="imagem" style="background-image: url('../assets/img/do-utilizador.png')"></div>
+    <ul>
+      <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
+      <li><a href="./contas.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+      <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+      <li class="user-icon">
+        <span><i class="fas solid fa-user"></i></span>
+        <div class="options-window">
+          <div class="options">
+            <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
+            
+            <a href="#"> <i class="fa-solid fa-right-from-bracket"></i></a> 
+          </div>
         </div>
+      </li>
     </ul>
-    <div class="toggle"><i class="fas fa-bars"></i></div>
   </nav>
 
   <!-- Botão principal -->
@@ -70,5 +74,8 @@ closeModalBtn.addEventListener('click', () => {
 });
 
   </script>
+
+  <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+  
 </body>
 </html>
