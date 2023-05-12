@@ -22,13 +22,11 @@ class Admin{
         this.campos = new Campos()
     }
 
-    async init(){
-        conteinerMsg.innerHTML = ''
-        conteiner.innerHTML = ''
-        this.preset.preset()
+    init(){
+        this.event()
     }
 
-    async event(){
+    event(){
         document.addEventListener('click', (e) => {
             const el = e.target
             const id = el.getAttribute('id')
