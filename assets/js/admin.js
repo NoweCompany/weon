@@ -1,8 +1,6 @@
-const menuaLteral = document.querySelector('.modal-body')
 const url = 'https://instrutorcerto.com.br'
 const urlWebsite   = document.location.href
 
-const predefinicao = document.querySelector('#predefinicao')
 const conteiner = document.querySelector('.conteiner')
 const conteinerMsg = document.querySelector('#msg')
 
@@ -27,15 +25,14 @@ class Admin{
     async init(){
         conteinerMsg.innerHTML = ''
         conteiner.innerHTML = ''
-        await this.event()
-        //this.preset.predefinicao()
+        this.preset.preset()
     }
 
     async event(){
         document.addEventListener('click', (e) => {
             const el = e.target
             const id = el.getAttribute('id')
-            if( id === 'predefinicao')  this.preset.predefinicao()
+            if( id === 'predefinicao')  this.preset.preset()
             if( id === 'campos') this.campos.campos()
         })
     }
@@ -43,16 +40,38 @@ class Admin{
 }
 
 class Preset{
-    async predefinicao(){
+    async preset(){
+        this.cleanMsg()
         this.creteTablePresets()
 
     }
     
-    msg(msg){
-        conteinerMsg.classList.remove('msg')
-        conteinerMsg.classList.add('active')
-        conteinerMsg.textContent = msg
+    async msg(msg, success){
+        if(!success){
+            conteinerMsg.className = 'error'
+            conteinerMsg.textContent = msg
+
+            setTimeout(() => {
+                this.cleanMsg()
+            }, 1000)
+
+            return
+        }else{
+            conteinerMsg.className = 'success'
+            conteinerMsg.textContent = msg
+
+            setTimeout(() => {
+                this.cleanMsg()
+            }, 1000);
+
+           return
+        }
+        
     }
+
+    cleanMsg(){
+        return conteinerMsg.className = 'msg'
+    }   
 
     maiorLength(data){
         let maiorLength = 0
@@ -71,38 +90,52 @@ class Preset{
             const el = e.target
             const id = el.getAttribute('id')
             if( id === 'createPreset')  this.rederFormPreset()
-            if( id === 'cancelPresetForm') this.predefinicao()
-            if( id === 'createPresetForm') this.createPreset()
+            if( id === 'cancelPresetForm') this.preset()
         })
     }
 
-    async createPreset(){
-        
+    async createPreset(e){
+        e.preventDefault()
+
+        const namePreset = document.querySelector('#name').value
+
+        if(!namePreset){
+            return this.msg('Campo vazio', false)
+    
+     }   
+        const response = await this.postApiPreset(namePreset)
+
+        if(!response) return
+
+        this.preset()
     }   
 
     rederFormPreset(){
         conteiner.innerHTML = `
         <form id="formPreset">
-        <h1> Criar Predefinição </h1>
-        <div>
-          <label for="name">Nome</label>
-          <input type="text" id="name">
-        </div>
-      </form>   
-        <div class="cont-btn-form-preset">
-            <button class="modal-button" id="cancelPresetForm"> Cancelar </button>
-            <button class="modal-button" id="createPresetForm"> Criar </button>
-        </div>
+            <h1> Criar Predefinição </h1>
+            <div>
+                <label for="name">Nome</label>
+                <input type="text" id="name">
+            </div>
+            <div class="cont-btn-form-preset">
+                <input type="button" class="modal-button" id="cancelPresetForm" value="Voltar" />
+                <input type="submit" class="modal-button" id="createPresetForm" value="Criar" />
+            </div>
+        </form>   
         `
-    }
+    
+        const formPreset = document.querySelector('#formPreset')
+        formPreset.addEventListener('submit', e => this.createPreset(e))
+    }    
 
     rederTable(){
         conteiner.innerHTML = `
         <table>
             <thead>
-            <tr id="thead">
-                <th>Nome</th>
-            </tr>
+                <tr id="thead">
+                    <th>Nome</th>
+                </tr>
             </thead>
             <tbody id="tbody">
   
@@ -116,7 +149,7 @@ class Preset{
         const data = await this.getApiPresets()
 
         //validar
-        if(data.msg) return this.msg(data.msg)
+        if(data.msg) return this.msg(data.msg, false)
 
         this.rederTable()
         this.event()
@@ -156,6 +189,20 @@ class Preset{
                 thFild.appendChild(thTextFild)
                 tr.appendChild(thFild)
             }
+            const tdEdit = document.createElement('td')
+            const tdDelet = document.createElement('td')
+            
+            tdEdit.className = 'editPreset'
+            tdDelet.className = 'deletPreset'
+
+            const tdTextEdit = document.createTextNode('Edit')
+            const tdTextDelet = document.createTextNode('Delet')
+
+            tdDelet.appendChild(tdTextDelet)
+            tdEdit.appendChild(tdTextEdit)
+
+            tr.appendChild(tdEdit)
+            tr.appendChild(tdDelet)
 
         }
     }
@@ -168,6 +215,33 @@ class Preset{
         }catch(e){
             //validar
             return false
+        }
+    }
+
+    async postApiPreset(namePreset){
+        try {
+            const myBody = JSON.stringify({name: namePreset})
+
+            const response = await fetch(`${url}/template/table`, {
+                method: 'POST',
+
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                
+                body: myBody
+            })
+
+            if(response.status !== 200){
+                const data = await response.json()
+                if(data) return this.msg(data, false)
+
+                return this.msg("Falha ao cria predefinição", false)
+            }
+
+            return this.msg("Predefinição criada com sucesso", true)
+        } catch (e) {
+            return this.msg("Falha ao cria predefinição", false)
         }
     }
 }
