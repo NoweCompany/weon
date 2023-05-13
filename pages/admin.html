@@ -11,7 +11,7 @@
   <nav>
     <ul>
       <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-      <li><a href="./contas.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+      <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
       <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
       <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
       <li class="user-icon">
@@ -20,7 +20,7 @@
           <div class="options">
             <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
             
-            <a href="#"> <i class="fa-solid fa-right-from-bracket"></i></a> 
+            <a  id="sair" href="/index.html"> <i class="fa-solid fa-right-from-bracket"></i></a> 
           </div>
         </div>
       </li>
@@ -57,8 +57,10 @@
       </div>
     </div>
   </div>
-  <div id="msg" class="msg"></div>
-  <div class="conteiner">
+  
+  <div class="conteiner-center">
+    <div id="msg" class="msg"></div>
+    <div class="conteiner"></div>
   </div>
   <script type="module" src="../assets/js/modules/Logado.js" ></script>
   <script type="module" src="../assets/js/admin.js"></script>
@@ -82,5 +84,7 @@ closeModalBtn.addEventListener('click', () => {
   </script>
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 
+
 </body>
 </html>
+

@@ -17,7 +17,10 @@ body{
   ::selection {
     color: rgb(33, 72, 180);
   }
-
+  
+  :root {
+    scroll-behavior: smooth;
+  }
 
   nav {
     background-color: #ffffff;
@@ -25,7 +28,7 @@ body{
     width: 100%;
     text-align: center;
     position: relative;
-    z-index: -99999;
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -59,10 +62,9 @@ body{
   }
 
   .user-icon {
-  position: fixed;
-   top: 10px;
-  right: 3%;
-  align-items: center;
+    position: fixed;
+    top: 10px;
+    right: 3%;
 }
 
   .user-icon span {

@@ -4,28 +4,19 @@
   src: url(../../SF-Pro-Display-Medium.otf);
 }
 
-*{
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
+body{
+  margin-top: 50px;
+  background-color: #2e578b;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family:'sfpro';
+    overflow: hidden;
+  }
 
 :root {
   scroll-behavior: smooth;
-}
-
-
-
-body{
-  color: rgb(0, 0, 0);
-  height: 100vh;
-  width: 100vw;
-  background-image: url("../img/background2.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-family:'sfpro';
- 
-
 }
 
 .conteiner{
@@ -41,12 +32,14 @@ body{
   padding: 10px;
   border-radius: 10px;
   align-items: center;
+  
 
 
 }
 
 h1{
   margin-bottom: 5%;
+  color: #000000;
 }
 
 form {
@@ -57,7 +50,6 @@ form {
   border-radius: 20px;
   box-shadow: 0 8px 32px 0 rgba(65, 65, 65, 0.37);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
   width: 300px;
@@ -65,6 +57,7 @@ form {
   align-items: center;
   position: absolute;
   position: fixed;
+  color: #fff;
   
 
 }
@@ -94,7 +87,6 @@ label {
   padding: 4px 20px;
   font-size: 15px;
   color: #fff;
-  text-align: center;
   background-color: black;
   border-radius: 10px;
   border: none;
@@ -117,7 +109,7 @@ label {
   max-width:25%;
   height: auto;
   position: relative;
-  top: -100px; /* ajuste a altura conforme necessário */
+  top: -100px; 
 }
 
   

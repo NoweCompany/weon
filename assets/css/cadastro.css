@@ -2,16 +2,20 @@
     font-family: sfpro;
     src: url("./../../SF-Pro-Display-Medium.otf");
   }
-  
-  body{
+
+body{
   margin-top: 50px;
   background-color: #2e578b;
-    height: 100vh;
-    width: 100vw;
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family:'sfpro';
-    overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family:'sfpro';
+  overflow-x: hidden;
+  }
+  
+  :root {
+    scroll-behavior: smooth;
   }
   
   .conteiner{
@@ -235,7 +239,6 @@
         width: 100%;
         text-align: center;
         position: relative;
-        z-index: -99999;
         position: fixed;
         top: 0;
         left: 0;
