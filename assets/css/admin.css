@@ -14,7 +14,7 @@ body{
   overflow-x: hidden;
 }
 
-.conteiner-center{
+.container-center{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -378,7 +378,7 @@ vertical-align: bottom;
     color: #fff;
     }
 
-    .conteiner{
+    .container{
       margin-top: 5%;
 
       display: flex;

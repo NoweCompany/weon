@@ -1,13 +1,13 @@
 const url = 'https://instrutorcerto.com.br'
 const urlWebsite   = document.location.href
 
-const conteiner = document.querySelector('.conteiner')
-const conteinerMsg = document.querySelector('#msg')
+const container = document.querySelector('.container')
+const containerMsg = document.querySelector('#msg')
 
 import Logado from "./modules/Logado.js";
 
 window.addEventListener('load', async (e) => {
-    conteinerMsg.innerHTML = ''
+    containerMsg.innerHTML = ''
     const logado = new Logado()
     if(!(await logado.userLogado())){
       return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`)
@@ -19,7 +19,7 @@ window.addEventListener('load', async (e) => {
 class Admin{
     constructor(){
         this.preset = new Preset()
-        this.campos = new Campos()
+        this.fields = new Fields()
     }
 
     init(){
@@ -31,7 +31,7 @@ class Admin{
             const el = e.target
             const id = el.getAttribute('id')
             if( id === 'predefinicao')  this.preset.preset()
-            if( id === 'campos') this.campos.campos()
+            if( id === 'fields') this.fields.fields()
         })
     }
 
@@ -46,8 +46,8 @@ class Preset{
     
     async msg(msg, success){
         if(!success){
-            conteinerMsg.className = 'error'
-            conteinerMsg.textContent = msg
+            containerMsg.className = 'error'
+            containerMsg.textContent = msg
 
             setTimeout(() => {
                 this.cleanMsg()
@@ -55,8 +55,8 @@ class Preset{
 
             return
         }else{
-            conteinerMsg.className = 'success'
-            conteinerMsg.textContent = msg
+            containerMsg.className = 'success'
+            containerMsg.textContent = msg
 
             setTimeout(() => {
                 this.cleanMsg()
@@ -68,14 +68,14 @@ class Preset{
     }
 
     cleanMsg(){
-        return conteinerMsg.className = 'msg'
+        return containerMsg.className = 'msg'
     }   
 
     maiorLength(data){
         let maiorLength = 0
 
         for(const preset of data.response){
-            for(let i = 0; i < preset.filds.length; i++){
+            for(let i = 0; i < preset.fields.length; i++){
                 if(i > maiorLength) maiorLength = i
             }
         }
@@ -109,7 +109,7 @@ class Preset{
     }   
 
     rederFormPreset(){
-        conteiner.innerHTML = `
+        container.innerHTML = `
         <form id="formPreset">
             <h1> Criar Predefinição </h1>
             <div>
@@ -128,7 +128,7 @@ class Preset{
     }    
 
     rederTable(){
-        conteiner.innerHTML = `
+        container.innerHTML = `
         <table>
             <thead>
                 <tr id="thead">
@@ -155,7 +155,8 @@ class Preset{
         const tbody = document.querySelector('#tbody')
         const thead = document.querySelector('#thead')
 
-        //retorna a lengtn do maior array de 'filds'
+        //retorna a lengtn do maior array de 'fields'
+        console.log(this.maiorLength(data));
         const maiorLength = this.maiorLength(data)
 
        //thead enumerado
@@ -169,7 +170,7 @@ class Preset{
 
         //tbody
         for(const preset of data.response){
-            const {tableName, filds} = preset
+            const {tableName, fields} = preset
             //tableName
             const tr = document.createElement('tr')
             const thTable = document.createElement('td')
@@ -179,13 +180,13 @@ class Preset{
             tr.appendChild(thTable)
             tbody.appendChild(tr)
 
-            //filds
+            //fields
             for(let i = 0; i <= maiorLength; i++){
-                const thFild = document.createElement('td')
-                const thTextFild = document.createTextNode(filds[i] ? filds[i].key : '')
+                const thfield = document.createElement('td')
+                const thTextfield = document.createTextNode(fields[i] ? fields[i].key : '')
                 
-                thFild.appendChild(thTextFild)
-                tr.appendChild(thFild)
+                thfield.appendChild(thTextfield)
+                tr.appendChild(thfield)
             }
             const tdEdit = document.createElement('td')
             const tdDelet = document.createElement('td')
@@ -204,11 +205,12 @@ class Preset{
 
         }
     }
+
     async getApiPresets(){
         try{
             const response = await fetch(`${url}/template/table`)
+            
             const data = await response.json()
-
             return data
         }catch(e){
             //validar
@@ -244,21 +246,226 @@ class Preset{
     }
 }
 
-class Campos{
+class Fields{
         
-    msg(msg){
-        conteinerMsg.classList.remove('msg')
-        conteinerMsg.classList.add('active')
-        conteinerMsg.textContent = msg
+    msg(msg, success){
+        if(!success){
+            containerMsg.className = 'error'
+            containerMsg.textContent = msg
+
+            setTimeout(() => {
+                this.cleanMsg()
+            }, 1000)
+
+            return
+        }else{
+            containerMsg.className = 'success'
+            containerMsg.textContent = msg
+
+            setTimeout(() => {
+                this.cleanMsg()
+            }, 1000);
+
+           return
+        }
     }
 
-    campos(){
-        if(conteinerMsg.classList.contains('active')){
-            conteinerMsg.classList.remove('active')
-            conteinerMsg.classList.add('msg')
-        }
-        conteiner.innerHTML = '<h1>Campos</h1>'
+    cleanMsg(){
+        return containerMsg.className = 'msg'
+    }  
+
+    async fields(){
+        this.renderFields()
+        this.events()
+        await this.addSelect()
     }
+
+    events(){
+        document.addEventListener('click', e => {
+            const id = e.target.getAttribute('id')
+            if(id === 'createField'){
+                this.createFields()
+            }
+            if(id === 'newField') {
+                this.newField()
+            }
+        })
+    }
+
+    renderFields(){
+        container.innerHTML = `
+            <select id="selectTableName">
+            <option value="" selected></option>
+            </select>
+            <button id="newField" >Novo Campo</button>
+            <button id="createField" >Criar campos</button>
+            
+            <form id="form">
+                <div class="create-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text">
+                    <label for="type">Type</label>
+
+                    <select id="selectTableName">
+                        <option value="" selected>Escolha um tipo</option>
+                        <option value="STRING">STRING</option>
+                        <option value="BOOLEAN">BOOLEAN</option>
+                        <option value="TINYINT">TINYINT</option>
+                        <option value="FLOAT">FLOAT</option>
+                        <option value="DATE">DATE</option>
+                    </select>
+                </div>
+            </form>
+        `
+    }
+
+    async addSelect(){
+        const response = await fetch(`${url}/template/table`)
+        const data = await response.json()
+        for(const key of data.response){
+            const select = document.querySelector('#selectTableName')
+            const option = document.createElement('option');
+            const textOption = document.createTextNode(key.tableName);
+            option.appendChild(textOption);
+            select.appendChild(option);
+        }
+
+    }
+
+    newField(){
+        var div = document.createElement("div");
+        div.className = "create-field";
+
+        var nameLabel = document.createElement("label");
+        nameLabel.setAttribute("for", "name");
+        nameLabel.innerHTML = "Name";
+
+        var nameInput = document.createElement("input");
+        nameInput.setAttribute("id", "name");
+        nameInput.setAttribute("type", "text");
+
+        var typeLabel = document.createElement("label");
+        typeLabel.setAttribute("for", "type");
+        typeLabel.innerHTML = "Type";
+
+        var typeSelect = document.createElement("select");
+
+        var typeOptionSelected = document.createElement("option");
+        typeOptionSelected.selected = true
+        typeOptionSelected.setAttribute("value", "");
+        typeOptionSelected.innerText = 'Escolha um tipo'
+        typeSelect.appendChild(typeOptionSelected)
+
+        var typeOptionStrg = document.createElement("option");
+        typeOptionStrg.setAttribute("value", "STRING");
+        typeOptionStrg.innerText = 'STRING'
+        typeSelect.appendChild(typeOptionStrg)
+
+        var typeOptionBoolean = document.createElement("option");
+        typeOptionBoolean.setAttribute("value", "BOOLEAN");
+        typeOptionBoolean.innerText = 'BOOLEAN'
+        typeSelect.appendChild(typeOptionBoolean)
+
+        var typeOptionInt = document.createElement("option");
+        typeOptionInt.setAttribute("value", "TINYINT");
+        typeOptionInt.innerText = 'TINYINT'
+        typeSelect.appendChild(typeOptionInt)
+
+        var typeOptionFloat = document.createElement("option");
+        typeOptionFloat.setAttribute("value", "FLOAT");
+        typeOptionFloat.innerText = 'FLOAT'
+        typeSelect.appendChild(typeOptionFloat)
+
+        var typeOptionDate = document.createElement("option");
+        typeOptionDate.setAttribute("value", "DATE");
+        typeOptionDate.innerText = 'DATE'
+        typeSelect.appendChild(typeOptionDate)
+
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Apagar";
+        deleteButton.onclick = function() {
+            container.removeChild(div);
+        };
+
+        div.appendChild(nameLabel);
+        div.appendChild(nameInput);
+        div.appendChild(typeLabel);
+        div.appendChild(typeSelect);
+        div.appendChild(deleteButton);
+
+        document.createElement("form");
+        form.appendChild(div);
+    }
+
+    createFields(){
+        const form = document.querySelector('#form');
+        
+        var elementosDoFormulario = form.elements;
+        const tableName = document.querySelector('#selectTableName').value
+        let dados = {};
+        let cont = 0
+
+        for (var i = 0; i < elementosDoFormulario.length; i++) {
+
+            if(elementosDoFormulario[i].id === 'name'){
+                const name = i
+                const type = i + 1
+                dados[cont] = [
+                    elementosDoFormulario[name].value,
+                    elementosDoFormulario[type].value
+                ];
+                cont += 1
+            }
+
+          }
+        
+        for(let i in dados){
+            const array = dados[i]
+            const name = array[0]
+            const type = array[1]
+
+            if(!name || !type || !tableName) return this.msg('Campos Inválidos', false)
+
+            this.postApiTemplate(name, type, tableName)
+        }
+        
+    }
+
+    async postApiTemplate(name, type, tableName){
+        try {
+            const myBody = JSON.stringify({
+                tableName: tableName,
+                fieldName: name,
+                options:{
+                    type: type,
+                    allowNull: true
+                }
+            })
+
+            const response = await fetch(`${url}/template/field`, {
+                method: 'POST',
+
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                
+                body: myBody
+            })
+
+            if(response.status !== 200){
+                const data = await response.json()
+                if(data.errors) return this.msg(data.errors, false)
+
+                return this.msg("Falha ao cria campos", false)
+            }
+
+            return this.msg("Campos criados com sucesso", true)
+        } catch (e) {
+            return this.msg("Falha ao cria campos", false)
+        }
+    }
+
 }
 
 const admin = new Admin()
