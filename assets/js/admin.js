@@ -26,12 +26,12 @@ class Admin{
         this.event()
     }
 
-    event(){
+    async event(){
         document.addEventListener('click', (e) => {
             const el = e.target
             const id = el.getAttribute('id')
             if( id === 'predefinicao')  this.preset.preset()
-            if( id === 'fields') this.fields.fields()
+            if( id === 'campos') this.fields.fields()
         })
     }
 
