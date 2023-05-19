@@ -1,55 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Home - weon  </title>
-    <link rel="stylesheet" href="../assets/css/home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/table.css">
+    <link rel="stylesheet" href="../assets/css/padrao.css">
+    <title>Weon</title>
     <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-cKpJf6wot58WKM6qr4BdJP4XjKcufzLWUmbYgY6S5S6w5jbs8Wb3qorvDn9KTwC2Ql8RROJ68aLpvpLVbDOwJw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<!-- logo nowe -->
- <div class="imagem-pequena">
+    <div class="imagem-pequena">
         <img src="../assets/img/icone preto.png" alt="Imagem Pequena">
       </div>
+      <nav>
+        <ul>
+          <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
+          <li><a id="select" href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+          <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+          <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+          <li class="user-icon">
+            <span><i class="fas solid fa-user"></i></span>
+            <div class="options-window">
+              <div class="options">
+                <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
+                
+                <a  id="sair" href="/index.html"> <i class="fa-solid fa-right-from-bracket"></i></a> 
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
 
-<!-- logo weon -->
+    <div class="conteiner">
 
-      <div class="image-container">
-		<img class="img" src="../assets/img/weon sem fundo branco.png" alt="weon"/>
-    <div class="word"> 
-<div class="tracking-in-expand"> 
+        <h1>Tabela</h1>
 
-      <h1> Seja bem-vindo </h1>
-      </div>
-	</div>
-</div>
-<nav>
-  <ul>
-    <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-    <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
-    <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-    <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
-    <li class="user-icon">
-      <span><i class="fas solid fa-user"></i></span>
-      <div class="options-window">
-        <div class="options">
-          <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
-          
-          <a  id="sair" href="/index.html"> <i class="fa-solid fa-right-from-bracket"></i></a> 
+        <table>
+            <thead>
+    
+                <th> <input type="checkbox">Fornecedor</th>
+                <th>Data De Pagamento</th>
+                <th>Data De Vencimento</th>
+                <th>Valor</th>
+                <th>Forma De Pagamento</th>
+                <th>Banco</th>
+                <th>Documento</th>
+            </thead>
+            <tbody id="table">
+
+        
+            </tbody>
+        </table>
+        <div class="msg"></div>
+        
+        <div class="btns">
+          <button id="post" class="meu-botao">Criar</button>
+          <button id="delet" class="meu-botao2">Deletar</button>
         </div>
-      </div>
-    </li>
-  </ul>
-</nav>
-         
-<script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
-      <script type="module" src="../assets/js/modules/Logado.js"></script>
-      <script type="module" src="../assets/js/home.js"></script>
-      
-</nav>
+      <!-- <button id="Download "class="meu-botao3">Download</button> -->
+       
+
+
+    </div>
+    <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+    <script type="module" src="./assets/js/modules/Logado.js"></script>
+    <script type="module" src="../assets/js/tabela.js"></script>
+    <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 </body>
 </html>

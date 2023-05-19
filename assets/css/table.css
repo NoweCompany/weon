@@ -1,394 +1,183 @@
-@font-face {
-    font-family: sfpro;
-    src: url("../../SF-Pro-Display-Medium.otf");
-  }
-
-
-body{
-  margin-top: 50px;
-  background-color: #2e578b;
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-family:'sfpro';
-  overflow-x: hidden;
-}
-
-::selection {
-  color: rgb(33, 72, 180);
-}
-    
-:root {
-  scroll-behavior: smooth;
-}
-
-nav {
-  background-color: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-  width: 100%;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  justify-content: space-between;
-}
-
-li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-li:last-child {
-  margin-right: 0;
-}
-
-li a {
-  display: block;
-  color: #000000;
-  text-align: center;
-  padding: 20px 30px;
-  text-decoration: none;
-  font-family: "sfpro";
-
-}
-
-.user-icon {
-position: fixed;
- top: 10px;
-right: 3%;
-align-items: center;
-
-}
-
-.user-icon span {
-  display: inline-block;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.options-window {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  padding: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  transition: opacity 0.3s;
-}
-
-.user-icon:hover .options-window {
-  display: block;
-  opacity: 1;
-  
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
-.options a {
-display: block;
-color: #000000;
-padding: 5px;
-text-decoration: none;
-transition: background-color 0.3s;
-}
-
-.options a:hover {
-background-color: #ddd;
-}
-
-
-li a {
-/* Restante das propriedades CSS */
-position: relative;
-overflow: hidden;
-transition: color 0.3s;
-}
-
-li a:before {
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 100%;
-height: 2px;
-background-color: #4469aa;
-transform: scaleX(0);
-transform-origin: left;
-transition: transform 0.3s;
-}
-
-li a:hover {
-color: #4469aa;
-}
-
-li a:hover:before {
-transform: scaleX(1);
-}
-
-
-li {
-/* Restante das propriedades CSS */
-display: inline-block;
-margin-right: 10px;
-vertical-align: bottom;
-}
-
- /* Estilização da barra de rolagem */
-::-webkit-scrollbar {
-width: 10px; /* Largura da barra de rolagem */
-}
-
-/* Estilização do botão de rolagem */
-::-webkit-scrollbar-button {
-display: none; /* Oculta o botão de rolagem */
-}
-
-/* Estilização do trilho da barra de rolagem */
-::-webkit-scrollbar-track {
-background-color: #000000; /* Cor de fundo do trilho */
-
-}
-
-/* Estilização do "polegar" da barra de rolagem */
-::-webkit-scrollbar-thumb {
-background-color: #ffffff; /* Cor do "polegar" */
-border-radius: 10px; /* Borda arredondada do "polegar" */
-}
-
-/* Estilização do "polegar" quando estiver "hovered" (passando o mouse) */
-::-webkit-scrollbar-thumb:hover {
-background-color: rgb(255, 255, 255); /* Cor do "polegar" quando "hovered" */
-}
-
 
 .msg{
-    background-color: rgba(255, 134, 134, 0.414);
-    color: #000000;
-    padding: 10px;
-    margin-top: 3px;
-    font-size: larger;
-    border-radius: 5px;
-    text-align: center;
+  background-color: rgba(255, 134, 134, 0.414);
+  color: #000000;
+  padding: 10px;
+  margin-top: 3px;
+  font-size: larger;
+  border-radius: 5px;
+  text-align: center;
 
 }
 
 .post:hover{
-    cursor: pointer;
-    background-color: rgb(0, 36, 214);
-    color: #fff;
+  cursor: pointer;
+  background-color: rgb(0, 36, 214);
+  color: #fff;
 }
 
 .conteiner{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    
-    margin-top: 5% ;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+  margin-top: 5% ;
 }
 
 .conteiner h1{
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
 
 .conteiner th{
-    font-size: 20px;
-    padding: 15px;
-    border: 1px solid #000000;
+  font-size: 20px;
+  padding: 15px;
+  border: 1px solid #000000;
 }
 
 
 .conteiner td{
-    font-size: 15px;
-    padding: 15px;
-    border: 1px solid #fff;
+  font-size: 15px;
+  padding: 15px;
+  border: 1px solid #fff;
 }
 
 #table tr {
-  transition: all 0.3s ease;
+transition: all 0.3s ease;
 }
 
 #table tr:hover {
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+transform: scale(1.05);
+transition: all 0.3s ease;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #delet:hover{
-    cursor: pointer;
-    background-color: rgb(248, 48, 48);
-    color: #fff;
+  cursor: pointer;
+  background-color: rgb(248, 48, 48);
+  color: #fff;
 }
 #edit:hover{
-    cursor: pointer;
-    background-color: rgb(234, 243, 101);
-    color: #080808;
+  cursor: pointer;
+  background-color: rgb(234, 243, 101);
+  color: #080808;
 }
 
 .imagem {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .imagem-pequena {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border-radius: 10%;
-    overflow: hidden;
-    width: 100px;
-    height: 10 0px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .imagem-pequena img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
 
-  ::selection {
-    color: rgb(33, 72, 180);
-  }
+.imagem-pequena {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 10%;
+  overflow: hidden;
+  width: 100px;
+  height: 10 0px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
 
-  /* Estilização da barra de rolagem */
-::-webkit-scrollbar {
-    width: 10px; /* Largura da barra de rolagem */
-  }
-  
-  /* Estilização do botão de rolagem */
-  ::-webkit-scrollbar-button {
-    display: none; /* Oculta o botão de rolagem */
-  }
-  
-  /* Estilização do trilho da barra de rolagem */
-  ::-webkit-scrollbar-track {
-    background-color: #000000; /* Cor de fundo do trilho */
-    
-  }
-  
-  /* Estilização do "polegar" da barra de rolagem */
-  ::-webkit-scrollbar-thumb {
-    background-color: #ffffff; /* Cor do "polegar" */
-    border-radius: 10px; /* Borda arredondada do "polegar" */
-  }
-  
-  /* Estilização do "polegar" quando estiver "hovered" (passando o mouse) */
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(255, 255, 255); /* Cor do "polegar" quando "hovered" */
-  }
-  /* nome */
-  table {
-    border-collapse: collapse;
-    width: 70%;
-    margin-bottom: 1rem;
-    color: #000000;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: .5rem;
- 
-    
-  }
-  /* nome do cabeçalho  */
-  th{
-    background-color: #4469aa;
-    color: rgb(255, 255, 255);   
-    
-  }
-  
-  #post {
-    text-align: center;
-  }
-  /* background linha */
-  tr {
-    background-color: #efefef;
-  }
-  
-  .msg {
-    margin-top: 1rem;
-    padding: .5rem;
-    background-color: #c7333300;
-    border-radius: .25rem;
-  }
-  
-  .meu-botao {
-    margin-bottom: 2%;
-    margin-right: 18%;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 10px 20px;
-    background-color: #4469aa;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    cursor: pointer;
+.imagem-pequena img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    
-  }
-  
-  .meu-botao:hover {
-    background-color: #2c4063;
-  }
-  
-  .meu-botao2 {
-    margin-bottom: 2%;
-    margin-right: 12%;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 10px 20px;
-    background-color: #4469aa;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .meu-botao:hover {
-    background-color: #17782b;
-  }
+/* nome */
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin-bottom: 1rem;
+  color: #000000;
+}
 
-  .meu-botao3 {
-    position: fixed;
-    bottom: 5%;
-    right: 21%;
-    padding: 10px 20px;
-    background-color: #4469aa;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .meu-botao:hover {
-    background-color: #17782b;
-  }
+th, td {
+  text-align: left;
+  padding: .5rem;
 
   
+}
+/* nome do cabeçalho  */
+th{
+  background-color: #4469aa;
+  color: rgb(255, 255, 255);   
+  
+}
+
+#post {
+  text-align: center;
+}
+/* background linha */
+tr {
+  background-color: #efefef;
+}
+
+.msg {
+  margin-top: 1rem;
+  padding: .5rem;
+  background-color: #c7333300;
+  border-radius: .25rem;
+}
+
+.meu-botao {
+  margin-bottom: 2%;
+  margin-right: 18%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+  background-color: #4469aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+
+  
+}
+
+.meu-botao:hover {
+  background-color: #2c4063;
+}
+
+.meu-botao2 {
+  margin-bottom: 2%;
+  margin-right: 12%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+  background-color: #4469aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.meu-botao:hover {
+  background-color: #17782b;
+}
+
+.meu-botao3 {
+  position: fixed;
+  bottom: 5%;
+  right: 21%;
+  padding: 10px 20px;
+  background-color: #4469aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.meu-botao:hover {
+  background-color: #17782b;
+}
+

@@ -3,6 +3,7 @@
 <head>
   <title>weon</title>
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/padrao.css">
   <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-cKpJf6wot58WKM6qr4BdJP4XjKcufzLWUmbYgY6S5S6w5jbs8Wb3qorvDn9KTwC2Ql8RROJ68aLpvpLVbDOwJw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
 
@@ -13,7 +14,7 @@
       <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
       <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
       <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-      <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+      <li><a id="select" href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
       <li class="user-icon">
         <span><i class="fas solid fa-user"></i></span>
         <div class="options-window">
@@ -50,19 +51,18 @@
         <button class="modal-button">Usuários</button>
         <button class="modal-button">Registros</button>
         <button class="modal-button">Lixeira</button>
+    
+     
         <h3>Configurações</h3>
-        
         <button class="modal-button" id="predefinicao">Predefinição</button>
         <button class="modal-button" id="campos">Campos</button>
       </div>
     </div>
   </div>
   
-  <div class="container-center">
+  <div class="conteiner-center">
     <div id="msg" class="msg"></div>
-    <div class="container">
-
-    </div>
+    <div class="conteiner"></div>
   </div>
   <script type="module" src="../assets/js/modules/Logado.js" ></script>
   <script type="module" src="../assets/js/admin.js"></script>
