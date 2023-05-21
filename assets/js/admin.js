@@ -23,7 +23,6 @@ class Admin{
     }
 
     init(){
-        this.preset.preset()
         this.event()
     }
 
@@ -399,9 +398,14 @@ class Fields{
         const deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "btn-delete")
         deleteButton.innerHTML = "Apagar";
-        deleteButton.onclick = function(e) {
+        deleteButton.onclick = (e) => {
             e.preventDefault()
-            containerDiv.remove()
+            if(form.elements.length > 3){
+                return containerDiv.remove()
+            }else{
+                return this.msg('É necessário ter pelo menos um campo', false)
+            }
+            
         };
 
         divName.appendChild(nameLabel);
@@ -420,6 +424,11 @@ class Fields{
 
     createFields(){
         const form = document.querySelector('#form');
+
+        if(form.elements.length < 3){
+            return this.msg('É necessário ter pelo menos um campo', false)
+        }
+        
         
         const elementosDoFormulario = form.elements;
         const tableName = document.querySelector('#selectTableName').value
