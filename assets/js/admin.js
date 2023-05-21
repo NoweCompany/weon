@@ -23,6 +23,7 @@ class Admin{
     }
 
     init(){
+        this.preset.preset()
         this.event()
     }
 
@@ -156,7 +157,6 @@ class Preset{
         const thead = document.querySelector('#thead')
 
         //retorna a lengtn do maior array de 'fields'
-        console.log(this.maiorLength(data));
         const maiorLength = this.maiorLength(data)
 
        //thead enumerado
@@ -188,8 +188,14 @@ class Preset{
                 thfield.appendChild(thTextfield)
                 tr.appendChild(thfield)
             }
+
             const tdEdit = document.createElement('td')
+            tdEdit.setAttribute('id', tableName + '_edit')
+            tdEdit.addEventListener('click', e => this.editPreset(e))
+
             const tdDelet = document.createElement('td')
+            tdDelet.setAttribute('id', tableName + '_delete'),
+            tdDelet.addEventListener('click', e => this.deletePreset(e))
             
             tdEdit.className = 'editPreset'
             tdDelet.className = 'deletPreset'
@@ -204,6 +210,14 @@ class Preset{
             tr.appendChild(tdDelet)
 
         }
+    }
+
+    editPreset(e){
+        console.log(e.target.id);
+    }
+
+    deletePreset(e){
+        console.log(e.target.id);
     }
 
     async getApiPresets(){
@@ -283,6 +297,7 @@ class Fields{
     events(){
         document.addEventListener('click', e => {
             const id = e.target.getAttribute('id')
+
             if(id === 'createField'){
                 this.createFields()
             }
@@ -294,29 +309,22 @@ class Fields{
 
     renderFields(){
         container.innerHTML = `
-            <select id="selectTableName">
-            <option value="" selected></option>
-            </select>
-            <button id="newField" >Novo Campo</button>
-            <button id="createField" >Criar campos</button>
+            <div class="cont-btns-filds">
+                <button id="newField" >Novo Campo</button>
+                <button id="createField" >Criar campos</button> 
+            </div>
+
+            <div class="cont-selecTableName"> 
+                <label>Selecione a predefinição</label>
+                <select id="selectTableName">
+                    <option value="" selected></option>
+                </select>
+            </div>
             
             <form id="form">
-                <div class="create-field">
-                    <label for="name">Name</label>
-                    <input id="name" type="text">
-                    <label for="type">Type</label>
-
-                    <select id="selectTableName">
-                        <option value="" selected>Escolha um tipo</option>
-                        <option value="STRING">STRING</option>
-                        <option value="BOOLEAN">BOOLEAN</option>
-                        <option value="TINYINT">TINYINT</option>
-                        <option value="FLOAT">FLOAT</option>
-                        <option value="DATE">DATE</option>
-                    </select>
-                </div>
             </form>
         `
+        this.newField()
     }
 
     async addSelect(){
@@ -333,84 +341,101 @@ class Fields{
     }
 
     newField(){
-        var div = document.createElement("div");
-        div.className = "create-field";
+        const containerDiv = document.createElement("div");
+        containerDiv.className = "create-field";
 
-        var nameLabel = document.createElement("label");
+        const divName = document.createElement("div");
+        divName.className = "divName";
+
+        const divType = document.createElement("div");
+        divType.className = "divType";
+
+        const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "name");
         nameLabel.innerHTML = "Name";
 
-        var nameInput = document.createElement("input");
+        const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "name");
         nameInput.setAttribute("type", "text");
 
-        var typeLabel = document.createElement("label");
+        const typeLabel = document.createElement("label");
         typeLabel.setAttribute("for", "type");
         typeLabel.innerHTML = "Type";
 
-        var typeSelect = document.createElement("select");
+        const typeSelect = document.createElement("select");
 
-        var typeOptionSelected = document.createElement("option");
+        const typeOptionSelected = document.createElement("option");
         typeOptionSelected.selected = true
         typeOptionSelected.setAttribute("value", "");
         typeOptionSelected.innerText = 'Escolha um tipo'
         typeSelect.appendChild(typeOptionSelected)
 
-        var typeOptionStrg = document.createElement("option");
+        const typeOptionStrg = document.createElement("option");
         typeOptionStrg.setAttribute("value", "STRING");
         typeOptionStrg.innerText = 'STRING'
         typeSelect.appendChild(typeOptionStrg)
 
-        var typeOptionBoolean = document.createElement("option");
+        const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "BOOLEAN");
         typeOptionBoolean.innerText = 'BOOLEAN'
         typeSelect.appendChild(typeOptionBoolean)
 
-        var typeOptionInt = document.createElement("option");
+        const typeOptionInt = document.createElement("option");
         typeOptionInt.setAttribute("value", "TINYINT");
         typeOptionInt.innerText = 'TINYINT'
         typeSelect.appendChild(typeOptionInt)
 
-        var typeOptionFloat = document.createElement("option");
+        const typeOptionFloat = document.createElement("option");
         typeOptionFloat.setAttribute("value", "FLOAT");
         typeOptionFloat.innerText = 'FLOAT'
         typeSelect.appendChild(typeOptionFloat)
 
-        var typeOptionDate = document.createElement("option");
+        const typeOptionDate = document.createElement("option");
         typeOptionDate.setAttribute("value", "DATE");
         typeOptionDate.innerText = 'DATE'
         typeSelect.appendChild(typeOptionDate)
 
 
-        var deleteButton = document.createElement("button");
+        const deleteButton = document.createElement("button");
+        deleteButton.setAttribute("class", "btn-delete")
         deleteButton.innerHTML = "Apagar";
-        deleteButton.onclick = function() {
-            container.removeChild(div);
+        deleteButton.onclick = function(e) {
+            e.preventDefault()
+            containerDiv.remove()
         };
 
-        div.appendChild(nameLabel);
-        div.appendChild(nameInput);
-        div.appendChild(typeLabel);
-        div.appendChild(typeSelect);
-        div.appendChild(deleteButton);
+        divName.appendChild(nameLabel);
+        divName.appendChild(nameInput);
 
-        document.createElement("form");
-        form.appendChild(div);
+        divType.appendChild(typeLabel);
+        divType.appendChild(typeSelect);
+        divType.appendChild(deleteButton)
+
+        containerDiv.appendChild(divName);
+        containerDiv.appendChild(divType);
+
+        const form = document.querySelector("#form");
+        form.appendChild(containerDiv);
     }
 
     createFields(){
         const form = document.querySelector('#form');
         
-        var elementosDoFormulario = form.elements;
+        const elementosDoFormulario = form.elements;
         const tableName = document.querySelector('#selectTableName').value
+
         let dados = {};
         let cont = 0
 
-        for (var i = 0; i < elementosDoFormulario.length; i++) {
-
+        for (let i = 0; i < elementosDoFormulario.length; i++) {
             if(elementosDoFormulario[i].id === 'name'){
                 const name = i
                 const type = i + 1
+
+                if(!elementosDoFormulario[name].value || !elementosDoFormulario[type].value || !tableName){
+                    return this.msg('Campos Inválidos', false)
+                } 
+
                 dados[cont] = [
                     elementosDoFormulario[name].value,
                     elementosDoFormulario[type].value
@@ -419,13 +444,11 @@ class Fields{
             }
 
           }
-        
+
         for(let i in dados){
             const array = dados[i]
             const name = array[0]
             const type = array[1]
-
-            if(!name || !type || !tableName) return this.msg('Campos Inválidos', false)
 
             this.postApiTemplate(name, type, tableName)
         }
