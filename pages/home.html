@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Home - weon  </title>
+    <link rel="stylesheet" href="../assets/js/navbar.js">
     <link rel="stylesheet" href="../assets/css/home.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
     <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
@@ -31,7 +32,7 @@
       </div>
 	</div>
 </div>
-<nav>
+<nav id="navbar">
   <ul>
     <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
     <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
@@ -39,24 +40,30 @@
     <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
     <li class="user-icon">
 
-    
-
 
       <span><i class="fas solid fa-user"></i></span>
       <div class="options-window">
         <div class="options">
           <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
           
-          <a  id="sair" href="/index.html"> <i class="fa-solid fa-right-from-bracket"></i></a> 
+          <a  id="Logaout" href="/index.html"> <i class="fa-solid fa-right-from-bracket"></i></a> 
         </div>
       </div>
     </li>
   </ul>
+
+  <a href="../pages/home.html">
+    <div id="logo">
+        <img src="../assets/img/weon_sembackground_preto.png" alt="Logo">
+        </div>
+      </a>
+      
 </nav>
-         
+<script src="../assets/js/modules/Logout.js"></script>     
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
       <script type="module" src="../assets/js/modules/Logado.js"></script>
       <script type="module" src="../assets/js/home.js"></script>
+
       
 </nav>
 </body>

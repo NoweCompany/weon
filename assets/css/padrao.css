@@ -41,7 +41,7 @@
   
 body{
   margin-top: 50px;
-  background-color: #2e578b;
+  background-color: #F1F6F9;
     height: 100vh;
     width: 100vw;
     background-size: cover;
@@ -51,7 +51,7 @@ body{
   }
 
   ::selection {
-    color: rgb(33, 72, 180);
+    color:rgb(46, 71, 163);
   }
   
   :root {
@@ -59,18 +59,25 @@ body{
   }
 
   nav {
-    background-color: #ffffff;
+    background-color: #688de3;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
     width: 100%;
     text-align: center;
-    position: relative;
     z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
+    transition: background-color 0.3s;
+  
+  }
+  
+  .navbar-scrolled {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
     
   }
-
+  
   ul {
     list-style-type: none;
     margin: 0;
@@ -78,39 +85,38 @@ body{
     overflow: hidden;
     justify-content: space-between;
   }
-
+  
   li {
     display: inline-block;
     margin-right: 10px;
   }
-
+  
   li:last-child {
     margin-right: 0;
   }
-
+  
   li a {
     display: block;
-    color: #000000;
+    color: #181823;
     text-align: center;
     padding: 20px 30px;
     text-decoration: none;
     font-family: "sfpro";
-  
   }
-
+  
   .user-icon {
-  position: fixed;
-   top: 10px;
-  right: 3%;
-  align-items: center;
-}
-
+    position: fixed;
+    top: 10px;
+    right: 3%;
+    align-items: center;
+  }
+  
   .user-icon span {
     display: inline-block;
     padding: 10px;
     cursor: pointer;
   }
-
+  
   .options-window {
     display: none;
     position: absolute;
@@ -124,30 +130,29 @@ body{
     border-radius: 10px;
     transition: opacity 0.3s;
   }
-
+  
   .user-icon:hover .options-window {
     display: block;
     opacity: 1;
-    
   }
-
+  
   .options {
     display: flex;
     flex-direction: column;
   }
-
+  
   .options a {
-  display: block;
-  color: #000000;
-  padding: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.options a:hover {
-  background-color: #ddd;
-}
-
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .options a:hover {
+    background-color: #ddd;
+  }
+  
 
 li a {
   /* Restante das propriedades CSS */
@@ -185,8 +190,18 @@ li {
   vertical-align: bottom;
 }
 
-
 #select{
-  color: #4469aa;
+  color: rgb(46, 71, 163);
+  
+}
+
+#logo {
+  position: fixed;
+  top: 18px;
+  left: 30px;
+}
+
+#logo img {
+  width: 100px;
   
 }

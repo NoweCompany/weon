@@ -1,6 +1,5 @@
 const conteinerMsg = document.querySelector('.msg')
 const table        = document.querySelector('#table')
-//const logaout      = document.querySelector('#Logaout') 
 const url = 'https://instrutorcerto.com.br'
 const urlWebsite   = document.location.href
 
@@ -16,10 +15,7 @@ window.addEventListener('load', async (e) => {
   }
 })
 
-// logaout.addEventListener('click', (e) => {
-//   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-//   window.location.assign(urlWebsite)
-// })
+
 
 class TableContas{
     constructor(){}

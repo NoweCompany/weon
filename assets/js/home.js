@@ -10,10 +10,3 @@ console.log('chamei');
     return
   }
 })
-
-const logaout = document.querySelector("#sair")
-
-logaout.addEventListener('click', (e) => {
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.assign(urlWebsite)
-  })

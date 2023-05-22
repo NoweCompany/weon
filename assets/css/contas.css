@@ -9,6 +9,7 @@
 h1 {
   text-align: center;
   margin-bottom: 30px;
+
 }
 
 form {
@@ -17,19 +18,20 @@ form {
   justify-content: center;
   align-items: center;
   gap: 30px; 
+  border-radius: 10px;
 }
 
 div {
   margin-top: 2%;
   flex: 0 0 calc(20% - 8px);
-  color: aliceblue;
+  color: #000000;
 }
 
 label {
   display: block;
   margin-bottom: px;
+ 
 }
-
 input[type="text"],
 input[type="date"],
 input[type="number"],
@@ -50,22 +52,22 @@ textarea {
 }
 
 input[type="submit"] {
-  background-color: #4caf50;
+  background-color: #688de3;
   color: #fff;
   border: none;
-  padding: 20px 30px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  align-self: center;
+  transition: background-color 0.3s, transform 0.3s; 
+  margin-left: 30%;
+  font-size: 20px;
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #5877bf;
+  transform: scale(1.1);
+ 
 }
-
-/* Fundo adicional */
-
 
 /* Responsividade */
 @media (max-width: 600px) {

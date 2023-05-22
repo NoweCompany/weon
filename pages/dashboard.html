@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+  
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet"/>
+
     <link rel="stylesheet" href="/assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,23 +17,28 @@
 </head>
 <body>
     
-    <nav>
-        <ul>
-          <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-          <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
-          <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-          <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
-          <li class="user-icon">
-            <span><i class="fas solid fa-user"></i></span>
-            <div class="options-window">
-              <div class="options">
-                <a href="#"> <i class="fa-solid fa-gear fa-1x"></i></a> 
-                
-                <a href="#"> <i class="fa-solid fa-right-from-bracket"></i></a> 
-              </div>
+  <nav id="navbar">
+    <ul>
+      <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
+      <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+      <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
+      <li class="user-icon">
+        <span><i class="fas solid fa-user"></i></span>
+        <div class="options-window">
+          <div class="options">
+            <a href="#"><i class="fa-solid fa-gear fa-1x"></i></a>
+            <a id="logout" href="/index.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+        </div> 
+        <a href="../pages/home.html">
+        <div id="logo">
+         
+            <img src="../assets/img/weon_sembackground_preto.png" alt="Logo">
             </div>
-          </li>
-        </ul>
+          </a>
+      </li>
+      </ul>
       </nav>
 
       <a href="https://nowe.netlify.app" target=_blank">
@@ -36,7 +46,92 @@
           <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
         </div>
        </a>
+
+    <div id="wrapper">
+      <div class="content-area">
+        <div class="container-fluid">
+          <div class="text-right mt-3 mb-3 d-fixed">
+
+          </div>
+          <div class="main">
+            <div class="row sparkboxes mt-4 mb-4">
+              <div class="col-md-4">
+                <div class="box box1">
+                  <div id="spark1"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box box2">
+                  <div id="spark2"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box box3">
+                  <div id="spark3"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-5 mb-4">
+              <div class="col-md-6">
+                <div class="box">
+                  <div id="bar"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box">
+                  <div id="donut"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4 mb-4">
+              <div class="col-md-6">
+                <div class="box">
+                  <div id="area"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box">
+                  <div id="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
+      const navbar = document.getElementById("navbar");
+      const select = document.getElementById("select");
       
-<script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+      // Define a posição de rolagem que ativa a mudança de cor
+      const scrollPosition = 200; // Ajuste o valor conforme necessário
+      
+      // Função para verificar a posição de rolagem e adicionar/remover as classes conforme necessário
+      function handleScroll() {
+        if (window.pageYOffset >= scrollPosition) {
+          navbar.classList.add("navbar-scrolled");
+          select.classList.add("select-scrolled");
+        } else {
+          navbar.classList.remove("navbar-scrolled");
+          select.classList.remove("select-scrolled");
+        }
+      }
+      
+      // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
+      window.addEventListener("scroll", handleScroll);
+      
+      </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="assets/data.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+
+    <script></script>
+    <script src="../assets/js/modules/Logout.js"></script> 
+    <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 </body>
 </html>
