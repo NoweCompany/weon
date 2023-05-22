@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/contas.css">
-    <link rel="stylesheet" href="./assets/css/padrao.css">
+    <link rel="stylesheet" href="../assets/css/padrao.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>weon</title>
 </head>
 <body>
 
-  <div class="imagem-pequena">
-    <img src="../assets/img/icone preto.png" alt="Imagem Pequena">
-  </div>
+  <a href="https://nowe.netlify.app" target=_blank">
+    <div class="imagem-pequena">
+      <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
+    </div>
+   </a>
 
 
   <nav>
@@ -40,7 +42,7 @@
     
 
     <form id="formCad">
-        <h1> Cadastrar contas </h1>
+        
         <div>
           <label for="documento">Documento:</label>
           <input  type="text" id="documento" name="documento">
@@ -83,11 +85,10 @@
           <label for="observacao">Observação:</label>
           <textarea id="observacao" name="observacao"></textarea>
         </div>
-        <center> 
-        <div> 
+          <div> 
           <input  class='btn' type="submit" value="Enviar">
         </div>
-    </center>
+   
       </form>      
     <script type="module" src="./assets/js/modules/Logado.js"></script>
     <script type="module" src="../assets/js/contasInsert.js"></script>
