@@ -56,8 +56,8 @@ background-color: #ddd;
     margin: 0 auto;
     max-width:25%;
     height: auto;
-    position: relative;
-    top: 50%; /* ajuste a altura conforme necessário */
+    position: fixed;
+    margin-top: 20%;
   }
 
   
@@ -112,14 +112,11 @@ background-color: #ddd;
 }
 
 .word{
-  color: rgb(255, 255, 255);
-  margin-top: 20px;
+  color: #333333;
+  margin-top: 32%;
+  position: fixed;
 }
 
-
-:root {
-scroll-behavior: smooth;
-}
 
 .tracking-in-expand {
 -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
