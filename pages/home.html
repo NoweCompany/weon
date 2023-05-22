@@ -57,7 +57,7 @@
         <img src="../assets/img/weon_sembackground_preto.png" alt="Logo">
         </div>
       </a>
-      
+
 </nav>
 <script src="../assets/js/modules/Logout.js"></script>     
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
@@ -67,4 +67,28 @@
       
 </nav>
 </body>
+
+<script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
+  const navbar = document.getElementById("navbar");
+  const select = document.getElementById("select");
+  
+  // Define a posição de rolagem que ativa a mudança de cor
+  const scrollPosition = 200; // Ajuste o valor conforme necessário
+  
+  // Função para verificar a posição de rolagem e adicionar/remover as classes conforme necessário
+  function handleScroll() {
+    if (window.pageYOffset >= scrollPosition) {
+      navbar.classList.add("navbar-scrolled");
+      select.classList.add("select-scrolled");
+    } else {
+      navbar.classList.remove("navbar-scrolled");
+      select.classList.remove("select-scrolled");
+    }
+  }
+  
+  // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
+  window.addEventListener("scroll", handleScroll);
+  
+  </script>
+  
 </html>
