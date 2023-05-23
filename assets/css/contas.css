@@ -22,12 +22,16 @@ form {
   align-items: center;
   gap: 30px;
   border-radius: 20px;
-  transform: translateY(20px);
+  transform: translateY(30px);
   animation: fadeIn 0.5s forwards;
-  background: linear-gradient(45deg, #e4e4e4, #fff5f5);
+  background-color: #f5f5f7;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin-left: 10%; /* Ajuste o valor da margem esquerda conforme necessário */
+  margin-right: 10%; /* Ajuste o valor da margem direita conforme necessário */
 }
+
+
 
 @keyframes fadeIn {
   from {
