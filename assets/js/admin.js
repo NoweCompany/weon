@@ -17,27 +17,17 @@ window.addEventListener('load', async (e) => {
 })
 
 class Admin{
-    constructor(){
-        this.preset = new Preset()
-        this.fields = new Fields()
-    }
-
-    init(){
-        this.event()
-    }
-
-    async event(){
-        document.addEventListener('click', (e) => {
-            const el = e.target
-            const id = el.getAttribute('id')
-            if( id === 'predefinicao')  this.preset.preset()
-            if( id === 'campos') this.fields.fields()
-        })
-    }
+    token(){
+        const token = document.cookie
+              .split("; ")
+              .find((row) => row.startsWith("token="))
+              .split("=")[1];
+        return token 
+      }
 
 }
 
-class Preset{
+class Preset extends Admin{
     async preset(){
         this.cleanMsg()
         this.creteTablePresets()
@@ -45,6 +35,7 @@ class Preset{
     }
     
     async msg(msg, success){
+        console.log('-_-');
         if(!success){
             containerMsg.className = 'error'
             containerMsg.textContent = msg
@@ -69,7 +60,7 @@ class Preset{
 
     cleanMsg(){
         return containerMsg.className = 'msg'
-    }   
+    } 
 
     maiorLength(data){
         let maiorLength = 0
@@ -221,7 +212,14 @@ class Preset{
 
     async getApiPresets(){
         try{
-            const response = await fetch(`${url}/template/table`)
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${super.token()}`
+            })
+
+            const response = await fetch(`${url}/template/table`, {
+                headers: headers
+            })
             
             const data = await response.json()
             return data
@@ -235,19 +233,22 @@ class Preset{
         try {
             const myBody = JSON.stringify({name: namePreset})
 
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${super.token()}`
+            })
+
             const response = await fetch(`${url}/template/table`, {
                 method: 'POST',
 
-                headers:{
-                    "Content-Type": "application/json",
-                },
+                headers:headers,
                 
                 body: myBody
             })
 
             if(response.status !== 200){
                 const data = await response.json()
-                if(data) return this.msg(data, false)
+                if(data) return this.msg(data.errors, false)
 
                 return this.msg("Falha ao cria predefinição", false)
             }
@@ -259,7 +260,7 @@ class Preset{
     }
 }
 
-class Fields{
+class Fields extends Admin{
         
     msg(msg, success){
         if(!success){
@@ -327,7 +328,18 @@ class Fields{
     }
 
     async addSelect(){
-        const response = await fetch(`${url}/template/table`)
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${super.token()}`
+        })
+
+        const response = await fetch(`${url}/template/table`,{
+            method: 'GET',
+            headers: headers
+        })
+
+        if(response.status !== 200) this.msg('Algo deu errado', false)
+
         const data = await response.json()
         for(const key of data.response){
             const select = document.querySelector('#selectTableName')
@@ -459,13 +471,19 @@ class Fields{
             const name = array[0]
             const type = array[1]
 
-            this.postApiTemplate(name, type, tableName)
+            const response = this.postApiTemplate(name, type, tableName)
+            if(response.status !== 200) return
         }
         
     }
 
     async postApiTemplate(name, type, tableName){
         try {
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${super.token()}`
+            })
+
             const myBody = JSON.stringify({
                 tableName: tableName,
                 fieldName: name,
@@ -478,9 +496,7 @@ class Fields{
             const response = await fetch(`${url}/template/field`, {
                 method: 'POST',
 
-                headers:{
-                    "Content-Type": "application/json",
-                },
+                headers:headers,
                 
                 body: myBody
             })
@@ -500,6 +516,13 @@ class Fields{
 
 }
 
-const admin = new Admin()
+const preset = new Preset()
+const fields = new Fields()
 
-admin.init()
+
+document.addEventListener('click', (e) => {
+    const el = e.target
+    const id = el.getAttribute('id')
+    if( id === 'predefinicao')  preset.preset()
+    if( id === 'campos') fields.fields()
+})
