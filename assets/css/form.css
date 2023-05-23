@@ -1,58 +1,67 @@
+@keyframes entrada {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-.conteiner{
+.conteiner {
   display: flex;
   align-items: center;
   flex-direction: column;
+  animation: entrada 1s ease;
 }
 
-.errors{
+.errors {
   background-color: rgba(255, 134, 134, 0.414);
   color: rgb(0, 0, 0);
   font-size: 20px;
   padding: 10px;
   border-radius: 10px;
   align-items: center;
-  
+  animation: entrada 1s ease;
 }
 
-h1{
+h1 {
   margin-bottom: 5%;
   color: #000000;
+  animation: entrada 1s ease;
 }
 
 form {
-  margin: -10%;
-  max-width: 400px;
-  padding: 70px;
+  margin: 13% auto;
+  max-width: 17%;
+  width: 100%;
+  padding: 5%;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   box-shadow: 0 8px 32px 0 rgba(65, 65, 65, 0.37);
-  width: 300px;
-  height: 300px;
-  align-items: center;
   color: #000000;
-  
-
+  position: fixed;
+  animation: entrada 1s ease;
 }
+
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 10%x;
   font-size: 20px;
-  align-items: center;
   border-radius: 10px;
 }
 
-.inputlogin, select {
-  width: 280px;
-  padding: 10px;
+.inputlogin,
+select {
+  width: 100%;
+  padding: 3%;
   border: none;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 20px;
   background-color: #bdbdbd;
-  align-items: center;
-  
 }
 
 .btn {
@@ -64,24 +73,27 @@ label {
   border-radius: 10px;
   border: none;
   transition: transform 0.3s ease;
-  align-items: center;
- 
+  
 }
 
 .btn:hover {
   transform: scale(1.1);
 }
 
-
 .imagem {
-  display: block;
-  margin: 0 auto;
-  max-width:25%;
-  height: auto;
-  position: relative;
-  top: -100px; 
+  display: flex;
+  width: 20%;
+  margin-left:39%;
+  margin-top: 3%;
+  position: fixed;
+  animation: entrada 1s ease;
+  
 }
 
+.imagem img {
+  max-width: 20%;
+  height: auto;
+}
   
 .imagem-pequena {
   position: fixed;
@@ -101,4 +113,10 @@ label {
   object-fit: cover;
 }
 
-
+.lnr-eye {
+  position: absolute;
+  top: 63%;
+  right: 17%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  }

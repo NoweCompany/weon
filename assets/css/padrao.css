@@ -3,8 +3,6 @@
     src: url("../../SF-Pro-Display-Medium.otf");
   }
 
-
-
   /* Estilos específicos para dispositivos móveis */
   @media screen and (max-width: 480px) {
     h1 {
@@ -204,4 +202,25 @@ li {
 #logo img {
   width: 100px;
   
+}
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+/* Estilização do trilho da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Cor de fundo do trilho */
+
+}
+
+/* Estilização do "polegar" da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #000000; /* Cor do "polegar" */
+  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
+}
+
+/* Estilização do "polegar" da barra de rolagem quando hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #688de3; /* Cor do "polegar" ao passar o mouse */
 }
