@@ -20,7 +20,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  
   margin-top: 5% ;
 }
 
@@ -30,15 +29,12 @@
 
 .conteiner th{
   font-size: 20px;
-  padding: 15px;
-  border: 1px solid #000000;
 }
 
 
 .conteiner td{
   font-size: 15px;
-  padding: 15px;
-  border: 1px solid #fff;
+
 }
 
 #table tr {
@@ -60,6 +56,120 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   background-color: rgb(234, 243, 101);
   color: #080808;
+}
+
+
+
+/* nome */
+table {
+  margin-top: 3%;
+  width: 70%;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+th, td {
+  text-align: left;
+  padding: .5rem;
+}
+
+th {
+  background-color: #4469aa;
+  color: #ffffff;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+#post {
+  text-align: center;
+}
+/* background linha */
+tr {
+  background-color: #efefef;
+}
+
+.msg {
+  margin-top: 1rem;
+  padding: .5rem;
+  background-color: #c7333300;
+  border-radius: .25rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 5%;
+  right: 9%;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 5%;
+  right: 9%;
+}
+
+.meu-botao {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #2c4063; /* Alterada para verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meu-botao:hover {
+  background-color: #135e20; /* Cor mais escura no hover */
+}
+
+.meu-botao2 {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #2c4063;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meu-botao2:hover {
+  background-color: #2c4063;
+}
+
+.meu-botao3 {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #4469aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.meu-botao3:hover {
+  background-color: #ff8800;
 }
 
 .imagem {
@@ -87,97 +197,3 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   height: 100%;
   object-fit: cover;
 }
-
-/* nome */
-table {
-  border-collapse: collapse;
-  width: 70%;
-  margin-bottom: 1rem;
-  color: #000000;
-}
-
-th, td {
-  text-align: left;
-  padding: .5rem;
-
-  
-}
-/* nome do cabeçalho  */
-th{
-  background-color: #4469aa;
-  color: rgb(255, 255, 255);   
-  
-}
-
-#post {
-  text-align: center;
-}
-/* background linha */
-tr {
-  background-color: #efefef;
-}
-
-.msg {
-  margin-top: 1rem;
-  padding: .5rem;
-  background-color: #c7333300;
-  border-radius: .25rem;
-}
-
-.meu-botao {
-  margin-bottom: 2%;
-  margin-right: 18%;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 10px 20px;
-  background-color: #4469aa;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-
-  
-}
-
-.meu-botao:hover {
-  background-color: #2c4063;
-}
-
-.meu-botao2 {
-  margin-bottom: 2%;
-  margin-right: 12%;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 10px 20px;
-  background-color: #4469aa;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.meu-botao:hover {
-  background-color: #17782b;
-}
-
-.meu-botao3 {
-  position: fixed;
-  bottom: 5%;
-  right: 21%;
-  padding: 10px 20px;
-  background-color: #4469aa;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.meu-botao:hover {
-  background-color: #17782b;
-}
-
