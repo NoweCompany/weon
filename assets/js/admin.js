@@ -35,7 +35,6 @@ class Preset extends Admin{
     }
     
     async msg(msg, success){
-        console.log('-_-');
         if(!success){
             containerMsg.className = 'error'
             containerMsg.textContent = msg

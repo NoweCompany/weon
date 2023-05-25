@@ -19,7 +19,7 @@
       <nav>
         <ul>
           <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-          <li><a id="select" href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+          <li><a id="select" href="./drive.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
           <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
           <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
           <li class="user-icon">
@@ -43,38 +43,27 @@
       </nav>
 
     <div class="conteiner">
-
-        <table>
-            <thead>
-    
-                <th>Fornecedor</th>
-                <th>Data De Pagamento</th>
-                <th>Data De Vencimento</th>
-                <th>Valor</th>
-                <th>Forma De Pagamento</th>
-                <th>Banco</th>
-                <th>Documento</th>
-            </thead>
-            <tbody id="table">
-
-        
-            </tbody>
-        </table>
         <div class="msg"></div>
-        
+        <select class="selectTable">
+          <option value="">Selecione uma tabela</option>
+        </select>
+
+        <table  class="table">
+          <thead class="thead">
+          </thead>
+
+          <tbody class="tbody">
+          </tbody>
+        </table>
         <div class="btns">
-          <button id="post" class="meu-botao">Criar</button>
+          <button id="post" class="meu-botao"><a href="./contas.html">Criar</a></button>
           <button id="delet" class="meu-botao2">Deletar</button>
         </div>
-      <!-- <button id="Download "class="meu-botao3">Download</button> -->
-       
-
-
     </div>
-    <script src="../assets/js/modules/Logout.js"></script>
+    <script type="module" src="../assets/js/modules/Logado.js"></script>
+    <script type="module" src="../assets/js/drive.js"></script>
+
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
-    <script type="module" src="./assets/js/modules/Logado.js"></script>
-    <script type="module" src="../assets/js/tabela.js"></script>
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
     <script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
       const navbar = document.getElementById("navbar");
