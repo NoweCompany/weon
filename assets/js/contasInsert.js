@@ -1,5 +1,5 @@
 const form = document.querySelector('#formCad')
-const url = 'http://localhost:3300'
+const url = 'https://instrutorcerto.com.br'
 const urlWebsite   = document.location.href
 
 import Logado from "./modules/Logado.js"
@@ -12,7 +12,7 @@ window.addEventListener('load', async (e) => {
       return
     }
   })
-
+  
 class FormInsert{
 
     validate(){
@@ -51,6 +51,7 @@ class FormInsert{
             observacao: dataForm.get('observacao')
         };
 
+        console.log(data);
         const jsonData = JSON.stringify(data)
 
         return jsonData

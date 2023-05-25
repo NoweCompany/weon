@@ -295,14 +295,14 @@ class Fields extends Admin{
     }
 
     events(){
-        document.addEventListener('click', e => {
-            const id = e.target.getAttribute('id')
+        container.addEventListener('click', e => {
+            let id = e.target.getAttribute('id')
 
             if(id === 'createField'){
                 this.createFields()
             }
             if(id === 'newField') {
-                this.newField()
+                this.createNewField()
             }
         })
     }
@@ -324,7 +324,7 @@ class Fields extends Admin{
             <form id="form">
             </form>
         `
-        this.newField()
+        this.createNewField()
     }
 
     async addSelect(){
@@ -351,7 +351,7 @@ class Fields extends Admin{
 
     }
 
-    newField(){
+    createNewField(){
         const containerDiv = document.createElement("div");
         containerDiv.className = "create-field";
 
@@ -392,8 +392,8 @@ class Fields extends Admin{
         typeSelect.appendChild(typeOptionBoolean)
 
         const typeOptionInt = document.createElement("option");
-        typeOptionInt.setAttribute("value", "TINYINT");
-        typeOptionInt.innerText = 'TINYINT'
+        typeOptionInt.setAttribute("value", "INTEGER");
+        typeOptionInt.innerText = 'INTEGER'
         typeSelect.appendChild(typeOptionInt)
 
         const typeOptionFloat = document.createElement("option");
@@ -434,7 +434,7 @@ class Fields extends Admin{
         form.appendChild(containerDiv);
     }
 
-    createFields(){
+    async createFields(){
         const form = document.querySelector('#form');
 
         if(form.elements.length < 3){
@@ -456,7 +456,6 @@ class Fields extends Admin{
                 if(!elementosDoFormulario[name].value || !elementosDoFormulario[type].value || !tableName){
                     return this.msg('Campos Inválidos', false)
                 } 
-
                 dados[cont] = [
                     elementosDoFormulario[name].value,
                     elementosDoFormulario[type].value
@@ -465,16 +464,23 @@ class Fields extends Admin{
             }
 
           }
+        let response
 
         for(let i in dados){
             const array = dados[i]
             const name = array[0]
             const type = array[1]
-
-            const response = this.postApiTemplate(name, type, tableName)
-            if(response.status !== 200) return
+            response = await this.postApiTemplate(name, type, tableName)
         }
         
+        if(!response || response.status !== 200){
+            const data = await response.json()
+            if(data.errors) return this.msg(data.errors, false)
+
+            return this.msg("Falha ao cria campos", false)
+        }
+
+        return this.msg("Campos criados com sucesso", true)
     }
 
     async postApiTemplate(name, type, tableName){
@@ -501,14 +507,7 @@ class Fields extends Admin{
                 body: myBody
             })
 
-            if(response.status !== 200){
-                const data = await response.json()
-                if(data.errors) return this.msg(data.errors, false)
-
-                return this.msg("Falha ao cria campos", false)
-            }
-
-            return this.msg("Campos criados com sucesso", true)
+            return response
         } catch (e) {
             return this.msg("Falha ao cria campos", false)
         }
@@ -518,7 +517,6 @@ class Fields extends Admin{
 
 const preset = new Preset()
 const fields = new Fields()
-
 
 document.addEventListener('click', (e) => {
     const el = e.target
