@@ -252,7 +252,10 @@ class Preset extends Admin{
                 return this.msg("Falha ao cria predefinição", false)
             }
 
-            return this.msg("Predefinição criada com sucesso", true)
+            this.msg("Predefinição criada com sucesso", true)
+            setTimeout(() => {
+                return fields.fields()
+            }, 300)
         } catch (e) {
             return this.msg("Falha ao cria predefinição", false)
         }
@@ -479,7 +482,10 @@ class Fields extends Admin{
             return this.msg("Falha ao cria campos", false)
         }
 
-        return this.msg("Campos criados com sucesso", true)
+        this.msg("Campos criados com sucesso", true)
+        setTimeout(() => {
+            preset.preset()
+        }, 300)
     }
 
     async postApiTemplate(name, type, tableName){
