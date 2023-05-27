@@ -1,56 +1,113 @@
+@media (max-width: 768px) {
+  .conteiner {
+    align-items: flex-start;
+    padding-top: 10%;
+  }
+
+  form {
+    width: 20%;
+    left: 25%;
+    top: 45%;
+  }
+
+  .imagem {
+    width: 100%;
+    margin-left: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .senha-wrapper .lnr-eye {
+    top: 40%;
+    right: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .btn input[type="submit"] {
+    width: 30%;
+    
+  }
+}
+
 @keyframes entrada {
   0% {
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translate(-50%, -50%) scale(0.8);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
-.conteiner {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  animation: entrada 1s ease;
-}
 
-.errors {
-  background-color: rgba(255, 134, 134, 0.414);
-  color: rgb(0, 0, 0);
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  align-items: center;
-  animation: entrada 1s ease;
-}
 
 h1 {
   margin-bottom: 5%;
   color: #000000;
-  animation: entrada 1s ease;
+
+}
+
+body {
+  background: linear-gradient(to right, #3c5eab 50%, #ffffff 50%);
+   overflow: hidden;
 }
 
 form {
-  margin: 13% auto;
-  max-width: 17%;
-  width: 100%;
+  margin: auto;
+  width: 14%;
+  height: auto;
   padding: 5%;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   box-shadow: 0 8px 32px 0 rgba(65, 65, 65, 0.37);
   color: #000000;
   position: fixed;
+  left: 26%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   animation: entrada 1s ease;
 }
 
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
 
-label {
-  display: block;
-  margin-bottom: 10%x;
-  font-size: 20px;
+.btn input[type="submit"] {
+  padding: 10px 30px;
+  font-size: 15px;
+  color: #fff;
+  background-color: black;
   border-radius: 10px;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.btn input[type="submit"]:hover {
+  transform: scale(1.1);
+}
+
+
+.senha-wrapper {
+  position: relative;
+}
+
+.senha-wrapper .lnr-eye {
+  position: absolute;
+  top: 35%;
+  right: 1%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .inputlogin,
@@ -59,42 +116,28 @@ select {
   padding: 3%;
   border: none;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 20px;
   background-color: #bdbdbd;
 }
-
-.btn {
-  display: inline-block;
-  padding: 4px 20px;
-  font-size: 15px;
-  color: #fff;
-  background-color: black;
-  border-radius: 10px;
-  border: none;
-  transition: transform 0.3s ease;
-  
-}
-
-.btn:hover {
-  transform: scale(1.1);
-}
-
 .imagem {
   display: flex;
   width: 20%;
-  margin-left:39%;
-  margin-top: 3%;
+  margin-left: 60%;
   position: fixed;
-  animation: entrada 1s ease;
-  
+  top: 50%;
+transform: translateY(-50%);
 }
 
+
+
 .imagem img {
-  max-width: 20%;
+  max-width: 100%;
   height: auto;
 }
-  
+
+
+
 .imagem-pequena {
   position: fixed;
   bottom: 20px;
@@ -102,7 +145,7 @@ select {
   border-radius: 10%;
   overflow: hidden;
   width: 100px;
-  height: 10 0px;
+  height: 100px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -113,10 +156,9 @@ select {
   object-fit: cover;
 }
 
-.lnr-eye {
-  position: absolute;
-  top: 63%;
-  right: 17%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  }
+.label {
+  display: block;
+  margin-bottom: 10%x;
+  font-size: 20px;
+  border-radius: 10px;
+}

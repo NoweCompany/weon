@@ -9,7 +9,7 @@
     <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet"/>
-
+    <link rel="icon" href="../assets/img/iconweon.ico.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,7 +21,7 @@
     <ul>
       <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
       <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
-      <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+      <li><a id="selected" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
       <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
       <li class="user-icon">
         <span><i class="fas solid fa-user"></i></span>
@@ -34,7 +34,7 @@
         <a href="../pages/home.html">
         <div id="logo">
          
-            <img src="../assets/img/weon_sembackground_preto.png" alt="Logo">
+            <img src="../assets/img/weon sem fundo branco.png" alt="Logo">
             </div>
           </a>
       </li>
@@ -123,7 +123,21 @@
       // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
       window.addEventListener("scroll", handleScroll);
       
+      window.addEventListener('scroll', function() {
+      var selectElement = document.getElementById('selected');
+      var bounding = selectElement.getBoundingClientRect();
+      
+      if (bounding.top < window.innerHeight && bounding.bottom >= 150) {
+        selectElement.classList.add('change-color');
+      } else {
+        selectElement.classList.remove('change-color');
+      }
+    });
+
       </script>
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

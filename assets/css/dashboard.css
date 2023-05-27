@@ -1,4 +1,13 @@
-   
+#selected {
+  /* Estilo inicial */
+  color: rgb(255, 255, 255);
+}
+
+#selected.change-color {
+  /* Estilo após a rolagem */
+  color: rgb(0, 0, 0);
+}
+
   .imagem-pequena {
     position: fixed;
     bottom: 20px;
