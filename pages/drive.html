@@ -44,17 +44,17 @@
 
     <div class="conteiner">
         <div class="msg"></div>
+        <select class="selectTable">
+          <option value="">Selecione uma tabela</option>
+        </select>
 
-      
-        <h1 class="titulo"><span>Selecione uma tabela </i></span></h1>
-      
-        <form>
-          <input class="chosen-value" type="text" value="" placeholder="Clique para selecionar">
-          <ul class="value-list">
-            
-         </ul>
-        </form>
-       
+        <table  class="table">
+          <thead class="thead">
+          </thead>
+
+          <tbody class="tbody">
+          </tbody>
+        </table>
         <div class="btns">
           <button id="post" class="meu-botao"><a href="./contas.html">Criar</a></button>
           <button id="delet" class="meu-botao2">Deletar</button>
@@ -62,6 +62,8 @@
     </div>
     <script type="module" src="../assets/js/modules/Logado.js"></script>
     <script type="module" src="../assets/js/drive.js"></script>
+
+    <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
     <script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
       const navbar = document.getElementById("navbar");
@@ -83,10 +85,7 @@
       
       // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
       window.addEventListener("scroll", handleScroll);
-
-
-
-
+      
       </script>
       
 </body>
