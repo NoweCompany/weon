@@ -20,7 +20,7 @@
   <nav id="navbar">
     <ul>
       <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-      <li><a href="./tabela.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
+      <li><a href="./drive.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
       <li><a id="selected" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
       <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Admin</a></li>
       <li class="user-icon">
@@ -127,7 +127,7 @@
       var selectElement = document.getElementById('selected');
       var bounding = selectElement.getBoundingClientRect();
       
-      if (bounding.top < window.innerHeight && bounding.bottom >= 150) {
+      if (bounding.top < window.innerHeight && bounding.bottom >= 30) {
         selectElement.classList.add('change-color');
       } else {
         selectElement.classList.remove('change-color');
@@ -136,14 +136,10 @@
 
       </script>
 
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="assets/data.js"></script>
-    <script src="../assets/js/dashboard.js"></script>
-    <script src="../assets/js/modules/Logout.js"></script> 
+    <script type="module" src="../assets/js/data.js"></script>
+    <script type="module" src="../assets/js/dashboard.js"></script>
+    <script type="module" src="../assets/js/modules/Logout.js"></script> 
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 </body>
 </html>
