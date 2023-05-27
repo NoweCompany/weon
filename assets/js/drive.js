@@ -208,10 +208,10 @@ class Drive{
 
     const data = await response.json()
     for(const key of data.response){
-      const option = document.createElement('option');
-      const textOption = document.createTextNode(key.tableName);
-      option.appendChild(textOption);
-      this.selectTable.appendChild(option);
+      const li = document.createElement('li');
+      const textli = document.createTextNode(key.tableName);
+      li.appendChild(textli);
+      this.selectTable.appendChild(li);
     }
   }
 
@@ -326,11 +326,71 @@ class Drive{
   } 
 }
 
-const select         = document.querySelector('.selectTable')
-const containerTable = document.querySelector('.table')
-const thead          = document.querySelector('.thead')
-const tbody          = document.querySelector('.tbody')
-const containerMsg   = document.querySelector('.msg')
+const select  = document.querySelector('.value-list')
 
-const drive = new Drive(select, containerTable, containerMsg, thead, tbody);
+const drive = new Drive(select);
 drive.init()
+
+const inputField = document.querySelector('.chosen-value');
+const dropdown = document.querySelector('.value-list');
+const dropdownArray = Array.from(document.querySelectorAll('li'));
+console.log(typeof dropdownArray);
+dropdown.classList.add('open');
+inputField.focus(); // Apenas para fins de demonstração
+let valueArray = [];
+dropdownArray.forEach(function(item) {
+  valueArray.push(item.textContent);
+});
+
+const closeDropdown = function() {
+  dropdown.classList.remove('open');
+};
+
+inputField.addEventListener('input', function() {
+  dropdown.classList.add('open');
+  let inputValue = inputField.value.toLowerCase();
+  let valueSubstring;
+  if (inputValue.length > 0) {
+    for (let j = 0; j < valueArray.length; j++) {
+      if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+        dropdownArray[j].classList.add('closed');
+      } else {
+        dropdownArray[j].classList.remove('closed');
+      }
+    }
+  } else {
+    for (let i = 0; i < dropdownArray.length; i++) {
+      dropdownArray[i].classList.remove('closed');
+    }
+  }
+});
+
+dropdownArray.forEach(function(item) {
+  item.addEventListener('click', function(evt) {
+    inputField.value = item.textContent;
+    dropdownArray.forEach(function(dropdown) {
+      dropdown.classList.add('closed');
+    });
+  });
+});
+
+inputField.addEventListener('focus', function() {
+  inputField.placeholder = 'Filtrar por:';
+  dropdown.classList.add('open');
+  dropdownArray.forEach(function(dropdown) {
+    dropdown.classList.remove('closed');
+  });
+});
+
+inputField.addEventListener('blur', function() {
+  inputField.placeholder = 'Clique para selecionar a tabela';
+  dropdown.classList.remove('open');
+});
+
+document.addEventListener('click', function(evt) {
+  const isDropdown = dropdown.contains(evt.target);
+  const isInput = inputField.contains(evt.target);
+  if (!isDropdown && !isInput) {
+    dropdown.classList.remove('open');
+  }
+});

@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 5% ;
+  margin-top: 3% ;
 }
 
 .conteiner h1{
@@ -200,32 +200,104 @@ tr {
 
 a{
   text-decoration: none;
-  color: #efefef;
+  color: #ffffff;
 }
 
-.conteiner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+form {
+  position: relative;
+  width: 20%;
+
 }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+.chosen-value,
+.value-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
 }
 
-.selectTable {
-  width: 200px;
-  padding: 5px;
-  border: 1px solid rgb(183, 183, 183);
-  border-radius: 4px;
+.chosen-value {
+  height: 1rem;
+  font-size: 15px;
+  padding: 10px;
   background-color: #ffffff;
-  animation: slideDown 0.5s ease-in-out;
+  border: 3px solid transparent;
+  transition: .3s ease-in-out;
 }
 
+.chosen-value::-webkit-input-placeholder {
+  color: #000000;
+}
+
+.chosen-value:hover {
+  background-color: #e4e4e4;
+  cursor: pointer;
+}
+
+.chosen-value:hover::-webkit-input-placeholder {
+  color: #000000;
+}
+
+.chosen-value:focus,
+.chosen-value.open {
+  outline: 0;
+  background-color: #e4e4e4;
+  color: #000;
+}
+
+.chosen-value:focus::-webkit-input-placeholder,
+.chosen-value.open::-webkit-input-placeholder {
+  color: #000;
+}
+
+.value-list {
+  margin-top: 3rem;
+  overflow: hidden;
+  max-height: 0px;
+  transition: .3s ease-in-out;
+}
+
+.value-list.open {
+  max-height: 200px;
+  overflow: auto;
+  height: 200px;
+  width: 97%;
+}
+
+.value-list li {
+  position: relative;
+  height: 1rem;
+  color: #000;
+  background-color: #FAFCFD;
+  padding: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color .3s;
+  opacity: 1;
+}
+
+.value-list li:hover {
+  background-color: #b9b9b9;
+  color: #000;
+}
+
+.value-list li.closed {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  opacity: 0;
+}
+
+.fa-solid-fa-arrow-down{
+  width: 20px;
+  height: auto;
+  margin: 20px;
+}
+
+.titulo{
+  font-size: 30px;
+}
 
