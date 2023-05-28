@@ -254,7 +254,7 @@ class Preset extends Admin{
 
             this.msg("Predefinição criada com sucesso", true)
             setTimeout(() => {
-                return fields.fields()
+                return fields.fields(namePreset)
             }, 300)
         } catch (e) {
             return this.msg("Falha ao cria predefinição", false)
@@ -290,10 +290,15 @@ class Fields extends Admin{
         return containerMsg.className = 'msg'
     }  
 
-    async fields(){
+    async fields(namePreset){
         this.renderFields()
         this.events()
         await this.addSelect()
+
+       if(namePreset){
+            const optionNmePreset = document.querySelector(`#${namePreset}`)
+            optionNmePreset.selected = true
+       }
     }
 
     events(){
@@ -311,13 +316,18 @@ class Fields extends Admin{
 
     renderFields(){
         container.innerHTML = `
+        <h1> Criar Predefinições </h1>
             <div class="cont-btns-filds">
-                <button id="newField" >Novo Campo</button>
-                <button id="createField" >Criar campos</button> 
+
+
+            <button id="newField"> <i class="fas fa-plus"> </i>  </button>
+        
+
+            <button id="createField"> <i class="fas fa-save"></i> </button>
             </div>
 
             <div class="cont-selecTableName"> 
-                <label>Selecione a predefinição</label>
+                <label></label>
                 <select id="selectTableName">
                     <option value="" selected></option>
                 </select>
@@ -346,6 +356,7 @@ class Fields extends Admin{
         for(const key of data.response){
             const select = document.querySelector('#selectTableName')
             const option = document.createElement('option');
+            option.setAttribute('id', key.tableName)
             const textOption = document.createTextNode(key.tableName);
             option.appendChild(textOption);
             select.appendChild(option);
