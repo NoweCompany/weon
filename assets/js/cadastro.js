@@ -58,17 +58,20 @@ class Register{
         let values = {}
 
         for(const el of elemenetsForm){
-            if(el.id){
-                let vl = el.value
-                
-                if(el.type === 'number') vl = Number(vl)
+            if(el.id === '') continue
 
-                values[el.id] = vl
-            }
+            let vl = el.value
+
+            if(!vl) return this.msg('Campos inválidos')
+
+            else if(el.type === 'checkbox')vl = Boolean(el.checked)
+
+            else if(el.type === 'number') vl = Number(vl)
+
+            values[el.id] = vl
         }
-        
+        console.log(values)
         const tableName = document.querySelector('#tableName').textContent
-
 
         const request = await this.postApiValues(tableName, values)
         const response = await request.json()
@@ -82,7 +85,6 @@ class Register{
 
     async postApiValues(tableName, values){
         try {
-            console.log({tableName,values})
             const request = await fetch(`${url}/template/values`, {
                 method: 'POST',
                 headers: {
@@ -122,9 +124,20 @@ class Register{
             if(key === 'id') continue           
             const type = response[key].type.split('(').splice(0, 1).join()
             let typeInput 
+            let atribute
 
             switch (type) {
                 case 'INT':
+                    typeInput = 'number'
+                    atribute = ['step', '1']
+                    break;
+
+                case 'TINYINT':
+                    typeInput = 'checkbox'
+                    break;
+                
+                case 'FLOAT':
+                    atribute = ['step', '0.01']
                     typeInput = 'number'
                     break;
 
@@ -143,6 +156,11 @@ class Register{
 
             const input = document.createElement('input')
             input.setAttribute('type', typeInput)
+            input.required = true
+            
+            if(typeInput === 'number'){
+                input.setAttribute(atribute[0], atribute[1])
+            }
             input.setAttribute('id', key)
 
             const label = document.createElement('label')
@@ -156,6 +174,7 @@ class Register{
         }
 
         const inputSubmit = document.createElement('input')
+        inputSubmit.className = 'btnEnviar'
         inputSubmit.setAttribute('type', 'submit')
 
         form.appendChild(inputSubmit)

@@ -385,27 +385,27 @@ class Fields extends Admin{
 
         const typeOptionStrg = document.createElement("option");
         typeOptionStrg.setAttribute("value", "STRING");
-        typeOptionStrg.innerText = 'STRING'
+        typeOptionStrg.innerText = 'Text'
         typeSelect.appendChild(typeOptionStrg)
 
         const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "BOOLEAN");
-        typeOptionBoolean.innerText = 'BOOLEAN'
+        typeOptionBoolean.innerText = 'Sim ou Não'
         typeSelect.appendChild(typeOptionBoolean)
 
         const typeOptionInt = document.createElement("option");
         typeOptionInt.setAttribute("value", "INTEGER");
-        typeOptionInt.innerText = 'INTEGER'
+        typeOptionInt.innerText = 'Inteiros'
         typeSelect.appendChild(typeOptionInt)
 
         const typeOptionFloat = document.createElement("option");
         typeOptionFloat.setAttribute("value", "FLOAT");
-        typeOptionFloat.innerText = 'FLOAT'
+        typeOptionFloat.innerText = 'Decimal'
         typeSelect.appendChild(typeOptionFloat)
 
         const typeOptionDate = document.createElement("option");
         typeOptionDate.setAttribute("value", "DATE");
-        typeOptionDate.innerText = 'DATE'
+        typeOptionDate.innerText = 'Data'
         typeSelect.appendChild(typeOptionDate)
 
 
