@@ -129,6 +129,8 @@ select {
 transform: translateY(-50%);
 }
 
+
+
 .imagem img {
   max-width: 100%;
   height: auto;
@@ -159,14 +161,4 @@ transform: translateY(-50%);
   margin-bottom: 10%x;
   font-size: 20px;
   border-radius: 10px;
-}
-
-.error {
-  text-align: center;
-  color: #ffffff;
-  background-color: #c05454;
-  padding: 5px 10px; /* Ajustar o padding interno para diminuir o tamanho */
-  margin-top: 20px;
-  border-radius: 10px;
-  font-size: 14px; /* Ajustar o tamanho da fonte */
 }

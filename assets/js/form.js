@@ -1,160 +1,108 @@
+const form         = document.querySelector('.form');
+const inpEmail     = document.querySelector('#email');
+const inpPassword  = document.querySelector('#password');
+const containerMsg = document.querySelector('.msg')
+const url = 'https://instrutorcerto.com.br'
+const urlWebsite   = document.location.href.split('/').slice(0, -1).join('/')
 
+import Logado from './modules/Logado.js'
 
-const url = 'https://instrutorcerto.com.br';
-const urlWebsite = document.location.href;
-
-import Logado from "./modules/Logado.js";
-
-window.addEventListener('load', async (e) => {
-  const logado = new Logado();
-  if (!(await logado.userLogado())) {
-    return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`);
-  } else {
-    return;
+window.addEventListener('load', async e => {
+  const logado = new Logado()
+  if(await logado.userLogado()){
+    console.log('chamei 2');
+    return window.location.assign(`${urlWebsite}/pages/home.html`)
+  }else{
+    return
   }
-});
+})
 
-class Drive {
-  constructor(selectTable, containerTable, containerMsg, thead, tbody) {
-    this.selectTable = selectTable;
-    this.containerTable = containerTable;
-    this.containerMsg = containerMsg;
-    this.thead = thead;
-    this.tbody = tbody;
-    this.tableData = [];
-  }
-
-  async init() {
-    await this.addOptions();
-    this.initSelect2();
-    this.events();
-  }
-
-  async addOptions() {
-    const headers = new Headers({
-      "Content-Type": "application/json",
-      "authorization": `Bearer ${this.token()}`
-    });
-
-    const response = await fetch(`${url}/template/table`, {
-      method: 'GET',
-      headers: headers
-    });
-
-    if (response.status !== 200) {
-      this.msg('Algo deu errado', false);
-      return;
+class FormLogin{
+    constructor(email, password){
+        this.crateJsonBody(this.email, this.password)
+        this.email = email;
+        this.password = password;
     }
-
-    const data = await response.json();
-    this.tableData = data.response; // Salva os dados da tabela para uso posterior
-
-    for (const key of this.tableData) {
-      const option = document.createElement('option');
-      const textOption = document.createTextNode(key.tableName);
-      option.appendChild(textOption);
-      this.selectTable.appendChild(option);
-    }
-  }
-
-  token() {
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="))
-      .split("=")[1];
-    return token;
-  }
-
-  initSelect2() {
-    $(this.selectTable).select2();
-  }
-
-  events() {
-    $(this.selectTable).on('change', (e) => this.renderTable(e.target.value));
-  }
-
-  async renderTable(selectedTable) {
-    this.thead.innerHTML = '';
-    this.tbody.innerHTML = '';
-
-    const table = this.tableData.find((data) => data.tableName === selectedTable);
-    if (!table) {
-      this.msg('Tabela não encontrada.', false);
-      return;
-    }
-
-    for (const field of table.fields) {
-      const th = document.createElement('th');
-      const textTh = document.createTextNode(field.key);
-      th.appendChild(textTh);
-      this.thead.appendChild(th);
-    }
-
-    const responseValues = await this.getVeluesApi(table.tableName);
-    if (responseValues.status !== 200) {
-      const dataValues = await responseValues.json();
-      this.msg(dataValues.errors, false);
-      return;
-    }
-
-    const dataValues = await responseValues.json();
-    for (const field of dataValues) {
-      const tr = document.createElement('tr');
-      for (const key in field) {
-        const value = field[key];
-        const td = document.createElement('td');
-        const textTd = document.createTextNode(value);
-
-        td.appendChild(textTd);
-        tr.appendChild(td);
-        this.tbody.appendChild(tr);
+    crateJsonBody(){
+      const obj = 
+      {
+        email: this.email,
+        password: this.password
       }
-    }
-  }
+      
 
-  async getVeluesApi(tableName) {
-    const response = await fetch(`${url}/template/values/${tableName}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${this.token()}`
+      return this.body = JSON.stringify(obj)
+    }
+
+    validate(){
+      return true
+    };
+
+    msg(msg, success){
+      if(!success){
+        containerMsg.className = 'error'
+        containerMsg.textContent = msg
+
+        setTimeout(() => {
+            this.cleanMsg()
+        }, 1000)
+
+        return
+    }else{
+        containerMsg.className = 'success'
+        containerMsg.textContent = msg
+
+        setTimeout(() => {
+            this.cleanMsg()
+        }, 1000);
+
+       return
+    }
+    };
+
+    cleanMsg(){
+      containerMsg.innerHTML = ''
+      containerMsg.className = 'msg'
+      return
+    }
+
+    async postApi(){
+        try{
+          if(!this.validate()) return this.msg('Valores inválidos', false)
+          const body = this.crateJsonBody()
+          const response = await fetch(url + '/token', 
+            {
+              method: "POST",
+              headers: 
+                {
+                  "Content-Type": "application/json",
+                },
+              body: body
+                  
+          });
+          const data = await response.json();
+          return data;
+        }catch(e){
+            this.msg('Falha na conexão com o servidor', false);
+        }
+    };
+
+    async init(){
+      const response = await this.postApi();
+      if(response.errors){
+        this.msg(response.errors, false);
+      }else{
+        const token = response.token;
+        const maxAge = 60*60*24*7
+        document.cookie = `token=${token};max-age=${maxAge}; path=/`;
+        window.location.reload()
       }
-    });
-
-    return response;
-  }
-
-  msg(msg, success) {
-    if (!success) {
-      this.containerMsg.className = 'error';
-      this.containerMsg.textContent = msg;
-
-      setTimeout(() => {
-        this.cleanMsg();
-      }, 1000);
-
-      return;
-    } else {
-      this.containerMsg.className = 'success';
-      this.containerMsg.textContent = msg;
-
-      setTimeout(() => {
-        this.cleanMsg();
-      }, 1000);
-
-      return;
-    }
-  }
-
-  cleanMsg() {
-    this.containerMsg.className = 'msg';
-  }
+    };
 }
 
-const select = document.querySelector('.selectTable');
-const containerTable = document.querySelector('.table');
-const thead = document.querySelector('.thead');
-const tbody = document.querySelector('.tbody');
-const containerMsg = document.querySelector('.msg');
-
-const drive = new Drive(select, containerTable, containerMsg, thead, tbody);
-drive.init()
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = new FormLogin(inpEmail.value, inpPassword.value);
+    form.init()
+    return
+})
