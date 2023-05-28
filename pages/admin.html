@@ -43,32 +43,20 @@
    </a>
   <!-- barra lateral -->
 
-  <div class="button-container">
-    <button class="button" id="openModalBtn">
-      <span class="arrow-icon">&rarr;</span>
-    </button>
-  </div>
-  
-  <div class="modal-container">
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <h2 class="modal-title"></h2>
-        <button class="modal-close" id="closeModalBtn">x</button>
-      </div>
-      <div class="modal-body">
-        <h3>Administração</h3>
-        <button class="modal-button">Usuários</button>
-        <button class="modal-button">Registros</button>
-        <button class="modal-button">Lixeira</button>
-    
-     
-        <h3>Configurações</h3>
-        <button class="modal-button" id="predefinicao">Predefinição</button>
-        <button class="modal-button" id="campos">Campos</button>
-      </div>
+  <div class="sidebar">
+    <div class="modal-body">
+      <h3>Administração</h3>
+      <button class="modal-button">Usuários <i class="fas fa-users"></i></button>
+      <button class="modal-button">Registros <i class="fas fa-clipboard"></i></button>
+      <button class="modal-button">Lixeira <i class="fas fa-trash"></i></button>
+      <h3>Configurações</h3>
+      <button class="modal-button" id="predefinicao">Predefinição <i class="fas fa-cog"></i></button>
+      <button class="modal-button" id="campos">Campos <i class="fas fa-cog"></i></button>
     </div>
   </div>
   
+
+  </div>
   <div class="container-center">
     <div id="msg" class="msg"></div>
     <div class="container"></div>
@@ -78,21 +66,6 @@
   <script type="module" src="../assets/js/admin.js"></script>
   <!-- JavaScript para exibir/ocultar a caixa modal -->
   <script>
-const openModalBtn = document.getElementById('openModalBtn');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const modal = document.getElementById('modal');
-const buttonContainer = document.querySelector('.button-container');
-
-openModalBtn.addEventListener('click', () => {
-  modal.classList.add('show');
-  buttonContainer.classList.add('hide');
-});
-
-closeModalBtn.addEventListener('click', () => {
-  modal.classList.remove('show');
-  buttonContainer.classList.remove('hide');
-});
-
 
   </script>
 
