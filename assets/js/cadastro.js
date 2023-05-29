@@ -156,7 +156,6 @@ class Register{
 
             const input = document.createElement('input')
             input.setAttribute('type', typeInput)
-            input.required = true
             
             if(typeInput === 'number'){
                 input.setAttribute(atribute[0], atribute[1])
