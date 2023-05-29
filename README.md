@@ -3,7 +3,7 @@
 
 # Grupo
 * [Moyseys](https://github.com/Moyseys) - Dev FullStack
-* [Geovaniorsoli](https://github.com/geovaniorsoli) - dev FrontEnd
+* [Geovaniorsoli](https://github.com/geovaniorsoli) - Dev FrontEnd
 * [paderao](https://github.com/paderao) - Auxiliar BackEnd
 * [pedroka_3](https://github.com/pedroka3) - Auxiliar BackEnd
 * [felipe](https://github.com/palmaazx) - Gestor de diagramas
