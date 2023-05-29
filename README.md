@@ -1,5 +1,9 @@
-# Nowe
+# [Nowe](https://nowe.netlify.app/)
 - Nowe é uma empresa fictícia criada para meu TCC do curso de informática do colégio bento quirino
+
+# [Weon](https://weonsystem.netlify.app/pages/drive.html)
+
+- Weon é um software oferecido pela nowe para fazer a gestão e logística de dados e documentos 
 
 # Grupo
 * [Moyseys](https://github.com/Moyseys) - Dev FullStack
