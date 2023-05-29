@@ -219,13 +219,10 @@ a{
   }
 }
 
-.selectTable {
-  width: 200px;
-  padding: 5px;
-  border: 1px solid rgb(183, 183, 183);
-  border-radius: 4px;
-  background-color: #ffffff;
-  animation: slideDown 0.5s ease-in-out;
+.selectTable{
+  font-size: 10px;
+  align-self: center;
+  ;
 }
 
 

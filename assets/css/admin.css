@@ -134,10 +134,9 @@ vertical-align: bottom;
 
     .container{
       margin-top: 5%;
-
       display: flex;
       flex-direction: column;
-      align-items: center;
+      
     }
 
 
@@ -173,6 +172,7 @@ vertical-align: bottom;
       align-items: center;
       flex-direction: row;
       column-gap: 30px;
+      
     }
 
 /* Campos */
@@ -181,10 +181,15 @@ vertical-align: bottom;
   margin-top: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
+  width: 110%;
+  height: max-content;
   animation: fade-in 0.5s ease;
+  background-color: #c9d4e8; /* Substitua pela cor desejada */
+  border-radius: 20px;
+  display: flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Efeito de sombra */
 }
+
 
 @keyframes fade-in {
   from {
@@ -197,15 +202,27 @@ vertical-align: bottom;
   }
 }
 
-#form select,
+#form select{
+  font-size: 15px;
+  border-radius: 10px;
+  padding: 1px;
+  margin-top: 5px;
+  width: 100%;
+  border: none;
+  animation: slide-in 0.5s ease;
+  height: auto;
+
+}
 #form input {
   font-size: 15px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 1px;
   margin-bottom: 10px;
   width: 100%;
   border: none;
   animation: slide-in 0.5s ease;
+  width: 100%;
+  height: auto;
 }
 
 @keyframes slide-in {
@@ -219,23 +236,17 @@ vertical-align: bottom;
   }
 }
 
-#form input[type="submit"] {
-  background-color: #f50057;
-  color: #ffffff;
-  cursor: pointer;
-  animation: fade-in 0.5s ease;
-}
-
 .btn-delete {
-  border-radius: 5px;
+  border-radius: 30px;
   outline: none;
-  padding: 5px 20px;
+  padding: 6px 9px;
   cursor: pointer;
-  background-color: #3c5eab;
+  background-color: #ff0000;
   color: #ffffff;
   border: none;
   transition: background-color 0.3s ease;
   animation: fade-in 0.5s ease;
+  margin-left: 10px;
 }
 
 @keyframes fade-in {
@@ -253,7 +264,7 @@ vertical-align: bottom;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   animation: slide-in 0.5s ease;
 }
 
@@ -270,49 +281,80 @@ vertical-align: bottom;
 
 .divType {
   display: flex;
-  gap: 10%;
+  gap: 1%;
   align-items: center;
   animation: fade-in 0.5s ease;
 }
 
-.cont-btns-filds {
-  display: flex;
-  justify-content: space-between;
-  gap: 5%;
-  animation: fade-in 0.5s ease;
-}
-
-.cont-btns-filds button {
-  border-radius: 5px;
-  outline: none;
-  padding: 5px 20px;
-  cursor: pointer;
-  background-color: #3c5eab;
-  color: #ffffff;
-  border: none;
-  transition: background-color 0.3s ease;
-  animation: fade-in 0.5s ease;
-}
-
-.cont-btns-filds button:hover {
-  background-color: #5681e5;
-  transform: scale(1.1);
-}
 
 #selectTableName {
-  margin-top: 10%;
-  font-size: 20px;
-  border-radius: 10px;
-  color: #000000;
+  display: inline-block;
+  width: 200px;
   padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  animation: fade-in 0.5s ease;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffffff;
+  outline: none;
+  margin-left: 65%;
+  margin-top: -30px;
+  display: flex;
+}
+
+#createField {
+  background-color: #4CAF50; /* Cor de fundo */
+  border: none; 
+  color: white;
+  padding: 10px 20px; 
+  text-align: center;
+  display: inline-block; 
+  font-size: 20px;
+  cursor: pointer; 
+  border-radius: 4px;
+  position: fixed;
+  left: 90%;
+  transform: translateX(-50%);
+  bottom: 30px;
+ 
+}
+
+#createField:hover {
+  background-color: #45a049;
+}
+
+#createField:active {
+  background-color: #3e8e41; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+}
+
+
+#newField {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-left: 30px;
+
+}
+
+
+#newField:hover {
+  background-color: #0056b3; 
+}
+
+#newField:active {
+  background-color: #004db3; 
 }
 
 
 /* sidebar */
 .sidebar {
+  
   width: 200px;
   background-color: #ffffff;
   height: 100%;
@@ -385,5 +427,130 @@ vertical-align: bottom;
 
 .sidebar .modal-button:hover {
   transform: scale(1.1);
+}
+
+.criarnovatabela {
+  position: fixed;
+  bottom: 50px;
+  left: 90%;
+  transform: translateX(-50%);
+  background-color: #02a90b;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.criarnovatabela:hover {
+  background-color: #007a12;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #007bff;
+  color: #fff;
+ 
+}
+
+thead th {
+  padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* aaa */
+
+#formPreset {
+  width: 300%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 40px;
+  align-self: center;
+  position: fixed;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#formPreset h1 {
+  font-size: 2rem;
+  position: fixed;
+  top: 100px;
+
+}
+
+#formPreset div {
+  margin-bottom: 1rem;
+}
+
+#formPreset label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+#formPreset {
+  display: flex;
+  justify-content: center;
+}
+
+#formPreset input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  height: auto;
+  margin-right: 30px;
+}
+
+#formPreset input[type="text"]:hover {
+  border-color: #007bff;
+}
+
+#formPreset input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.btn1 , .btn2 {
+  margin-top: 15px; 
+  margin-left: 20px;
+}
+
+
+.btn1 input[type="button"] {
+  padding: 10px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn2 input[type="submit"] {
+  padding: 10px 10px;
+  background-color: #1bb400;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 

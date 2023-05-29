@@ -106,10 +106,13 @@ class Preset extends Admin{
                 <label for="name">Nome</label>
                 <input type="text" id="name">
             </div>
-            <div class="cont-btn-form-preset">
-                <input type="button" class="modal-button" id="cancelPresetForm" value="Voltar" />
-                <input type="submit" class="modal-button" id="createPresetForm" value="Criar" />
+
+            <div class="btn1">
+            <input type="button"  id="cancelPresetForm" value=" x " />
             </div>
+            <div class="btn2">
+                <input type="submit"  id="createPresetForm" value=" Próximo" />
+            </div> 
         </form>   
         `
     
@@ -129,7 +132,7 @@ class Preset extends Admin{
   
             </tbody>
         </table>
-        <button id="createPreset" class="modal-button">Criar</button>
+        <button id="createPreset" class="criarnovatabela">Criar</button>
         `
     }
 
@@ -316,15 +319,18 @@ class Fields extends Admin{
 
     renderFields(){
         container.innerHTML = `
+        <div class="titulo"> 
         <h1> Criar Predefinições </h1>
-            <div class="cont-btns-filds">
+        <div> 
 
-
+            <div class="newfield">
             <button id="newField"> <i class="fas fa-plus"> </i>  </button>
-        
-
-            <button id="createField"> <i class="fas fa-save"></i> </button>
             </div>
+            
+        
+        <div class="botãocreate">
+            <button id="createField"> <i class="fas fa-save"></i> </button>
+         </div>     
 
             <div class="cont-selecTableName"> 
                 <label></label>
@@ -376,7 +382,7 @@ class Fields extends Admin{
 
         const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "name");
-        nameLabel.innerHTML = "Name";
+        nameLabel.innerHTML = "Campo";
 
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "name");
@@ -384,7 +390,7 @@ class Fields extends Admin{
 
         const typeLabel = document.createElement("label");
         typeLabel.setAttribute("for", "type");
-        typeLabel.innerHTML = "Type";
+        typeLabel.innerHTML = "";
 
         const typeSelect = document.createElement("select");
 
@@ -396,7 +402,7 @@ class Fields extends Admin{
 
         const typeOptionStrg = document.createElement("option");
         typeOptionStrg.setAttribute("value", "STRING");
-        typeOptionStrg.innerText = 'Text'
+        typeOptionStrg.innerText = 'Texto'
         typeSelect.appendChild(typeOptionStrg)
 
         const typeOptionBoolean = document.createElement("option");
