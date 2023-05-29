@@ -1,5 +1,5 @@
 # [Nowe](https://nowe.netlify.app/)
-- Nowe é uma empresa fictícia criada para meu TCC do curso de informática do colégio bento quirin, essa empresa tem como objetivo vender softwares de gestão e logística 
+- Nowe é uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirin, essa empresa tem como objetivo vender softwares de gestão e logística 
 
 # [Weon](https://weonsystem.netlify.app/pages/drive.html)
 
