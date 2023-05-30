@@ -204,6 +204,7 @@
 
       
 body {
+  font-family: Roboto, sans-serif;
   background-color: #eff4f7;
   color: rgb(0, 0, 0);
   
@@ -387,31 +388,24 @@ h1, h2, h3, h4, h5, h6, strong {
   margin-bottom: 38px;
 }
 
+/*dashboard*/
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
-@media screen and (max-width:760px) {
-  .monthly-earnings-text {
-    left: 30px;
+#charts{
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction:row;
+  align-items:flex-start;
+  border-radius: 5%;
+  margin-top: 9%;
+  background-color:whitesmoke;
+  box-shadow: 3px 3px #4469aa, 0.2em 0 1.5em #4469aa;
   }
-  .box {
-    padding: 25px 0;
+  
+  
+  #chart{
+      width: 100%;
+      height: 100%;
+
   }
-}
-
-.sparkboxes .box {
-  padding: 3px 0 0 0;
-  position: relative;
-}
-
-#spark1, #spark2, #spark3, #spark4 {
-  position: relative;
-  padding-top: 15px;
-}
-
-
-/* overrides */
-.sparkboxes #apexcharts-subtitle-text { fill: #8799a2 !important; }
-
-
-.spinner-border {
-  display: none;
-}
