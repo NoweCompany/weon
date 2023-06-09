@@ -443,6 +443,9 @@
     transition: background-color 0.3s ease;
   }
   
+
+  /* tabela */
+  
   .criarnovatabela:hover {
     background-color: #292929;
   }
@@ -450,39 +453,66 @@
   
   .container {
     margin-top: 5%;
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: 70%;
     max-height: 600px; /* Altura máxima para a rolagem vertical */
   }
+  
   .table-container {
+    border-collapse: separate; /* Separação das bordas das células */
+    border-spacing: 4px; /* Espaçamento zero entre as células */
     max-height: 500px; /* Altura máxima para a rolagem vertical */
-    overflow: auto; /* Rolagem vertical e horizontal */
+    overflow: auto;
+    position: relative; /* Posição relativa para posicionamento do pseudo-elemento */
+  }
+  
+  .table-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -2px; /* Posição à esquerda da tabela */
+    height: 100%;
+    width: 2px; /* Largura da linha vertical */
+    background-color: #000000; /* Cor da linha vertical */
   }
   
   .table-container table {
     width: 100%;
     margin-bottom: 0;
     color: #000000;
+    padding: 3px;
   }
   
-  .table-container th, .table-container td {
+  .table-container th,
+  .table-container td {
     text-align: center;
+    font-size: 15px;
     padding: .5rem;
   }
   
   /* nome do cabeçalho */
   .table-container th {
-    background-color: #4469aa;
+    background-color: #292929;
     color: #ffffff;
+    margin: 1px;
+    position: sticky;
+    top: 0;
+    font-weight: 300;
   }
   
-  /* background linha */
-  .table-container tr {
+  /* linhas ímpares */
+  .table-container tr:nth-child(odd) {
     background-color: #efefef;
   }
   
+  /* linhas pares */
+  .table-container tr:nth-child(even) {
+    background-color: #ffffff;
+  }
   
+ 
   /* aaa */
   #formPreset {
     width: 50%;

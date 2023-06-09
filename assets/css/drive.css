@@ -72,12 +72,7 @@ tr:nth-child(odd) {
   background-color: #ffffff; /* Cor branca */
 }
 
-.msg {
-  margin-top: 1rem;
-  padding: .5rem;
-  background-color: #c7333300;
-  border-radius: .25rem;
-}
+
 
 .imagem {
   width: 40px;
@@ -117,19 +112,9 @@ a{
   margin-bottom: 20px;
 }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
 .selectTable{
   font-size: 10px;
   align-self: center;
-  ;
 }
 
 
