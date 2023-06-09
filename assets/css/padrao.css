@@ -250,3 +250,24 @@ li {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #292929; /* Cor do "polegar" ao passar o mouse */
 }
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  height: 4px; /* Altura da barra de rolagem */
+}
+
+/* Estilização do trilho da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Cor de fundo do trilho */
+}
+
+/* Estilização do "polegar" da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #0000004a; /* Cor do "polegar" */
+  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
+}
+
+/* Estilização do "polegar" da barra de rolagem quando hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
+}
