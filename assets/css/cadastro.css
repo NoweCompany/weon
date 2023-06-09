@@ -118,14 +118,16 @@
 
 /* estilo do form */
 #form {
+  width: 900px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-self: center;
   background-color: #ffffff;
-  border-radius: 30px;
-  width: 400px;
-  padding: 2rem;
+  border-radius: 20px;
+  color: #3a3a36;
+  padding: 3rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 #form h1 {
@@ -135,10 +137,11 @@
 
 #form .campos {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
-  max-width: 300px;
+  max-width: 900px;
+  color: #000;
 }
 
 #form .campos label {
@@ -149,41 +152,91 @@
 #form .campos input[type="text"],
 #form .campos input[type="number"],
 #form .campos input[type="date"] {
-  width: 100%;
+  flex: 1 0 calc(25% - 0.5rem); /* Divisão em quatro colunas */
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  background-color: #ededed;
+  border: none;
   border-radius: 4px;
   transition: border-color 0.3s ease;
-}
-
-#form .campos input[type="text"]:hover,
-#form .campos input[type="number"]:hover,
-#form .campos input[type="date"]:hover {
-  border-color: #007bff;
-}
-
-#form .campos input[type="text"]:focus,
-#form .campos input[type="number"]:focus,
-#form .campos input[type="date"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  margin-bottom: 0.5rem;
 }
 
 #form input[type="submit"] {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
+  margin-top: auto;
+  padding: 8px 30px;
+  color: #fafafa;
+  background-color: #4179d2;
+  border-radius: 8px;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin-top: 10px;
+  align-self: center; 
 }
 
 #form input[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #292929;
 }
+
+.linha {
+  display: flex;
+  flex-direction: column;
+}
+
+.linha {
+  display: flex;
+  flex-direction: column;
+}
+
+checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-label {
+  font-size: 0.9rem;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  appearance: none;
+  border: 2px solid #000;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-input:checked {
+  border-color: #4179d2;
+  background-color: #4179d2;
+}
+
+.checkbox-input:checked::before {
+  content: '\2713';
+  color: #fafafa;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-input:focus {
+  border-color: #4179d2;
+}
+
+.checkbox-input:hover {
+  border-color: #4179d2;
+}
+
+.checkbox-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 .fixed-button {
   position: fixed;

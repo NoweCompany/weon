@@ -111,6 +111,7 @@ class Register{
 
         const form = document.querySelector('#form')
         form.innerHTML = `
+
             <h1 id="tableName">${tableName}</h1>
 
             <div class="campos">
@@ -153,7 +154,7 @@ class Register{
                     break;
             }
             const div = document.createElement('div')
-
+            div.className = "linha"
             const input = document.createElement('input')
             input.setAttribute('type', typeInput)
             

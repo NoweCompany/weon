@@ -39,7 +39,7 @@
   
 body{
   margin-top: 50px;
-  background-color: #eaf7ff;
+  background-color: #f7f7f7;
     height: 100vh;
     width: 100vw;
     background-size: cover;
@@ -49,7 +49,7 @@ body{
   }
 
   ::selection {
-    color:rgb(46, 71, 163);
+    background-color:#b8dcff;
   }
   
   :root {
@@ -57,7 +57,7 @@ body{
   }
 
   nav {
-    background-color: #3c5eab;
+    background-color: #4179d2;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     width: 100%;
@@ -188,7 +188,7 @@ li {
 }
 
 #select{
-  color: rgb(255, 255, 255);
+  color: #f7f7f7;
   
 }
 
@@ -233,21 +233,20 @@ li {
 
 /* Estilização da barra de rolagem */
 ::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
+  width: 4px; /* Largura da barra de rolagem */
 }
 /* Estilização do trilho da barra de rolagem */
 ::-webkit-scrollbar-track {
   background-color: #ffffff; /* Cor de fundo do trilho */
 
 }
-
 /* Estilização do "polegar" da barra de rolagem */
 ::-webkit-scrollbar-thumb {
-  background-color: #000000; /* Cor do "polegar" */
+  background-color: #0000004a; /* Cor do "polegar" */
   border-radius: 40px; /* Arredondamento das bordas do "polegar" */
 }
 
 /* Estilização do "polegar" da barra de rolagem quando hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #688de3; /* Cor do "polegar" ao passar o mouse */
+  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
 }
