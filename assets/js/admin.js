@@ -122,17 +122,18 @@ class Preset extends Admin{
 
     rederTable(){
         container.innerHTML = `
+        <div class="table-container">
         <table>
             <thead>
                 <tr id="thead">
                     <th>Nome</th>
                 </tr>
             </thead>
-            <tbody id="tbody">
-  
-            </tbody>
+            <tbody id="tbody"></tbody>
         </table>
-        <button id="createPreset" class="criarnovatabela">Criar</button>
+    </div>
+    <button id="createPreset" class="criarnovatabela">Criar</button>
+    
         `
     }
 
