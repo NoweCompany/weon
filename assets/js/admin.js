@@ -209,8 +209,36 @@ class Preset extends Admin{
         console.log(e.target.id);
     }
 
-    deletePreset(e){
+    async deletePreset(e){
         console.log(e.target.id);
+
+        const id = e.target.id; // ID do item a ser excluído
+
+        const tableName = id.split('_')[0]
+        console.log(tableName)
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${super.token()}`
+        })
+
+        const request = await fetch(`${url}/template/table`, {
+        method: 'DELETE',
+        headers: headers,
+            
+        
+        body: JSON.stringify({ tableName: tableName })
+        })
+        
+        const data = await request.json()
+        if(request.status !== 200){
+            this.msg(data.errors, false)
+        
+        }
+        else{
+            this.msg('susceso', true)
+            this.preset()
+        }
+
     }
 
     async getApiPresets(){
