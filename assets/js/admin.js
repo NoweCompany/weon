@@ -348,17 +348,18 @@ class Fields extends Admin{
 
     renderFields(){
         container.innerHTML = `
-        <div class="titulo"> 
-        <h1> Criar Predefinições </h1>
-        <div> 
+        <div class="titulo">
+        <h1 id="tituloPrincipal">Criar Predefinições</h1>
+        </div>
+
 
             <div class="newfield">
-            <button id="newField"> <i class="fas fa-plus"> </i>  </button>
+            <button id="newField"> Criar Campos</button>
             </div>
             
         
         <div class="botãocreate">
-            <button id="createField"> <i class="fas fa-save"></i> </button>
+            <button id="createField"> Salvar </i> </button>
          </div>     
 
             <div class="cont-selecTableName"> 
@@ -366,6 +367,13 @@ class Fields extends Admin{
                 <select id="selectTableName">
                     <option value="" selected></option>
                 </select>
+            </div>
+
+            <div class="block">
+            <h1 id="campos1">Nome</h1>
+            <h1 id="tipo">Tipo</h1>
+            <h1 id="obrigatorio">Obrigatorio</h1>
+            <h1 id="delete">Delete</h1>
             </div>
             
             <form id="form">
@@ -411,8 +419,9 @@ class Fields extends Admin{
 
         const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "name");
-        nameLabel.innerHTML = "Campo";
+        nameLabel.innerHTML = "";
 
+    
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "name");
         nameInput.setAttribute("type", "text");
@@ -420,6 +429,8 @@ class Fields extends Admin{
         const typeLabel = document.createElement("label");
         typeLabel.setAttribute("for", "type");
         typeLabel.innerHTML = "";
+
+    
 
         const typeSelect = document.createElement("select");
 
@@ -457,7 +468,7 @@ class Fields extends Admin{
 
         const deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "btn-delete")
-        deleteButton.innerHTML = "Apagar";
+        deleteButton.innerHTML = "Excluir";
         deleteButton.onclick = (e) => {
             e.preventDefault()
             if(form.elements.length > 3){
