@@ -122,6 +122,9 @@ class Preset extends Admin{
 
     rederTable(){
         container.innerHTML = `
+        
+        <h1 id="tituloPrincipal">Tabelas</h1>
+
         <div class="table-container">
         <table>
             <thead>
@@ -193,8 +196,8 @@ class Preset extends Admin{
             tdEdit.className = 'editPreset'
             tdDelet.className = 'deletPreset'
 
-            const tdTextEdit = document.createTextNode('Edit')
-            const tdTextDelet = document.createTextNode('Delet')
+            const tdTextEdit = document.createTextNode('Editar')
+            const tdTextDelet = document.createTextNode('Apagar')
 
             tdDelet.appendChild(tdTextDelet)
             tdEdit.appendChild(tdTextEdit)
@@ -352,28 +355,39 @@ class Fields extends Admin{
         <h1 id="tituloPrincipal">Criar Predefinições</h1>
         </div>
 
+        <!-- Botão Criar -->
 
             <div class="newfield">
-            <button id="newField"> Criar Campos</button>
-            </div>
-            
+            <button id="newField">
+            <i class="fas fa-plus"></i> Criar Campos
+            </button>
+        </div>
         
-        <div class="botãocreate">
-            <button id="createField"> Salvar </i> </button>
-         </div>     
+          <!-- Botão Salvar-->
 
+            <div class="botãocreate">
+            <button id="createField">
+              <i class="fas fa-save"></i> Salvar
+            </button>
+          </div>    
+
+          <!-- Botão select tabelas-->
             <div class="cont-selecTableName"> 
-                <label></label>
+               
+            <!-- Botão select tipo-->  
                 <select id="selectTableName">
                     <option value="" selected></option>
                 </select>
             </div>
 
+
+            <!-- bloco titulo form-->  
             <div class="block">
-            <h1 id="campos1">Nome</h1>
-            <h1 id="tipo">Tipo</h1>
-            <h1 id="obrigatorio">Obrigatorio</h1>
-            <h1 id="delete">Delete</h1>
+            <span id="campos1">Nome</span>
+            <span id="tipo">Tipo</span>
+            <span id="obrigatorio">Obrigatório</span>
+            <span id="delete">Delete</span>
+
             </div>
             
             <form id="form">
@@ -468,7 +482,7 @@ class Fields extends Admin{
 
         const deleteButton = document.createElement("button");
         deleteButton.setAttribute("class", "btn-delete")
-        deleteButton.innerHTML = "Excluir";
+        deleteButton.innerHTML = '<i class="fas fa-trash"></i> Excluir';
         deleteButton.onclick = (e) => {
             e.preventDefault()
             if(form.elements.length > 3){

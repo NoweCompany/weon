@@ -139,12 +139,14 @@
     width: 70%;
     max-height: 300px; /* Altura máxima para a rolagem vertical */
   }
+
   
   table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 0;
     color: #000000;
+    margin-top: 3%;
   }
   
   th, td {
@@ -176,12 +178,14 @@
   /* criar predefinicao*/
   
   .block {
-    background-color: #ccc;
+    background-color: #292929;
     border-radius: 10px 10px 0px 0px;
     padding: 10px;
     display: flex;
     align-items: center;
     margin-top: 30px;
+    color: #f7f7f7;
+    font-size:25px;
   }
  
   
@@ -206,8 +210,10 @@
     width: 100%;
     height: auto;
     animation: fade-in 0.5s ease;
-    background-color: #939393;
+    background-color: #ededed;
     border-radius: 0 0 10px 10px;
+    overflow-y: scroll;
+    max-height: 300px;
   }
   
   #form select {
@@ -217,9 +223,11 @@
     width: 100%;
     border: none;
     height: auto;
-    text-align: left;
+    text-align: center;
     margin-right: 300px;
+    font-family: 'sfpro'
   }
+  
   
   .container #form input {
     margin-top: 10px;
@@ -232,13 +240,16 @@
     height: auto;
     text-align: left;
     margin-left: 8%;
+    
   }
   
   .create-field {
     display: flex;
     flex-wrap: wrap;
     gap: 3px;
+    
   }
+
   
   .divType {
     display: flex;
@@ -256,15 +267,22 @@
     border: none;
     position: fixed;
     right: 19%;
+    transition: background-color 0.3s;
   }
+  
+
+  .btn-delete:hover {
+    background-color: #fc4848;
+  }
+  
   
   #tituloPrincipal {
     font-size: 40px;
     font-weight: bold;
-    color: #000000;
+    color: #3a3a36;
     text-align: center;
     margin-top: 30px;
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -277,14 +295,15 @@
     font-size: 16px;
     border: none;
     border-radius: 20px;
-    background-color: #d0d0d0;
+    background-color: #ededed;
     outline: none;
     margin-top: -2%;
     position: fixed;
+    font-family: 'sfpro';
   }
   
   #newField {
-    background-color: #007bff;
+    background-color: #4179d2;
     border: none;
     color: white;
     padding: 10px 30px;
@@ -292,9 +311,16 @@
     font-size: 20px;
     cursor: pointer;
     border-radius: 4px;
-    margin-top: 15%;
+    margin-top: 5%;
     float: right;
+    transition: background-color 0.3s;
   }
+
+  #newField:hover {
+    background-color: #6694e2;
+  }
+  
+  
   
   /* Media queries para telas menores */
   @media (max-width: 1512px) {
@@ -322,23 +348,25 @@
 }
 
 
-  #createField {
-    border: none; 
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    cursor: pointer; 
-    border-radius: 4px;
-    position: fixed;
-    right: 15%;
-    bottom: 30px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 30px;
- 
- 
-  }
+#createField {
+  border: none; 
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer; 
+  border-radius: 4px;
+  position: fixed;
+  right: 15%;
+  bottom: 30px;
+  background-color: #4179d2;
+  padding: 10px 30px;
+  transition: background-color 0.3s;
+}
+
+#createField:hover {
+  background-color: #6694e2;
+}
+
   
  
   
