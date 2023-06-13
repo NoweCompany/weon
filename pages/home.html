@@ -44,7 +44,6 @@
     <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
       <li><a href="./drive.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
       <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-      <li><a href="./configuração.html"><i class="fa-solid fa-screwdriver-wrench"></i> Configuração</a></li>
       <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
     <li class="user-icon">
 
@@ -89,6 +88,24 @@
   
   // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
   window.addEventListener("scroll", handleScroll);
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    var icons = document.querySelectorAll("[data-icon]");
+  
+    for (var i = 0; i < icons.length; i++) {
+      var icon = icons[i];
+      var iconName = icon.getAttribute("data-icon");
+      var iconElement = document.createElement("i");
+  
+      // Adicione as classes necessárias para exibir o ícone corretamente
+      iconElement.classList.add("fas");
+      iconElement.classList.add("fa-" + iconName);
+  
+      // Substitua o elemento de link original pelo ícone
+      icon.innerHTML = "";
+      icon.appendChild(iconElement);
+    }
+  });
   
   </script>
 
