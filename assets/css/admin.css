@@ -149,7 +149,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 0;
-  color: #000000;
+  color: #cd1f1f;
   margin-top: 3%;
   opacity: 0;
   animation: fade-in 1s forwards;
@@ -173,7 +173,6 @@ th, td {
 }
 
 th {
-  background-color: #4469aa;
   color: #ffffff;
   text-align: left;
   border-radius: 10px 10px 0px 0px;
