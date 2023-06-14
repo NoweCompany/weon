@@ -456,22 +456,22 @@ class Fields extends Admin {
 
         const typeOptionStrg = document.createElement("option");
         typeOptionStrg.setAttribute("value", "STRING");
-        typeOptionStrg.innerText = 'Texto'
+        typeOptionStrg.innerText = 'Texto pequeno'
         typeSelect.appendChild(typeOptionStrg)
 
         const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "BOOLEAN");
-        typeOptionBoolean.innerText = 'Sim ou Não'
+        typeOptionBoolean.innerText = 'Caixa de seleção'
         typeSelect.appendChild(typeOptionBoolean)
 
         const typeOptionInt = document.createElement("option");
         typeOptionInt.setAttribute("value", "INTEGER");
-        typeOptionInt.innerText = 'Inteiros'
+        typeOptionInt.innerText = 'Número Inteiros'
         typeSelect.appendChild(typeOptionInt)
 
         const typeOptionFloat = document.createElement("option");
         typeOptionFloat.setAttribute("value", "FLOAT");
-        typeOptionFloat.innerText = 'Decimal'
+        typeOptionFloat.innerText = 'Número Decimal'
         typeSelect.appendChild(typeOptionFloat)
 
         const typeOptionDate = document.createElement("option");
