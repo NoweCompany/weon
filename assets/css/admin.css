@@ -154,7 +154,7 @@ table {
   opacity: 0;
   animation: fade-in 1s forwards;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: #f7f7f7
 }
 
 @keyframes fade-in {
@@ -439,6 +439,8 @@ background-color: #6694e2;
 .sidebar h3 {
   text-align: center;
   margin-left: 10%;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .sidebar .modal-button {
@@ -481,6 +483,20 @@ background-color: #6694e2;
 
 .sidebar .modal-button:hover {
   transform: scale(1.1);
+}
+
+.deletPreset{
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deletPreset:hover {
+  background-color: #fc4848;
 }
 
 .criarnovatabela {

@@ -129,7 +129,7 @@ class Preset extends Admin{
         <table>
             <thead>
                 <tr id="thead">
-                    <th>Nome</th>
+                    <th>Campos</th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
