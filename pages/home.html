@@ -15,11 +15,7 @@
 </head>
 <body>
 <!-- logo nowe -->
-<a href="https://nowe.netlify.app" target=_blank">
-  <div class="imagem-pequena">
-    <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
-  </div>
- </a>
+
 
 <!-- logo weon -->
 <a href="../pages/home.html">
@@ -63,50 +59,13 @@
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
       <script type="module" src="../assets/js/modules/Logado.js"></script>
       <script type="module" src="../assets/js/home.js"></script>
+      <script src="../assets/js/padrao.js"> </script> 
 
       
 </nav>
 </body>
 
-<script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
-  const navbar = document.getElementById("navbar");
-  const select = document.getElementById("select");
-  
-  // Define a posição de rolagem que ativa a mudança de cor
-  const scrollPosition = 200; // Ajuste o valor conforme necessário
-  
-  // Função para verificar a posição de rolagem e adicionar/remover as classes conforme necessário
-  function handleScroll() {
-    if (window.pageYOffset >= scrollPosition) {
-      navbar.classList.add("navbar-scrolled");
-      select.classList.add("select-scrolled");
-    } else {
-      navbar.classList.remove("navbar-scrolled");
-      select.classList.remove("select-scrolled");
-    }
-  }
-  
-  // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
-  window.addEventListener("scroll", handleScroll);
-  
-  document.addEventListener("DOMContentLoaded", function() {
-    var icons = document.querySelectorAll("[data-icon]");
-  
-    for (var i = 0; i < icons.length; i++) {
-      var icon = icons[i];
-      var iconName = icon.getAttribute("data-icon");
-      var iconElement = document.createElement("i");
-  
-      // Adicione as classes necessárias para exibir o ícone corretamente
-      iconElement.classList.add("fas");
-      iconElement.classList.add("fa-" + iconName);
-  
-      // Substitua o elemento de link original pelo ícone
-      icon.innerHTML = "";
-      icon.appendChild(iconElement);
-    }
-  });
-  
-  </script>
+
+
 
 </html>

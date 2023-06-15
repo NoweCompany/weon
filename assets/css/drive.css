@@ -1,21 +1,4 @@
 
-.msg{
-  background-color: rgba(255, 134, 134, 0.414);
-  color: #000000;
-  padding: 10px;
-  margin-top: 3px;
-  font-size: larger;
-  border-radius: 5px;
-  text-align: center;
-
-}
-
-.post:hover{
-  cursor: pointer;
-  background-color: rgb(0, 36, 214);
-  color: #fff;
-}
-
 .conteiner{
   display: flex;
   align-items: center;

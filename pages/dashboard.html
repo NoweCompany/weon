@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-  
-    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+
     <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700" rel="stylesheet"/>
     <link rel="icon" href="../assets/img/iconweon.ico.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-... (hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
  
 </head>
 <body>
@@ -21,8 +19,8 @@
     <ul>
       <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
       <li><a href="./drive.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
-      <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-      <li><a id="select" href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
+      <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+      <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
       <li class="user-icon">
         <span><i class="fas solid fa-user"></i></span>
         <div class="options-window">
@@ -41,60 +39,13 @@
       </ul>
       </nav>
 
-      <a href="https://nowe.netlify.app" target=_blank">
-        <div class="imagem-pequena">
-          <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
-        </div>
-       </a>
-
-    <div id="wrapper">
-      <div class="content-area">
-        <div class="container-fluid">
-          <div class="text-right mt-3 mb-3 d-fixed">
-
-    <div id="charts">
-        <div id="chart">
-        </div>
-    </div>
-
-    <script>// Obtém os elementos da barra de navegação e do elemento com o ID 'select'
-      const navbar = document.getElementById("navbar");
-      const select = document.getElementById("select");
-      
-      // Define a posição de rolagem que ativa a mudança de cor
-      const scrollPosition = 200; // Ajuste o valor conforme necessário
-      
-      // Função para verificar a posição de rolagem e adicionar/remover as classes conforme necessário
-      function handleScroll() {
-        if (window.pageYOffset >= scrollPosition) {
-          navbar.classList.add("navbar-scrolled");
-          select.classList.add("select-scrolled");
-        } else {
-          navbar.classList.remove("navbar-scrolled");
-          select.classList.remove("select-scrolled");
-        }
-      }
-      
-      // Adiciona um ouvinte de evento para verificar a posição de rolagem durante o scroll
-      window.addEventListener("scroll", handleScroll);
-      
-      window.addEventListener('scroll', function() {
-      var selectElement = document.getElementById('selected');
-      var bounding = selectElement.getBoundingClientRect();
-      
-      if (bounding.top < window.innerHeight && bounding.bottom >= 30) {
-        selectElement.classList.add('change-color');
-      } else {
-        selectElement.classList.remove('change-color');
-      }
-    });
-
-      </script>
+     
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script type="module" src="../assets/js/data.js"></script>
     <script type="module" src="../assets/js/dashboard.js"></script>
     <script type="module" src="../assets/js/modules/Logout.js"></script> 
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/padrao.js"> </script> 
 </body>
 </html>

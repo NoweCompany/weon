@@ -74,8 +74,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    transition: background-color 0.3s;
-  
+    transition: background-color 0.3s; 
   }
   
   .navbar-scrolled {
@@ -202,7 +201,7 @@ li {
 
 #logo {
   position: fixed;
-  top: 18px;
+  top: 15px;
   left: 30px;
 }
 
@@ -221,7 +220,7 @@ li {
   color: #ffffff;
   background-color: #c05454;
   padding: 10px 100px 10px 100px;
-  margin-top: 20px;
+  margin-top: 2px;
   border-radius: 10px;
   position: absolute;
 }
