@@ -77,12 +77,6 @@ body{
     transition: background-color 0.3s; 
   }
   
-  .navbar-scrolled {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    
-  }
-  
   ul {
     list-style-type: none;
     margin: 0;
@@ -128,7 +122,7 @@ body{
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
@@ -155,7 +149,7 @@ body{
   }
   
   .options a:hover {
-    background-color: #ffffff;
+    background-color: #000000;
   }
   
 
@@ -203,12 +197,17 @@ li {
   position: fixed;
   top: 15px;
   left: 30px;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
 }
+
 
 #logo img {
   width: 100px;
   
 }
+
 
 .msg{
   display: none;

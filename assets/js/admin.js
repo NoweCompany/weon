@@ -382,13 +382,14 @@ class Fields extends Admin {
 
 
             <!-- bloco titulo form-->  
-            <div class="block">
-            <span id="campos1">Nome</span>
-            <span id="tipo">Tipo</span>
-            <span id="obrigatorio">Obrigatório</span>
-            <span id="delete">Delete</span>
-
-            </div>
+            <table id='titulotabela'>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Obrigatório</th>
+              <th>Delete</th>
+            </tr>
+            </table>
             
             <form id="form">
             </form>
@@ -429,7 +430,7 @@ class Fields extends Admin {
         divName.className = "divName";
 
         const divType = document.createElement("div");
-        divType.className = "divType";
+        divName.className = "divName";
 
         const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "name");
