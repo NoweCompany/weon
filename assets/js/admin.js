@@ -419,7 +419,7 @@ class Fields extends Admin {
             option.appendChild(textOption);
             select.appendChild(option);
         }
-
+        $('#selectTableName').select2();
     }
 
     createNewField() {
@@ -601,3 +601,4 @@ document.addEventListener('click', (e) => {
     if (id === 'predefinicao') preset.preset()
     if (id === 'campos') fields.fields()
 })
+

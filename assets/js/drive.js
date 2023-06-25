@@ -74,8 +74,9 @@ class Drive {
   }
 
   async renderTable(selectedTable) {
+ 
     this.thead.innerHTML = '';
-    this.tbody.innerHTML = '';
+    this.tbody.innerHTML = '<button> cadastrar </button>';
 
     const table = this.tableData.find((data) => data.tableName === selectedTable);
     if (!table) {

@@ -17,7 +17,6 @@
   <nav>
     <ul>
       <li><a id="selected" href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-      <li><a href="./drive.html"><i class="fas solid fa-cloud"></i> Drive</a></li>
       <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
       <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
       <li class="user-icon">
@@ -38,30 +37,39 @@
           </a>
   </nav>
 
-  <!-- Botão principal -->
-  <a href="https://nowe.netlify.app" target=_blank">
-  <div class="imagem-pequena">
-    <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
-  </div>
- </a>
+ 
+
+
   <!-- barra lateral -->
   <div class="sidebar">
     <div class="modal-body">
-      <h3>Predefinições</h3>
-      
-        <div class="msg"></div>
-
-               
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="search-input" placeholder="Tabelas" aria-label="Recipient's username" aria-describedby="button-addon2">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-        </div>
-        
-
+      <h3>Predefinições</h3>      
+        <div class="msg"></div>         
+        <select class="selectTable">
+          <option value="">Selecione uma tabela </option>
+        </select> 
         
     </div>
   </div>
  
+ 
+  
+  <table class="table1">
+    <thead class="thead">
+    </thead>
+    <tbody class="tbody">
+    </tbody>
+    <button type="button" class="btn btn-outline-success">Cadastrar</button>
+  </table>
+</div>
+
+
+
+
+
+
+
+
 
   <!-- Conteiner -->
   <div class="msg"></div>
@@ -71,6 +79,7 @@
   </div>
   <script src="../assets/js/modules/Logout.js"></script>
   <script src="../assets/js/cadastro.js"></script>
+  <script type="module" src="../assets/js/drive.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <!-- JavaScript para exibir/ocultar a caixa modal -->
 
