@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/form.css">
-    <link rel="stylesheet" href="./assets/css/padrao.css">
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/form.css">
+  <link rel="stylesheet" href="./assets/css/padrao.css">
+  <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
 
 
-    <title>weon - entrar</title>
-    <link href="./assets/img/iconweon.ico.png" rel="icon">
+  <title>weon - Entrar</title>
+  <link href="./assets/img/iconweon.ico.png" rel="icon">
 </head>
+
 <body>
-    
-    <a href="https://nowe.netlify.app" target=_blank">
-        <div class="imagem-pequena">
-          <img  src="../assets/img/icone preto.png" alt="Imagem Pequena">
-        </div>
-       </a>
 
-      <img src="./assets/img/weonpreto.png" alt="logo weon" class="imagem">
+  <a href="https://nowe.netlify.app" target=_blank">
+    <div class="imagem-pequena">
+      <img src="../assets/img/icone preto.png" alt="Imagem Pequena">
+    </div>
+  </a>
 
-      <div class="conteiner">
-        <form action="" method="post" class="form">
-          <h1>Login</h1>
-          <div class="row">
-            <label for="email">Email</label>
-            <input type="text" id="email" class="inputlogin" name="email">
-          </div>
-          <div class="row">
-            <label for="password">Senha</label>
-            <div class="senha-wrapper">
-              <input type="password" id="password" class="inputlogin" name="password">
-              <i class="lnr lnr-eye"></i>
-            </div>
-          </div>
-          <div class="btn">
-            <input type="submit" class="btn">
-          </div>
-          <div class="msg"></div>
-        </form>
+  <img src="./assets/img/weonpreto.png" alt="logo weon" class="imagem">
+
+  <div class="conteiner">
+    <form action="" method="post" class="form">
+      <h1>Login</h1>
+      <div class="row">
+        <label for="email">Email</label>
+        <input type="text" id="email" class="inputlogin" name="email">
       </div>
-      <script>
-      let btn = document.querySelector('.lnr-eye');
-    btn.addEventListener('click', function() {
-    let input = document.querySelector('#password');
-    if(input.getAttribute('type') == 'password') {
+      <div class="row">
+        <label for="password">Senha</label>
+        <div class="senha-wrapper">
+          <input type="password" id="password" class="inputlogin" name="password">
+          <i class="lnr lnr-eye"></i>
+        </div>
+      </div>
+      <div class="btn">
+        <input type="submit" class="btn">
+      </div>
+      <div class="msg"></div>
+    </form>
+  </div>
+  <script>
+    let btn = document.querySelector('.lnr-eye');
+    btn.addEventListener('click', function () {
+      let input = document.querySelector('#password');
+      if (input.getAttribute('type') == 'password') {
         input.setAttribute('type', 'text');
-    } else {
+      } else {
         input.setAttribute('type', 'password');
-    }
+      }
     });
-      </script>
-      
-    <script type="module" src="./assets/js/modules/Logado.js"></script>
-    <script type="module" src="./assets/js/form.js"></script>
+  </script>
+
+  <script type="module" src="./assets/js/modules/Logado.js"></script>
+  <script type="module" src="./assets/js/form.js"></script>
 </body>
+
 </html>
