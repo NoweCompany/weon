@@ -1,0 +1,280 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+@font-face {
+
+
+    font-family: sfpro;
+    src: url("../../SF-Pro-Display-Medium.otf");
+  }
+
+  /* Estilos específicos para dispositivos móveis */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  /* Estilos específicos para tablets */
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    h1 {
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  /* Estilos específicos para desktops */
+  @media screen and (min-width: 769px) {
+    h1 {
+      font-size: 26px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+  }
+
+  
+body{
+  margin-top: 50px;
+  background-color: #f7f7f7;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family:'sfpro';
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color:#b8dcff;
+  }
+  
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  nav {
+    background-color: #4179d2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 64px;
+    text-align: center;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: background-color 0.3s; 
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    justify-content: space-between;
+  }
+  
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  li:last-child {
+    margin-right: 0;
+  }
+  
+  li a {
+    display: block;
+    color: #1f1d1d;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+    font-family: "sfpro";
+  }
+  
+  .user-icon {
+    position: fixed;
+    top: 10px;
+    right: 3%;
+    align-items: center;
+  }
+  
+  .user-icon span {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .options-window {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    transition: opacity 0.3s;
+  }
+  
+  .user-icon:hover .options-window {
+    display: block;
+    opacity: 1;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .options a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .options a:hover {
+    background-color: #000000;
+  }
+  
+
+li a {
+  /* Restante das propriedades CSS */
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+li a:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+li a:hover {
+  color: #ffffff;
+}
+
+li a:hover:before {
+  transform: scaleX(1);
+}
+
+
+li {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+
+#select{
+  color: #f7f7f7;
+  
+}
+
+#logo {
+  position: fixed;
+  top: 26.2%;
+  left: 3%;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+}
+
+
+#logo img {
+  width: 100px;
+  
+}
+
+
+.msg{
+  display: none;
+}
+
+.error{
+  display: block;
+  text-align: center;
+  color: #ffffff;
+  background-color: #c05454;
+  padding: 10px 100px 10px 100px;
+  margin-top: 2px;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.success{
+  margin-top: 100px;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  color: #ffffff;
+  background-color: #54c06a;
+  padding: 10px 100px 10px 100px;
+  margin-top: 20px;
+  border-radius: 10px;
+  position: absolute;
+}
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  width: 4px; /* Largura da barra de rolagem */
+}
+/* Estilização do trilho da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Cor de fundo do trilho */
+
+}
+/* Estilização do "polegar" da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #0000004a; /* Cor do "polegar" */
+  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
+}
+
+/* Estilização do "polegar" da barra de rolagem quando hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
+}
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  height: 4px; /* Altura da barra de rolagem */
+}
+
+/* Estilização do trilho da barra de rolagem */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Cor de fundo do trilho */
+}
+
+/* Estilização do "polegar" da barra de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #0000004a; /* Cor do "polegar" */
+  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
+}
+
+/* Estilização do "polegar" da barra de rolagem quando hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
+}
