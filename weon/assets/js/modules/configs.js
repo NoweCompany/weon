@@ -1,6 +1,6 @@
 export default {
     urlApi: 'https://apiweon.nowecompany.com.br',
-    urlWebsiteDefault: 'http://localhost:5500/weon/',
+    urlWebsiteDefault: 'https://nowecompany/weon/',
     urlWebsiteRelativa: () => {
         const urlWebsite = document.location.href
         let urlFormated = urlWebsite.split("/").slice(0, -1).join('/')
