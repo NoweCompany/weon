@@ -1,6 +1,7 @@
-const url = 'http://localhost:3300'
+import configs from "./modules/configs.js";
 
-const urlWebsite = document.location.href;
+const url = configs.urlApi
+const urlWebsite = configs.urlWebsiteDefault
 
 import Logado from "./modules/Logado.js";
 

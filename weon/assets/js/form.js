@@ -1,16 +1,20 @@
+import configs from '../js/modules/configs.js'
+import Logado from './modules/Logado.js'
+
 const form = document.querySelector('.form');
 const inpEmail = document.querySelector('#email');
 const inpPassword = document.querySelector('#password');
 const containerMsg = document.querySelector('.msg')
-const url = 'http://localhost:3300'
-const urlWebsite = document.location.href.split('/').slice(0, -1).join('/')
 
-import Logado from './modules/Logado.js'
+const url = configs.urlApi
+const urlWebsite = configs.urlWebsiteRelativa()
+
+console.log(urlWebsite);
+console.log(configs.urlWebsiteRelativa());
 
 window.addEventListener('load', async e => {
   const logado = new Logado()
   if (await logado.userLogado()) {
-    console.log('chamei 2');
     return window.location.assign(`${urlWebsite}/pages/home.html`)
   } else {
     return

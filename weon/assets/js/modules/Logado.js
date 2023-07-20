@@ -1,4 +1,6 @@
-const url = 'http://localhost:3300'
+import configs from './configs.js'
+const url = configs.urlApi
+
 export default class Logado {
   async userLogado() {
     try {

@@ -1,5 +1,7 @@
-const url = 'http://localhost:3300'
-const urlWebsite = document.location.href
+import configs from '../js/modules/configs.js'
+
+const url = configs.urlApi
+const urlWebsite = configs.urlWebsiteDefault
 
 const container = document.querySelector('.container')
 const containerMsg = document.querySelector('#msg')
