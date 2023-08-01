@@ -15,16 +15,17 @@ window.addEventListener('load', async (e) => {
 });
 
 class Controller {
-    constructor(drive, register, containerMsg, container) {
+    constructor(containerMsg, container) {
         this.container = container
         this.containerMsg = containerMsg
-        this.drive = drive
-        this.register = register
+        this.drive = new Drive()
+        this.register = new Register()
 
         this.form = null
         this.thead = null
         this.tbody = null
         this.btnCad = null
+        this.back = null
     }
 
     init() {
@@ -32,8 +33,17 @@ class Controller {
         this.drive.init(this.btnCad, this.thead, this.tbody)
     }
 
+    addEnvents() {
+        this.btnCad.addEventListener('click', () => {
+            this.renderFormHtml()
+        })
+
+        this.back.addEventListener('click', () => {
+            this.renderTableHTML()
+        })
+    }
+
     renderTableHTML() {
-        console.log(this.container);
         this.container.innerHTML = `
         <div class="Cont-btn">
             <button id="btnCad" class="btn-outline-success">Cadastrar</button>
@@ -50,16 +60,25 @@ class Controller {
         this.btnCad = document.querySelector('#btnCad')
         this.thead = document.querySelector('.thead');
         this.tbody = document.querySelector('.tbody');
-
+        
+        this.addEnvents()
         return null
     }
 
     renderFormHtml() {
-        this.form = document.querySelector('#form')
-        return this.container.innerHTML = `
+        this.container.innerHTML = `
+            <div class="Cont-btn">
+                <button id="back" class="btn-outline-success">back</button>
+            </div>
             <form id="form">
             </form>
         `
+
+        this.form = document.querySelector('#form')
+        this.back = document.querySelector('#back')
+
+        this.addEnvents()
+        return null
     }
 
     msg(msg, success) {
@@ -279,18 +298,19 @@ class Register extends Controller {
 
 class Drive extends Controller {
     constructor(selectCollection) {
-        this.selectCollection = selectCollection
-        this.btnCad = null
+        super()
+        this.selectCollection = selectCollection,
+        this.btnCad = null,
         this.thead = null,
-            this.tbody = null
-        this.collectionData = [];
+        this.tbody = null,
+        this.collectionData = []
 
     }
 
     async init(btnCad, thead, tbody) {
         this.btnCad = btnCad
         this.thead = thead,
-            this.tbody = tbody
+        this.tbody = tbody
 
         await this.addOptions();
         this.initSelect2();
@@ -344,6 +364,7 @@ class Drive extends Controller {
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
             for (const key in field) {
+                if(key === '_id') continue
                 const value = field[key];
                 const td = document.createElement('td');
                 const textTd = document.createTextNode(value);
@@ -412,12 +433,8 @@ class Drive extends Controller {
     }
 }
 
-const selectCollection = document.querySelector('.selectCollection');
 const containerMsg = document.querySelector('.msg');
 const container = document.querySelector('.container')
 
-const drive = new Drive(selectCollection)
-const register = new Register()
-const controller = new Controller(drive, register, containerMsg, container)
-
+const controller = new Controller(containerMsg, container)
 controller.init()
