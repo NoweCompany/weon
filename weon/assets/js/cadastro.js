@@ -18,26 +18,25 @@ class Controller {
     constructor(containerMsg, container) {
         this.container = container
         this.containerMsg = containerMsg
-        this.drive = new Drive()
-        this.register = new Register()
 
-        this.form = null
-        this.thead = null
-        this.tbody = null
-        this.btnCad = null
-        this.back = null
+        this.drive = null
+        this.register = null
     }
 
     init() {
-        this.renderTableHTML()
-        this.drive.init(this.btnCad, this.thead, this.tbody)
+        this.drive = new Drive()
+        this.drive.init(this.container, this.containerMsg)
     }
 
-    addEnvents() {
-        this.btnCad.addEventListener('click', () => {
-            this.renderFormHtml()
+    setEventOnButtonCad(presetName){
+        const btnCad = document.querySelector(`#${presetName}`)
+        btnCad.addEventListener('click', (e) => {
+            const el = e.target
+            this.renderFormHtml(el.id)
         })
+    }
 
+    setEventOnButtonBack(){
         this.back.addEventListener('click', () => {
             this.renderTableHTML()
         })
@@ -46,7 +45,7 @@ class Controller {
     renderTableHTML() {
         this.container.innerHTML = `
         <div class="Cont-btn">
-            <button id="btnCad" class="btn-outline-success">Cadastrar</button>
+            <button id="btnCad" name="btnCad" class="btn-outline-success">Cadastrar</button>
         </div>
         <table class="table">
             <thead class="thead">
@@ -56,29 +55,26 @@ class Controller {
             </tbody>
         </table>
         `
-
-        this.btnCad = document.querySelector('#btnCad')
-        this.thead = document.querySelector('.thead');
-        this.tbody = document.querySelector('.tbody');
-        
-        this.addEnvents()
-        return null
+        const btnCad = document.querySelector('#btnCad')
+        const thead = document.querySelector('.thead')
+        const tbody =  document.querySelector('.tbody')
+        return {btnCad, thead, tbody}
     }
 
-    renderFormHtml() {
+    renderFormHtml(presetName) {
         this.container.innerHTML = `
             <div class="Cont-btn">
                 <button id="back" class="btn-outline-success">back</button>
             </div>
+            <h1> ${presetName} </h1>
             <form id="form">
             </form>
         `
 
-        this.form = document.querySelector('#form')
-        this.back = document.querySelector('#back')
+        const form = document.querySelector('#form')
+        const back = document.querySelector('#back')
 
-        this.addEnvents()
-        return null
+        return { form, back }
     }
 
     msg(msg, success) {
@@ -110,10 +106,9 @@ class Controller {
 }
 
 class Register extends Controller {
-    constructor(container) {
-        super(containerMsg)
-
-        this.container = container
+    constructor() {
+        super()
+        
     }
 
     async init() {
@@ -297,21 +292,22 @@ class Register extends Controller {
 }
 
 class Drive extends Controller {
-    constructor(selectCollection) {
+    constructor() {
         super()
-        this.selectCollection = selectCollection,
-        this.btnCad = null,
-        this.thead = null,
-        this.tbody = null,
+        this.selectCollection = document.querySelector('.selectCollection'),
+        this.cadBtn = document.querySelector
         this.collectionData = []
+
+        this.container = null
+        this.containerMsg = null
+
+        this.collectinoPresetName = null
 
     }
 
-    async init(btnCad, thead, tbody) {
-        this.btnCad = btnCad
-        this.thead = thead,
-        this.tbody = tbody
-
+    async init(container, containerMsg) {
+        this.container = container 
+        this.containerMsg = containerMsg 
         await this.addOptions();
         this.initSelect2();
         this.events();
@@ -319,8 +315,8 @@ class Drive extends Controller {
 
     async addOptions() {
         const data = await this.getApiCollections()
+        
         this.collectionData = data.response; // Salva os dados da tabela para uso posterior
-
         for (const key of this.collectionData) {
             const option = document.createElement('option');
             const textOption = document.createTextNode(key.collectionName);
@@ -349,15 +345,23 @@ class Drive extends Controller {
         $(this.selectCollection).on('change', (e) => this.renderTable(e.target.value));
     }
 
+    initializeTable(collectionName, tableElements){
+        this.presetName = collectionName
+        tableElements.btnCad.setAttribute('id', collectionName)
+        super.setEventOnButtonCad(this.presetName)
+    }
+
     async renderTable(collectionName) {
-        this.btnCad.setAttribute('id', collectionName)
+        const tableElements = super.renderTableHTML()
+        this.initializeTable(collectionName, tableElements)
 
         const fieldsCollection = await this.getApiFields(collectionName)
         for (const field of fieldsCollection.fields) {
+            console.log(field);
             const th = document.createElement('th');
             const textTh = document.createTextNode(field.key);
             th.appendChild(textTh);
-            this.thead.appendChild(th);
+            tableElements.thead.appendChild(th);
         }
 
         const valuesCollection = await this.getVeluesApi(collectionName);
@@ -371,7 +375,7 @@ class Drive extends Controller {
 
                 td.appendChild(textTd);
                 tr.appendChild(td);
-                this.tbody.appendChild(tr);
+                tableElements.tbody.appendChild(tr);
             }
         }
     }
