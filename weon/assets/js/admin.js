@@ -1,7 +1,7 @@
 import configs from '../js/modules/configs.js'
 
 const url = configs.urlApi
-const urlWebsite = configs.urlWebsiteDefault
+const urlWebsite = configs.urlWebsiteRelativa()
 
 const container = document.querySelector('.container')
 const containerMsg = document.querySelector('#msg')
@@ -12,7 +12,7 @@ window.addEventListener('load', async (e) => {
     containerMsg.innerHTML = ''
     const logado = new Logado()
     if (!(await logado.userLogado())) {
-        return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`)
+        return window.location.assign(`${urlWebsite}`)
     } else {
         return
     }

@@ -11,9 +11,9 @@
   <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-cKpJf6wot58WKM6qr4BdJP4XjKcufzLWUmbYgY6S5S6w5jbs8Wb3qorvDn9KTwC2Ql8RROJ68aLpvpLVbDOwJw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
@@ -43,20 +43,22 @@
   </nav>
 
 
-
+  <div class="loading" id="loading">
+    <img src="../assets/gif/load-31_256.gif"/>
+  </div>
 
   <!-- barra lateral -->
   <div class="sidebar">
     <div class="modal-body">
       <h3>Predefinições</h3>
-      <div class="msg"></div>
       <select class="selectCollection js-example-responsive" style="width: 75%">
         <option value="">Selecione uma tabela </option>
       </select>
 
     </div>
   </div>
-
+  
+    
   <div class="msg"></div>
   <div class="container">
   </div>
@@ -65,7 +67,6 @@
 
   <script type="module" src="../assets/js/modules/Logout.js"></script>
   <script type="module" src="../assets/js/cadastro.js"></script>
-  <script type="module" src="../assets/js/drive.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <!-- JavaScript para exibir/ocultar a caixa modal -->
   </script>
