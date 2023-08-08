@@ -1,4 +1,4 @@
-<div align="center"><img src="./assets/img/nowe/versao branca.png" width="200" aling-item="center"/></div>
+<div align="center"><img src="./assets/img/slogan.jpg" width="100%" aling-item="center"/></div>
 
 # Nesse repositório você encontra:
 - [Nowe](https://nowe.netlify.app/) uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirino, essa empresa tem como objetivo vender softwares de gestão e logística. 
