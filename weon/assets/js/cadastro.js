@@ -27,11 +27,11 @@ class Drive{
     }
 
     async init(inicialization = false){
-        this.showForm('clientes')
-        // if(inicialization) {
-        //     await this.addOptions()
-        // }
-        // this.initializeSelect2()
+        //this.showForm('clientes')
+        if(inicialization) {
+            await this.addOptions()
+        }
+        this.initializeSelect2()
     }
 
     initializeSelect2() {
@@ -49,6 +49,7 @@ class Drive{
 
             const {btnCad, thead, tbody} = this.renderTableHtml()
 
+            //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
 
@@ -130,9 +131,34 @@ class Drive{
         await this.addInputsToForm(form, presetSelected)
         
         form.addEventListener('submit', async (e) => {
-            e.preventDefault()
-        })
-    }
+            try {
+                e.preventDefault()
+                const elements = e.target.elements
+
+                let valuesForm = {}
+                for(const element of elements){
+                    if(!element.id || !element.type) continue
+                    let valueInput = element.value
+
+                    switch(element.type){
+                        case 'number':
+                        valueInput = Number(valueInput)
+                        break
+
+                        case 'checkbox':
+                            valueInput = Boolean(valueInput)
+                    }
+
+                    valuesForm[element.id] = valueInput
+                }
+
+            const response = await this.requests.postApiValues(presetSelected, [valuesForm])
+            this.msg('Cadastro bem sucedido')
+
+        } catch (error) {
+            this.msg(error.message, false)
+        }})
+        }
 
     async addInputsToForm(form, presetSelected = this.presetSelected){
         try {
@@ -240,6 +266,31 @@ class Requests{
         this.token = token
         this.apiUrl = apiUrl
         this.loading = loading
+    }
+
+    async postApiValues(collectionName, values) {
+        try {
+            this.addLoading()
+            const response = await fetch(`${this.apiUrl}/value`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${this.token}`
+                },
+                body: JSON.stringify({ collectionName, values })
+            })
+
+            const data = await response.json();
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.removeLoading()
+            return response
+        } catch (e) {
+            console.log(e);
+            this.removeLoading()
+             throw new Error(e.message || 'Ocorreu um erro inesperado')
+            return false
+        }
     }
 
     async getApiCollections() {
