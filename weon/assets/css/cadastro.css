@@ -18,19 +18,22 @@
 
   
   .loading {
-    /* Tentei deixar o fundo na tela 
-    interia, mas o margin-top do body na arquivo default.cdd não permite */
-    display: none;
-    background-color: #29292969;
+    margin-top: 30px;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo branco com transparência */
     width: 100vw;
     height: 100vh;
-    
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-
     position: absolute;
     z-index: 5!important;
-    
+    backdrop-filter: blur(5px); 
+  }
+
+ 
+  .gif {
+    max-width: 100%;
+    max-height: 100%;
   }
 
   /* sidebar */
@@ -45,6 +48,7 @@
     padding-top: 30px;
     animation: slide-in 0.5s ease;
   }
+
 
   @keyframes slide-in {
     from {

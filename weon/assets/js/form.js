@@ -15,7 +15,7 @@ console.log(configs.urlWebsiteRelativa());
 window.addEventListener('load', async e => {
   const logado = new Logado()
   if (await logado.userLogado()) {
-    return window.location.assign(`${urlWebsite}/pages/home.html`)
+    return window.location.assign(`pages/home.html`)
   } else {
     return
   }
