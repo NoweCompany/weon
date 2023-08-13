@@ -62,9 +62,11 @@ class Drive{
 
     renderTableHtml(){
         this.container.innerHTML = `
-        <div class="Cont-btn">
-            <button id="btnCad" name="btnCad" class="btn-outline-success">Cadastrar</button>
-        </div>
+        <div class="btn-cad">
+        <div class="container d-flex justify-content-end h-100">
+        <button id="btnCad" name="btnCad" class="btn btn-outline-success btn-lg">Cadastrar</button>
+      </div>
+    </div>    
         <table class="table">
             <thead class="thead">
             </thead>
@@ -84,13 +86,19 @@ class Drive{
 
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
-            <h1> ${presetSelected} </h1>
+        <h1 class="display-3">${presetSelected}</h1>
             <form id="form" class="formPreset">
-                <input type="submit" class="inputFormPreset" value="Enviar">
+            <input type="submit" class="btn btn-primary" value="Enviar">
             </form>
+
+            <div class='dangerbtn'>
             <div class="Cont-btn">
-                <button id="back" class="btn-outline-success">Voltar</button>
-            </div>
+        <button id="back" class="btn btn-outline-danger btn-lg">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+        </div>
+        </div> 
+
         `
 
         const form = document.querySelector('#form')
@@ -174,11 +182,10 @@ class Drive{
 
                 const input = document.createElement('input')
                 input.setAttribute('id', key)
-                input.setAttribute('placeholder', key)
+                
                 input.setAttribute('required', required)
                 input.setAttribute('type', typeInput)
                 if(type === 'int') input.setAttribute('step', '1')
-                
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
                 label.innerText = key
