@@ -54,7 +54,19 @@
 
   </div>
   <div class="container-center">
-    
+
+    <div class="popupConfirmation alert alert-secondary alert-dismissible fade" role="alert">
+      <h4>Tem certeza que deseja <strong> apagar? </strong></h4>
+      <form id="formAlertConfirmation">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" id="labelAlertConfirmation" class="form-label">Digite o nome da predefinição há ser excluida</label>
+          <input type="text" class="form-control" id="inputAlertConfimation" aria-describedby="">
+        </div>
+        <button type="submit" id="btnSubmitAlertConfirmation" class="btn btn-primary">Enviar</button>
+      </form>
+      <button type="button" id="btnClosePopUp" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div id="msg" class="msg">
 
       <div class="alert alert-primary" role="alert">

@@ -561,6 +561,11 @@ li {
   background-color: #ff9d0098
 }
 
+.popupConfirmation{
+  position: fixed;
+  margin-top: 70px;
+  z-index: 2;
+}
 
 
 

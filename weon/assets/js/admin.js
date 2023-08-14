@@ -192,7 +192,12 @@ class Preset extends Admin {
 
             const tdDelet = document.createElement('td')
             tdDelet.setAttribute('id', collectionName + '_delete'),
-                tdDelet.addEventListener('click', e => this.deletePreset(e))
+            tdDelet.addEventListener('click', e => {
+                const popUpAlert = document.querySelector('.popupConfirmation')
+                if(popUpAlert) this.showPopUp(popUpAlert, e)
+                
+                console.log(popUpAlert);
+            })
 
             tdEdit.className = 'editPreset'
             tdDelet.className = 'deletPreset'
@@ -209,16 +214,41 @@ class Preset extends Admin {
         }
     }
 
+    showPopUp(popUpAlert, e){
+        popUpAlert.classList.add('show')
+
+        const labelAlertConfirmation = document.querySelector('#labelAlertConfirmation')
+        const inputAlertConfimation = document.querySelector('#inputAlertConfimation')
+        const formAlertConfirmation = document.querySelector('#formAlertConfirmation')
+        const btnClosePopUp = document.querySelector('#btnClosePopUp')
+
+        const el = e.target
+        const collectionName = el.id.split('_')[0]
+
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida ${collectionName}`
+        
+        btnClosePopUp.addEventListener('click', (e) => {
+            popUpAlert.classList.remove("show")
+        })
+
+        formAlertConfirmation.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const valueInput = inputAlertConfimation.value
+            if(valueInput === collectionName){
+                await this.deletePreset(collectionName)
+                console.log('Mano');
+            }else{
+                console.log("Erro");
+                this.msg('Escreva o nome correto para excluir a predefinição!', false)
+            }
+        })
+    }
+
     editPreset(e) {
         console.log(e.target.id);
     }
 
-    async deletePreset(e) {
-        console.log(e.target.id);
-
-        const id = e.target.id; // ID do item a ser excluído
-
-        const collectionName = id.split('_')[0]
+    async deletePreset(collectionName) {
 
         const headers = new Headers({
             "Content-Type": "application/json",
@@ -266,6 +296,7 @@ class Preset extends Admin {
 
     async postApiPreset(namePreset) {
         try {
+            namePreset = namePreset.trim()
             const myBody = JSON.stringify({ collectionName: namePreset })
 
             const headers = new Headers({
@@ -618,7 +649,7 @@ class Fields extends Admin {
 
 const preset = new Preset()
 const fields = new Fields()
-
+preset.preset()
 document.addEventListener('click', (e) => {
     const el = e.target
     const id = el.getAttribute('id')
