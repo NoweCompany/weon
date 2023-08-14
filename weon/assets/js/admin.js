@@ -117,7 +117,6 @@ class Preset extends Admin {
             </div> 
         </form>   
         `
-
         const formPreset = document.querySelector('#formPreset')
         formPreset.addEventListener('submit', e => this.createPreset(e))
     }

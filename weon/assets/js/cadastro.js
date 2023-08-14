@@ -126,7 +126,6 @@ class Drive{
                 const value = field[key];
                 const td = document.createElement('td');
                 const textTd = document.createTextNode(value);
-
                 td.appendChild(textTd);
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -204,23 +203,18 @@ class Drive{
         switch (type) {
             case 'string':
                 return 'text'
-                break;
 
             case 'number':
                 return 'number'
-                break;
 
             case 'date':
                 return 'date'
-                break;
 
             case 'int':
                 return 'number'
-                break;
 
             default:
                 return 'text'
-                break;
         }
     }
 
@@ -299,7 +293,6 @@ class Requests{
             console.log(e);
             this.removeLoading()
              throw new Error(e.message || 'Ocorreu um erro inesperado')
-            return false
         }
     }
 

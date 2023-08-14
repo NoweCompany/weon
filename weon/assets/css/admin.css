@@ -384,7 +384,7 @@ li {
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4179d2;
+  background-color: #007bff; /* Cor primária do Bootstrap */
   color: white;
   font-size: 20px;
   border: none;
@@ -394,12 +394,14 @@ li {
   transition: background-color 0.3s ease;
 }
 
+.criarnovatabela:hover {
+  background-color: #0056b3; /* Cor escura ao passar o mouse, similar ao Bootstrap */
+}
+
+
+
 
 /* tabela */
-
-.criarnovatabela:hover {
-  background-color: #292929;
-}
 
 
 .container {
@@ -545,7 +547,19 @@ li {
   margin-bottom: 10px;
 }
 
+.editPreset{
+  background-color: #ff9d00;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.editPreset:hover{
+  background-color: #ff9d0098
+}
 
 
 
