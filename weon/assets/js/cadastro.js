@@ -161,7 +161,7 @@ class Drive{
                 }
 
             const response = await this.requests.postApiValues(presetSelected, [valuesForm])
-            this.msg('Cadastro bem sucedido')
+            this.msg('Cadastro bem sucedido', true)
 
         } catch (error) {
             this.msg(error.message, false)
@@ -243,21 +243,24 @@ class Drive{
 
     msg(msg, success) {
         if (!success) {
-            this.containerMsg.className = 'error';
+            this.containerMsg.className = 'alert alert-danger d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
+            this.containerMsg.setAttribute('role', 'alert')
             this.containerMsg.textContent = msg;
 
             setTimeout(() => {
                 this.cleanMsg();
-            }, 2000);
+            }, 3000);
 
             return;
         } else {
-            this.containerMsg.className = 'success';
+            this.containerMsg.className = 'alert alert-success d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
+
+            this.containerMsg.setAttribute('role', 'alert')
             this.containerMsg.textContent = msg;
 
             setTimeout(() => {
                 this.cleanMsg();
-            }, 2000);
+            }, 3000);
 
             return;
         }

@@ -213,7 +213,7 @@ li {
 .msg{
   display: none;
 }
-
+/* 
 .error{
   display: block;
   text-align: center;
@@ -236,7 +236,7 @@ li {
   margin-top: 50px;
   border-radius: 10px;
   position: absolute;
-}
+} */
 
 /* Estilização da barra de rolagem */
 ::-webkit-scrollbar {

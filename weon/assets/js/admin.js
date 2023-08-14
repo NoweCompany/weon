@@ -491,10 +491,10 @@ class Fields extends Admin {
         typeOptionInt.innerText = 'Número Inteiros'
         typeSelect.appendChild(typeOptionInt)
 
-        const typeOptionFloat = document.createElement("option");
-        typeOptionFloat.setAttribute("value", "float");
-        typeOptionFloat.innerText = 'Número Decimal'
-        typeSelect.appendChild(typeOptionFloat)
+        const typeOptionDouble = document.createElement("option");
+        typeOptionDouble.setAttribute("value","double");
+        typeOptionDouble.innerText = 'Número Decimal'
+        typeSelect.appendChild(typeOptionDouble)
 
         const typeOptionDate = document.createElement("option");
         typeOptionDate.setAttribute("value", "date");
