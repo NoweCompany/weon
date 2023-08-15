@@ -49,17 +49,6 @@
     animation: slide-in 0.5s ease;
   }
 
-
-  @keyframes slide-in {
-    from {
-      transform: translateX(-100%);
-    }
-
-    to {
-      transform: translateX(0);
-    }
-  }
-
   .sidebar .modal-body {
     display: flex;
     flex-direction: column;

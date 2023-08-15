@@ -425,7 +425,7 @@ class Fields extends Admin {
             <div class="table-responsive">
 
             <div class="table-responsive mt-4">
-            <table class="table table-dark table-striped rounded" id="titulotabela">
+            <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
                 <thead class="text-center">
                 <tr>
                     <th class="fw-normal">Nome</th>
