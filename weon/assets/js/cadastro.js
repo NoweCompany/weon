@@ -86,7 +86,7 @@ class Drive{
 
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
-        <h1 class="display-3">${presetSelected}</h1>
+        <h1 class="display-6">${presetSelected}</h1>
             <form id="form" class="formPreset">
             <input type="submit" class="btn btn-primary" value="Enviar">
             </form>

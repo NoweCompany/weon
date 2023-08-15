@@ -207,23 +207,13 @@
     border-radius: 5px;
     font-weight: 300;
   }
-
+  
 
 
   #post {
     text-align: center;
   }
 
-  /* background linha */
-  tr:nth-child(even) {
-    background-color: #ededed;
-    /* Cor cinza */
-  }
-
-  tr:nth-child(odd) {
-    background-color: #ffffff;
-    /* Cor branca */
-  }
 
   .Cont-btn {
     margin-top: 5%;

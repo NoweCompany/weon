@@ -124,7 +124,8 @@ class Preset extends Admin {
     rederTable() {
         container.innerHTML = `
         
-        <h1 id="tituloPrincipal">Tabelas</h1>
+        <h1 id="tituloPrincipal" class="display-6">Predefinições</h1>
+
 
         <div class="table-container">
         <table>
@@ -384,7 +385,7 @@ class Fields extends Admin {
     renderFields() {
         container.innerHTML = `
         <div class="titulo">
-        <h1 id="tituloPrincipal" class="display-4">Criar Predefinições</h1>
+        <h1 id="tituloPrincipal" class="display-6">Criar Predefinições</h1>
         </div>
 
 
@@ -419,7 +420,7 @@ class Fields extends Admin {
           
 
 
-            <!-- bloco titulo form-->  
+            <!-- bloco   form-->  
             
 
             <div class="table-responsive">

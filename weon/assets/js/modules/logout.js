@@ -1,4 +1,4 @@
-import configs from './configs.js'
+import configs from './configs'
 const urlWebsite = configs.urlWebsiteDefault
 
 const logaout = document.querySelector('#Logaout') 
