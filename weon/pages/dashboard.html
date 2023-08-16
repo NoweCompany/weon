@@ -6,39 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>weon - dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="icon" href="../assets/img/iconweon.ico.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
- 
- 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(initializeChart);
+
+        var chart; // Variável global para o objeto do gráfico
+
+        function initializeChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Sales');
+            data.addColumn('number', 'Expenses');
+            data.addColumn('number', 'Profit');
+
+            chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+            drawChart(data); // Chama a função drawChart inicialmente
+        }
+
+        function drawChart(dataTable) {
+            var options = {
+                chart: {
+                    title: 'Nowe Company',
+                    subtitle: 'vendas, despesas, and Profit: 2022-2023',
+                },
+                bars: 'horizontal' // Required for Material Bar Charts.
+            };
+
+            chart.draw(dataTable, google.charts.Bar.convertOptions(options));
+        }
+
+        function updateChart(event) {
+            event.preventDefault(); // Impede o envio do formulário
+
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var num3 = parseFloat(document.getElementById("num3").value);
+
+            var newData = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', 'Profit'],
+                ['2014', num1, num2, num3],
+            ]);
+
+            drawChart(newData); // Atualiza o gráfico com os novos dados
+        }
+    </script>
 </head>
 <body>
-    
-  <nav id="navbar">
-    <ul>
-      <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
-     
-      <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-      <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
-      <li class="user-icon">
-        <span><i class="fas solid fa-user"></i></span>
-        <div class="options-window">
-          <div class="options">
-            <a href="#"><i class="fa-solid fa-gear fa-1x"></i></a> 
-            <a id="Logaout" href="/"><i class="fa-solid fa-right-from-bracket"></i></a> 
-          </div>
-        </div>
-      </li>
-      <a href="../pages/home.html">
-        <div id="logo">
-            <img src="../assets/img/weonbranco.png" alt="Logo">
-        </div>
-      </a>
-    </ul>
-  </nav>
+    <nav id="navbar">
+        <ul>
+            <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Cadastro</a></li>
+            <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+            <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
+            <li class="user-icon">
+                <span><i class="fas solid fa-user"></i></span>
+                <div class="options-window">
+                    <div class="options">
+                        <a href="#"><i class="fa-solid fa-gear fa-1x"></i></a>
+                        <a id="Logaout" href="/"><i class="fa-solid fa-right-from-bracket"></i></a>
+                    </div>
+                </div>
+            </li>
+            <a href="../pages/home.html">
+                <div id="logo">
+                    <img src="../assets/img/weonbranco.png" alt="Logo">
+                </div>
+            </a>
+        </ul>
+    </nav>
 
-     
+    <<div class="container mt-5">
+      <div class="row justify-content-center dp-fixed">
+          <div class="col-lg-6"> <!-- Definindo 6 colunas para o formulário -->
+              <form id="myForm" onsubmit="updateChart(event)" class="p-4 bg-light">
+          <div class="mb-1">
+              <label for="num1" class="form-label">Numero 01:</label>
+              <input type="number" class="form-control" id="num1" placeholder="Numero 01">
+          </div>
+          <div class="mb-3">
+              <label for="num2" class="form-label">Numero 02:</label>
+              <input type="number" class="form-control" id="num2" placeholder="Numero 02">
+          </div>
+          <div class="mb-3">
+              <label for="num3" class="form-label">Numero 03:</label>
+              <input type="number" class="form-control" id="num3" placeholder="Numero 03">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+  
+
+    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script type="module" src="../assets/js/data.js"></script>
