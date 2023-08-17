@@ -147,6 +147,10 @@ class Drive{
 
                         case 'checkbox':
                             valueInput = Boolean(valueInput)
+                        
+                        case 'date':
+                            valueInput = new Date(valueInput).toISOString()
+                            console.log(valueInput);
                     }
 
                     valuesForm[element.id] = valueInput
@@ -271,6 +275,7 @@ class Requests{
     async postApiValues(collectionName, values) {
         try {
             this.addLoading()
+            console.log(values);
             const response = await fetch(`${this.apiUrl}/value`, {
                 method: 'POST',
                 headers: {
