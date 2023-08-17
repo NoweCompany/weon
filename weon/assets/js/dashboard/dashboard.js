@@ -2,7 +2,7 @@ import configs from '../modules/configs.js'
 import ApiRequests from '../services/ApiRequests.js'
 import Messaging from '../services/Messaging.js'
 import Token from '../services/Token.js'
-import Loading from '../services/loading.js'
+import Loading from '../services/Loading.js'
 
 class Dashboard {
   constructor(form, selectPreset, selectField01, selectField02, api, messaging){
