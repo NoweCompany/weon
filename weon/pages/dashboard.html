@@ -11,51 +11,6 @@
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['bar']});
-        google.charts.setOnLoadCallback(initializeChart);
-
-        var chart; // Variável global para o objeto do gráfico
-
-        function initializeChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Year');
-            data.addColumn('number', 'Sales');
-            data.addColumn('number', 'Expenses');
-            data.addColumn('number', 'Profit');
-
-            chart = new google.charts.Bar(document.getElementById('barchart_material'));
-
-            drawChart(data); // Chama a função drawChart inicialmente
-        }
-
-        function drawChart(dataTable) {
-            var options = {
-                chart: {
-                    title: 'Nowe Company',
-                    subtitle: 'vendas, despesas, and Profit: 2022-2023',
-                },
-                bars: 'horizontal' // Required for Material Bar Charts.
-            };
-
-            chart.draw(dataTable, google.charts.Bar.convertOptions(options));
-        }
-
-        function updateChart(event) {
-            event.preventDefault(); // Impede o envio do formulário
-
-            var num1 = parseFloat(document.getElementById("num1").value);
-            var num2 = parseFloat(document.getElementById("num2").value);
-            var num3 = parseFloat(document.getElementById("num3").value);
-
-            var newData = google.visualization.arrayToDataTable([
-                ['Year', 'Sales', 'Expenses', 'Profit'],
-                ['2014', num1, num2, num3],
-            ]);
-
-            drawChart(newData); // Atualiza o gráfico com os novos dados
-        }
-    </script>
 </head>
 <body>
     <nav id="navbar">
@@ -79,22 +34,31 @@
             </a>
         </ul>
     </nav>
-
-    <<div class="container mt-5">
+    <div class="loading" id="loading">
+        <img  src="../assets/gif/nowecube.gif" width="200" height="200"/>
+    </div>
+    <div class="msg"></div>
+    <div class="container mt-5">
       <div class="row justify-content-center dp-fixed">
-          <div class="col-lg-6"> <!-- Definindo 6 colunas para o formulário -->
-              <form id="myForm" onsubmit="updateChart(event)" class="p-4 bg-light">
+        <div class="col-lg-6"> <!-- Definindo 6 colunas para o formulário -->
+        <form id="fromDash" class="p-4 bg-light">
           <div class="mb-1">
-              <label for="num1" class="form-label">Numero 01:</label>
-              <input type="number" class="form-control" id="num1" placeholder="Numero 01">
+              <label for="presets" class="form-label">Predefinições</label>
+              <select class="form-control" id="presets">
+                <option selected >Selecione uma predefinição</option>
+              </select>
           </div>
           <div class="mb-3">
-              <label for="num2" class="form-label">Numero 02:</label>
-              <input type="number" class="form-control" id="num2" placeholder="Numero 02">
+              <label for="field01" class="form-label">Field 01:</label>
+              <select class="form-control" id="field01">
+                <option selected >Selecione um campo do tipo String</option>
+              </select>
           </div>
           <div class="mb-3">
-              <label for="num3" class="form-label">Numero 03:</label>
-              <input type="number" class="form-control" id="num3" placeholder="Numero 03">
+              <label for="field02" class="form-label">Field 02:</label>
+              <select class="form-control" id="field02">
+                <option selected >Selecione um campo do tipo Number</option>
+              </select>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -104,9 +68,9 @@
     <div id="barchart_material" style="width: 900px; height: 500px;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script type="module" src="../assets/js/data.js"></script>
-    <script type="module" src="../assets/js/dashboard.js"></script>
-    <script type="module" src="../assets/js/modules/Logout.js"></script> 
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+
+    <script type="module" src="../assets/js/modules/Logout.js"></script>
+    <script type="module"  src="../assets/js/dashboard/dashboard.js"></script> 
 </body>
 </html>

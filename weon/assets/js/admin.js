@@ -1,5 +1,6 @@
 import configs from '../js/modules/configs.js'
 
+
 const url = configs.urlApi
 const urlWebsite = configs.urlWebsiteRelativa()
 
@@ -651,10 +652,10 @@ class Fields extends Admin {
 const preset = new Preset()
 const fields = new Fields()
 preset.preset()
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')
-    if (id === 'predefinicao') preset.preset()
-    if (id === 'campos') fields.fields()
+    if (id === 'predefinicao') await preset.preset()
+    if (id === 'campos') await fields.fields()
 })
 

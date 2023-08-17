@@ -409,3 +409,15 @@ h1, h2, h3, h4, h5, h6, strong {
       height: 100%;
 
   }
+
+#presets {
+
+}
+
+.mb-2 {
+  display: none;
+}
+
+.mb-3 {
+  display: none;
+}
