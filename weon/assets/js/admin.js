@@ -25,10 +25,34 @@ class Admin {
             .split("; ")
             .find((row) => row.startsWith("token="))
             .split("=")[1];
+            
         return token
     }
 
+    async getItemsInTrash(collectionName) {
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.token()}`
+        });
+
+        try {
+            const response = await fetch(`${url}/trash/${collectionName}`, {
+                headers: headers
+            });
+
+            if (response.status !== 200) {
+                const data = await response.json();
+                throw new Error(data.errors);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error("Erro ao obter itens da lixeira: " + error.message);
+        }
+    }
 }
+    
 
 class Preset extends Admin {
     async preset() {
@@ -649,13 +673,48 @@ class Fields extends Admin {
 
 }
 
+class Trash extends Admin{
+    async renderTrashItems() {
+        const trashItems = await super.getItemsInTrash('teste')
+        console.log(trashItems)
+
+        // Limpar o container antes de renderizar os itens
+        container.innerHTML = '';
+
+        // Renderizar os itens da lixeira
+        trashItems.forEach(value => {
+            for (const key in value) {
+                const element = value[key]
+                console.log(element)
+                const itemElement = document.createElement('div');
+                itemElement.innerHTML += element 
+
+                container.appendChild(itemElement);
+            }
+        })
+    }
+
+    // Chamar este método para exibir os itens da lixeira
+    trash() {
+        this.renderTrashItems();
+    }
+}
+
 const preset = new Preset()
 const fields = new Fields()
+const trash = new Trash()
 preset.preset()
 document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')
+<<<<<<< HEAD
     if (id === 'predefinicao') await preset.preset()
     if (id === 'campos') await fields.fields()
 })
 
+=======
+    if (id === 'predefinicao') preset.preset()
+    if (id === 'campos') fields.fields()
+    if (id === 'lixeira') trash.trash()
+})
+>>>>>>> 953300e25a3b0a1fb7929361e5c9cf052ed14418
