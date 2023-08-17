@@ -62,9 +62,11 @@ class Drive{
 
     renderTableHtml(){
         this.container.innerHTML = `
-        <div class="Cont-btn">
-            <button id="btnCad" name="btnCad" class="btn-outline-success">Cadastrar</button>
-        </div>
+        <div class="btn-cad">
+        <div class="container d-flex justify-content-end h-100">
+        <button id="btnCad" name="btnCad" class="btn btn-outline-success btn-lg">Cadastrar</button>
+      </div>
+    </div>    
         <table class="table">
             <thead class="thead">
             </thead>
@@ -84,13 +86,19 @@ class Drive{
 
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
-            <h1> ${presetSelected} </h1>
+        <h1 class="display-6">${presetSelected}</h1>
             <form id="form" class="formPreset">
-                <input type="submit" class="inputFormPreset" value="Enviar">
+            <input type="submit" class="btn btn-primary" value="Enviar">
             </form>
+
+            <div class='dangerbtn'>
             <div class="Cont-btn">
-                <button id="back" class="btn-outline-success">Voltar</button>
-            </div>
+        <button id="back" class="btn btn-outline-danger btn-lg">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+        </div>
+        </div> 
+
         `
 
         const form = document.querySelector('#form')
@@ -118,7 +126,6 @@ class Drive{
                 const value = field[key];
                 const td = document.createElement('td');
                 const textTd = document.createTextNode(value);
-
                 td.appendChild(textTd);
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -157,7 +164,7 @@ class Drive{
                 }
 
             const response = await this.requests.postApiValues(presetSelected, [valuesForm])
-            this.msg('Cadastro bem sucedido')
+            this.msg('Cadastro bem sucedido', true)
 
         } catch (error) {
             this.msg(error.message, false)
@@ -178,11 +185,10 @@ class Drive{
 
                 const input = document.createElement('input')
                 input.setAttribute('id', key)
-                input.setAttribute('placeholder', key)
+                
                 input.setAttribute('required', required)
                 input.setAttribute('type', typeInput)
                 if(type === 'int') input.setAttribute('step', '1')
-                
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
                 label.innerText = key
@@ -201,23 +207,18 @@ class Drive{
         switch (type) {
             case 'string':
                 return 'text'
-                break;
 
             case 'number':
                 return 'number'
-                break;
 
             case 'date':
                 return 'date'
-                break;
 
             case 'int':
                 return 'number'
-                break;
 
             default:
                 return 'text'
-                break;
         }
     }
 
@@ -240,21 +241,24 @@ class Drive{
 
     msg(msg, success) {
         if (!success) {
-            this.containerMsg.className = 'error';
+            this.containerMsg.className = 'alert alert-danger d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
+            this.containerMsg.setAttribute('role', 'alert')
             this.containerMsg.textContent = msg;
 
             setTimeout(() => {
                 this.cleanMsg();
-            }, 2000);
+            }, 3000);
 
             return;
         } else {
-            this.containerMsg.className = 'success';
+            this.containerMsg.className = 'alert alert-success d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
+
+            this.containerMsg.setAttribute('role', 'alert')
             this.containerMsg.textContent = msg;
 
             setTimeout(() => {
                 this.cleanMsg();
-            }, 2000);
+            }, 3000);
 
             return;
         }
@@ -294,7 +298,6 @@ class Requests{
             console.log(e);
             this.removeLoading()
              throw new Error(e.message || 'Ocorreu um erro inesperado')
-            return false
         }
     }
 

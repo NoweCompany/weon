@@ -18,19 +18,22 @@
 
   
   .loading {
-    /* Tentei deixar o fundo na tela 
-    interia, mas o margin-top do body na arquivo default.cdd não permite */
-    display: none;
-    background-color: #29292969;
+    margin-top: 15px;
+    display: fixed;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo branco com transparência */
     width: 100vw;
     height: 100vh;
-    
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-
     position: absolute;
     z-index: 5!important;
-    
+    backdrop-filter: blur(5px); 
+  }
+
+ 
+  .gif {
+    max-width: 100%;
+    max-height: 100%;
   }
 
   /* sidebar */
@@ -46,16 +49,6 @@
     animation: slide-in 0.5s ease;
   }
 
-  @keyframes slide-in {
-    from {
-      transform: translateX(-100%);
-    }
-
-    to {
-      transform: translateX(0);
-    }
-  }
-
   .sidebar .modal-body {
     display: flex;
     flex-direction: column;
@@ -65,7 +58,8 @@
 
   .sidebar h3 {
     text-align: center;
-    margin-left: 10%;
+    margin-bottom: 10px;
+    
   }
 
   .sidebar .modal-button {
@@ -113,38 +107,48 @@
     transform: scale(1.1);
   }
 
-  /* estilo do form */
+
   #form {
-    border: 3px solid rgb(35, 91, 163) ;
-    width: 400px;
-    flex-direction: column;
+    width: 800px; /* Aumentei a largura para acomodar as 4 colunas */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Divide em 4 colunas de largura igual */
+    gap: 10px; /* Espaçamento entre os campos */
     justify-content: center;
-    align-self: center;
+    align-items: center;
     background-color: #ffffff;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 5%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
+  
+  #form input[type="text"],
+  #form input[type="number"],
+  #form textarea,
+  #form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+  }
+  
+  #form input[type="text"]:focus,
+  #form input[type="number"]:focus,
+  #form textarea:focus,
+  #form input[type="date"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .dangerbtn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-right: 30px;
+    margin-top: 65px;
+  }
+  
 
-  #form h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  #form input[type="submit"] {
-    padding: 8px 30px;
-    color: #fafafa;
-    background-color: #4179d2;
-    border-radius: 8px;
-    border: none;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    margin-top: 10px;
-    align-self: center;
-  }
-
-  #form input[type="submit"]:hover {
-    background-color: #292929;
-  }
 
   .linha {
     display: flex;
@@ -164,18 +168,6 @@
     flex-direction: column;
     justify-content: center;
   }
-
-  #back {
-    padding: 8px 30px;
-    color: #fafafa;
-    background-color: #040553;
-    border-radius: 8px;
-    border: none;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    margin-top: 10px;
-    align-self: center;
-  }
-
 
 
 
@@ -201,23 +193,13 @@
     border-radius: 5px;
     font-weight: 300;
   }
-
+  
 
 
   #post {
     text-align: center;
   }
 
-  /* background linha */
-  tr:nth-child(even) {
-    background-color: #ededed;
-    /* Cor cinza */
-  }
-
-  tr:nth-child(odd) {
-    background-color: #ffffff;
-    /* Cor branca */
-  }
 
   .Cont-btn {
     margin-top: 5%;
@@ -226,4 +208,12 @@
   .selectTable {
     font-size: 10px;
     align-self: center;
+  }
+
+  .btn-cad{
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-right: 4px;
+    margin-top: 20px;
   }

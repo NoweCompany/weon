@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<meta charset="UTF-8">
 <title>weon - administração</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -11,7 +12,7 @@
 </head>
   
 
-</head>
+
 
 <body>
 <nav id="navbar">
@@ -53,7 +54,26 @@
 
   </div>
   <div class="container-center">
-    <div id="msg" class="msg"></div>
+
+    <div class="popupConfirmation alert alert-secondary alert-dismissible fade" role="alert">
+      <h4>Tem certeza que deseja <strong> apagar? </strong></h4>
+      <form id="formAlertConfirmation">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" id="labelAlertConfirmation" class="form-label">Digite o nome da predefinição há ser excluida</label>
+          <input type="text" class="form-control" id="inputAlertConfimation" aria-describedby="">
+        </div>
+        <button type="submit" id="btnSubmitAlertConfirmation" class="btn btn-primary">Enviar</button>
+      </form>
+      <button type="button" id="btnClosePopUp" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div id="msg" class="msg">
+
+      <div class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+      </div>
+
+    </div>
     <div class="container">
 
     </div>
@@ -61,15 +81,9 @@
   <script type="module" src="../assets/js/modules/Logout.js"></script>
   <script type="module" src="../assets/js/admin.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 
 
-  <script>
-    $(document).ready(function() {
-      $('#selectTableName').select2();
-    });
-  </script>
 
 
 </body>

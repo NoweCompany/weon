@@ -117,7 +117,6 @@ class Preset extends Admin {
             </div> 
         </form>   
         `
-
         const formPreset = document.querySelector('#formPreset')
         formPreset.addEventListener('submit', e => this.createPreset(e))
     }
@@ -125,7 +124,8 @@ class Preset extends Admin {
     rederTable() {
         container.innerHTML = `
         
-        <h1 id="tituloPrincipal">Tabelas</h1>
+        <h1 id="tituloPrincipal" class="display-6">Predefinições</h1>
+
 
         <div class="table-container">
         <table>
@@ -193,7 +193,12 @@ class Preset extends Admin {
 
             const tdDelet = document.createElement('td')
             tdDelet.setAttribute('id', collectionName + '_delete'),
-                tdDelet.addEventListener('click', e => this.deletePreset(e))
+            tdDelet.addEventListener('click', e => {
+                const popUpAlert = document.querySelector('.popupConfirmation')
+                if(popUpAlert) this.showPopUp(popUpAlert, e)
+                
+                console.log(popUpAlert);
+            })
 
             tdEdit.className = 'editPreset'
             tdDelet.className = 'deletPreset'
@@ -210,16 +215,41 @@ class Preset extends Admin {
         }
     }
 
+    showPopUp(popUpAlert, e){
+        popUpAlert.classList.add('show')
+
+        const labelAlertConfirmation = document.querySelector('#labelAlertConfirmation')
+        const inputAlertConfimation = document.querySelector('#inputAlertConfimation')
+        const formAlertConfirmation = document.querySelector('#formAlertConfirmation')
+        const btnClosePopUp = document.querySelector('#btnClosePopUp')
+
+        const el = e.target
+        const collectionName = el.id.split('_')[0]
+
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida ${collectionName}`
+        
+        btnClosePopUp.addEventListener('click', (e) => {
+            popUpAlert.classList.remove("show")
+        })
+
+        formAlertConfirmation.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const valueInput = inputAlertConfimation.value
+            if(valueInput === collectionName){
+                await this.deletePreset(collectionName)
+                console.log('Mano');
+            }else{
+                console.log("Erro");
+                this.msg('Escreva o nome correto para excluir a predefinição!', false)
+            }
+        })
+    }
+
     editPreset(e) {
         console.log(e.target.id);
     }
 
-    async deletePreset(e) {
-        console.log(e.target.id);
-
-        const id = e.target.id; // ID do item a ser excluído
-
-        const collectionName = id.split('_')[0]
+    async deletePreset(collectionName) {
 
         const headers = new Headers({
             "Content-Type": "application/json",
@@ -267,6 +297,7 @@ class Preset extends Admin {
 
     async postApiPreset(namePreset) {
         try {
+            namePreset = namePreset.trim()
             const myBody = JSON.stringify({ collectionName: namePreset })
 
             const headers = new Headers({
@@ -354,44 +385,60 @@ class Fields extends Admin {
     renderFields() {
         container.innerHTML = `
         <div class="titulo">
-        <h1 id="tituloPrincipal">Criar Predefinições</h1>
+        <h1 id="tituloPrincipal" class="display-6">Campos</h1>
         </div>
+
 
         <!-- Botão Criar -->
 
-            <div class="newfield">
-            <button id="newField">
-            <i class="fas fa-plus"></i> Criar Campos
-            </button>
-        </div>
+        <div class="newfield">
+        <button id="newField" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Criar Campos
+        </button>
+      </div>
+      
         
           <!-- Botão Salvar-->
 
-            <div class="botãocreate">
-            <button id="createField">
-              <i class="fas fa-save"></i> Salvar
-            </button>
-          </div>    
+          <div class="botãocreate">
+          <button id="createField" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+          </button>
+        </div>
+           
 
           <!-- Botão select tabelas-->
             <div class="cont-selecTableName"> 
                
+
             <!-- Botão select tipo-->  
-                <select id="selectTableName">
-                    <option value="" selected></option>
-                </select>
+            <div class="form-group">
+            <select id="selectTableName" class="form-select">
+              <option value="" selected></option>
+            </select>
+          </div>
+          
+
+
+            <!-- bloco   form-->  
+            
+
+            <div class="table-responsive">
+
+            <div class="table-responsive mt-4">
+            <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
+                <thead class="text-center">
+                <tr>
+                    <th class="fw-normal">Nome</th>
+                    <th class="fw-normal">Tipo</th>
+                    <th class="fw-normal">Obrigatório</th>
+                    <th class="fw-normal">Delete</th>
+                </tr>
+                </thead>
+            </table>
             </div>
 
 
-            <!-- bloco titulo form-->  
-            <table id='titulotabela'>
-            <tr>
-              <th>Nome</th>
-              <th>Tipo</th>
-              <th>Obrigatório</th>
-              <th>Delete</th>
-            </tr>
-            </table>
             
             <form id="form">
             </form>
@@ -421,35 +468,38 @@ class Fields extends Admin {
             option.appendChild(textOption);
             select.appendChild(option);
         }
-        $('#selectTableName').select2();
+
     }
 
     createNewField() {
+        // Criação do container principal
         const containerDiv = document.createElement("div");
         containerDiv.className = "create-field";
-
+      
+        // Criação do elemento para o nome com classe Bootstrap
         const divName = document.createElement("div");
-        divName.className = "divName";
+        divName.className = "mb-4";
 
-        const divType = document.createElement("div");
-        divName.className = "divName";
-
+      
         const nameLabel = document.createElement("label");
         nameLabel.setAttribute("for", "name");
-        nameLabel.innerHTML = "";
-
-
+    
+      
         const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "name");
         nameInput.setAttribute("type", "text");
-
+      
+        // Criação do elemento para o tipo com classe Bootstrap
+        const divType = document.createElement("div");
+        divType.className = "divName";
+      
         const typeLabel = document.createElement("label");
         typeLabel.setAttribute("for", "type");
-        typeLabel.innerHTML = "";
 
-
-
+      
         const typeSelect = document.createElement("select");
+        typeSelect.classList.add("form-select", "w-50"); // Adicione a classe "w-50" para definir a largura do select
+        
 
         const typeOptionSelected = document.createElement("option");
         typeOptionSelected.selected = true
@@ -472,10 +522,10 @@ class Fields extends Admin {
         typeOptionInt.innerText = 'Número Inteiros'
         typeSelect.appendChild(typeOptionInt)
 
-        const typeOptionFloat = document.createElement("option");
-        typeOptionFloat.setAttribute("value", "float");
-        typeOptionFloat.innerText = 'Número Decimal'
-        typeSelect.appendChild(typeOptionFloat)
+        const typeOptionDouble = document.createElement("option");
+        typeOptionDouble.setAttribute("value","double");
+        typeOptionDouble.innerText = 'Número Decimal'
+        typeSelect.appendChild(typeOptionDouble)
 
         const typeOptionDate = document.createElement("option");
         typeOptionDate.setAttribute("value", "date");
@@ -484,8 +534,12 @@ class Fields extends Admin {
 
 
         const deleteButton = document.createElement("button");
-        deleteButton.setAttribute("class", "btn-delete")
+        deleteButton.className = "btn-delete"; // Usando a classe personalizada para estilização
+        deleteButton.setAttribute("id", "deleteButton"); // Adicione o id desejado, por exemplo, "deleteButton";
         deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+        
+    
+        
         deleteButton.onclick = (e) => {
             e.preventDefault()
             if (form.elements.length > 3) {
@@ -596,7 +650,7 @@ class Fields extends Admin {
 
 const preset = new Preset()
 const fields = new Fields()
-
+preset.preset()
 document.addEventListener('click', (e) => {
     const el = e.target
     const id = el.getAttribute('id')

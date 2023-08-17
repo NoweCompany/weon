@@ -141,86 +141,28 @@ li {
   /* Altura máxima para a rolagem vertical */
 }
 
-
 .table-container {
   overflow-x: auto;
   /* Adiciona rolagem horizontal quando necessário */
   max-width: 100%;
   border-collapse: separate;
-  border-spacing: 15px; /* Define o espaço entre as células */
+  border-spacing: 30px; /* Define o espaço entre as células */
 }
 
 /* Form preset */
-
-.cont-btn-form-preset {
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  column-gap: 30px;
-
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.block {
-  background-color: #292929;
-  border-radius: 10px 10px 0px 0px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-  color: #f7f7f7;
-  font-size: 25px;
-  animation: fade-in 0.4s ease-out;
-}
-
-
-#campos1 {
-  margin-left: 7%;
-}
-
-#tipo {
-  margin-left: 20%;
-}
-
-#obrigatorio {
-  margin-left: 20%;
-}
-
-#delete {
-  margin-left: 23%;
-}
 
 #form {
   flex-direction: column;
   width: 100%;
   height: auto;
-  animation: fade-in 0.5s ease;
-  background-color: #ededed;
+  background-color: #d7d7d7;
   border-radius: 0 0 10px 10px;
   overflow-y: scroll;
   max-height: 300px;
+  min-height: 400px;
 }
 
 #form select {
-  font-size: 20px;
-  border-radius: 10px;
-  margin-top: 10px;
-  width: 40%;
-  border: none;
-  height: auto;
-  text-align: center;
   margin-right: 300px;
   font-family: 'sfpro';
   margin-left: -50px;
@@ -228,11 +170,11 @@ li {
 }
 
 .container #form input {
-  margin-top: 10px;
+  margin-top: 1px;
   font-size: 20px;
-  border-radius: 10px;
-  padding: 1px;
-  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 4px;
+  margin-bottom: px;
   width: 100%;
   border: none;
   height: auto;
@@ -245,6 +187,7 @@ li {
   flex-wrap: wrap;
   padding: 10px;
   gap: 102px;
+  margin-bottom: -50px;
 }
 
 .btn-delete {
@@ -259,108 +202,216 @@ li {
   transition: background-color 0.3s;
   width: 40px;
   height: 40px;
+  margin-top: 25px;
+  margin-bottom: -5%;
+  margin-left: 21%;
 }
 
 
 .btn-delete:hover {
   background-color: #fc4848;
-}
+} 
 
 
-#tituloPrincipal {
-  font-size: 40px;
-  font-weight: bold;
-  color: #3a3a36;
+#newField {
   text-align: center;
-  margin-top: 30px;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 20px;
+  margin-top: -1%;
+  float: right;
 }
 
 #selectTableName {
   width: 200px;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ededed;
-  outline: none;
   margin-top: -2%;
   position: fixed;
   font-family: 'sfpro';
+  margin-bottom: -5%;
 }
-
-#newField {
-  background-color: #4179d2;
-  border: none;
-  color: white;
-  padding: 10px 30px;
-  text-align: center;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-top: 5%;
-  float: right;
-  transition: background-color 0.3s;
-}
-
-#newField:hover {
-  background-color: #6694e2;
-}
-
 
 
 /* Media queries para telas menores */
-@media (max-width: 1512px) {
+@media (max-width: 1677px)  {
 
-  #obrigatorio {
-    margin-left: 15%;
+  
+  .btn-delete {
+    border-radius: 9px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 13%;
   }
-
-  #delete {
-    margin-left: 20%;
-  }
-
-}
-
-@media (max-width: 1406px) {
-
-  #obrigatorio {
-    margin-left: 10%;
-  }
-
-  #delete {
-    margin-left: 15%;
-  }
-
-}
-
-
+  
+  
+  .btn-delete:hover {
+    background-color: #fc4848;
+  } 
+  
+  
+ /* botao save */
 #createField {
-  border: none;
-  color: white;
   text-align: center;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 4px;
   position: fixed;
   right: 15%;
   bottom: 30px;
-  background-color: #4179d2;
-  padding: 10px 30px;
-  transition: background-color 0.3s;
 }
-
-#createField:hover {
-  background-color: #6694e2;
 }
 
 
+@media (max-width: 1346px){
+  
+
+  .btn-delete {
+    border-radius: 9px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 9%;
+  }
+  
+  
+  .btn-delete:hover {
+    background-color: #fc4848;
+  } 
+  
+
+}
+/* botao save */
+#createField {
+  text-align: center;
+  position: fixed;
+  right: 15%;
+  bottom: 30px;
+}
+
+@media (max-width: 1679px){
+  
+  .btn-delete {
+    border-radius: 9px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 26% 
+  }
+  
+  
+  .btn-delete:hover {
+    background-color: #fc4848;
+  } 
+  
+
+}
 
 
+@media (max-width: 1346px){
+  
+ 
+  .btn-delete {
+    border-radius: 9px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 9%;
+  }
+  
+  
+  .btn-delete:hover {
+    background-color: #fc4848;
+  } 
+  
+}
+
+
+@media (max-width: 1475px){
+ 
+  
+  .btn-delete {
+    border-radius: 9px;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    font-size: 10px;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 17%;
+  }
+  
+  
+  .btn-delete:hover {
+    background-color: #fc4848;
+  } 
+
+  @media (max-width: 1346px){
+  
+  
+    .btn-delete {
+      border-radius: 9px;
+      outline: none;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #ff0000;
+      color: #ffffff;
+      border: none;
+      font-size: 10px;
+      transition: background-color 0.3s;
+      width: 40px;
+      height: 40px;
+      margin-top: 20px;
+      margin-left: 9%;
+    }
+    
+    
+    .btn-delete:hover {
+      background-color: #fc4848;
+    } 
+    
+  }
+  
+}
+
+/* botao save */
+#createField {
+  text-align: center;
+  position: fixed;
+  right: 15%;
+  bottom: 30px;
+}
 
 
 /* bar */
@@ -466,7 +517,7 @@ li {
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4179d2;
+  background-color: #007bff; /* Cor primária do Bootstrap */
   color: white;
   font-size: 20px;
   border: none;
@@ -476,12 +527,14 @@ li {
   transition: background-color 0.3s ease;
 }
 
+.criarnovatabela:hover {
+  background-color: #0056b3; /* Cor escura ao passar o mouse, similar ao Bootstrap */
+}
+
+
+
 
 /* tabela */
-
-.criarnovatabela:hover {
-  background-color: #292929;
-}
 
 
 .container {
@@ -627,26 +680,27 @@ li {
   margin-bottom: 10px;
 }
 
-#titulotabela{
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  background-color: #292929;
-  border-radius: 10px 10px 0px 0px;
-  color: #ddd;
-  padding: 1rem;
-
+.editPreset{
+  background-color: #ff9d00;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-th,
-td {
-  padding: 10px;
-  border-radius: 5px;
-
- 
-
+.editPreset:hover{
+  background-color: #ff9d0098
 }
+
+.popupConfirmation{
+  position: fixed;
+  margin-top: 70px;
+  z-index: 2;
+}
+
+
 
 
 
