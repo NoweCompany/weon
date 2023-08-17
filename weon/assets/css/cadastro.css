@@ -109,9 +109,10 @@
 
 
   #form {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
+    width: 800px; /* Aumentei a largura para acomodar as 4 colunas */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Divide em 4 colunas de largura igual */
+    gap: 10px; /* Espaçamento entre os campos */
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
@@ -120,39 +121,24 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
   
-  #form input[type="text"], 
+  #form input[type="text"],
   #form input[type="number"],
-  #form textarea {
+  #form textarea,
+  #form input[type="date"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     height: 40px;
   }
   
-  #form input[type="text"]:focus, 
+  #form input[type="text"]:focus,
   #form input[type="number"]:focus,
-  #form textarea:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  #form input[type="date"] {
-    width: 200px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 40px; /* Definindo a mesma altura para o campo de data */
-    outline: none;
-    appearance: none;
-  }
-  
+  #form textarea:focus,
   #form input[type="date"]:focus {
+    outline: none;
     border-color: #007bff;
   }
-
   
   .dangerbtn {
     position: fixed;

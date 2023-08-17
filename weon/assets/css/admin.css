@@ -141,7 +141,6 @@ li {
   /* Altura máxima para a rolagem vertical */
 }
 
-
 .table-container {
   overflow-x: auto;
   /* Adiciona rolagem horizontal quando necessário */
@@ -160,6 +159,7 @@ li {
   border-radius: 0 0 10px 10px;
   overflow-y: scroll;
   max-height: 300px;
+  min-height: 400px;
 }
 
 #form select {
@@ -187,6 +187,7 @@ li {
   flex-wrap: wrap;
   padding: 10px;
   gap: 102px;
+  margin-bottom: -50px;
 }
 
 .btn-delete {
@@ -201,7 +202,8 @@ li {
   transition: background-color 0.3s;
   width: 40px;
   height: 40px;
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-bottom: -5%;
   margin-left: 21%;
 }
 
@@ -211,64 +213,25 @@ li {
 } 
 
 
+#newField {
+  text-align: center;
+  font-size: 20px;
+  margin-top: -1%;
+  float: right;
+}
+
 #selectTableName {
   width: 200px;
   margin-top: -2%;
   position: fixed;
   font-family: 'sfpro';
+  margin-bottom: -5%;
 }
-
-#newField {
-  text-align: center;
-  font-size: 20px;
-  margin-top: 5%;
-  float: right;
-}
-
-
 
 
 /* Media queries para telas menores */
 @media (max-width: 1677px)  {
 
-
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 300px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 300px;
-    font-family: 'sfpro';
-    margin-left: -70px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 1px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 100%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 8%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
   
   .btn-delete {
     border-radius: 9px;
@@ -289,36 +252,9 @@ li {
   
   .btn-delete:hover {
     background-color: #fc4848;
-  } */
+  } 
   
   
-  #tituloPrincipal {
-    font-size: 4px;
-    font-weight: bold;
-    color: #3a3a36;
-    text-align: center;
-    margin-top: 30px;
-    position: relative;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  #selectTableName {
-    width: 200px;
-    margin-top: -2%;
-    position: fixed;
-    font-family: 'sfpro';
-  }
-  
-  #newField {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 5%;
-    float: right;
-  }
-
  /* botao save */
 #createField {
   text-align: center;
@@ -328,111 +264,10 @@ li {
 }
 }
 
-@media (max-width: 1495px){
-  
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 200px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 300px;
-    font-family: 'sfpro';
-    margin-left: -90px;
-    width: 20px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 1px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 100%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 1%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
-  
-  .btn-delete {
-    border-radius: 9px;
-    outline: none;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #ff0000;
-    color: #ffffff;
-    border: none;
-    font-size: 10px;
-    transition: background-color 0.3s;
-    width: 40px;
-    height: 40px;
-    margin-top: 20px;
-    margin-left: 5%;
-  }
-  
-  
-  .btn-delete:hover {
-    background-color: #fc4848;
-  } 
-  
-}
 
 @media (max-width: 1346px){
   
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 190px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 200px;
-    font-family: 'sfpro';
-    margin-left: -110px;
-    width: 20px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 25px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 80%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 1%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
-  
+
   .btn-delete {
     border-radius: 9px;
     outline: none;
@@ -466,45 +301,6 @@ li {
 
 @media (max-width: 1679px){
   
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 190px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 200px;
-    font-family: 'sfpro';
-    margin-left: -110px;
-    width: 20px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 25px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 80%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 1%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
-  
   .btn-delete {
     border-radius: 9px;
     outline: none;
@@ -532,45 +328,7 @@ li {
 
 @media (max-width: 1346px){
   
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 190px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 200px;
-    font-family: 'sfpro';
-    margin-left: -110px;
-    width: 20px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 25px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 80%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 1%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
-  
+ 
   .btn-delete {
     border-radius: 9px;
     outline: none;
@@ -596,45 +354,7 @@ li {
 
 
 @media (max-width: 1475px){
-  
-  #form {
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    background-color: #d7d7d7;
-    border-radius: 0 0 10px 10px;
-    overflow-y: scroll;
-    max-height: 190px;
-  }
-  
-  #form select {
-    margin-top: 1px;
-    margin-right: 200px;
-    font-family: 'sfpro';
-    margin-left: -110px;
-    width: 20px;
-  
-  }
-  
-  .container #form input {
-    margin-top: 25px;
-    font-size: 20px;
-    border-radius: 5px;
-    padding: 4px;
-    margin-bottom: px;
-    width: 80%;
-    border: none;
-    height: auto;
-    text-align: left;
-    margin-left: 1%;
-  }
-  
-  .create-field {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 102px;
-  }
+ 
   
   .btn-delete {
     border-radius: 9px;
@@ -659,45 +379,7 @@ li {
 
   @media (max-width: 1346px){
   
-    #form {
-      flex-direction: column;
-      width: 100%;
-      height: auto;
-      background-color: #d7d7d7;
-      border-radius: 0 0 10px 10px;
-      overflow-y: scroll;
-      max-height: 190px;
-    }
-    
-    #form select {
-      margin-top: 1px;
-      margin-right: 200px;
-      font-family: 'sfpro';
-      margin-left: -110px;
-      width: 20px;
-    
-    }
-    
-    .container #form input {
-      margin-top: 25px;
-      font-size: 20px;
-      border-radius: 5px;
-      padding: 4px;
-      margin-bottom: px;
-      width: 80%;
-      border: none;
-      height: auto;
-      text-align: left;
-      margin-left: 1%;
-    }
-    
-    .create-field {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 10px;
-      gap: 102px;
-    }
-    
+  
     .btn-delete {
       border-radius: 9px;
       outline: none;
