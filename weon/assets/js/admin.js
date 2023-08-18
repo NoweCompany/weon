@@ -707,14 +707,7 @@ preset.preset()
 document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')
-<<<<<<< HEAD
     if (id === 'predefinicao') await preset.preset()
     if (id === 'campos') await fields.fields()
 })
 
-=======
-    if (id === 'predefinicao') preset.preset()
-    if (id === 'campos') fields.fields()
-    if (id === 'lixeira') trash.trash()
-})
->>>>>>> 953300e25a3b0a1fb7929361e5c9cf052ed14418

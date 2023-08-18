@@ -1,5 +1,5 @@
 import configs from './configs.js'
-const urlWebsite = configs.urlWebsiteRelativa()
+const urlWebsite = configs.urlWebsiteDefault
 
 const logaout = document.querySelector('#Logaout') 
 logaout.addEventListener('click', (e) => {
