@@ -142,9 +142,8 @@ class Drive{
                     const valueTd = td.innerText
                     const idTd = td.id
                     this.valuePreset[idTd] = valueTd
-                    console.log(valueTd);
                 })
-                this.valuePreset[id] = tr.id
+                this.valuePreset._id = tr.getAttribute('id')
                 this.isEdit = true
                 this.showForm()
             })
@@ -181,10 +180,11 @@ class Drive{
                     valuesForm[element.id] = valueInput
                 }
 
-            if(this.isEdit){
+            if(!this.isEdit){
                 const response = await this.requests.postApiValues(presetSelected, [valuesForm])
             }else{
-                const response = await this.requests.updateApiValues(presetSelected, [valuesForm], this.valuePreset.id)
+                const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuePreset._id)
+                this.valuePreset = {}
                 this.isEdit = false
             }
             this.msg('Atualização bem sucedida', true)
@@ -224,8 +224,6 @@ class Drive{
                 containerInputLabel.appendChild(input)
                 form.insertBefore(containerInputLabel, form.firstChild)
             });
-
-            this.valuePreset = {}
             
         } catch (error) {
             this.msg(error.message, false)
@@ -308,7 +306,6 @@ class Requests{
     async postApiValues(collectionName, values) {
         try {
             this.addLoading()
-            console.log(values);
             const response = await fetch(`${this.apiUrl}/value`, {
                 method: 'POST',
                 headers: {
@@ -324,7 +321,6 @@ class Requests{
             this.removeLoading()
             return response
         } catch (e) {
-            console.log(e);
             this.removeLoading()
              throw new Error(e.message || 'Ocorreu um erro inesperado')
         }
