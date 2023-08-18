@@ -23,6 +23,8 @@ class Drive{
         this.requests = requests
 
         this.collectionData = []
+        this.valuePreset = {}
+        
         this.presetSelected = null
     }
 
@@ -122,14 +124,27 @@ class Drive{
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
             for (const key in field) {
-                if(key === '_id') continue
+                if(key === '_id') {
+                    tr.setAttribute('id', field[key])
+                    continue
+                }
                 const value = field[key];
                 const td = document.createElement('td');
                 const textTd = document.createTextNode(value);
                 td.appendChild(textTd);
+                td.setAttribute('id', key)
                 tr.appendChild(td);
                 tbody.appendChild(tr);
             }
+            tr.addEventListener('click', (e) => {
+                tr.childNodes.forEach((td, i) => {
+                    const valueTd = td.innerText
+                    const idTd = td.id
+                    this.valuePreset[idTd] = valueTd
+                    console.log(valueTd);
+                })
+                this.showForm()
+            })
         }
     }
 
@@ -165,6 +180,7 @@ class Drive{
 
             const response = await this.requests.postApiValues(presetSelected, [valuesForm])
             this.msg('Cadastro bem sucedido', true)
+            return form
 
         } catch (error) {
             this.msg(error.message, false)
@@ -176,6 +192,7 @@ class Drive{
             if(!presetSelected || !form) return  
 
             const response = await requests.getApiFields(presetSelected)
+            
             response.fields.reverse().forEach((field, index, array) => {
                 const containerInputLabel = document.createElement('div')
                 containerInputLabel.classList.add('containerInputLabel')
@@ -188,6 +205,7 @@ class Drive{
                 
                 input.setAttribute('required', required)
                 input.setAttribute('type', typeInput)
+                if(this.valuePreset[key]) input.value = this.valuePreset[key]
                 if(type === 'int') input.setAttribute('step', '1')
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
@@ -197,6 +215,8 @@ class Drive{
                 containerInputLabel.appendChild(input)
                 form.insertBefore(containerInputLabel, form.firstChild)
             });
+
+            this.valuePreset = {}
             
         } catch (error) {
             this.msg(error.message, false)
