@@ -23,6 +23,7 @@ class Drive{
         this.requests = requests
 
         this.collectionData = []
+        this.isEdit = false
         this.valuePreset = {}
         
         this.presetSelected = null
@@ -45,7 +46,7 @@ class Drive{
         $(this.select2Collections).on('change', (e) => this.showDocument(e.target.value));
     }
 
-    async showDocument(collectionName){
+    async showDocument(collectionName = this.presetSelected){
         try {
             this.presetSelected = collectionName
 
@@ -143,6 +144,8 @@ class Drive{
                     this.valuePreset[idTd] = valueTd
                     console.log(valueTd);
                 })
+                this.valuePreset[id] = tr.id
+                this.isEdit = true
                 this.showForm()
             })
         }
@@ -178,8 +181,14 @@ class Drive{
                     valuesForm[element.id] = valueInput
                 }
 
-            const response = await this.requests.postApiValues(presetSelected, [valuesForm])
-            this.msg('Cadastro bem sucedido', true)
+            if(this.isEdit){
+                const response = await this.requests.postApiValues(presetSelected, [valuesForm])
+            }else{
+                const response = await this.requests.updateApiValues(presetSelected, [valuesForm], this.valuePreset.id)
+                this.isEdit = false
+            }
+            this.msg('Atualização bem sucedida', true)
+            this.showDocument()
             return form
 
         } catch (error) {
@@ -302,6 +311,31 @@ class Requests{
             console.log(values);
             const response = await fetch(`${this.apiUrl}/value`, {
                 method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${this.token}`
+                },
+                body: JSON.stringify({ collectionName, values })
+            })
+
+            const data = await response.json();
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.removeLoading()
+            return response
+        } catch (e) {
+            console.log(e);
+            this.removeLoading()
+             throw new Error(e.message || 'Ocorreu um erro inesperado')
+        }
+    }
+
+    async updateApiValues(collectionName, values, id) {
+        try {
+            this.addLoading()
+            console.log(values, collectionName, id);
+            const response = await fetch(`${this.apiUrl}/value/${id}`, {
+                method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${this.token}`
