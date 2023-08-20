@@ -160,6 +160,7 @@
     border-collapse: separate;
     border-spacing: 5px;
     border-radius: 10px;
+
   }
   
   th,
@@ -168,6 +169,7 @@
     padding: .5rem;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s; /* Trocamos a transição para a sombra da caixa */
+    cursor: pointer;
   }
   
   th {
@@ -178,8 +180,7 @@
   }
   
   tr {
-    color: #292929;
-    transition: transform 0.3s, color 0.3s;
+    transition: transform 0.3s;
   }
   
   tr:hover {
@@ -188,7 +189,9 @@
     z-index: 1;
   }
   
-
+  tr:hover td {
+    color: #4179d2;
+}
 
 
   #post {
@@ -212,3 +215,15 @@
     margin-right: 4px;
     margin-top: 20px;
   }
+
+
+  .border{
+    background-color: #ffffff;
+    width: 1000px;
+    height: 30px;
+    justify-content: center;
+    border-radius: 10px;
+  
+  }
+
+  
