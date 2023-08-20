@@ -251,7 +251,7 @@ class Preset extends Admin {
         const el = e.target
         const collectionName = el.id.split('_')[0]
 
-        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida ${collectionName}`
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida:  "${collectionName}"`
         
         btnClosePopUp.addEventListener('click', (e) => {
             popUpAlert.classList.remove("show")
