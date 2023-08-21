@@ -731,6 +731,7 @@ li {
   border-radius: 10px;
   margin-top: -30px;
 }
+
 .popupConfirmation {
   position: absolute;
   top: 1px; /* Ajuste a distância desejada a partir do topo */
