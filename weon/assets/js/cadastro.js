@@ -50,7 +50,7 @@ class Drive{
         try {
             this.presetSelected = collectionName
 
-            const {btnCad, thead, tbody} = this.renderTableHtml()
+            const {btnCad, thead, tbody} = this.renderTableHtml(collectionName)
 
             //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
@@ -170,7 +170,12 @@ class Drive{
                 let valuesForm = {}
                 for(const element of elements){
                     if(!element.id || !element.type) continue
-                    let valueInput = element.value
+                        let valueInput = ''
+                        if(element.type !== 'checkbox') {
+                            valueInput = element.value
+                        }else {
+                            valueInput = element.checked
+                        }
 
                     switch(element.type){
                         case 'number':
@@ -179,10 +184,10 @@ class Drive{
 
                         case 'checkbox':
                             valueInput = Boolean(valueInput)
-                        
+                            break
+
                         case 'date':
                             valueInput = new Date(valueInput).toISOString()
-                            console.log(valueInput);
                     }
 
                     valuesForm[element.id] = valueInput
@@ -216,14 +221,16 @@ class Drive{
 
                 const {key, type, required} = field
                 const typeInput = this.transformType(type)
+                console.log(field);
 
                 const input = document.createElement('input')
                 input.setAttribute('id', key)
                 
-                input.setAttribute('required', required)
+                if(typeInput !== 'checkbox') input.setAttribute('required', required)
                 input.setAttribute('type', typeInput)
                 if(this.valuePreset[key]) input.value = this.valuePreset[key]
-                if(type === 'int') input.setAttribute('step', '1')
+                else if(type === 'int') input.setAttribute('step', '1')
+                else if(type === 'double') input.setAttribute('step', '0.1')
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
                 label.innerText = key
@@ -246,11 +253,17 @@ class Drive{
             case 'number':
                 return 'number'
 
+            case 'double':
+                return 'number'
+    
             case 'date':
                 return 'date'
 
             case 'int':
                 return 'number'
+            
+            case 'bool':
+                return 'checkbox'
 
             default:
                 return 'text'
