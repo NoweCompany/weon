@@ -220,12 +220,8 @@ li {
   float: right;
 }
 
-#selectTableName {
+#selectTableName{
   width: 200px;
-  margin-top: -2%;
-  position: fixed;
-  font-family: 'sfpro';
-  margin-bottom: -5%;
 }
 
 
@@ -727,6 +723,20 @@ li {
 }
 
 
+.border{
+  background-color: #ffffff;
+  width: 1000px;
+  height: 30px;
+  border-radius: 10px;
+  margin-top: -30px;
+}
+.popupConfirmation {
+  position: absolute;
+  top: 1px; /* Ajuste a distância desejada a partir do topo */
+  right: 10px; /* Ajuste a distância desejada a partir da direita */
+  background-color: #f0f0f0;
+  width: 15%;
+}
 
 
 

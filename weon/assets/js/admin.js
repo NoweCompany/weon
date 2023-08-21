@@ -409,45 +409,42 @@ class Fields extends Admin {
 
     renderFields() {
         container.innerHTML = `
+    
+        <div class="d-flex justify-content-center align-items-center mb-5">
+    <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center z-1">
+
         <div class="titulo">
         <h1 id="tituloPrincipal" class="display-6">Campos</h1>
         </div>
 
-
-        <!-- Botão Criar -->
-
         <div class="newfield">
-        <button id="newField" class="btn btn-primary">
-          <i class="fas fa-plus"></i> Criar Campos
-        </button>
+            <button id="newField" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Criar Campos
+            </button>
+        </div>
+
+        <!-- Botão select tipo-->  
+        <div class="form-group">
+        <select id="selectTableName" class="form-select">
+          <option value="" selected></option>
+        </select>
       </div>
-      
-        
-          <!-- Botão Salvar-->
+
+            </div>
+        </div>
+    </div>
+</div>
+            
+
 
           <div class="botãocreate">
           <button id="createField" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar
           </button>
         </div>
-           
-
-          <!-- Botão select tabelas-->
-            <div class="cont-selecTableName"> 
-               
-
-            <!-- Botão select tipo-->  
-            <div class="form-group">
-            <select id="selectTableName" class="form-select">
-              <option value="" selected></option>
-            </select>
-          </div>
-          
 
 
-            <!-- bloco   form-->  
-            
-
+            <!-- bloco   form-->       
             <div class="table-responsive">
 
             <div class="table-responsive mt-4">
@@ -523,7 +520,7 @@ class Fields extends Admin {
 
       
         const typeSelect = document.createElement("select");
-        typeSelect.classList.add("form-select", "w-50"); // Adicione a classe "w-50" para definir a largura do select
+        typeSelect.classList.add("form-select"); 
         
 
         const typeOptionSelected = document.createElement("option");
