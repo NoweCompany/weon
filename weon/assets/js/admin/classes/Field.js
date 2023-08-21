@@ -150,7 +150,7 @@ export default class Fields{
         typeSelect.appendChild(typeOptionStrg)
 
         const typeOptionBoolean = document.createElement("option");
-        typeOptionBoolean.setAttribute("value", "boolean");
+        typeOptionBoolean.setAttribute("value", "bool");
         typeOptionBoolean.innerText = 'Caixa de seleção'
         typeSelect.appendChild(typeOptionBoolean)
 
