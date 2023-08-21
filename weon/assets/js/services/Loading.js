@@ -8,6 +8,6 @@ export default class Loading {
   }
 
   removeLoading(){
-      this.loadingComponent.style.display = 'none'
+    this.loadingComponent.style.display = 'none'
   }
 }
