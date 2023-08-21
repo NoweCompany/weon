@@ -1,4 +1,4 @@
-export default  class Messaging {
+export default class Messaging {
   constructor(containerMsg){
     this.containerMsg = containerMsg
   }
