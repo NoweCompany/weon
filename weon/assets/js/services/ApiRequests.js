@@ -39,7 +39,7 @@ export default class ApiRequests {
             "authorization": `Bearer ${this.token}`
         })
     
-        const request = await fetch(`${this.apiUrl}/collection`, {
+        const response = await fetch(`${this.apiUrl}/collection`, {
             method: 'DELETE',
             headers: headers,
     
@@ -47,14 +47,14 @@ export default class ApiRequests {
             body: JSON.stringify({ collectionName: collectionName })
         })
 
+        const data = await response.json()
         if(response.status !== 200) throw new Error(data.errors)
 
         this.loading.removeLoading()
-        const data = await request.json()
         return data
     } catch (error) {
         this.loading.removeLoading()
-        throw new Error(e.message || 'Ocorreu um erro inesperado')
+        throw new Error(error.message || 'Ocorreu um erro inesperado')
     }
   }
 

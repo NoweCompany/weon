@@ -190,11 +190,15 @@ export default class Presets {
         formAlertConfirmation.addEventListener('submit', async (e) => {
             e.preventDefault()
             const valueInput = inputAlertConfimation.value
-            if(valueInput === collectionName){
-                await this.api.deletePreset(collectionName)
-            }else{
-                console.log("Erro");
-                this.messaging.msg('Escreva o nome correto para excluir a predefinição!', false)
+            try {
+                if(valueInput === collectionName){
+                    const data = await this.api.deletePreset(collectionName)
+                    return this.messaging.msg(data.success, true)
+                }else{
+                    this.messaging.msg('Escreva o nome correto para excluir a predefinição!', false)
+                }
+            } catch (error) {
+                this.messaging.msg(error.message || "Algo deu errado tente novamente mais tarde 😢", false)
             }
         })
     }
