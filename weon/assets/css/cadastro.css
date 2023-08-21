@@ -159,15 +159,19 @@
     margin-bottom: 1rem;
     border-collapse: separate;
     border-spacing: 5px;
-    /* Define o espaço entre as células */
-  }
+    border-radius: 10px;
 
+  }
+  
   th,
   td {
     text-align: left;
     padding: .5rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s; /* Trocamos a transição para a sombra da caixa */
+    cursor: pointer;
   }
-
+  
   th {
     background-color: #292929;
     color: #f7f7f7;
@@ -175,6 +179,19 @@
     font-weight: 300;
   }
   
+  tr {
+    transition: transform 0.3s;
+  }
+  
+  tr:hover {
+
+    transform: scale(1.02);
+    z-index: 1;
+  }
+  
+  tr:hover td {
+    color: #4179d2;
+}
 
 
   #post {
@@ -198,3 +215,15 @@
     margin-right: 4px;
     margin-top: 20px;
   }
+
+
+  .border{
+    background-color: #ffffff;
+    width: 1000px;
+    height: 30px;
+    justify-content: center;
+    border-radius: 10px;
+  
+  }
+
+  

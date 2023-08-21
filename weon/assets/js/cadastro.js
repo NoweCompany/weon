@@ -63,45 +63,53 @@ class Drive{
        }
     }
 
-    renderTableHtml(){
+    renderTableHtml(presetSelected) {
         this.container.innerHTML = `
-        <div class="btn-cad">
-        <div class="container d-flex justify-content-end h-100">
-        <button id="btnCad" name="btnCad" class="btn btn-outline-success btn-lg">Cadastrar</button>
-      </div>
-    </div>    
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <h1 class="mb-0 order-1">${presetSelected}</h1>
+            <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-1 order-2">Adicionar Documento</button>
+          </div>
+        </div>
+        
         <table class="table">
-            <thead class="thead">
-            </thead>
-            
-            <tbody class="tbody">
-            </tbody>
+          <thead class="thead">
+          </thead>
+          
+          <tbody class="tbody">
+          </tbody>
         </table>
-        `
-        const btnCad = document.querySelector('#btnCad')
-        const thead = document.querySelector('.thead')
-        const tbody =  document.querySelector('.tbody')
-
-        btnCad.addEventListener('click', () => {this.showForm()})
-
-        return {btnCad, thead, tbody}
+        `;
+        const form = document.querySelector('#form')
+        const btnCad = document.querySelector('#btnCad');
+        const thead = document.querySelector('.thead');
+        const tbody = document.querySelector('.tbody');
+    
+        btnCad.addEventListener('click', () => {
+            this.showForm();
+        });
+    
+        return { form, btnCad, thead, tbody };
     }
-
+    
+    
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
-        <h1 class="display-6">${presetSelected}</h1>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+          <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <h1 class="mb-0 order-1">${presetSelected}</h1>
+            <button id="back" name="btnCad" class="btn btn btn-outline-danger btn-sm-1 order-2">Voltar</button>
+          </div>
+        </div>
+
             <form id="form" class="formPreset">
             <input type="submit" class="btn btn-primary" value="Enviar">
             </form>
 
-            <div class='dangerbtn'>
-            <div class="Cont-btn">
-        <button id="back" class="btn btn-outline-danger btn-lg">
-            <i class="bi bi-arrow-left"></i> Voltar
-        </button>
+           
+            
         </div>
         </div> 
-
         `
 
         const form = document.querySelector('#form')
