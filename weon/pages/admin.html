@@ -17,32 +17,26 @@
 
 
 <body>
-<nav id="navbar">
+  <nav id="navbar">
     <ul>
-      <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Documentos</a></li>
-      <li><a href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-      <li><a id="select" href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
-      <li class="user-icon">
-        <span><i class="fas solid fa-user"></i></span>
-        <div class="options-window">
-          <div class="options">
-            <a href="#"><i class="fa-solid fa-gear fa-1x"></i></a> 
-            <a id="Logout" href="#"><i class="fa-solid fa-right-from-bracket"></i></a> 
-          </div>
-        </div>
-      </li>
-      <a href="../pages/home.html">
-        <div id="logo">
-            <img src="../assets/img/weonbranco.png" alt="Logo">
-        </div>
-      </a>
+        <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Documentos</a></li>
+        <li><a  href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+        <li><a id="select" href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
+        <li class="user-icon">
+            <a href="./user.html"><i class="fa-solid fa-user"></i></a>
+        </li>
+        <a href="../pages/home.html">
+            <div id="logo">
+                <img src="../assets/img/weonbranco.png" alt="Logo">
+            </div>
+        </a>
     </ul>
-  </nav>
+</nav>
 
   <div class="sidebar">
     <div class="modal-body">
       <h1>Administração</h1>
-      <button class="modal-button">Usuários <i class="fas fa-users"></i></button>
+      <button class="modal-button" id="user"> Usuários <i class="fas fa-users"></i></button>
       <button class="modal-button">Histórico <i class="fas fa-clipboard"></i></button>
       <button class="modal-button" id ="lixeira">Lixeira <i class="fas fa-trash"></i></button>
       <h1>Configurações</h1>
@@ -93,6 +87,7 @@
   </div>
   <script type="module" src="../assets/js/modules/logout.js"></script>
   <script type="module" src="../assets/js/admin/main.js"></script>
+  <script type="module" src="../assets/js/admin/classes/user.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 
