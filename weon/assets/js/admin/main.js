@@ -35,6 +35,7 @@ const preset = new Presets(document.querySelector('.container'), messaging, api)
 const fields = new Fields(document.querySelector('.container'), messaging, api, preset)
 const trash = new Trashs()
 
+await preset.preset()
 document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')

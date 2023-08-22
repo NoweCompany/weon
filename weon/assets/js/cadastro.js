@@ -123,6 +123,7 @@ class Drive{
     }
 
     buildTable(thead, tbody, fieldsCollection, valuesCollection) {
+        thead.appendChild(document.createElement('th')).innerText = 'Selecione'
         for (const field of fieldsCollection.fields) {
             const th = document.createElement('th');
             const textTh = document.createTextNode(field.key);
@@ -132,6 +133,10 @@ class Drive{
 
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
+            const inputCheckBox = document.createElement('input') 
+            inputCheckBox.setAttribute('type', 'checkbox')
+            tr.appendChild(inputCheckBox)
+
             for (const key in field) {
                 if(key === '_id') {
                     tr.setAttribute('id', field[key])
@@ -139,22 +144,25 @@ class Drive{
                 }
                 const value = field[key];
                 const td = document.createElement('td');
+                
+                td.addEventListener('click', (e) => {
+                    tr.childNodes.forEach((td, i) => {
+                        const valueTd = td.innerText
+                        const idTd = td.id
+                        this.valuePreset[idTd] = valueTd
+                    })
+                    this.valuePreset._id = tr.getAttribute('id')
+                    this.isEdit = true
+                    this.showForm()
+                })
+
                 const textTd = document.createTextNode(value);
                 td.appendChild(textTd);
                 td.setAttribute('id', key)
                 tr.appendChild(td);
                 tbody.appendChild(tr);
             }
-            tr.addEventListener('click', (e) => {
-                tr.childNodes.forEach((td, i) => {
-                    const valueTd = td.innerText
-                    const idTd = td.id
-                    this.valuePreset[idTd] = valueTd
-                })
-                this.valuePreset._id = tr.getAttribute('id')
-                this.isEdit = true
-                this.showForm()
-            })
+
         }
     }
 
