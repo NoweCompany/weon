@@ -126,53 +126,12 @@ body{
   
   .user-icon {
     position: fixed;
-    top: 10px;
+    top: 1px;
     right: 3%;
     align-items: center;
   }
   
-  .user-icon span {
-    display: inline-block;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .options-window {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    padding: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    transition: opacity 0.3s;
-  }
-  
-  .user-icon:hover .options-window {
-    display: block;
-    opacity: 1;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .options a {
-    display: block;
-    color: #000000;
-    padding: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .options a:hover {
-    background-color: #000000;
-  }
-  
+ 
 
 li a {
   /* Restante das propriedades CSS */
