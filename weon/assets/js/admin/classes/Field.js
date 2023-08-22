@@ -33,19 +33,31 @@ export default class Fields{
 
     renderFields() {
         this.container.innerHTML = `
-        <div class="titulo">
+        
+
+
+<div class="d-flex justify-content-center align-items-center mb-5">
+    <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+       
+
+    <div class="titulo">
         <h1 id="tituloPrincipal" class="display-6">Campos</h1>
         </div>
-
-
-        <!-- Botão Criar -->
-
-        <div class="newfield">
-        <button id="newField" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Criar Campos
-        </button>
+ <div class="newfield">
+            <button id="newField" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Criar Campos
+            </button>
         </div>
-        
+          <!-- Botão select tipo-->  
+            <div class="form-group">
+            <select id="selectTableName" class="form-select">
+                <option value="" selected></option>
+            </select>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
         
             <!-- Botão Salvar-->
 
@@ -56,16 +68,10 @@ export default class Fields{
         </div>
             
 
-            <!-- Botão select tabelas-->
-            <div class="cont-selecTableName"> 
+           
                 
 
-            <!-- Botão select tipo-->  
-            <div class="form-group">
-            <select id="selectTableName" class="form-select">
-                <option value="" selected></option>
-            </select>
-            </div>
+          
             
 
 
