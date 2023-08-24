@@ -81,14 +81,18 @@ class Drive{
 
     renderTableHtml(presetSelected) {
         this.container.innerHTML = `
-        <div class="d-flex justify-content-center align-items-center">
-          <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <h1 class="mb-0 order-1">${presetSelected}</h1>
-            <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-1 order-2">Adicionar Documento</button>
-            <button id="btnDelet" name="btnDelet" class="btn btn-outline-secondary btn-sm-1 order-2">Deletar Documentos</button>
-          </div>
+            <div class="d-flex justify-content-center align-items-center mb-5">
+        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <div class="ml-auto">
+                <h1 class="mb-0">${presetSelected}</h1>
+            </div>
+            <div> 
+            <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-4 ml-2">Adicionar</button>
+            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger btn-sm-1">Deletar</button>
+            </div>
         </div>
-        
+    </div>
+
         <table class="table">
           <thead class="thead">
           </thead>
@@ -118,12 +122,8 @@ class Drive{
                 <h1 class="mb-0">${presetSelected}</h1>
             </div>
             <div> 
-            <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4 ml-2">
-            <i class="bi bi-arrow-left"></i> Voltar
-        </button>
-        <button type="submit" form="form" class="btn btn-outline-primary btn-sm-1">
-            <i class="bi bi-check"></i> Salvar
-        </button>
+            <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+            <button type="submit" form="form" class="btn btn-outline-primary btn-sm-1">Salvar</button>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@ class Drive{
     }
 
     buildTable(thead, tbody, fieldsCollection, valuesCollection) {
-        thead.appendChild(document.createElement('th')).innerText = 'Selecione'
+        thead.appendChild(document.createElement('th')).innerText = '✔'
         for (const field of fieldsCollection.fields) {
             const th = document.createElement('th');
             const textTh = document.createTextNode(field.key);
@@ -154,8 +154,7 @@ class Drive{
             //checkbox
             const inputCheckBox = document.createElement('input') 
             inputCheckBox.setAttribute('type', 'checkbox')
-            inputCheckBox.setAttribute('class', 'checkBoxDelet')
-            
+            inputCheckBox.setAttribute('class', 'checkBoxDelet, form-check-input form-check-input-lg d-flex ms-3 mt-2')
             tr.appendChild(inputCheckBox)
 
             for (const key in field) {
