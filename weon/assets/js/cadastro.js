@@ -51,6 +51,22 @@ class Drive{
             this.presetSelected = collectionName
 
             const {btnCad, thead, tbody} = this.renderTableHtml(collectionName)
+            const btnDelet = document.querySelector("#btnDelet")
+            const childresOfTBody = tbody.children
+            btnDelet.addEventListener('click', async (e) => {
+                try {
+                    const checkboxes = document.querySelectorAll('.checkBoxDelet')
+                    for(const checkbox of checkboxes){
+                        if(checkbox.checked){
+                            const response = await requests.deleteApiValues(this.presetSelected, checkbox.id)
+                            this.msg(response.success, true)
+                            checkbox.parentNode.remove()
+                        }
+                    }
+                } catch (error) {
+                    this.msg(error.message || 'Ocorreu um erro inesperado 😢', false)
+                }
+            })
 
             //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
@@ -69,6 +85,7 @@ class Drive{
           <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
             <h1 class="mb-0 order-1">${presetSelected}</h1>
             <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-1 order-2">Adicionar Documento</button>
+            <button id="btnDelet" name="btnDelet" class="btn btn-outline-secondary btn-sm-1 order-2">Deletar Documentos</button>
           </div>
         </div>
         
@@ -133,18 +150,22 @@ class Drive{
 
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
+            //checkbox
             const inputCheckBox = document.createElement('input') 
             inputCheckBox.setAttribute('type', 'checkbox')
+            inputCheckBox.setAttribute('class', 'checkBoxDelet')
+            
             tr.appendChild(inputCheckBox)
 
             for (const key in field) {
                 if(key === '_id') {
+                    inputCheckBox.setAttribute('id', field[key])
                     tr.setAttribute('id', field[key])
                     continue
                 }
                 const value = field[key];
                 const td = document.createElement('td');
-                
+
                 td.addEventListener('click', (e) => {
                     tr.childNodes.forEach((td, i) => {
                         const valueTd = td.innerText
@@ -377,6 +398,29 @@ class Requests{
             console.log(e);
             this.removeLoading()
              throw new Error(e.message || 'Ocorreu um erro inesperado')
+        }
+    }
+
+    async deleteApiValues(collectionName, id){
+        try {
+            this.addLoading()
+            const response = await fetch(`${this.apiUrl}/value/${id}/${collectionName}/false`, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${this.token}`
+                },
+            })
+
+            const data = await response.json();
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.removeLoading()
+            return response
+        } catch (e) {
+            console.log(e);
+            this.removeLoading()
+            throw new Error(e.message || 'Ocorreu um erro inesperado')
         }
     }
 
