@@ -96,20 +96,21 @@ class Drive{
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
-          <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <h1 class="mb-0 order-1">${presetSelected}</h1>
-            <button id="back" name="btnCad" class="btn btn btn-outline-danger btn-sm-1 order-2">Voltar</button>
-          </div>
+        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <div class="ml-auto">
+                <h1 class="mb-0">${presetSelected}</h1>
+            </div>
+            <div> 
+            <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4 ml-2">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+        <button type="submit" form="form" class="btn btn-outline-primary btn-sm-1">
+            <i class="bi bi-check"></i> Salvar
+        </button>
+            </div>
         </div>
-
-            <form id="form" class="formPreset">
-            <input type="submit" class="btn btn-primary" value="Enviar">
-            </form>
-
-           
-            
-        </div>
-        </div> 
+    </div>
+    <form id="form" class="formPreset"> </form>
         `
 
         const form = document.querySelector('#form')
