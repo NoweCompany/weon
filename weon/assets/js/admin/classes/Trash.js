@@ -1,49 +1,34 @@
-export default class Trashs{
-  async renderTrashItems() {
-      const trashItems = await super.getItemsInTrash('teste')
-      console.log(trashItems)
-
-      // Limpar o container antes de renderizar os itens
-      container.innerHTML = '';
-
-      // Renderizar os itens da lixeira
-      trashItems.forEach(value => {
-          for (const key in value) {
-              const element = value[key]
-              console.log(element)
-              const itemElement = document.createElement('div');
-              itemElement.innerHTML += element 
-
-              container.appendChild(itemElement);
-          }
-      })
-  }
-
-  // Chamar este método para exibir os itens da lixeira
-  trash() {
-      this.renderTrashItems();
-  }
-
-  async getItemsInTrash(collectionName) {
-    const headers = new Headers({
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${this.token()}`
-    });
-
-    try {
-        const response = await fetch(`${url}/trash/${collectionName}`, {
-            headers: headers
-        });
-
-        if (response.status !== 200) {
-            const data = await response.json();
-            throw new Error(data.errors);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        throw new Error("Erro ao obter itens da lixeira: " + error.message);
+export default class Trash{
+    constructor(container, messaging, api){
+        this.container = container
+        this.messaging = messaging
+        this.api = api
     }
-}
+    async renderTrashItems() {
+        try {
+            const trashItems = await this.api.getIndexItemsInTrash()
+            console.log(trashItems);
+            // Limpar o container antes de renderizar os itens
+            this.container.innerHTML = 'Lixeira';
+
+            // Renderizar os itens da lixeira
+            trashItems.forEach(collection => {
+                const label = document.createElement('div')
+                const textLabel = document.createTextNode(collection.collectionName)
+                label.appendChild(textLabel)
+                this.container.appendChild(label)
+                collection.values.forEach((documents, index) => {
+                    console.log(documents);
+                })
+            })
+        } catch (error) {
+            
+        }
+    }
+    
+
+    // Chamar este método para exibir os itens da lixeira
+    trash() {
+        this.renderTrashItems();
+    }
 }

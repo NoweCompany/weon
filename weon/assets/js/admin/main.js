@@ -5,7 +5,7 @@ const urlWebsite = configs.urlWebsiteRelativa()
 //classes
 import Presets from './classes/Preset.js'
 import Fields from './classes/Field.js'
-import Trashs from './classes/Trash.js'
+import Trash from './classes/Trash.js'
 //Modulos
 import Logado from "../modules/Logado.js";
 //Services
@@ -33,13 +33,14 @@ const messaging = new Messaging(document.querySelector('#msg'))
 //Inicializando Classes
 const preset = new Presets(document.querySelector('.container'), messaging, api)
 const fields = new Fields(document.querySelector('.container'), messaging, api, preset)
-const trash = new Trashs()
+const trash = new Trash(document.querySelector('.container'), messaging, api)
 
 await preset.preset()
 document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')
     if (id === 'predefinicao') await preset.preset()
-    if (id === 'campos') await fields.fields()
+    else if (id === 'campos') await fields.fields()
+    else if (id === 'lixeira') await trash.trash()
 })
 

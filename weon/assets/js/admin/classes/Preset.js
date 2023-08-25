@@ -193,6 +193,8 @@ export default class Presets {
             try {
                 if(valueInput === collectionName){
                     const data = await this.api.deletePreset(collectionName)
+                    popUpAlert.classList.remove("show")
+                    this.preset()
                     return this.messaging.msg(data.success, true)
                 }else{
                     this.messaging.msg('Escreva o nome correto para excluir a predefinição!', false)

@@ -96,9 +96,13 @@ class FormLogin {
     if (response.errors) {
       this.msg(response.errors, false);
     } else {
-      const token = response.token;
+      const { token } = response;
+
+      console.log(response);
       const maxAge = 60 * 60 * 24 * 7
       document.cookie = `token=${token};max-age=${maxAge}; path=/`;
+      const jsonDataUser = JSON.stringify(response.user)
+      window.localStorage.setItem('weonDataUser', jsonDataUser)
       window.location.reload()
     }
   };
