@@ -90,17 +90,19 @@
 
 
   #form {
-    width: 800px; /* Aumentei a largura para acomodar as 4 colunas */
+    width: 100%; /* Use full width of the container */
+    max-width: 800px; /* Set a maximum width to prevent excessive stretching */
+    margin: 0 auto; /* Center the form horizontally */
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Divide em 4 colunas de largura igual */
-    gap: 10px; /* Espaçamento entre os campos */
+    grid-template-columns: repeat(4, 1fr); /* Divide into 4 columns of equal width */
+    gap: 10px; /* Spacing between the fields */
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    border-radius: 10px;
+    border: 1px solid #dee2e6; /* Add a minimal border */
+    border-radius: 5px; /* Slight border radius for a softer look */
     padding: 5%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+}
   
   #form input[type="text"],
   #form input[type="number"],
@@ -225,4 +227,9 @@
     border-radius: 10px;
     
   }
+
+ .form-check-input{
+  height: 20px;
+  width: 20px;
+ }
 
