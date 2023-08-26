@@ -39,7 +39,7 @@ class Drive{
 
     initializeSelect2() {
         $(this.select2Collections).select2({
-            placeholder: 'Selecione uma predefinição',
+            placeholder: 'Tabelas',
             closeOnSelect: false,
             language: 'pt',
         });

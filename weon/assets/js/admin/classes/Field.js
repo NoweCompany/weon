@@ -35,37 +35,34 @@ export default class Fields{
         this.container.innerHTML = `
         
 
-
-<div class="d-flex justify-content-center align-items-center mb-5">
-    <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-       
-
-    <div class="titulo">
-        <h1 id="tituloPrincipal" class="display-6">Campos</h1>
-        </div>
- <div class="newfield">
-            <button id="newField" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Criar Campos
-            </button>
-        </div>
-          <!-- Botão select tipo-->  
-            <div class="form-group">
-            <select id="selectTableName" class="form-select">
-                <option value="" selected></option>
-            </select>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <div class="titulo">
+                <h1 id="tituloPrincipal" class="display-6">Campos</h1>
             </div>
+
+            <div class="d-flex align-items-end"> 
+                <div class="newfield"> 
+                    <button id="newField" class="btn btn-outline-primary btn-sm">Criar campo</button>
+                </div>
+
+                <div class="botãocreate">
+                    <button id="createField" class="btn btn-outline-success btn-sm1">Salvar</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <select id="selectTableName" class="form-select">
+                    <option value="" selected></option>
+                </select>
             </div>
         </div>
     </div>
 </div>
         
-            <!-- Botão Salvar-->
+            
 
-            <div class="botãocreate">
-            <button id="createField" class="btn btn-success">
-            <i class="fas fa-save"></i> Salvar
-            </button>
-        </div>
+           
             
 
            

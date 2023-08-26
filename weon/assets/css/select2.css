@@ -1,101 +1,53 @@
+/* Estilos para o Select2 */
 .select2-container .select2-selection--single {
-    box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    text-align: center;
-    margin-left: -17%;
-  }
-  
-  .select2-container .select2-selection--single .select2-selection__rendered {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-  }
-  
-  .select2-dropdown {
-    border-radius: 10px 10px 12px 12px;
-    display: block;
-    visibility: hidden;
-
-  }
-  
-  .select2-container--open .select2-dropdown {
-    opacity: 1;
-    visibility: visible;
-    width: 100%;
-  }
-  
-  .select2-results {
-    display: block;
-    overflow-y: auto;
-    max-height: 200px;
-    width: 130%;
-    margin-left: -17%;
-  }
-  
-  .select2-results__option {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #000000;
-    transition: transform 0.3s ease;
-    border-bottom: 1px solid #353535;
-  }
-  
-  .select2-results__option:hover {
-    transform: scale(1.1);
-    color: #111;
-  }
-  
-  .select2-search--dropdown {
-    display: block;
-    padding: 6px;
-    background-color: #ffffff;
-  }
-  
-  .select2-search--dropdown .select2-search__field {
-    padding: 6px;
-    width: 130%;
-    margin-left: -17%;
-    box-sizing: border-box;
-  }
-  
-  .select2-search--dropdown.select2-search--hide {
-    display: none;
-  }
-  
-  .select2-hidden-accessible {
-    border: 0 !important;
-    clip: rect(0 0 0 0) !important;
-    -webkit-clip-path: inset(0%) !important;
-    clip-path: inset(0%) !important;
-    height: 0px !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    width: 0px !important;
-    white-space: nowrap !important;
-  }
-  
-  .select2-container--default .select2-selection--single {
-    background-color: #4179d2;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 130%;
-    margin-right: 10%;
-
-  }
-  
-  .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #ffffff;
-    line-height: 30px;
-  }
-  
-.select2-results__options{
-    background-color: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  width: 100%;
 }
 
+.select2-container .select2-selection--single .select2-selection__rendered {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
+.select2-dropdown {
+  display: block;
+  visibility: hidden;
+}
+
+.select2-container--open .select2-dropdown {
+  opacity: 1;
+  visibility: visible;
+
+}
+
+.select2-results {
   
+  width: 100%;
+}
+
+.select2-results__option {
+  display: block;
+  margin-top: 10px;
+  color: #000000;
+}
+
+.select2-search--dropdown .select2-search__field {
+  padding: 6px;
+  width: 130%;
+}
+
+.select2-search--dropdown.select2-search--hide {
+  display: none;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #ffffff;
+  line-height: 30px;
+}
+
+.select2-results__options {
+  background-color: rgb(255, 255, 255);
+}
