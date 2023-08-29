@@ -154,7 +154,7 @@ class Drive{
             //checkbox
             const inputCheckBox = document.createElement('input') 
             inputCheckBox.setAttribute('type', 'checkbox')
-            inputCheckBox.setAttribute('class', 'checkBoxDelet, form-check-input form-check-input-lg d-flex ms-3 mt-2')
+            inputCheckBox.setAttribute('class', 'checkBoxDelet form-check-input form-check-input-lg d-flex ms-3 mt-2')
             tr.appendChild(inputCheckBox)
 
             for (const key in field) {
