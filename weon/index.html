@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/form.css">
   <link rel="stylesheet" href="./assets/css/padrao.css">
   <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
@@ -24,29 +25,34 @@
   </a>
 
   <img src="./assets/img/weonpreto.png" alt="logo weon" class="imagem">
-
-  <div class="conteiner">
+ 
+  <div class="container">
+    <div class="msg mt-3"></div>
     <form action="" method="post" class="form">
-      <h1>Login</h1>
-      <div class="row">
-        <label for="email">Email</label>
-        <input type="text" id="email" class="inputlogin" name="email">
-      </div>
-      <div class="row">
-        <label for="password">Senha</label>
-        <div class="senha-wrapper">
-          <input type="password" id="password" class="inputlogin" name="password">
-          <i class="lnr lnr-eye"></i>
+        <h3 class="mb-4">Login</h3>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" id="email" class="form-control" name="email">
         </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <div class="input-group">
+                <input type="password" id="password" class="form-control" name="password">
+                <button class="btn btn-outline-primary" type="button" id="togglePassword">
+                    <i class="lnr lnr-eye"></i>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center"> <!-- Add a flex container for centering -->
+          <button type="submit" class="btn btn-primary mt-3">Entrar</button>   
       </div>
-      <div class="btn">
-        <input type="submit" class="btn">
-      </div>
-      <div class="msg"></div>
-    </form>
-  </div>
+     
+      </form>
+
+  
+</div>
   <script>
-    let btn = document.querySelector('.lnr-eye');
+    let btn = document.querySelector('.btn-outline-primary');
     btn.addEventListener('click', function () {
       let input = document.querySelector('#password');
       if (input.getAttribute('type') == 'password') {

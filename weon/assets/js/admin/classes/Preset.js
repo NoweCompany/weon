@@ -54,20 +54,20 @@ export default class Presets {
 
     rederFormPreset() {
         this.container.innerHTML = `
-        <form id="formPreset">
-            <h1> Criar Predefinição </h1>
-            <div>
-                <label for="name">Nome</label>
-                <input type="text" id="name">
-            </div>
+        <div class="container">
+    <form id="formPreset" class="bg-white p-5 rounded-lg">
+    <h1 class="text-center mb-4">Criar Predefinição</h1>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" placeholder="Digite o nome da sua predefinição">
+        </div>
 
-            <div class="btn1">
-            <input type="button"  id="cancelPresetForm" value=" x " />
-            </div>
-            <div class="btn2">
-                <input type="submit"  id="createPresetForm" value=" Próximo" />
-            </div> 
-        </form>   
+        <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-outline-danger" id="cancelPresetForm">Voltar</button>
+        <button type="submit" class="btn btn-outline-primary" id="createPresetForm">Próximo</button>
+    </div>
+    </form>
+</div> 
         `
         const formPreset = document.querySelector('#formPreset')
         formPreset.addEventListener('submit', e => this.createPreset(e))
@@ -77,8 +77,6 @@ export default class Presets {
         this.container.innerHTML = `
         
         <h1 id="tituloPrincipal" class="display-6">Predefinições</h1>
-
-
         <div class="table-container">
         <table>
             <thead>
@@ -89,7 +87,7 @@ export default class Presets {
             <tbody id="tbody"></tbody>
         </table>
     </div>
-    <button id="createPreset" class="criarnovatabela">Criar</button>
+    <button id="createPreset" class="criarnovatabela btn btn-outline-primary">Criar</button>
     
         `
     }

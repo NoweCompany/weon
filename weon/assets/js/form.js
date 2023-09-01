@@ -44,31 +44,30 @@ class FormLogin {
 
   msg(msg, success) {
     if (!success) {
-      containerMsg.className = 'error'
-      containerMsg.textContent = msg
+        containerMsg.className = 'alert alert-danger alert-sm';
+        containerMsg.textContent = msg;
 
-      setTimeout(() => {
-        this.cleanMsg()
-      }, 1000)
+        setTimeout(() => {
+            this.cleanMsg();
+        }, 2000); 
 
-      return
+        return;
     } else {
-      containerMsg.className = 'success'
-      containerMsg.textContent = msg
+        containerMsg.className = 'alert alert-success';
+        containerMsg.textContent = msg;
 
-      setTimeout(() => {
-        this.cleanMsg()
-      }, 1000);
+        setTimeout(() => {
+            this.cleanMsg();
+        }, 1000);
 
-      return
+        return;
     }
-  };
+}
 
-  cleanMsg() {
-    containerMsg.innerHTML = ''
-    containerMsg.className = 'msg'
-    return
-  }
+cleanMsg() {
+    containerMsg.className = 'alert'; 
+    containerMsg.textContent = ''; 
+}
 
   async postApi() {
     try {
