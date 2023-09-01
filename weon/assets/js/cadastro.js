@@ -24,7 +24,7 @@ class Drive{
 
         this.collectionData = []
         this.isEdit = false
-        this.valuePreset = {}
+        this.valuesPreset = {}
         
         this.presetSelected = null
     }
@@ -134,6 +134,8 @@ class Drive{
         const btnBack = document.querySelector('#back')
 
         btnBack.addEventListener('click', () => {
+            this.valuesPreset = {}
+            this.isEdit = false
             this.showDocument(this.presetSelected)
         })
 
@@ -156,7 +158,6 @@ class Drive{
             inputCheckBox.setAttribute('type', 'checkbox')
             inputCheckBox.setAttribute('class', 'checkBoxDelet, form-check-input form-check-input-lg d-flex ms-3 mt-2')
             tr.appendChild(inputCheckBox)
-
             for (const key in field) {
                 if(key === '_id') {
                     inputCheckBox.setAttribute('id', field[key])
@@ -170,9 +171,9 @@ class Drive{
                     tr.childNodes.forEach((td, i) => {
                         const valueTd = td.innerText
                         const idTd = td.id
-                        this.valuePreset[idTd] = valueTd
+                        this.valuesPreset[idTd] = valueTd
                     })
-                    this.valuePreset._id = tr.getAttribute('id')
+                    this.valuesPreset._id = tr.getAttribute('id')
                     this.isEdit = true
                     this.showForm()
                 })
@@ -208,7 +209,7 @@ class Drive{
 
                     switch(element.type){
                         case 'number':
-                        valueInput = Number(valueInput)
+                            valueInput = Number(valueInput)
                         break
 
                         case 'checkbox':
@@ -222,20 +223,21 @@ class Drive{
                     valuesForm[element.id] = valueInput
                 }
 
-            if(!this.isEdit){
-                const response = await this.requests.postApiValues(presetSelected, [valuesForm])
-            }else{
-                const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuePreset._id)
-                this.valuePreset = {}
-                this.isEdit = false
+                if(!this.isEdit){
+                    const response = await this.requests.postApiValues(presetSelected, [valuesForm])
+                }else{
+                    const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuesPreset._id)
+                    this.isEdit = false
+                    this.valuesPreset = {}
+                }
+                this.msg('Atualização bem sucedida', true)
+                this.showDocument()
+                return form
+            } catch (error) {
+                this.msg(error, false)
             }
-            this.msg('Atualização bem sucedida', true)
-            this.showDocument()
-            return form
+        })
 
-        } catch (error) {
-            this.msg(error.message, false)
-        }})
         }
 
     async addInputsToForm(form, presetSelected = this.presetSelected){
@@ -250,16 +252,23 @@ class Drive{
 
                 const {key, type, required} = field
                 const typeInput = this.transformType(type)
-                console.log(field);
 
                 const input = document.createElement('input')
                 input.setAttribute('id', key)
                 
                 if(typeInput !== 'checkbox') input.setAttribute('required', required)
                 input.setAttribute('type', typeInput)
-                if(this.valuePreset[key]) input.value = this.valuePreset[key]
-                else if(type === 'int') input.setAttribute('step', '1')
-                else if(type === 'double') input.setAttribute('step', '0.1')
+                if(type === 'int') input.setAttribute('step', '1')
+                if(type === 'double') input.setAttribute('step', '0.1')
+                if(this.isEdit && this.valuesPreset[key]){
+                    const valuesOfField = this.valuesPreset[key]
+                    
+                    if(typeInput === 'checkbox'){
+                        input.checked = valuesOfField === 'true'
+                    }else{
+                        input.value = valuesOfField
+                    }
+                }
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
                 label.innerText = key
@@ -379,7 +388,6 @@ class Requests{
     async updateApiValues(collectionName, values, id) {
         try {
             this.addLoading()
-            console.log(values, collectionName, id);
             const response = await fetch(`${this.apiUrl}/value/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -388,16 +396,15 @@ class Requests{
                 },
                 body: JSON.stringify({ collectionName, values })
             })
-
+            
             const data = await response.json();
             if(response.status !== 200) throw new Error(data.errors)
 
             this.removeLoading()
             return response
         } catch (e) {
-            console.log(e);
             this.removeLoading()
-             throw new Error(e.message || 'Ocorreu um erro inesperado')
+             throw new Error('Ocorreu um erro inesperado')
         }
     }
 
@@ -418,9 +425,8 @@ class Requests{
             this.removeLoading()
             return response
         } catch (e) {
-            console.log(e);
             this.removeLoading()
-            throw new Error(e.message || 'Ocorreu um erro inesperado')
+            throw new Error('Ocorreu um erro inesperado')
         }
     }
 
