@@ -1,13 +1,25 @@
 export default class Fields{
-    constructor(container, messaging, requests, preset){
+    _presetController = null
+
+    constructor(container, messaging, requests){
         this.messaging = messaging
         this.api = requests
         this.container = container
 
-        this.preset = preset
-
         this.currentValuesCollection = null
         this.collectionSelected = null
+    }
+
+    set presetController(instancePreset){
+        if(instancePreset){
+            return this._presetController = instancePreset
+        }
+        
+        throw new Error("Instância de Preset inválida")
+    }
+
+    get presetController(){
+        return this._presetController
     }
 
     async fields(namePreset) {
@@ -17,6 +29,7 @@ export default class Fields{
         this.events()
 
         if (namePreset) {
+            this.loadFields(namePreset)
             const optionNamePreset = document.querySelector(`#${namePreset}`)
             optionNamePreset.selected = true
         }
@@ -300,11 +313,13 @@ export default class Fields{
                     name: inputValue,
                     type: valueSelectOfTypes,
                     method: method,
-                    fieldName: this.currentValuesCollection.fields[i]?.key,
+                    fieldName: this.currentValuesCollection?.fields[i]?.key,
                     fieldRequired: true,
                 }
             } 
-            console.log(dados);
+
+            let formErrors = false
+
             for (let i in dados) {
                 const field = dados[i]
                 const {name, type, fieldName, fieldRequired, method} = field
@@ -314,17 +329,18 @@ export default class Fields{
                 }else if(method ===  'update'){
                     const newValues = {type: type, description: ''}
                     response = await this.api.updateApiTemplate(
-                        collectionName, 
-                        fieldName, 
-                        name, 
+                        collectionName,
+                        fieldName,
+                        name,
                         fieldRequired,
                         newValues
-                        )
+                    )
                 }else{  
                     return this.messaging.msg("Não foi possível completar sua modificação😢")
                 }
                 
                 if (!response || response.status !== 200) {
+                    formErrors = true
                     const data = await response.json()
                     if (data.errors) {
                         this.messaging.msg(`Campo ${name}: ${data.errors}`, false)
@@ -335,7 +351,11 @@ export default class Fields{
                 }
 
                 this.messaging.msg(`O campo ${name} foi Criado/Alterado com sucesso`, true)
+                
             }
+            if(!formErrors) setTimeout(() => {
+                return this.presetController.preset()
+            }, 1000)
 
             await this.loadFields(collectionName)
         }catch(error){
