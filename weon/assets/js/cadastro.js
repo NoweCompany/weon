@@ -71,7 +71,7 @@ class Drive{
             //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
-
+            console.log(valuesCollection);
             this.buildTable(thead, tbody, fieldsCollection, valuesCollection)
         } catch (error) {    
             this.container.innerHTML = ''
@@ -180,6 +180,7 @@ class Drive{
 
                 const textTd = document.createTextNode(value);
                 td.appendChild(textTd);
+                console.log(key);
                 td.setAttribute('id', key)
                 tr.appendChild(td);
                 tbody.appendChild(tr);

@@ -1,9 +1,24 @@
 export default class Presets {
+    _fieldController = null
+
     constructor(container, messaging, requests){
         this.messaging = messaging
         this.api = requests
 
         this.container = container
+    }
+
+    set fieldController(instanceField){
+        console.log(instanceField);
+        if(instanceField){
+            return this._fieldController = instanceField
+        }
+        
+        throw new Error("Instância de Preset inválida")
+    }
+
+    get fieldController(){
+        return this._fieldController
     }
 
     async preset() {
@@ -203,7 +218,8 @@ export default class Presets {
         })
     }
 
-    editPreset(e) {
-        console.log(e.target.id);
+    async editPreset(e) {
+        const namePreset = e.target.id.split('_')[0]
+        await this._fieldController.fields(namePreset)
     }
 }

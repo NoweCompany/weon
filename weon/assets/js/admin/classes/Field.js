@@ -1,106 +1,168 @@
 export default class Fields{
-    constructor(container, messaging, requests, preset){
+    _presetController = null
+
+    constructor(container, messaging, requests){
         this.messaging = messaging
         this.api = requests
         this.container = container
 
-        this.preset = preset
+        this.currentValuesCollection = null
+        this.collectionSelected = null
+    }
+
+    set presetController(instancePreset){
+        if(instancePreset){
+            return this._presetController = instancePreset
+        }
+        
+        throw new Error("Instância de Preset inválida")
+    }
+
+    get presetController(){
+        return this._presetController
     }
 
     async fields(namePreset) {
         this.renderFields()
-        this.events()
         await this.addSelect()
+        this.handleSelectTableName();
+        this.events()
 
         if (namePreset) {
-            const optionNmePreset = document.querySelector(`#${namePreset}`)
-            optionNmePreset.selected = true
+            this.loadFields(namePreset)
+            const optionNamePreset = document.querySelector(`#${namePreset}`)
+            optionNamePreset.selected = true
+        }
+    }
+
+    async loadFields(collectionSelected){
+        const form = document.querySelector("#form");
+        form.innerHTML = ''
+        await this.setDataColletion()
+        this.dataCollection.forEach(collection => {
+            if(collection.collectionName === collectionSelected){
+                this.currentValuesCollection = {collectionName: collection.collectionName, fields: collection.fields}
+                if(collection.fields.length <= 0){
+                    this.createNewField()
+                }else{
+                    collection.fields.forEach(field => {    
+                        this.createNewField(field.key, field.type)
+                    })
+                }
+            }
+        });
+        return true
+    }
+
+    tranformType(type){
+        switch (type) {
+            case 'string':
+                return 'Texto pequeno'
+
+            case 'double':
+                return 'Número Decimal'
+    
+            case 'date':
+                return 'Data'
+
+            case 'int':
+                return 'Número Inteiros'
+            
+            case 'bool':
+                return 'Caixa de seleção'
+
+            default:
+                return type
         }
     }
 
     events() {
-       this.container.addEventListener('click', e => {
-            let id = e.target.getAttribute('id')
+        this.container.addEventListener('click', e => {
+        let id = e.target.getAttribute('id')
+            
+        switch (id) {
+            case 'createField':
+            this.createFields();
+            break;
+    
+            case 'newField':
+            this.createNewField();
+            break;
+        }
+        })
+    }
 
-            if (id === 'createField') {
-                this.createFields()
-            }
-            if (id === 'newField') {
-                this.createNewField()
+    handleSelectTableName(){
+        const select =  document.querySelector("#selectTableName")
+        select.addEventListener('change', (e) => {
+            const el = e.target
+            const value = el.value
+            if(value){
+                this.loadFields(value)
             }
         })
     }
 
     renderFields() {
         this.container.innerHTML = `
-        
-
         <div class="d-flex justify-content-center align-items-center mb-5">
         <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <div class="titulo">
-                <h1 id="tituloPrincipal" class="display-6">Campos</h1>
-            </div>
 
-            <div class="d-flex align-items-end"> 
-                <div class="newfield"> 
-                    <button id="newField" class="btn btn-outline-primary btn-sm">Criar campo</button>
-                </div>
 
-                <div class="botãocreate">
-                    <button id="createField" class="btn btn-outline-success btn-sm1">Salvar</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <select id="selectTableName" class="form-select">
-                    <option value="" selected></option>
-                </select>
-            </div>
+        <div class="titulo">
+            <h1 id="tituloPrincipal" class="display-6">Campos</h1>
         </div>
-    </div>
-</div>
-        
-            
+        <div class="newfield">
+            <button id="newField" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Criar Campos
+            </button>
+        </div>
 
-           
-            
+        <!-- Botão select tipo-->  
+        <div class="form-group">
+            <select id="selectTableName" class="form-select">
+                <option value="" selected></option>
+            </select>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
 
-           
-                
+            <!-- Botão Salvar-->
 
-          
-            
+            <div class="botãocreate">
+                <button id="createField" class="btn btn-success">
+                <i class="fas fa-save"></i> Salvar
+            </button>
+        </div>
 
+        <!-- bloco   form-->  
 
-            <!-- bloco   form-->  
-            
-
-            <div class="table-responsive">
+        <div class="table-responsive">
 
             <div class="table-responsive mt-4">
             <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
                 <thead class="text-center">
-                <tr>
-                    <th class="fw-normal">Nome</th>
-                    <th class="fw-normal">Tipo</th>
-                    <th class="fw-normal">Obrigatório</th>
-                    <th class="fw-normal">Delete</th>
-                </tr>
+                    <tr>
+                        <th class="fw-normal">Nome</th>
+                        <th class="fw-normal">Tipo</th>
+                        <th class="fw-normal">Obrigatório</th>
+                        <th class="fw-normal">Delete</th>
+                    </tr>
                 </thead>
             </table>
             </div>
 
-
-            
-            <form id="form">
-            </form>
+        <form id="form">
+        </form>
         `
         this.createNewField()
     }
 
     async addSelect() {
-        const data = await this.api.getApiCollection()
-        for (const key of data.response) {
+        await this.setDataColletion()
+        for (const key of this.dataCollection) {
             const select = document.querySelector('#selectTableName')
             const option = document.createElement('option');
             option.setAttribute('id', key.collectionName)
@@ -111,7 +173,17 @@ export default class Fields{
 
     }
 
-    createNewField() {
+    async setDataColletion(){
+        try {
+            const {response} = await this.api.getApiCollection()
+            this.dataCollection = response
+            return response
+        } catch (error) {
+            this.msg('Ocorreu um erro inesperado tente novamente mais tarde!')
+        }
+    }
+
+    createNewField(inputValue = '', type = '') {
         // Criação do container principal
         const containerDiv = document.createElement("div");
         containerDiv.className = "create-field";
@@ -126,8 +198,13 @@ export default class Fields{
     
         
         const nameInput = document.createElement("input");
-        nameInput.setAttribute("id", "name");
         nameInput.setAttribute("type", "text");
+        if(inputValue){
+            nameInput.setAttribute('value', inputValue)
+            nameInput.setAttribute("id", "update");
+        }else{
+            nameInput.setAttribute("id", "post");
+        }
         
         // Criação do elemento para o tipo com classe Bootstrap
         const divType = document.createElement("div");
@@ -143,8 +220,8 @@ export default class Fields{
 
         const typeOptionSelected = document.createElement("option");
         typeOptionSelected.selected = true
-        typeOptionSelected.setAttribute("value", "");
-        typeOptionSelected.innerText = 'Escolha um tipo'
+        typeOptionSelected.setAttribute("value", type);
+        typeOptionSelected.innerText = type ? this.tranformType(type) : 'Escolha um tipo'
         typeSelect.appendChild(typeOptionSelected)
 
         const typeOptionStrg = document.createElement("option");
@@ -205,54 +282,85 @@ export default class Fields{
     }
 
     async createFields() {
-        const form = document.querySelector('#form');
+        try{
+            const form = document.querySelector('#form');
 
-        if (form.elements.length < 3) {
-            return this.messaging.msg('É necessário ter pelo menos um campo', false)
-        }
-
-
-        const elementosDoFormulario = form.elements;
-        const collectionName = document.querySelector('#selectTableName').value
-
-        let dados = {};
-        let cont = 0
-
-        for (let i = 0; i < elementosDoFormulario.length; i++) {
-            if (elementosDoFormulario[i].id === 'name') {
-                const name = i
-                const type = i + 1
-
-                if (!elementosDoFormulario[name].value || !elementosDoFormulario[type].value || !collectionName) {
-                    return this.messaging.msg('Campos Inválidos', false)
-                }
-                dados[cont] = [
-                    elementosDoFormulario[name].value,
-                    elementosDoFormulario[type].value
-                ];
-                cont += 1
+            if (form.elements.length < 3) {
+                return this.messaging.msg('É necessário ter pelo menos um campo', false)
             }
 
+
+            const rowsOfForm = form.children;
+            const collectionName = document.querySelector('#selectTableName').value
+
+            let dados = {};
+            for (let i = 0; i < rowsOfForm.length; i++) {
+                const elementOfRowForm = rowsOfForm[i]
+
+                const inputValue = elementOfRowForm.querySelector('input[type="text"]').value
+                const valueSelectOfTypes = elementOfRowForm.querySelector('select').value
+                const method = elementOfRowForm.querySelector('input[type="text"]').id
+                
+                if(!inputValue || !valueSelectOfTypes ){
+                    if(inputValue && !valueSelectOfTypes){
+                        return this.messaging.msg(`O campo de nome ${inputValue} precisa especificar um tipo !`)
+                    }
+                    else{
+                        return this.messaging.msg(`O ${i+1}º campo Não foi preenchido corretamente!`)
+                    }
+                }
+                dados[i] = {
+                    name: inputValue,
+                    type: valueSelectOfTypes,
+                    method: method,
+                    fieldName: this.currentValuesCollection?.fields[i]?.key,
+                    fieldRequired: true,
+                }
+            } 
+
+            let formErrors = false
+
+            for (let i in dados) {
+                const field = dados[i]
+                const {name, type, fieldName, fieldRequired, method} = field
+                let response = {}
+                if(method ===  'post'){
+                    response = await this.api.postApiTemplate(name, type, collectionName)
+                }else if(method ===  'update'){
+                    const newValues = {type: type, description: ''}
+                    response = await this.api.updateApiTemplate(
+                        collectionName,
+                        fieldName,
+                        name,
+                        fieldRequired,
+                        newValues
+                    )
+                }else{  
+                    return this.messaging.msg("Não foi possível completar sua modificação😢")
+                }
+                
+                if (!response || response.status !== 200) {
+                    formErrors = true
+                    const data = await response.json()
+                    if (data.errors) {
+                        this.messaging.msg(`Campo ${name}: ${data.errors}`, false)
+                    }else{
+                        this.messaging.msg(`Falha ao criar o campo ${name}`, false)
+                    }
+                    continue
+                }
+
+                this.messaging.msg(`O campo ${name} foi Criado/Alterado com sucesso`, true)
+                
+            }
+            if(!formErrors) setTimeout(() => {
+                return this.presetController.preset()
+            }, 1000)
+
+            await this.loadFields(collectionName)
+        }catch(error){
+            console.log(error);
+            this.messaging.msg(error.message, false)
         }
-        let response
-
-        for (let i in dados) {
-            const array = dados[i]
-            const name = array[0]
-            const type = array[1]
-            response = await this.api.postApiTemplate(name, type, collectionName)
-        }
-
-        if (!response || response.status !== 200) {
-            const data = await response.json()
-            if (data.errors) return this.messaging.msg(data.errors, false)
-
-            return this.messaging.msg("Falha ao cria campos", false)
-        }
-
-        this.messaging.msg("Campos criados com sucesso", true)
-        setTimeout(() => {
-            this.preset.preset()
-        }, 300)
     }
 }

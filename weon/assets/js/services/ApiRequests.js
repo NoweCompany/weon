@@ -193,6 +193,37 @@ export default class ApiRequests {
             }
     }
 
+    async updateApiTemplate(collectionName, fieldName, newFieldName, fieldRequired, newValues) {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+            
+            const myBody = JSON.stringify({
+                collectionName,
+                fieldName,
+                newFieldName,
+                fieldRequired: true,
+                newValues
+            })
+            const response = await fetch(`${this.apiUrl}/field`, {
+                method: 'PUT',
+
+                headers: headers,
+
+                body: myBody
+            })
+
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
     async getApiCollection(){
         try{
             this.loading.addLoading()
