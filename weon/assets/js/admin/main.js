@@ -15,7 +15,6 @@ import Token from '../services/Token.js'
 import Loading from '../services/Loading.js'
 
 window.addEventListener('load', async (e) => {
-    document.querySelector('#msg').innerHTML = ''
     const logado = new Logado()
     if (!(await logado.userLogado())) {
         return window.location.assign(`${urlWebsite}`)
@@ -35,7 +34,7 @@ const preset = new Presets(document.querySelector('.container'), messaging, api)
 const fields = new Fields(document.querySelector('.container'), messaging, api, preset)
 const trash = new Trash(document.querySelector('.container'), messaging, api)
 
-await preset.preset()
+await fields.fields()
 document.addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')

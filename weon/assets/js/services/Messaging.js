@@ -5,30 +5,34 @@ export default class Messaging {
 
   msg(msg, success) {
     if (!success) {
-        this.containerMsg.className = 'alert alert-danger d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
-        this.containerMsg.setAttribute('role', 'alert')
-        this.containerMsg.textContent = msg;
+      const newPopUp = document.createElement('div')
+      newPopUp.className = 'alert alert-danger d-flex mt-1 bottom-0 end-0 h5 mr-5';
+      newPopUp.setAttribute('role', 'alert')
+      newPopUp.innerHTML = msg;
+    
+      this.containerMsg.appendChild(newPopUp)
 
-        setTimeout(() => {
-            this.cleanMsg();
-        }, 3000);
+      setTimeout(() => {
+          newPopUp.remove()
+      }, 3000);
 
-        return;
+      return;
     } else {
-        this.containerMsg.className = 'alert alert-success d-flex mt-4 position-absolute bottom-0 end-0 h5 mr-5';
+      const newPopUp = document.createElement('div')
+      newPopUp.className = 'alert alert-success d-flex mt-1 bottom-0 end-0 h5 mr-5';
+      newPopUp.setAttribute('role', 'alert')
+      newPopUp.innerHTML = msg;
+      this.containerMsg.appendChild(newPopUp)
 
-        this.containerMsg.setAttribute('role', 'alert')
-        this.containerMsg.textContent = msg;
+      setTimeout(() => {
+          newPopUp.remove()
+      }, 3000);
 
-        setTimeout(() => {
-            this.cleanMsg();
-        }, 3000);
-
-        return;
+      return;
     }
   }
 
   cleanMsg() {
-      this.containerMsg.className = 'msg';
+      this.containerMsg.innerHTML = '';
   }
 }
