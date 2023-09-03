@@ -161,36 +161,36 @@ export default class ApiRequests {
     }
   
     async postApiTemplate(name, type, collectionName) {
-            try {
-                this.loading.addLoading()
-                const headers = new Headers({
-                    "Content-Type": "application/json",
-                    "authorization": `Bearer ${this.token}`
-                })
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
 
-                const myBody = JSON.stringify({
-                    collectionName: collectionName,
-                    fieldName: name,
-                    options: {
-                        type: type,
-                        description: "",
-                        required: true
-                    }
-                })
-                const response = await fetch(`${this.apiUrl}/field`, {
-                    method: 'POST',
+            const myBody = JSON.stringify({
+                collectionName: collectionName,
+                fieldName: name,
+                options: {
+                    type: type,
+                    description: "",
+                    required: true
+                }
+            })
+            const response = await fetch(`${this.apiUrl}/field`, {
+                method: 'POST',
 
-                    headers: headers,
+                headers: headers,
 
-                    body: myBody
-                })
+                body: myBody
+            })
 
-                this.loading.removeLoading()
-                return response
-            } catch (e) {
-                this.loading.removeLoading()
-                throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
-            }
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
     }
 
     async updateApiTemplate(collectionName, fieldName, newFieldName, fieldRequired, newValues) {
@@ -243,6 +243,28 @@ export default class ApiRequests {
             this.loading.removeLoading()
             return data
         }catch(error){
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
+    async download(collectionName){
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/download/${collectionName}`, {
+                method: 'POST',
+
+                headers: headers,
+            })
+            console.log(response);
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
             this.loading.removeLoading()
             throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }

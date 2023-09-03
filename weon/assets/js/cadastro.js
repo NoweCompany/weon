@@ -52,7 +52,9 @@ class Drive{
 
             const {btnCad, thead, tbody} = this.renderTableHtml(collectionName)
             const btnDelet = document.querySelector("#btnDelet")
+            const btnDownload = document.querySelector("#btnDownload")
             const childresOfTBody = tbody.children
+
             btnDelet.addEventListener('click', async (e) => {
                 try {
                     const checkboxes = document.querySelectorAll('.checkBoxDelet')
@@ -68,10 +70,24 @@ class Drive{
                 }
             })
 
+            btnDownload.addEventListener('click', async (e) => {
+                try {
+                    const response = await this.requests.download(collectionName)
+                    const data = await response.json()
+                    if(response.status !== 200 ){
+                        return this.msg(data.errors, false)
+                    }
+                
+                    window.location.assign(data.url)
+                } catch (error) {
+                    return this.msg('Ocorreu um erro inesperado 😢', false)
+                }
+            })
+
+
             //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
-            console.log(valuesCollection);
             this.buildTable(thead, tbody, fieldsCollection, valuesCollection)
         } catch (error) {    
             this.container.innerHTML = ''
@@ -89,6 +105,7 @@ class Drive{
             <div> 
             <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-4 ml-2">Adicionar</button>
             <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger btn-sm-1">Deletar</button>
+            <button id="btnDownload" class="btn btn-outline-secondary btn-sm-1">Download</button>
             </div>
         </div>
     </div>
@@ -180,7 +197,6 @@ class Drive{
 
                 const textTd = document.createTextNode(value);
                 td.appendChild(textTd);
-                console.log(key);
                 td.setAttribute('id', key)
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -383,6 +399,27 @@ class Requests{
         } catch (e) {
             this.removeLoading()
              throw new Error(e.message || 'Ocorreu um erro inesperado')
+        }
+    }
+
+    async download(collectionName){
+        try {
+            this.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/download/${collectionName}`, {
+                method: 'POST',
+
+                headers: headers,
+            })
+            this.removeLoading()
+            return response
+        } catch (e) {
+            this.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }
     }
 
