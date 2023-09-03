@@ -5,6 +5,10 @@
 
 - [Weon](https://weonsystem.netlify.app/pages/drive.html) um software web oferecido pela nowe para fazer a gestão e logística de documentos.
 
+## Login para visitantes 
+- Email: visitante@gmail.com
+- Senha: 123456
+
 ## Progresso - (Weon)
 - [x] Login
 - [x] Cadastro de predefinições
