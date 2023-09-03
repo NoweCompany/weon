@@ -39,10 +39,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
           <li><a class="nav-link scrollto" href="#services">Serviços</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contatos</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
           <li><a class="nav-link scrollto" href="patchnotes.html">Novidades</a></li>
           <li><a class="getstarted scrollto" href="https://nowecompany.com.br/weon">Software</a></li>
         </ul>
@@ -99,67 +99,28 @@
 
           </div>
 
-          <div class="col-lg-6">
-            <form action="https://formsubmit.co/nowecompany@gmail.com" method="post">
-              <input type="hidden" name="_next" value="https://nowe.netlify.app/thankyou">
-              <div class="row gy-4">
-                <div class="col-md-6">
-    
-                  <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" required>
+          <div class="col-lg-6 mt-4">
+            <form action="https://formsubmit.co/nowecompany@gmail.com" method="POST" />
+              <input type="hidden" name="_next" value="https://nowecompany.com.br/thankyou.html">
+
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" id="email"  name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Telefone" required>
+                    </div>
+                    <div class="col-md-12">
+                        <textarea class="form-control" name="mensagem" rows="6" placeholder="Deixe uma mensagem!"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" id="email"  name="email" class="form-control" placeholder="Email" required>
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Telefone" required>
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="mensagem" rows="6" placeholder="Deixe uma mensagem!"></textarea>
-                </div>
-                    <button type="submit" class="button">
-                      Pronto!
-                    </button>
-                  </section>
-                  </div>
-                  <input type="hidden" name="_captcha" value="false">
-                <style>
-                  .button{
-                    margin-left: 30%;
-                    justify-content: center;
-                    height: 42px;
-                    width: 300px;
-                    border: none;
-                    font-size: 18px;
-                    font-weight: thin;
-                    text-align: center;
-                    color: rgb(255, 255, 255);
-                    border-radius: 10px;
-                    cursor: pointer;
-                    background: cornflowerblue;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    -webkit-transition-duration: 0.3s;
-                    transition-duration: 0.3s;
-                    -webkit-transition-property: box-shadow, transform;
-                    transition-property: box-shadow, transform;
-
-                  }
-
-                  .button:hover, .btn:focus, .btn:active{
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-                    -webkit-transform: scale(1.1);
-                    transform: scale(1.1);
-
-                  }
-
-                </style>
-
-              </div>
+                <input type="hidden" name="_captcha" value="false">
             </form>
-
-          </div>
+        </div>
 
         </div>
 
@@ -191,7 +152,9 @@
           <div class="col-lg-2 col-6 footer-links">
             <h4>Links</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="index.html">Página inicial</a></li>
+              <li><i class="bi bi-phone"></i> <a href="Contato.html">Contato</a></li>
+              <li><i class="bi bi-instagram"></i> <a href="https://www.instagram.com/nowecompany/" target="_blank"> Instagram</a></li>
+              <li><i class="bi bi-github"></i> <a href="https://github.com/nowecompany" target="_blank"> Github</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="/assets/cube/cube.html">...</a></li>
             </ul>
           </div>
