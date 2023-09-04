@@ -107,35 +107,26 @@ export default class Fields{
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
         <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-
-
-        <div class="titulo">
-            <h1 id="tituloPrincipal" class="display-6">Campos</h1>
+            <div class="titulo">
+                <h1 id="tituloPrincipal" class="display-6">Campos</h1>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="form-group me-3">
+                    <select id="selectTableName" class="form-select">
+                        <option value="" selected></option>
+                    </select>
+                </div>
+                <div class="newfield me-3">
+                    <button id="newField" class="btn btn-outline-primary">Criar Campo</button>
+                </div>
+                <div class="botãocreate">
+                    <button id="createField" class="btn btn-outline-success">Salvar</button>
+                </div>
+            </div>
         </div>
-        <div class="newfield">
-            <button id="newField" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Criar Campos
-            </button>
-        </div>
+    </div>
 
-        <!-- Botão select tipo-->  
-        <div class="form-group">
-            <select id="selectTableName" class="form-select">
-                <option value="" selected></option>
-            </select>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-
-            <!-- Botão Salvar-->
-
-            <div class="botãocreate">
-                <button id="createField" class="btn btn-success">
-                <i class="fas fa-save"></i> Salvar
-            </button>
-        </div>
+           
 
         <!-- bloco   form-->  
 
