@@ -168,30 +168,7 @@
       .msg{
         display: none;
       }
-      table {
-        border-collapse: collapse;
-        width: 70%;
-        margin-bottom: 1rem;
-        color: #000000;
-      }
-      
-      th, td {
-        text-align: center;
-        padding: .5rem;
-        
-      }
-      /* nome do cabeçalho  */
-      th{
-        background-color: #4469aa;
-        color: rgb(255, 255, 255);   
-        
-      }
-      
-      /* background linha */
-      tr {
-        background-color: #efefef;
-      }
-  
+    
       /* Form preset */
   
       .cont-btn-form-preset{

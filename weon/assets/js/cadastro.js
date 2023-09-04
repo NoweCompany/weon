@@ -105,7 +105,8 @@ class Drive{
             <div> 
             <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-4 ml-2">Adicionar</button>
             <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger btn-sm-1">Deletar</button>
-            <button id="btnDownload" class="btn btn-outline-secondary btn-sm-1">Download</button>
+            <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
+
             </div>
         </div>
     </div>

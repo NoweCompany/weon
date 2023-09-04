@@ -110,15 +110,15 @@ li {
   flex-direction: column;
   width: 70%;
   max-height: 300px;
-  /* Altura máxima para a rolagem vertical */
+
 }
 
 .table-container {
   overflow-x: auto;
   /* Adiciona rolagem horizontal quando necessário */
   max-width: 100%;
-  border-collapse: separate;
-  border-spacing: 30px; /* Define o espaço entre as células */
+
+  border-spacing: 20px; /* Define o espaço entre as células */
 }
 
 /* Form preset */
@@ -185,12 +185,6 @@ li {
 } 
 
 
-#newField {
-  text-align: center;
-  font-size: 20px;
-  margin-top: -1%;
-  float: right;
-}
 
 /* Media queries para telas menores */
 @media (max-width: 1681px)  {
@@ -508,35 +502,25 @@ li {
 
 .table-container {
   border-collapse: separate;
-  /* Separação das bordas das células */
   border-spacing: 10px;
-  /* Espaçamento zero entre as células */
+ 
   max-height: 500px;
-  /* Altura máxima para a rolagem vertical */
+
   overflow: auto;
   position: relative;
-  /* Posição relativa para posicionamento do pseudo-elemento */
+ 
 
 }
 
-.table-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -2px;
-  /* Posição à esquerda da tabela */
-  height: 100%;
-  width: 2px;
-  /* Largura da linha vertical */
-  background-color: #000000;
-  /* Cor da linha vertical */
-}
+
 
 .table-container table {
   width: 100%;
   margin-bottom: 0;
   color: #000000;
   padding: 3px;
+  border-collapse: separate;
+  border-spacing: 3px;
 }
 
 .table-container th,
@@ -544,6 +528,7 @@ li {
   text-align: center;
   font-size: 15px;
   padding: .5rem;
+  
 }
 
 /* nome do cabeçalho */
