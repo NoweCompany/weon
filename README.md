@@ -1,9 +1,9 @@
 <div align="center"><img src="./assets/img/slogan.jpg" width="100%" aling-item="center"/></div>
 
 # Nesse repositório você encontra:
-- [Nowe](nowecompany.com.br) uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirino, essa empresa tem como objetivo vender softwares de gestão e logística. 
+- [Nowe](https//:nowecompany.com.br) uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirino, essa empresa tem como objetivo vender softwares de gestão e logística. 
 
-- [Weon](nowecompany.com.br/weon) um software web oferecido pela nowe para fazer a gestão e logística de documentos.
+- [Weon](https//:nowecompany.com.br/weon) um software web oferecido pela nowe para fazer a gestão e logística de documentos.
 
 ## Login para visitantes 
 - Email: visitante@nowe.com
