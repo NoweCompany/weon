@@ -70,7 +70,7 @@ export default class Presets {
     rederFormPreset() {
         this.container.innerHTML = `
         <div class="container">
-    <form id="formPreset" class="bg-white p-5 rounded-lg">
+        <form id="formPreset" class="bg-white p-5 rounded rounded-10">
     <h1 class="text-center mb-4">Criar Predefinição</h1>
         <div class="form-group">
             <label for="name">Nome</label>
@@ -153,29 +153,45 @@ export default class Presets {
                     tr.appendChild(thfield)
                 }
 
-                const tdEdit = document.createElement('td')
-                tdEdit.setAttribute('id', collectionName + '_edit')
-                tdEdit.addEventListener('click', e => this.editPreset(e))
+                // Adicione ícones do FontAwesome aos elementos tdEdit e tdDelet
+                const tdEdit = document.createElement('td');
+                tdEdit.setAttribute('id', collectionName + '_edit');
+                tdEdit.addEventListener('click', (e) => this.editPreset(e));
 
-                const tdDelet = document.createElement('td')
-                tdDelet.setAttribute('id', collectionName + '_delete'),
-                tdDelet.addEventListener('click', e => {
-                    const popUpAlert = document.querySelector('.popupConfirmation')
-                    if(popUpAlert) this.showPopUp(popUpAlert, e)
-                })
+                const tdDelet = document.createElement('td');
+                tdDelet.setAttribute('id', collectionName + '_delete');
+                tdDelet.addEventListener('click', (e) => {
+                const popUpAlert = document.querySelector('.popupConfirmation');
+                if (popUpAlert) this.showPopUp(popUpAlert, e);
+                });
 
-                tdEdit.className = 'editPreset'
-                tdDelet.className = 'deletPreset'
+                // Criar elementos de ícone para edição e exclusão
+                const editIcon = document.createElement('i');
+                editIcon.className = 'fas fa-edit'; // Classe do ícone de edição do FontAwesome
 
-                const tdTextEdit = document.createTextNode('Editar')
-                const tdTextDelet = document.createTextNode('Apagar')
+                const deletIcon = document.createElement('i');
+                deletIcon.className = 'fas fa-trash-alt'; // Classe do ícone de exclusão do FontAwesome
 
-                tdDelet.appendChild(tdTextDelet)
-                tdEdit.appendChild(tdTextEdit)
+                // Adicionar ícones aos elementos tdEdit e tdDelet
+                tdEdit.appendChild(editIcon);
+                tdDelet.appendChild(deletIcon);
 
-                tr.appendChild(tdEdit)
-                tr.appendChild(tdDelet)
+                // Adicionar texto às células (Editar e Apagar)
+                const tdTextEdit = document.createTextNode('');
+                const tdTextDelet = document.createTextNode('');
 
+                // Adicionar texto às células tdEdit e tdDelet (opcional, se desejar)
+                tdEdit.appendChild(tdTextEdit);
+                tdDelet.appendChild(tdTextDelet);
+
+                // Definir classes CSS para as células tdEdit e tdDelet (se necessário)
+                tdEdit.className = 'editPreset';
+                tdDelet.className = 'deletPreset';
+
+                // Adicione as células com ícones e texto à linha da tabela
+                // Suponha que você já tenha uma linha (tr) criada anteriormente
+                tr.appendChild(tdEdit);
+                tr.appendChild(tdDelet);
             }
         } catch (error) {
             const msgError = error.message

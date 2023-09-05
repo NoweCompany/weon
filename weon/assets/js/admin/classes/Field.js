@@ -130,7 +130,7 @@ export default class Fields{
 
         <!-- bloco   form-->  
 
-        <div class="table-responsive">
+
 
             <div class="table-responsive mt-4">
             <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
@@ -143,7 +143,7 @@ export default class Fields{
                     </tr>
                 </thead>
             </table>
-            </div>
+          
 
         <form id="form">
         </form>
