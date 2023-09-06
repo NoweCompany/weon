@@ -77,17 +77,20 @@ export default class Fields{
     }
 
     events() {
-        this.container.addEventListener('click', e => {
+        this.container.addEventListener('click', async e => {
         let id = e.target.getAttribute('id')
+        console.log(id);
             
         switch (id) {
             case 'createField':
-            this.createFields();
+                await this.createFields();
             break;
     
             case 'newField':
-            this.createNewField();
+                this.createNewField();
             break;
+            default:
+                return
         }
         })
     }
@@ -192,9 +195,9 @@ export default class Fields{
         nameInput.setAttribute("type", "text");
         if(inputValue){
             nameInput.setAttribute('value', inputValue)
-            nameInput.setAttribute("id", "update");
+            nameInput.setAttribute("class", "update");
         }else{
-            nameInput.setAttribute("id", "post");
+            nameInput.setAttribute("class", "post");
         }
         
         // Criação do elemento para o tipo com classe Bootstrap
@@ -290,7 +293,7 @@ export default class Fields{
 
                 const inputValue = elementOfRowForm.querySelector('input[type="text"]').value
                 const valueSelectOfTypes = elementOfRowForm.querySelector('select').value
-                const method = elementOfRowForm.querySelector('input[type="text"]').id
+                const method = elementOfRowForm.querySelector('input[type="text"]').className
                 
                 if(!inputValue || !valueSelectOfTypes ){
                     if(inputValue && !valueSelectOfTypes){

@@ -37,12 +37,12 @@ const trash  = new Trash(document.querySelector('.container'), messaging, api)
 fields.presetController = preset
 preset.fieldController = fields
 
-await preset.preset()
-document.addEventListener('click', async (e) => {
+document.querySelector('.modal-body').addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')
 
     if (id === 'predefinicao') await preset.preset()
     else if (id === 'campos')  await fields.fields()
     else if (id === 'lixeira') await trash.trash()
+    else return
 })

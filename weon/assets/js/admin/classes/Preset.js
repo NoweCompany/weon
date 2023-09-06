@@ -9,7 +9,6 @@ export default class Presets {
     }
 
     set fieldController(instanceField){
-        console.log(instanceField);
         if(instanceField){
             return this._fieldController = instanceField
         }
