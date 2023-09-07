@@ -160,7 +160,7 @@ export default class ApiRequests {
         }
     }
   
-    async postApiTemplate(name, type, collectionName) {
+    async postApiTemplate(name, type, collectionName, fieldRequired) {
         try {
             this.loading.addLoading()
             const headers = new Headers({
@@ -174,7 +174,7 @@ export default class ApiRequests {
                 options: {
                     type: type,
                     description: "",
-                    required: true
+                    required: fieldRequired
                 }
             })
             const response = await fetch(`${this.apiUrl}/field`, {

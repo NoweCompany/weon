@@ -9,7 +9,6 @@ export default class Presets {
     }
 
     set fieldController(instanceField){
-        console.log(instanceField);
         if(instanceField){
             return this._fieldController = instanceField
         }
@@ -70,7 +69,7 @@ export default class Presets {
     rederFormPreset() {
         this.container.innerHTML = `
         <div class="container">
-    <form id="formPreset" class="bg-white p-5 rounded-lg">
+        <form id="formPreset" class="bg-white p-5 rounded rounded-10">
     <h1 class="text-center mb-4">Criar Predefinição</h1>
         <div class="form-group">
             <label for="name">Nome</label>
@@ -153,29 +152,43 @@ export default class Presets {
                     tr.appendChild(thfield)
                 }
 
-                const tdEdit = document.createElement('td')
-                tdEdit.setAttribute('id', collectionName + '_edit')
-                tdEdit.addEventListener('click', e => this.editPreset(e))
+                const tdEdit = document.createElement('td');
+                tdEdit.setAttribute('id', collectionName + '_edit');
+                tdEdit.addEventListener('click', (e) => this.editPreset(e));
 
-                const tdDelet = document.createElement('td')
-                tdDelet.setAttribute('id', collectionName + '_delete'),
-                tdDelet.addEventListener('click', e => {
-                    const popUpAlert = document.querySelector('.popupConfirmation')
-                    if(popUpAlert) this.showPopUp(popUpAlert, e)
-                })
+                const tdDelet = document.createElement('td');
+                tdDelet.setAttribute('id', collectionName + '_delete');
+                tdDelet.addEventListener('click', (e) => {
+                const popUpAlert = document.querySelector('.popupConfirmation');
+                if (popUpAlert) this.showPopUp(popUpAlert, e);
+                });
 
-                tdEdit.className = 'editPreset'
-                tdDelet.className = 'deletPreset'
+          
+                const editIcon = document.createElement('i');
+                editIcon.className = 'fas fa-edit';
 
-                const tdTextEdit = document.createTextNode('Editar')
-                const tdTextDelet = document.createTextNode('Apagar')
+                const deletIcon = document.createElement('i');
+                deletIcon.className = 'fas fa-trash-alt';
 
-                tdDelet.appendChild(tdTextDelet)
-                tdEdit.appendChild(tdTextEdit)
+           
+                tdEdit.appendChild(editIcon);
+                tdDelet.appendChild(deletIcon);
 
-                tr.appendChild(tdEdit)
-                tr.appendChild(tdDelet)
+         
+                const tdTextEdit = document.createTextNode('');
+                const tdTextDelet = document.createTextNode('');
 
+            
+                tdEdit.appendChild(tdTextEdit);
+                tdDelet.appendChild(tdTextDelet);
+
+              
+                tdEdit.className = 'editPreset';
+                tdDelet.className = 'deletPreset';
+
+            
+                tr.appendChild(tdEdit);
+                tr.appendChild(tdDelet);
             }
         } catch (error) {
             const msgError = error.message
@@ -194,7 +207,7 @@ export default class Presets {
         const el = e.target
         const collectionName = el.id.split('_')[0]
 
-        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida ${collectionName}`
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida "${collectionName}"`
         
         btnClosePopUp.addEventListener('click', (e) => {
             popUpAlert.classList.remove("show")

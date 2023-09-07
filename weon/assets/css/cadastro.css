@@ -90,17 +90,17 @@
 
 
   #form {
-    width: 100%; /* Use full width of the container */
-    max-width: 800px; /* Set a maximum width to prevent excessive stretching */
-    margin: 0 auto; /* Center the form horizontally */
+    width: 100%; 
+    max-width: 800px; 
+    margin: 0 auto; 
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Divide into 4 columns of equal width */
-    gap: 10px; /* Spacing between the fields */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    border: 1px solid #dee2e6; /* Add a minimal border */
-    border-radius: 5px; /* Slight border radius for a softer look */
+    border: 1px solid #dee2e6; 
+    border-radius: 10px; 
     padding: 5%;
 }
   
@@ -132,7 +132,6 @@
   }
   
 
-
   .linha {
     display: flex;
     flex-direction: column;
@@ -162,7 +161,10 @@
     border-collapse: separate;
     border-spacing: 5px;
     border-radius: 10px;
+  }
 
+  tr td:first-child:hover {
+    transform: none; /* Remova a transformação no hover */
   }
   
   th,
@@ -170,7 +172,7 @@
     text-align: left;
     padding: .5rem;
     position: relative;
-    transition: transform 0.3s, box-shadow 0.3s; /* Trocamos a transição para a sombra da caixa */
+    transition: transform 0.3s;
     cursor: pointer;
   }
   
@@ -181,19 +183,29 @@
     font-weight: 300;
   }
   
+  /* Aplicar cores alternadas às linhas da tabela */
+  tr:nth-child(even) {
+    background-color: #ffffff; /* Cor da linha para índices pares */
+
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff; /* Cor da linha para índices ímpares */
+
+  }
+  
   tr {
     transition: transform 0.3s;
   }
   
   tr:hover {
-
     transform: scale(1.02);
     z-index: 1;
   }
   
   tr:hover td {
     color: #4179d2;
-}
+  }
 
 
   #post {
@@ -233,3 +245,6 @@
   width: 20px;
  }
 
+.pop{
+  border-radius: 20px;
+}

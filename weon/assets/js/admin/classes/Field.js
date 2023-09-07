@@ -77,17 +77,20 @@ export default class Fields{
     }
 
     events() {
-        this.container.addEventListener('click', e => {
+        this.container.addEventListener('click', async e => {
         let id = e.target.getAttribute('id')
+        console.log(id);
             
         switch (id) {
             case 'createField':
-            this.createFields();
+                await this.createFields();
             break;
     
             case 'newField':
-            this.createNewField();
+                this.createNewField();
             break;
+            default:
+                return
         }
         })
     }
@@ -106,48 +109,45 @@ export default class Fields{
     renderFields() {
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
-        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <div class="titulo">
-                <h1 id="tituloPrincipal" class="display-6">Campos</h1>
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="form-group me-3">
-                    <select id="selectTableName" class="form-select">
-                        <option value="" selected></option>
-                    </select>
+            <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                <div class="titulo">
+                    <h1 id="tituloPrincipal" class="display-6">Campos</h1>
                 </div>
-                <div class="newfield me-3">
-                    <button id="newField" class="btn btn-outline-primary">Criar Campo</button>
-                </div>
-                <div class="botãocreate">
-                    <button id="createField" class="btn btn-outline-success">Salvar</button>
+                <div class="d-flex align-items-center">
+                    <div class="form-group me-3">
+                        <select id="selectTableName" class="form-select">
+                            <option value="" selected></option>
+                        </select>
+                    </div>
+                    <div class="newfield me-3">
+                        <button id="newField" class="btn btn-outline-primary">Criar Campo</button>
+                    </div>
+                    <div class="botãocreate">
+                        <button id="createField" class="btn btn-outline-success">Salvar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-           
-
-        <!-- bloco   form-->  
-
+    
+       
+    
+        <!-- bloco form-->  
         <div class="table-responsive">
-
             <div class="table-responsive mt-4">
-            <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
-                <thead class="text-center">
-                    <tr>
-                        <th class="fw-normal">Nome</th>
-                        <th class="fw-normal">Tipo</th>
-                        <th class="fw-normal">Obrigatório</th>
-                        <th class="fw-normal">Delete</th>
-                    </tr>
-                </thead>
-            </table>
+                <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="fw-normal">Nome</th>
+                            <th class="fw-normal">Tipo</th>
+                            <th class="fw-normal">Obrigatório</th>
+                            <th class="fw-normal">Delete</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-
-        <form id="form">
-        </form>
-        `
+            <form id="form"></form>
+        </div>
+        `;
         this.createNewField()
     }
 
@@ -174,7 +174,7 @@ export default class Fields{
         }
     }
 
-    createNewField(inputValue = '', type = '') {
+    createNewField(inputValue = '', type = '', isRequired = false) {
         // Criação do container principal
         const containerDiv = document.createElement("div");
         containerDiv.className = "create-field";
@@ -192,14 +192,14 @@ export default class Fields{
         nameInput.setAttribute("type", "text");
         if(inputValue){
             nameInput.setAttribute('value', inputValue)
-            nameInput.setAttribute("id", "update");
+            nameInput.setAttribute("class", "update");
         }else{
-            nameInput.setAttribute("id", "post");
+            nameInput.setAttribute("class", "post");
         }
         
         // Criação do elemento para o tipo com classe Bootstrap
         const divType = document.createElement("div");
-        divType.className = "divName";
+        divType.className = "mb-4";
         
         const typeLabel = document.createElement("label");
         typeLabel.setAttribute("for", "type");
@@ -219,6 +219,23 @@ export default class Fields{
         typeOptionStrg.setAttribute("value", "string");
         typeOptionStrg.innerText = 'Texto pequeno'
         typeSelect.appendChild(typeOptionStrg)
+
+        // Criação da caixa de seleção (checkbox) e rótulo
+        const isRequiredCheckboxLabel = document.createElement("label");
+        isRequiredCheckboxLabel.className = "form-check-label"; // Classe para rótulo de checkbox Bootstrap
+        
+
+        const isRequiredCheckbox = document.createElement("input");
+        isRequiredCheckbox.setAttribute("type", "checkbox");
+        isRequiredCheckbox.className = "form-check-input"; // Classe para a caixa de seleção Bootstrap
+        isRequiredCheckbox.setAttribute("id", "isRequired");
+        if (isRequired) {
+            isRequiredCheckbox.checked = true;
+        }
+    
+        // Adicionando a caixa de seleção ao rótulo e o rótulo à divType
+        isRequiredCheckboxLabel.appendChild(isRequiredCheckbox);
+        divType.appendChild(isRequiredCheckboxLabel);
 
         const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "bool");
@@ -288,9 +305,10 @@ export default class Fields{
             for (let i = 0; i < rowsOfForm.length; i++) {
                 const elementOfRowForm = rowsOfForm[i]
 
+                const validationCheckbox = elementOfRowForm.querySelector('#isRequired');
                 const inputValue = elementOfRowForm.querySelector('input[type="text"]').value
                 const valueSelectOfTypes = elementOfRowForm.querySelector('select').value
-                const method = elementOfRowForm.querySelector('input[type="text"]').id
+                const method = elementOfRowForm.querySelector('input[type="text"]').className
                 
                 if(!inputValue || !valueSelectOfTypes ){
                     if(inputValue && !valueSelectOfTypes){
@@ -300,12 +318,19 @@ export default class Fields{
                         return this.messaging.msg(`O ${i+1}º campo Não foi preenchido corretamente!`)
                     }
                 }
+
+                 // Verifica se a caixa de seleção está marcada e se o campo está vazio
+                 console.log(validationCheckbox)
+                 if (validationCheckbox.checked && inputValue.trim() === '') {
+                     return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
+                 }
+
                 dados[i] = {
                     name: inputValue,
                     type: valueSelectOfTypes,
                     method: method,
                     fieldName: this.currentValuesCollection?.fields[i]?.key,
-                    fieldRequired: true,
+                    fieldRequired: validationCheckbox.checked,
                 }
             } 
 
@@ -316,7 +341,7 @@ export default class Fields{
                 const {name, type, fieldName, fieldRequired, method} = field
                 let response = {}
                 if(method ===  'post'){
-                    response = await this.api.postApiTemplate(name, type, collectionName)
+                    response = await this.api.postApiTemplate(name, type, collectionName, fieldRequired)
                 }else if(method ===  'update'){
                     const newValues = {type: type, description: ''}
                     response = await this.api.updateApiTemplate(
@@ -350,7 +375,6 @@ export default class Fields{
 
             await this.loadFields(collectionName)
         }catch(error){
-            console.log(error);
             this.messaging.msg(error.message, false)
         }
     }

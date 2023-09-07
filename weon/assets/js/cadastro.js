@@ -274,8 +274,12 @@ class Drive{
                 const input = document.createElement('input')
                 input.setAttribute('id', key)
                 
-                if(typeInput !== 'checkbox') input.setAttribute('required', required)
-                input.setAttribute('type', typeInput)
+                if (typeInput !== 'checkbox') {
+                    input.setAttribute('required', required);
+                }
+    
+                input.setAttribute('type', typeInput);
+
                 if(type === 'int') input.setAttribute('step', '1')
                 if(type === 'double') input.setAttribute('step', '0.1')
                 if(this.isEdit && this.valuesPreset[key]){
@@ -290,6 +294,13 @@ class Drive{
                 const label = document.createElement('label')
                 label.setAttribute('for', key)
                 label.innerText = key
+
+                if (required) {
+                    const asterisk = document.createElement('span');
+                    asterisk.innerText = ' *';
+                    asterisk.style.color = 'red'; // Defina a cor do asterisco como vermelha ou outra de sua escolha
+                    label.appendChild(asterisk);
+                }
 
                 containerInputLabel.appendChild(label)
                 containerInputLabel.appendChild(input)
