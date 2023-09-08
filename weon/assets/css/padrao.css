@@ -232,7 +232,7 @@ li {
 }
 /* Estilização do trilho da barra de rolagem */
 ::-webkit-scrollbar-track {
-  background-color: #ffffff; /* Cor de fundo do trilho */
+  background-color: #ffffff00; /* Cor de fundo do trilho */
 
 }
 /* Estilização do "polegar" da barra de rolagem */

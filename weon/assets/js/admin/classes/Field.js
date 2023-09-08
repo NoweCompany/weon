@@ -43,7 +43,7 @@ export default class Fields{
     async loadFields(collectionSelected){
         const form = document.querySelector("#form");
         form.innerHTML = `
-            <table class="table table-striped rounded mb-0" id="titulotabela">
+            <table class="table table-striped" id="titulotabela">
                 <thead class="text-center">
                     <tr>
                         <th class="fw-normal">Nome</th>
@@ -186,19 +186,22 @@ export default class Fields{
         
         const nameInput = document.createElement("input");
         nameInput.setAttribute("type", "text");
-        if(inputValue){
-            nameInput.setAttribute('value', inputValue)
-            nameInput.setAttribute("class", "update");
-        }else{
-            nameInput.setAttribute("class", "post");
+        
+        if (inputValue) {
+            nameInput.setAttribute('value', inputValue);
+            nameInput.classList.add("update", "form-control"); 
+        } else {
+            nameInput.classList.add("post", "form-control"); 
         }
+        
         
         // Criação do elemento para o tipo com classe Bootstrap
         const tdType = document.createElement("td");
         tdType.className = "mb-4";
         
         const typeSelect = document.createElement("select");
-        typeSelect.classList.add("form-select", "w-50"); // Adicione a classe "w-50" para definir a largura do select
+        typeSelect.classList.add("form-select");
+        typeSelect.classList.add("select1"); 
         
 
         const typeOptionSelected = document.createElement("option");
@@ -247,9 +250,10 @@ export default class Fields{
         const tdBtnDelete = document.createElement("td");
         tdBtnDelete.className = "mb-4";
         const deleteButton = document.createElement("button");
-        deleteButton.className = "btn-delete"; // Usando a classe personalizada para estilização
-        deleteButton.setAttribute("id", "deleteButton"); // Adicione o id desejado, por exemplo, "deleteButton";
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+        deleteButton.className = "btn btn-outline-danger";
+        deleteButton.setAttribute("id", "deleteButton"); 
+        deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+
         
     
         
