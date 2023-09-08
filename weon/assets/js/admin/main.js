@@ -37,6 +37,7 @@ const trash  = new Trash(document.querySelector('.container'), messaging, api)
 fields.presetController = preset
 preset.fieldController = fields
 
+await preset.preset()
 document.querySelector('.modal-body').addEventListener('click', async (e) => {
     const el = e.target
     const id = el.getAttribute('id')

@@ -38,11 +38,12 @@ export default class Presets {
     }
 
     event() {
-        document.addEventListener('click', (e) => {
+        removeEventListener('click', document)
+        document.addEventListener('click', async (e) => {
             const el = e.target
             const id = el.getAttribute('id')
             if (id === 'createPreset') this.rederFormPreset()
-            if (id === 'cancelPresetForm') this.preset()
+            else if (id === 'cancelPresetForm') await this.preset()
         })  
     }
 
@@ -110,11 +111,14 @@ export default class Presets {
         try {
             
             const data = await this.api.getApiPresets()
-            if(data.length <= 0) {
-                this.messagin.msg('Não há nehuma tabela crida')
-            }
+            
             this.rederTable()
             this.event()
+
+            if(!data?.response) {
+                this.messaging.msg(data)
+                return
+            }
 
             const tbody = document.querySelector('#tbody')
             const thead = document.querySelector('#thead')

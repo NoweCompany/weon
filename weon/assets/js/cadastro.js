@@ -240,7 +240,6 @@ class Drive{
 
                     valuesForm[element.id] = valueInput
                 }
-
                 if(!this.isEdit){
                     const response = await this.requests.postApiValues(presetSelected, [valuesForm])
                 }else{
@@ -267,7 +266,6 @@ class Drive{
             response.fields.reverse().forEach((field, index, array) => {
                 const containerInputLabel = document.createElement('div')
                 containerInputLabel.classList.add('containerInputLabel')
-
                 const {key, type, required} = field
                 const typeInput = this.transformType(type)
 
@@ -275,7 +273,9 @@ class Drive{
                 input.setAttribute('id', key)
                 
                 if (typeInput !== 'checkbox') {
-                    input.setAttribute('required', required);
+                    if(required){
+                        input.setAttribute('required', true);
+                    }
                 }
     
                 input.setAttribute('type', typeInput);

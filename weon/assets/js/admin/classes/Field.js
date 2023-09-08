@@ -32,12 +32,30 @@ export default class Fields{
             this.loadFields(namePreset)
             const optionNamePreset = document.querySelector(`#${namePreset}`)
             optionNamePreset.selected = true
+        }else{
+            const select =  document.querySelector("#selectTableName")
+            
+            select.children[1].selected = true
+            this.loadFields(select.children[1].value)
         }
     }
 
     async loadFields(collectionSelected){
         const form = document.querySelector("#form");
-        form.innerHTML = ''
+        form.innerHTML = `
+            <table class="table table-striped rounded mb-0" id="titulotabela">
+                <thead class="text-center">
+                    <tr>
+                        <th class="fw-normal">Nome</th>
+                        <th class="fw-normal">Tipo</th>
+                        <th class="fw-normal">Obrigatório</th>
+                        <th class="fw-normal">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody" id="tbody">
+                </tbody>
+            </table>
+        `
         await this.setDataColletion()
         this.dataCollection.forEach(collection => {
             if(collection.collectionName === collectionSelected){
@@ -46,7 +64,7 @@ export default class Fields{
                     this.createNewField()
                 }else{
                     collection.fields.forEach(field => {    
-                        this.createNewField(field.key, field.type)
+                        this.createNewField(field.key, field.type, field.required)
                     })
                 }
             }
@@ -79,7 +97,6 @@ export default class Fields{
     events() {
         this.container.addEventListener('click', async e => {
         let id = e.target.getAttribute('id')
-        console.log(id);
             
         switch (id) {
             case 'createField':
@@ -128,27 +145,10 @@ export default class Fields{
                 </div>
             </div>
         </div>
-    
-       
-    
-        <!-- bloco form-->  
-        <div class="table-responsive">
-            <div class="table-responsive mt-4">
-                <table class="table table-dark table-striped rounded mb-0" id="titulotabela">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="fw-normal">Nome</th>
-                            <th class="fw-normal">Tipo</th>
-                            <th class="fw-normal">Obrigatório</th>
-                            <th class="fw-normal">Delete</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <form id="form"></form>
-        </div>
+        
+        <form id="form">
+        </form>
         `;
-        this.createNewField()
     }
 
     async addSelect() {
@@ -176,16 +176,12 @@ export default class Fields{
 
     createNewField(inputValue = '', type = '', isRequired = false) {
         // Criação do container principal
-        const containerDiv = document.createElement("div");
-        containerDiv.className = "create-field";
+        const trField = document.createElement("tr");
+        trField.className = "create-field";
         
         // Criação do elemento para o nome com classe Bootstrap
-        const divName = document.createElement("div");
-        divName.className = "mb-4";
-
-        
-        const nameLabel = document.createElement("label");
-        nameLabel.setAttribute("for", "name");
+        const tdName = document.createElement("td");
+        tdName.className = "mb-4";
     
         
         const nameInput = document.createElement("input");
@@ -198,12 +194,8 @@ export default class Fields{
         }
         
         // Criação do elemento para o tipo com classe Bootstrap
-        const divType = document.createElement("div");
-        divType.className = "mb-4";
-        
-        const typeLabel = document.createElement("label");
-        typeLabel.setAttribute("for", "type");
-
+        const tdType = document.createElement("td");
+        tdType.className = "mb-4";
         
         const typeSelect = document.createElement("select");
         typeSelect.classList.add("form-select", "w-50"); // Adicione a classe "w-50" para definir a largura do select
@@ -221,9 +213,8 @@ export default class Fields{
         typeSelect.appendChild(typeOptionStrg)
 
         // Criação da caixa de seleção (checkbox) e rótulo
-        const isRequiredCheckboxLabel = document.createElement("label");
-        isRequiredCheckboxLabel.className = "form-check-label"; // Classe para rótulo de checkbox Bootstrap
-        
+        const tdRequired = document.createElement("td");
+        tdRequired.className = "mb-4";
 
         const isRequiredCheckbox = document.createElement("input");
         isRequiredCheckbox.setAttribute("type", "checkbox");
@@ -232,10 +223,6 @@ export default class Fields{
         if (isRequired) {
             isRequiredCheckbox.checked = true;
         }
-    
-        // Adicionando a caixa de seleção ao rótulo e o rótulo à divType
-        isRequiredCheckboxLabel.appendChild(isRequiredCheckbox);
-        divType.appendChild(isRequiredCheckboxLabel);
 
         const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "bool");
@@ -257,7 +244,8 @@ export default class Fields{
         typeOptionDate.innerText = 'Data'
         typeSelect.appendChild(typeOptionDate)
 
-
+        const tdBtnDelete = document.createElement("td");
+        tdBtnDelete.className = "mb-4";
         const deleteButton = document.createElement("button");
         deleteButton.className = "btn-delete"; // Usando a classe personalizada para estilização
         deleteButton.setAttribute("id", "deleteButton"); // Adicione o id desejado, por exemplo, "deleteButton";
@@ -268,25 +256,27 @@ export default class Fields{
         deleteButton.onclick = (e) => {
             e.preventDefault()
             if (form.elements.length > 3) {
-                return containerDiv.remove()
+                return trField.remove()
             } else {
                 return this.messaging.msg('É necessário ter pelo menos um campo', false)
             }
 
         };
 
-        divName.appendChild(nameLabel);
-        divName.appendChild(nameInput);
+        tdName.appendChild(nameInput);
+        tdType.appendChild(typeSelect);
+        tdRequired.appendChild(isRequiredCheckbox)
+        tdBtnDelete.appendChild(deleteButton)
 
-        divType.appendChild(typeLabel);
-        divType.appendChild(typeSelect);
+        trField.appendChild(tdName);
+        trField.appendChild(tdType);
+        trField.appendChild(tdRequired)
+        trField.appendChild(tdBtnDelete)
 
-        containerDiv.appendChild(divName);
-        containerDiv.appendChild(divType);
-        containerDiv.appendChild(deleteButton)
-
-        const form = document.querySelector("#form");
-        form.appendChild(containerDiv);
+        const table = document.querySelector(".table");
+        const tbody = document.querySelector('#tbody')
+        tbody.appendChild(trField)
+        table.appendChild(tbody)
     }
 
     async createFields() {
@@ -297,10 +287,8 @@ export default class Fields{
                 return this.messaging.msg('É necessário ter pelo menos um campo', false)
             }
 
-
-            const rowsOfForm = form.children;
             const collectionName = document.querySelector('#selectTableName').value
-
+            const rowsOfForm = document.querySelector('#tbody').children
             let dados = {};
             for (let i = 0; i < rowsOfForm.length; i++) {
                 const elementOfRowForm = rowsOfForm[i]
@@ -320,7 +308,6 @@ export default class Fields{
                 }
 
                  // Verifica se a caixa de seleção está marcada e se o campo está vazio
-                 console.log(validationCheckbox)
                  if (validationCheckbox.checked && inputValue.trim() === '') {
                      return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
                  }
