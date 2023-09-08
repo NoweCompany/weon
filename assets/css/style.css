@@ -1642,3 +1642,9 @@ section {
 }
 
 
+.carousel-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%; /* Defina a largura máxima desejada */
+  height: auto;
+}

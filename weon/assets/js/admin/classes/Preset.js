@@ -156,7 +156,6 @@ export default class Presets {
                     tr.appendChild(thfield)
                 }
 
-                // Adicione ícones do FontAwesome aos elementos tdEdit e tdDelet
                 const tdEdit = document.createElement('td');
                 tdEdit.setAttribute('id', collectionName + '_edit');
                 tdEdit.addEventListener('click', (e) => this.editPreset(e));
@@ -168,31 +167,30 @@ export default class Presets {
                 if (popUpAlert) this.showPopUp(popUpAlert, e);
                 });
 
-                // Criar elementos de ícone para edição e exclusão
+          
                 const editIcon = document.createElement('i');
-                editIcon.className = 'fas fa-edit'; // Classe do ícone de edição do FontAwesome
+                editIcon.className = 'fas fa-edit';
 
                 const deletIcon = document.createElement('i');
-                deletIcon.className = 'fas fa-trash-alt'; // Classe do ícone de exclusão do FontAwesome
+                deletIcon.className = 'fas fa-trash-alt';
 
-                // Adicionar ícones aos elementos tdEdit e tdDelet
+           
                 tdEdit.appendChild(editIcon);
                 tdDelet.appendChild(deletIcon);
 
-                // Adicionar texto às células (Editar e Apagar)
+         
                 const tdTextEdit = document.createTextNode('');
                 const tdTextDelet = document.createTextNode('');
 
-                // Adicionar texto às células tdEdit e tdDelet (opcional, se desejar)
+            
                 tdEdit.appendChild(tdTextEdit);
                 tdDelet.appendChild(tdTextDelet);
 
-                // Definir classes CSS para as células tdEdit e tdDelet (se necessário)
+              
                 tdEdit.className = 'editPreset';
                 tdDelet.className = 'deletPreset';
 
-                // Adicione as células com ícones e texto à linha da tabela
-                // Suponha que você já tenha uma linha (tr) criada anteriormente
+            
                 tr.appendChild(tdEdit);
                 tr.appendChild(tdDelet);
             }
@@ -213,7 +211,7 @@ export default class Presets {
         const el = e.target
         const collectionName = el.id.split('_')[0]
 
-        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida ${collectionName}`
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida "${collectionName}"`
         
         btnClosePopUp.addEventListener('click', (e) => {
             popUpAlert.classList.remove("show")
