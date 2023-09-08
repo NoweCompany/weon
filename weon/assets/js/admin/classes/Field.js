@@ -95,35 +95,28 @@ export default class Fields{
     }
 
     events() {
-        this.container.addEventListener('click', async e => {
-        let id = e.target.getAttribute('id')
-            
-        switch (id) {
-            case 'createField':
-                await this.createFields();
-            break;
-    
-            case 'newField':
-                this.createNewField();
-            break;
-            default:
-                return
-        }
-        })
+        const createField = document.querySelector('#createField')
+        const newField = document.querySelector('#newField')
+        
+        createField.addEventListener('click', () => this.createFields())
+        newField.addEventListener('click', () => this.createNewField())
     }
 
     handleSelectTableName(){
         const select =  document.querySelector("#selectTableName")
-        select.addEventListener('change', (e) => {
+        const handleChange = (e) => {
             const el = e.target
             const value = el.value
             if(value){
                 this.loadFields(value)
             }
-        })
+        } 
+        select.removeEventListener('change', handleChange)
+        select.addEventListener('change', handleChange)
     }
 
     renderFields() {
+        this.container.innerHTML = ''
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
             <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
@@ -254,8 +247,6 @@ export default class Fields{
         deleteButton.setAttribute("id", "deleteButton"); 
         deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
 
-        
-    
         
         deleteButton.onclick = (e) => {
             e.preventDefault()

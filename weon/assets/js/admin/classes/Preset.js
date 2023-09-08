@@ -37,14 +37,9 @@ export default class Presets {
         return maiorLength
     }
 
-    event() {
-        removeEventListener('click', document)
-        document.addEventListener('click', async (e) => {
-            const el = e.target
-            const id = el.getAttribute('id')
-            if (id === 'createPreset') this.rederFormPreset()
-            else if (id === 'cancelPresetForm') await this.preset()
-        })  
+    addEventToBtnsOfTable() {
+        const createPreset = document.querySelector('#createPreset')
+        createPreset.addEventListener('click', () => this.rederFormPreset())
     }
 
     async createPreset(e) {
@@ -71,21 +66,24 @@ export default class Presets {
         this.container.innerHTML = `
         <div class="container">
         <form id="formPreset" class="bg-white p-5 rounded rounded-10">
-    <h1 class="text-center mb-4">Criar Predefinição</h1>
-        <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" id="name" placeholder="Digite o nome da sua predefinição">
-        </div>
+            <h1 class="text-center mb-4">Criar Predefinição</h1>
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" id="name" placeholder="Digite o nome da sua predefinição">
+            </div>
 
-        <div class="d-flex justify-content-between mt-4">
-        <button type="button" class="btn btn-outline-danger" id="cancelPresetForm">Voltar</button>
-        <button type="submit" class="btn btn-outline-primary" id="createPresetForm">Próximo</button>
-    </div>
-    </form>
-</div> 
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-danger" id="cancelPresetForm">Voltar</button>
+                <button type="submit" class="btn btn-outline-primary" id="createPresetForm">Próximo</button>
+            </div>
+        </form>
+        </div> 
         `
         const formPreset = document.querySelector('#formPreset')
         formPreset.addEventListener('submit', e => this.createPreset(e))
+        
+        const cancelPresetForm = document.querySelector('#cancelPresetForm')
+        cancelPresetForm.addEventListener('click', () => this.preset())
     }
 
     rederTable() {
@@ -101,9 +99,8 @@ export default class Presets {
             </thead>
             <tbody id="tbody"></tbody>
         </table>
-    </div>
-    <button id="createPreset" class="criarnovatabela btn btn-outline-primary">Criar</button>
-    
+        </div>
+        <button id="createPreset" class="criarnovatabela btn btn-outline-primary">Criar</button>
         `
     }
 
@@ -113,7 +110,7 @@ export default class Presets {
             const data = await this.api.getApiPresets()
             
             this.rederTable()
-            this.event()
+            this.addEventToBtnsOfTable()
 
             if(!data?.response) {
                 this.messaging.msg(data)
@@ -156,18 +153,25 @@ export default class Presets {
                     tr.appendChild(thfield)
                 }
 
+                //TdEdit
                 const tdEdit = document.createElement('td');
                 tdEdit.setAttribute('id', collectionName + '_edit');
-                tdEdit.addEventListener('click', (e) => this.editPreset(e));
 
+                tdEdit.removeEventListener('click', this.editPreset)
+                tdEdit.addEventListener('click', (e) => this.editPreset(e, collectionName ));
+
+                //TdDelet
                 const tdDelet = document.createElement('td');
                 tdDelet.setAttribute('id', collectionName + '_delete');
-                tdDelet.addEventListener('click', (e) => {
-                const popUpAlert = document.querySelector('.popupConfirmation');
-                if (popUpAlert) this.showPopUp(popUpAlert, e);
-                });
 
-          
+                const handleClickTdDelet = (e) => {
+                    const popUpAlert = document.querySelector('.popupConfirmation');
+                    if (popUpAlert && !popUpAlert.classList.contains('show')) this.showPopUp(popUpAlert, e, collectionName);
+                }
+                tdDelet.removeEventListener('click', handleClickTdDelet)
+                tdDelet.addEventListener('click', handleClickTdDelet);
+
+                //Add Icons 
                 const editIcon = document.createElement('i');
                 editIcon.className = 'fas fa-edit';
 
@@ -200,7 +204,7 @@ export default class Presets {
         }
     }
 
-    showPopUp(popUpAlert, e){
+    showPopUp(popUpAlert, e, collectionName){
         popUpAlert.classList.add('show')
 
         const labelAlertConfirmation = document.querySelector('#labelAlertConfirmation')
@@ -209,21 +213,23 @@ export default class Presets {
         const btnClosePopUp = document.querySelector('#btnClosePopUp')
 
         const el = e.target
-        const collectionName = el.id.split('_')[0]
 
+        inputAlertConfimation.focus()
         labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida "${collectionName}"`
         
         btnClosePopUp.addEventListener('click', (e) => {
+            inputAlertConfimation.value = ''
             popUpAlert.classList.remove("show")
         })
 
-        formAlertConfirmation.addEventListener('submit', async (e) => {
+        const handleSubmitFormAlertConfirmation = async (e) => {
             e.preventDefault()
             const valueInput = inputAlertConfimation.value
             try {
                 if(valueInput === collectionName){
                     const data = await this.api.deletePreset(collectionName)
                     popUpAlert.classList.remove("show")
+                    inputAlertConfimation.value = ''
                     this.preset()
                     return this.messaging.msg(data.success, true)
                 }else{
@@ -232,11 +238,13 @@ export default class Presets {
             } catch (error) {
                 this.messaging.msg(error.message || "Algo deu errado tente novamente mais tarde 😢", false)
             }
-        })
+        }
+
+        formAlertConfirmation.removeEventListener('submit', handleSubmitFormAlertConfirmation)
+        formAlertConfirmation.addEventListener('submit', handleSubmitFormAlertConfirmation)
     }
 
-    async editPreset(e) {
-        const namePreset = e.target.id.split('_')[0]
+    async editPreset(e, namePreset) {
         await this._fieldController.fields(namePreset)
     }
 }
