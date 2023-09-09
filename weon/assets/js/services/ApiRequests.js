@@ -106,6 +106,30 @@ export default class ApiRequests {
         }
     }
 
+    async deleteField(collectionName, fieldName){
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+        
+            const response = await fetch(`${this.apiUrl}/field/${collectionName}/${fieldName}`, {
+                method: 'DELETE',
+                headers: headers,
+            })
+
+            const data = await response.json()
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.loading.removeLoading()
+            return data
+        } catch (error) {
+            this.loading.removeLoading()
+            throw new Error(error.message || 'Ocorreu um erro inesperado')
+        }
+    }
+
     async getApiPresets() {
         try {
                 this.loading.addLoading()
@@ -205,9 +229,10 @@ export default class ApiRequests {
                 collectionName,
                 fieldName,
                 newFieldName,
-                fieldRequired: true,
+                fieldRequired,
                 newValues
             })
+            console.log(myBody);
             const response = await fetch(`${this.apiUrl}/field`, {
                 method: 'PUT',
 

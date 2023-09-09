@@ -30,13 +30,15 @@ export default class Fields{
 
         if (namePreset) {
             this.loadFields(namePreset)
+            this.collectionSelected = namePreset
             const optionNamePreset = document.querySelector(`#${namePreset}`)
             optionNamePreset.selected = true
         }else{
             const select =  document.querySelector("#selectTableName")
             
             select.children[1].selected = true
-            this.loadFields(select.children[1].value)
+            this.collectionSelected = select.children[1].value
+            this.loadFields(this.collectionSelected)
         }
     }
 
@@ -95,10 +97,10 @@ export default class Fields{
     }
 
     events() {
-        const createField = document.querySelector('#createField')
+        const form = document.querySelector('#form');
         const newField = document.querySelector('#newField')
         
-        createField.addEventListener('click', () => this.createFields())
+        form.addEventListener('submit', (e) => this.createFields(e))
         newField.addEventListener('click', () => this.createNewField())
     }
 
@@ -108,6 +110,7 @@ export default class Fields{
             const el = e.target
             const value = el.value
             if(value){
+                this.collectionSelected = value
                 this.loadFields(value)
             }
         } 
@@ -133,7 +136,7 @@ export default class Fields{
                         <button id="newField" class="btn btn-outline-primary">Criar Campo</button>
                     </div>
                     <div class="botãocreate">
-                        <button id="createField" class="btn btn-outline-success">Salvar</button>
+                        <button id="createField" form="form" class="btn btn-outline-success">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -182,9 +185,11 @@ export default class Fields{
         
         if (inputValue) {
             nameInput.setAttribute('value', inputValue);
-            nameInput.classList.add("update", "form-control"); 
+            nameInput.classList.add("form-control"); 
+            nameInput.id = 'update'
         } else {
-            nameInput.classList.add("post", "form-control"); 
+            nameInput.classList.add("form-control"); 
+            nameInput.id = 'post'
         }
         
         
@@ -243,20 +248,30 @@ export default class Fields{
         const tdBtnDelete = document.createElement("td");
         tdBtnDelete.className = "mb-4";
         const deleteButton = document.createElement("button");
-        deleteButton.className = "btn btn-outline-danger";
+        deleteButton.className = "btn btn-outline-danger ";
         deleteButton.setAttribute("id", "deleteButton"); 
         deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
 
         
-        deleteButton.onclick = (e) => {
+        const handleClickDeleteButton = (e) => {
             e.preventDefault()
-            if (form.elements.length > 3) {
-                return trField.remove()
+            if (table.parentNode.elements.length > 4) {
+                try {
+                    if(inputValue){ 
+                        this.showPopUp(trField, inputValue)
+                    }else{
+                        return trField.remove()
+                    }
+                } catch (error) {
+                    console.log(error);
+                    this.messaging.msg('Ocorreu um erro inesperado ao excluir seu campo.')
+                }
             } else {
                 return this.messaging.msg('É necessário ter pelo menos um campo', false)
             }
 
         };
+        deleteButton.addEventListener('click', (e) => handleClickDeleteButton(e))
 
         tdName.appendChild(nameInput);
         tdType.appendChild(typeSelect);
@@ -274,11 +289,60 @@ export default class Fields{
         table.appendChild(tbody)
     }
 
-    async createFields() {
+    showPopUp(trField, fieldName){
+        const containerModal = document.createElement('div')
+        containerModal.innerHTML = `
+            <div class="modal mt-5" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir o campo ${fieldName}</h5>
+                        <button type="btn" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    Se você confirmar essa ação seus valores ainda persistiram em sua predefinição, porem não será possível altera-los
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" id="confirmationBtn" class="btn btn-danger">Excluir</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            `   
+            this.container.appendChild(containerModal)
+            const modal = document.querySelector("#exampleModal")
+            const btnCancel = document.querySelector('#cancelBtn')
+            const btnClose = document.querySelector('#btnClose')
+            const btnConfirmation = document.querySelector('#confirmationBtn')
+
+            btnClose.addEventListener('click', (e) => {
+                e.preventDefault()
+                modal.remove()
+            })
+            btnConfirmation.addEventListener('click', async (e) => {
+                e.preventDefault()
+                await this.api.deleteField(this.collectionSelected, fieldName)
+                this.messaging.msg("Campo excluido com sucesso.", true)
+                modal.remove()
+                trField.remove()
+                setTimeout(() => this.fields(this.collectionSelected), 1500)
+            })
+
+            btnCancel.addEventListener('click', (e) => {
+                e.preventDefault()
+                modal.remove()
+            })
+    }
+
+    async createFields(e) {
         try{
+            e.preventDefault()
             const form = document.querySelector('#form');
 
-            if (form.elements.length < 3) {
+            if (form.elements.length < 4) {
                 return this.messaging.msg('É necessário ter pelo menos um campo', false)
             }
 
@@ -291,7 +355,7 @@ export default class Fields{
                 const validationCheckbox = elementOfRowForm.querySelector('#isRequired');
                 const inputValue = elementOfRowForm.querySelector('input[type="text"]').value
                 const valueSelectOfTypes = elementOfRowForm.querySelector('select').value
-                const method = elementOfRowForm.querySelector('input[type="text"]').className
+                const method = elementOfRowForm.querySelector('input[type="text"]').id
                 
                 if(!inputValue || !valueSelectOfTypes ){
                     if(inputValue && !valueSelectOfTypes){
