@@ -15,10 +15,10 @@ window.addEventListener('load', async (e) => {
 });
 
 class Drive{
-    constructor(containerMsg, container, requests, select2Collections){
+    constructor(containerMsg, container, requests, sideBar){
         this.container = container
         this.containerMsg = containerMsg
-        this.select2Collections = select2Collections
+        this.sideBar = sideBar
 
         this.requests = requests
 
@@ -34,21 +34,27 @@ class Drive{
         if(inicialization) {
             await this.addOptions()
         }
-        this.initializeSelect2()
-    }
-
-    initializeSelect2() {
-        $(this.select2Collections).select2({
-            placeholder: 'Tabelas',
-            closeOnSelect: false,
-            language: 'pt',
-        });
-        $(this.select2Collections).on('change', (e) => this.showDocument(e.target.value));
     }
 
     async showDocument(collectionName = this.presetSelected){
         try {
             this.presetSelected = collectionName
+
+            //Promise.all
+            const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
+            const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
+
+            if(fieldsCollection.fields.length <= 0) {
+                this.container.innerHTML = `
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="galert-headin">Aviso</h4>
+                    <p>Não há nenhum campo criado para essa predefinição</p>
+                    <hr>
+                    <p class="mb-0">Crie seus campos em <a class="alert-link" href="/weon/pages/admin.html"> administração </a> </p>
+                </div>
+                `
+                return
+            }
 
             const {btnCad, thead, tbody} = this.renderTableHtml(collectionName)
             const btnDelet = document.querySelector("#btnDelet")
@@ -85,9 +91,6 @@ class Drive{
             })
 
 
-            //Promise.all
-            const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
-            const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
             this.buildTable(thead, tbody, fieldsCollection, valuesCollection)
         } catch (error) {    
             this.container.innerHTML = ''
@@ -342,11 +345,17 @@ class Drive{
             const response = await this.requests.getApiCollections()
             
             this.collectionData = response.response; // Salva os dados da tabela para uso posterior
+           
             for (const key of this.collectionData) {
-                const option = document.createElement('option');
-                const textOption = document.createTextNode(key.collectionName);
-                option.appendChild(textOption);
-                this.select2Collections.appendChild(option);
+                const btn = document.createElement('button');
+                btn.setAttribute('value', key.collectionName);
+                const textbtn = document.createTextNode(key.collectionName);
+                btn.className = 'btn btn-outline-primary btn-block'
+
+                btn.appendChild(textbtn);
+                this.sideBar.appendChild(btn);
+
+                btn.addEventListener('click', (e) => this.showDocument(e.target.value))
             }
         } catch (error) {
             this.msg(error.message, false)
@@ -561,7 +570,7 @@ class Requests{
 const containerMsg = document.querySelector('.msg');
 const container = document.querySelector('.container')
 const loading = document.querySelector('.loading') 
-const select2Collections = document.querySelector('.selectCollection')
+const sideBar = document.querySelector('.modal-body')
 
 const token = () => {
     const token = document.cookie
@@ -572,5 +581,5 @@ const token = () => {
 }
 
 const requests = new Requests(token(), configs.urlApi, loading)
-const drive = new Drive(containerMsg, container, requests, select2Collections)
+const drive = new Drive(containerMsg, container, requests, sideBar)
 drive.init(true)

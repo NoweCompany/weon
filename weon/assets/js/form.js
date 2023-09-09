@@ -92,6 +92,7 @@ cleanMsg() {
 
   async init() {
     const response = await this.postApi();
+    console.log(response);
     if (response.errors) {
       this.msg(response.errors, false);
     } else {
