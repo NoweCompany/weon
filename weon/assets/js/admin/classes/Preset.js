@@ -88,8 +88,20 @@ export default class Presets {
 
     rederTable() {
         this.container.innerHTML = `
-        
-        <h1 id="tituloPrincipal" class="display-6">Predefinições</h1>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <div class="titulo">
+                <h1 id="tituloPrincipal" class="display-6">Predefinições</h1>
+            </div>
+                <div class="newfield me-3">
+                    <button id="createPreset" class="btn btn-outline-primary">Adicionar</button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+     
         <div class="table-container">
         <table>
             <thead>
@@ -100,7 +112,7 @@ export default class Presets {
             <tbody id="tbody"></tbody>
         </table>
         </div>
-        <button id="createPreset" class="criarnovatabela btn btn-outline-primary">Criar</button>
+      
         `
     }
 

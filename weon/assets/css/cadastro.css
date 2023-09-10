@@ -85,7 +85,7 @@
   }
 
   .sidebar .modal-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
 
@@ -248,3 +248,4 @@
 .pop{
   border-radius: 20px;
 }
+

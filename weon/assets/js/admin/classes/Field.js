@@ -124,16 +124,23 @@ export default class Fields{
         <div class="d-flex justify-content-center align-items-center mb-5">
             <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                 <div class="titulo">
-                    <h1 id="tituloPrincipal" class="display-6">Campos</h1>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="form-group me-3">
+               
+                <div class="row align-items-center">
+                    <div class="col-6">
+                    <h1 id="tituloPrincipal" class="display-6">Predefinição:</h1>
+                    </div>
+                    <div class="col-5">
+                    <div class="form-group ms-3">
                         <select id="selectTableName" class="form-select">
-                            <option value="" selected></option>
+                        <option value="" selected></option>
                         </select>
                     </div>
+                    </div>
+                </div>
+                </div>
+                <div class="d-flex align-items-center">
                     <div class="newfield me-3">
-                        <button id="newField" class="btn btn-outline-primary">Criar Campo</button>
+                        <button id="newField" class="btn btn-outline-primary">Adicionar Campo</button>
                     </div>
                     <div class="botãocreate">
                         <button id="createField" form="form" class="btn btn-outline-success">Salvar</button>
@@ -294,23 +301,24 @@ export default class Fields{
     showPopUp(trField, fieldName){
         const containerModal = document.createElement('div')
         containerModal.innerHTML = `
-            <div class="modal mt-5" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Deseja apagar o campo "${fieldName}"?</h5>
-                    </div>
-                    <div class="modal-body">
+        <div class="modal mt-5" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deseja apagar o campo "${fieldName}"?</h5>
+                </div>
+                <div class="modal-body">
                     Se você confirmar essa ação, seus valores ainda persistirão em sua predefinição, porém não será possível alterá-los.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="confirmationBtn" class="btn btn-outline-danger">Excluir</button>
-                        <button type="button" id="cancelBtn" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                        
-                    </div>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" id="btnClose" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="confirmationBtn" class="btn btn-outline-danger">Excluir</button>
+                
                 </div>
             </div>
+        </div>
+    </div>
+    
             `   
             this.container.appendChild(containerModal)
             const modal = document.querySelector("#exampleModal")

@@ -350,7 +350,7 @@ class Drive{
                 const btn = document.createElement('button');
                 btn.setAttribute('value', key.collectionName);
                 const textbtn = document.createTextNode(key.collectionName);
-                btn.className = 'btn btn-outline-primary btn-block'
+                btn.className = 'btn btn-light modal-button'
 
                 btn.appendChild(textbtn);
                 this.sideBar.appendChild(btn);
