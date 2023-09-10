@@ -59,7 +59,6 @@
 
 /* bar */
 .sidebar {
-
   width: 200px;
   background-color: #ffffff;
   height: 100%;
@@ -69,6 +68,7 @@
   overflow-x: hidden;
   padding-top: 30px;
   animation: slide-in 0.5s ease;
+  transition: width 0.5s; 
 }
 
 @keyframes slide-in {
@@ -86,6 +86,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
+  z-index: 10;
 }
 
 .sidebar h1 {
@@ -108,12 +109,10 @@
   background: none;
   text-align: left;
   position: relative;
-  /* Adiciona posição relativa aos botões */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
-
 }
 
 .sidebar .modal-button:after {
@@ -136,9 +135,55 @@
   margin-left: 0;
 }
 
-.sidebar .modal-button:hover {
+.sidebar .toggle-button:hover {
   transform: scale(1.1);
 }
+
+.toggle-button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  text-decoration: none;
+  font-size: 16px;
+  color: #333333;
+  transition: transform 0.3s ease;
+  background: none;
+  text-align: left;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+/* Estilo para a sidebar reduzida */
+.sidebar.collapsed {
+  width: 120px; /* Largura reduzida */
+  overflow-x: hidden;
+}
+
+.sidebar.collapsed .toggle-button {
+  padding-left: 10px; 
+  padding-right: 0;
+  justify-content: center;
+}
+
+.sidebar.collapsed .toggle-button i {
+  margin-left: 0; 
+}
+
+
+
+#sidebar-title.hidden {
+  visibility: hidden;
+}
+
+/* Estilo para ocultar os ícones */
+.toggle-button i.icon-hidden {
+  visibility: hidden;
+}
+
 
 .deletPreset{
   background-color: #ff0000;
