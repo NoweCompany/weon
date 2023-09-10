@@ -106,9 +106,9 @@ class Drive{
                 <h1 class="mb-0">${presetSelected}</h1>
             </div>
             <div> 
-            <button id="btnCad" name="btnCad" class="btn btn-outline-primary btn-sm-4 ml-2">Adicionar</button>
-            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger btn-sm-1">Deletar</button>
             <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
+            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2">Deletar</button>
+            <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
 
             </div>
         </div>

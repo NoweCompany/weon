@@ -86,6 +86,7 @@
 
   .sidebar .modal-button:hover {
     transform: scale(1.05);
+    color: #4179d2;
   }
 
 
