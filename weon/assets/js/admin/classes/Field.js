@@ -185,11 +185,13 @@ export default class Fields{
         
         if (inputValue) {
             nameInput.setAttribute('value', inputValue);
-            nameInput.classList.add("form-control"); 
-            nameInput.id = 'update'
+            nameInput.classList.add("form-control");
+            nameInput.classList.add("input-fild"); 
+            nameInput.id = 'update';
         } else {
-            nameInput.classList.add("form-control"); 
-            nameInput.id = 'post'
+            nameInput.classList.add("form-control");
+            nameInput.classList.add("input-fild"); 
+            nameInput.id = 'post';
         }
         
         
@@ -296,17 +298,15 @@ export default class Fields{
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir o campo ${fieldName}</h5>
-                        <button type="btn" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Deseja apagar o campo "${fieldName}"?</h5>
                     </div>
                     <div class="modal-body">
-                    Se você confirmar essa ação seus valores ainda persistiram em sua predefinição, porem não será possível altera-los
+                    Se você confirmar essa ação, seus valores ainda persistirão em sua predefinição, porém não será possível alterá-los.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="cancelBtn" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" id="confirmationBtn" class="btn btn-danger">Excluir</button>
+                        <button type="button" id="confirmationBtn" class="btn btn-outline-danger">Excluir</button>
+                        <button type="button" id="cancelBtn" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                        
                     </div>
                     </div>
                 </div>

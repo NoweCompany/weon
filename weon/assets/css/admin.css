@@ -37,10 +37,11 @@
   text-align: center;
 }
 
-.form-control{
-  width: 70%;
+.form-control, .input-fild{
   margin: 0 auto;
+  width: 70%;
 }
+
 
 .select1{
   width: 70%;
