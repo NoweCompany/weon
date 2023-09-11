@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="light" data-current-theme="light">
 <html>
 
 <head>
@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../assets/css/cadastro.css">
   <link rel="stylesheet" href="../assets/css/padrao.css">
   <link rel="stylesheet" href="../assets/css/select2.css">
+  
   <link rel="icon" href="../assets/img/icon.ico.png" type="image/x-icon">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -39,7 +40,8 @@
     <img  src="../assets/gif/nowecube.gif" width="200" height="200"/>
   </div>
 
-  <div class="sidebar z-2">
+ 
+  <div class="sidebar" id="sidebar">
     <h3>Predefinições</h3>
     <div class="modal-body">
       <div class="input-group mb-3">
@@ -51,6 +53,8 @@
     </div>
   </div>
   
+  <button id="toggleButton" class="toggle-button btn btn-outline-primary position-fixed bottom-0 start-0 m-3"><i class="fa-solid fa-bars"></i></button>
+
   
     
   <div class="msg"></div>
@@ -69,7 +73,8 @@
 
   </script>
   <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
-
+  <script src="../assets/js/modules/darkmode.js"> </script>
+  <script src="../assets/js/modules/sidebarcad.js"> </script>
 </body>
 
 </html>

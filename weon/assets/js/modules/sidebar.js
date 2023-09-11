@@ -36,3 +36,4 @@ function activateSidebarToggle() {
   checkSidebarState();
 }
 activateSidebarToggle();
+

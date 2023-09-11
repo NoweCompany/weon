@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const darkModeSwitch = document.getElementById("darkModeSwitch");
+    console.log('AAAAAAAAAA');
+    const darkModeSwitch = document.getElementById("darkModeSwitch") || null;
     const htmlElement = document.documentElement;
     let darkModeStylesheet;
 
@@ -42,22 +43,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function applyThemeFromCookie() {
         const themeCookie = getCookie("theme");
-        if (themeCookie === "dark") {
-            applyDarkTheme();
-            darkModeSwitch.checked = true;
-        } else {
-            applyLightTheme();
-            darkModeSwitch.checked = false;
+        console.log(darkModeSwitch);
+        if(darkModeSwitch){
+            if (themeCookie === "dark") {
+                applyDarkTheme();
+                darkModeSwitch.checked = true;
+            } else {
+                applyLightTheme();
+                darkModeSwitch.checked = false;
+            }
+        }else{
+            if (themeCookie === "dark") {
+                applyDarkTheme();
+            } else {
+                applyLightTheme();
+            }
         }
     }
 
-    darkModeSwitch.addEventListener("change", function () {
-        if (darkModeSwitch.checked) {
-            applyDarkTheme();
-        } else {
-            applyLightTheme();
-        }
-    });
+    if(darkModeSwitch){
+        darkModeSwitch.addEventListener("change", function () {
+            if (darkModeSwitch.checked) {
+                applyDarkTheme();
+            } else {
+                applyLightTheme();
+            }
+        });
+    }
 
     applyThemeFromCookie();
 });

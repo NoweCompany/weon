@@ -65,7 +65,7 @@ export default class Presets {
     rederFormPreset() {
         this.container.innerHTML = `
         <div class="container">
-        <form id="formPreset" class="bg-white p-5 rounded rounded-10">
+        <form id="formPreset" class="p-5 rounded rounded-10 popreset">
             <h1 class="text-center mb-4">Criar Predefinição</h1>
             <div class="form-group">
                 <label for="name">Nome</label>
