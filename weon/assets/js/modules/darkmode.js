@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('AAAAAAAAAA');
     const darkModeSwitch = document.getElementById("darkModeSwitch") || null;
     const htmlElement = document.documentElement;
     let darkModeStylesheet;
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function applyThemeFromCookie() {
         const themeCookie = getCookie("theme");
-        console.log(darkModeSwitch);
         if(darkModeSwitch){
             if (themeCookie === "dark") {
                 applyDarkTheme();

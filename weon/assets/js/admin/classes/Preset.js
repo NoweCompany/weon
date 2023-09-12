@@ -56,7 +56,7 @@ export default class Presets {
             if (!response) return
             
             this.messaging.msg(response.success, true)
-            return this.preset()
+            return this._fieldController.fields(namePreset)
         } catch (error) {
             return this.messaging.msg(error.message, false)
         }   
@@ -257,6 +257,7 @@ export default class Presets {
     }
 
     async editPreset(e, namePreset) {
+        console.log(namePreset);
         await this._fieldController.fields(namePreset)
     }
 }

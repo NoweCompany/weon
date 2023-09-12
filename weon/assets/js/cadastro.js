@@ -43,7 +43,7 @@ class Drive{
             //Promise.all
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
-
+            
             if(fieldsCollection.fields.length <= 0) {
                 this.container.innerHTML = `
                 <div class="alert alert-warning" role="alert">
@@ -74,7 +74,7 @@ class Drive{
                 } catch (error) {
                     this.msg(error.message || 'Ocorreu um erro inesperado 😢', false)
                 }
-            })
+            }) 
 
             btnDownload.addEventListener('click', async (e) => {
                 try {
@@ -102,12 +102,12 @@ class Drive{
         this.container.innerHTML = `
             <div class="d-flex justify-content-center align-items-center mb-5">
         <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <div class="ml-auto">
+            <div class="ml-auto" >
                 <h1 class="mb-0">${presetSelected}</h1>
             </div>
-            <div> 
+            <div id="headerTable"> 
             <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
-            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2">Deletar</button>
+            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
             <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
 
             </div>
@@ -179,6 +179,22 @@ class Drive{
             inputCheckBox.setAttribute('type', 'checkbox')
             inputCheckBox.setAttribute('class', 'checkBoxDelet form-check-input form-check-input-lg d-flex ms-3 mt-2')
             tr.appendChild(inputCheckBox)
+            inputCheckBox.addEventListener("click", () => {
+                const btnDelet = document.querySelector('#btnDelet')
+                const checkboxes = document.querySelectorAll('.checkBoxDelet')
+                const containCheckBoxChecked = () => {
+                    for(let checkbox of checkboxes){
+                        if(checkbox.checked) return true
+                    }
+                    return false
+                }
+                if(btnDelet && containCheckBoxChecked()){
+                    btnDelet.classList.remove('d-none')
+                }else{
+                    btnDelet.classList.add('d-none')
+                }
+
+            })
             for (const key in field) {
                 if(key === '_id') {
                     inputCheckBox.setAttribute('id', field[key])
@@ -251,7 +267,9 @@ class Drive{
                     this.valuesPreset = {}
                 }
                 this.msg('Atualização bem sucedida', true)
-                this.showDocument()
+                for(const element of elements){
+                    element.value = ''
+                }
                 return form
             } catch (error) {
                 this.msg(error, false)
@@ -344,8 +362,8 @@ class Drive{
         try {
             const response = await this.requests.getApiCollections()
             
+            if(response?.msg) return this.msg(response.msg, false)
             this.collectionData = response.response; // Salva os dados da tabela para uso posterior
-           
             for (const key of this.collectionData) {
                 const btn = document.createElement('button');
                 btn.setAttribute('value', key.collectionName);

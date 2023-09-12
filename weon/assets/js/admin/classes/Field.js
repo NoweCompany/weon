@@ -31,7 +31,8 @@ export default class Fields{
         if (namePreset) {
             this.loadFields(namePreset)
             this.collectionSelected = namePreset
-            const optionNamePreset = document.querySelector(`#${namePreset}`)
+            const namePresetFormatedId = namePreset.replace(/ /g, "_")
+            const optionNamePreset = document.querySelector(`#${namePresetFormatedId}`)
             optionNamePreset.selected = true
         }else{
             const select =  document.querySelector("#selectTableName")
@@ -159,7 +160,8 @@ export default class Fields{
         for (const key of this.dataCollection) {
             const select = document.querySelector('#selectTableName')
             const option = document.createElement('option');
-            option.setAttribute('id', key.collectionName)
+            const idFormated = key.collectionName.replace(/ /g, "_")
+            option.setAttribute('id', idFormated)
             const textOption = document.createTextNode(key.collectionName);
             option.appendChild(textOption);
             select.appendChild(option);
@@ -207,6 +209,10 @@ export default class Fields{
         tdType.className = "mb-4";
         
         const typeSelect = document.createElement("select");
+        if(inputValue) {
+            typeSelect.setAttribute('arial-label', 'Disabled')
+            typeSelect.disabled = true
+        }
         typeSelect.classList.add("form-select");
         typeSelect.classList.add("select1"); 
         
@@ -336,7 +342,7 @@ export default class Fields{
                 this.messaging.msg("Campo excluido com sucesso.", true)
                 modal.remove()
                 trField.remove()
-                setTimeout(() => this.fields(this.collectionSelected), 1500)
+                this.fields(this.collectionSelected)
             })
 
             btnCancel.addEventListener('click', (e) => {
@@ -423,9 +429,9 @@ export default class Fields{
                 this.messaging.msg(`O campo ${name} foi Criado/Alterado com sucesso`, true)
                 
             }
-            if(!formErrors) setTimeout(() => {
+            if(!formErrors) {
                 return this.presetController.preset()
-            }, 1000)
+            }
 
             await this.loadFields(collectionName)
         }catch(error){
