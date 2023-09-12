@@ -227,7 +227,7 @@ export default class Presets {
         const el = e.target
 
         inputAlertConfimation.focus()
-        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida "${collectionName}"`
+        labelAlertConfirmation.innerText = `Digite o nome da predefinição há ser excluida: "${collectionName}"`
         
         btnClosePopUp.addEventListener('click', (e) => {
             inputAlertConfimation.value = ''

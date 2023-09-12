@@ -34,6 +34,7 @@ class Drive{
         if(inicialization) {
             await this.addOptions()
         }
+        this.showDocument('humanos')
     }
 
     async showDocument(collectionName = this.presetSelected){
@@ -114,6 +115,7 @@ class Drive{
         </div>
     </div>
 
+    <div class="container-center">  
         <table class="table">
           <thead class="thead">
           </thead>
@@ -121,6 +123,7 @@ class Drive{
           <tbody class="tbody">
           </tbody>
         </table>
+        </div>
         `;
         const form = document.querySelector('#form')
         const btnCad = document.querySelector('#btnCad');
@@ -297,6 +300,8 @@ class Drive{
                     if(required){
                         input.setAttribute('required', true);
                     }
+                }else{
+                    input.className = 'form-check-input'
                 }
     
                 input.setAttribute('type', typeInput);

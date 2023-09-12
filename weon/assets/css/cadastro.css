@@ -1,155 +1,150 @@
-  body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .container {
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+.container {
+  margin-top: 3%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
   #selected {
     color: #f7f7f7;
 
   }
 
-
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Animação para fechar a barra lateral */
+  @keyframes slide-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Restante do seu CSS continua igual */
+  
+  /* sidebar aberta */
+  .sidebar {
+    width: 200px;
+    background-color: #ffffff;
+    height: 100%;
+    position: fixed;
+    top: 0; /* Corrija o valor de "top" para 0 */
+    left: -200px; /* Inicialmente, posicione a barra fora da tela */
+    overflow-x: hidden;
+    padding-top: 30px;
+    animation: slide-in 0.5s ease; /* Use a animação slide-in */
+  }
+  
+  /* sidebar fechada */
+  .sidebar.closed {
+    width: 200px;
+    background-color: #ffffff;
+    height: 100%;
+    position: fixed;
+    top: 0; /* Corrija o valor de "top" para 0 */
+    left: 0; /* Posicione a barra na tela */
+    overflow-x: hidden;
+    padding-top: 30px;
+    animation: slide-out 0.5s ease; /* Use a animação slide-out */
+  }
+  
   /* sidebar */
   .sidebar {
     width: 200px;
     background-color: #ffffff;
     height: 100%;
     position: fixed;
-    margin-top: 10px;
-    top: 0;
+    top: 1;
     left: 0;
+    overflow-x: hidden;
+    padding-top: 30px;
+    animation: slide-in 0.5s ease;
+  }
+
+  .sidebar .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .sidebar h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    
+  }
+
+  .sidebar .modal-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333333;
+    transition: transform 0.3s ease;
+    background: none;
+    text-align: left;
+    position: relative;
+    /* Adiciona posição relativa aos botões */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+
+  }
+
+  .sidebar .modal-button:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #e9e9e9;
     transform: translateX(0);
-    transition: transform 0.5s ease; /* Adicione uma transição suave para a animação */
+    transition: transform 0.5s ease;
+    /* Define a cor da linha */
   }
+
+  .sidebar .modal-button:last-child:after {
+    display: none;
+    /* Remove a linha do último botão */
+  }
+
+  .sidebar .modal-body>*:not(h3) {
+    margin-left: 0;
+  }
+
+  .sidebar .modal-button:hover {
+    transform: scale(1.05);
+    color: #4179d2;
+  }
+
   .sidebar.closed {
-    transform: translateX(-100%); /* Posicione a barra lateral fora da tela */
-  }
-
-  .sidebar .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-  }
-
-  .sidebar h3 {
-    text-align: center;
-    margin-bottom: 10px;
-    
-  }
-
-  .sidebar .modal-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
-    color: #333333;
-    transition: transform 0.3s ease;
-    background: none;
-    text-align: left;
-    position: relative;
-    /* Adiciona posição relativa aos botões */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 10px;
-
-  }
-
-  .sidebar .modal-button:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e9e9e9;
-    /* Define a cor da linha */
-  }
-
-  .sidebar .modal-button:last-child:after {
-    display: none;
-    /* Remove a linha do último botão */
-  }
-
-  .sidebar .modal-body>*:not(h3) {
-    margin-left: 0;
-  }
-
-  .sidebar .modal-button:hover {
-    transform: scale(1.05);
-    color: #4179d2;
-  }
-
-
-  .sidebar .modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-  }
-
-  .sidebar h3 {
-    text-align: center;
-    margin-bottom: 10px;
-    
-  }
-
-  .sidebar .modal-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
-    color: #333333;
-    transition: transform 0.3s ease;
-    background: none;
-    text-align: left;
-    position: relative;
-    /* Adiciona posição relativa aos botões */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 10px;
-
-  }
-
-  .sidebar .modal-button:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e9e9e9;
-    /* Define a cor da linha */
-  }
-
-  .sidebar .modal-button:last-child:after {
-    display: none;
-    /* Remove a linha do último botão */
-  }
-
-  .sidebar .modal-body>*:not(h3) {
-    margin-left: 0;
-  }
-
-  .sidebar .modal-button:hover {
-    transform: scale(1.05);
-    color: #4179d2;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease; /* Posicione a barra lateral fora da tela */
   }
 
 
@@ -187,37 +182,6 @@
     border-color: #007bff;
   }
   
-  #form input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-#form label.checkbox-label {
-    display: inline-block;
-    cursor: pointer;
-}
-
-#form label.checkbox-label input[type="checkbox"] {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-}
-
-#form label.checkbox-label::before {
-    content: "";
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background-color: #fff;
-}
-
-#form label.checkbox-label input[type="checkbox"]:checked + ::before {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
   .dangerbtn {
     position: fixed;
     top: 0;
@@ -272,7 +236,7 @@
   }
   
   th {
-    background-color: #3a3a3a;
+    background-color: #292929;
     color: #f7f7f7;
     border-radius: 5px;
     font-weight: 300;
@@ -343,6 +307,4 @@
 .pop{
   border-radius: 20px;
 }
-
-  
 
