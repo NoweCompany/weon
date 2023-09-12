@@ -34,6 +34,7 @@ class Drive{
         if(inicialization) {
             await this.addOptions()
         }
+        this.showDocument('humanos')
     }
 
     async showDocument(collectionName = this.presetSelected){
@@ -107,8 +108,8 @@ class Drive{
             </div>
             <div> 
             <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
-            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2">Deletar</button>
-            <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
+            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-1">Deletar</button>
+            <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-1">Adicionar</button>
 
             </div>
         </div>
@@ -281,6 +282,8 @@ class Drive{
                     if(required){
                         input.setAttribute('required', true);
                     }
+                }else{
+                    input.className = 'form-check-input'
                 }
     
                 input.setAttribute('type', typeInput);
