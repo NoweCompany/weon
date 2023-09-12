@@ -1,4 +1,4 @@
-.screen{
+
 @keyframes entrada {
   0% {
     opacity: 0;
@@ -67,9 +67,4 @@ transform: translateY(-50%);
   font-size: 20px;
 }
 
-}
-.responsive-screen{
-  body{
-    background-color: red;
-  }
-}
+
