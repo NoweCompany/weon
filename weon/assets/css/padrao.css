@@ -172,12 +172,10 @@ li {
 }
 
 #logo {
+  display: block;
   position: fixed;
   top: 26.2%;
   left: 3%;
-  width: 100px;
-  height: 100px;
-  background-size: cover;
 }
 
 

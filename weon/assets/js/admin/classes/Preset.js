@@ -106,7 +106,7 @@ export default class Presets {
         <table>
             <thead>
                 <tr id="thead">
-                    <th>Campos</th>
+                    <th>Predefinição</th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>

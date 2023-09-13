@@ -61,11 +61,11 @@ body {
     background-color: #ffffff;
     height: 100%;
     position: fixed;
-    top: 0; /* Corrija o valor de "top" para 0 */
-    left: 0; /* Posicione a barra na tela */
+    top: 0; 
+    left: 0; 
     overflow-x: hidden;
     padding-top: 30px;
-    animation: slide-out 0.5s ease; /* Use a animação slide-out */
+    animation: slide-out 0.5s ease;
   }
   
   /* sidebar */
@@ -94,7 +94,7 @@ body {
     
   }
 
-  .sidebar .modal-button {
+  .sidebar .modal-button{
     display: block;
     width: 100%;
     padding: 12px;
@@ -105,14 +105,13 @@ body {
     color: #333333;
     transition: transform 0.3s ease;
     background: none;
-    text-align: left;
     position: relative;
-    /* Adiciona posição relativa aos botões */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 10px;
 
+  }
+
+  #sidebarContent{
+    margin-left: 20px;
   }
 
   .sidebar .modal-button:after {
@@ -146,6 +145,9 @@ body {
     transform: translateX(-100%);
     transition: transform 0.5s ease; /* Posicione a barra lateral fora da tela */
   }
+
+
+ 
 
 
   #form {
