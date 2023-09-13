@@ -68,3 +68,37 @@ transform: translateY(-50%);
 }
 
 
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(to bottom, #4179d2 50%, #4179d2 50%);
+  }
+
+  form {
+    padding: 5%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: #3a3a36;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: entrada 1s ease;
+  }
+  
+  .imagem {
+    display: flex;
+    width: 30%;
+    position: fixed;
+    left: -10%; /* Centralize horizontalmente */
+    top: 10%; 
+    transform: translateX(-50%); /* Apenas translateX para centralizar horizontalmente */
+  }
+  
+  .imagem img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+
+  
+}

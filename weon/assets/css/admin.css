@@ -68,7 +68,7 @@
   overflow-x: hidden;
   padding-top: 30px;
   animation: slide-in 0.5s ease;
-
+  transition: width 0.5s; 
 }
 
 @keyframes slide-in {
@@ -88,7 +88,6 @@
   padding: 20px;
   z-index: 10;
   
- 
 }
 
 .sidebar h1 {
@@ -107,6 +106,7 @@
   text-decoration: none;
   font-size: 16px;
   color: #333333;
+  transition: transform 0.3s ease;
   background: none;
   text-align: left;
   position: relative;
@@ -114,7 +114,6 @@
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
-
 }
 
 .sidebar .modal-button:after {
@@ -130,7 +129,6 @@
 
 .sidebar .modal-button:last-child:after {
   display: none;
-  /* Remove a linha do último botão */
 }
 
 .sidebar .modal-body>*:not(h3) {
@@ -157,40 +155,28 @@
   padding-right: 10px;
 }
 
-/* Estilo para a sidebar reduzida */
 .sidebar.collapsed {
-  width: 80px; /* Largura reduzida */
+  width: 80px; 
   overflow-x: hidden;
-  transition: width 0.5s; 
-  
-}
-
-.sidebar.closed {
-  transform: translateX(-100%); /* Posicione a barra lateral fora da tela */
 }
 
 .sidebar.collapsed .toggle-button {
   padding-right: 0;
   justify-content: center;
-
 }
 
 .sidebar.collapsed .toggle-button i {
   margin-right: 5%; 
-  
 }
 
 
 #sidebar-title.hidden {
   visibility: hidden;
-  
 }
 
-/* Estilo para ocultar os ícones */
 .toggle-button i.icon-hidden {
   visibility: hidden;
 }
-
 
 .deletPreset{
   background-color: #ff0000;
@@ -290,14 +276,10 @@ th {
 }
 
 
-
-
 #formPreset {
   width: 30%; 
-  margin: 0 auto;
-  margin-top: 100px; 
+  
 }
-
 
 .editPreset{
   background-color: #ff9d00;

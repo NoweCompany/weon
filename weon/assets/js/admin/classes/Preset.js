@@ -65,19 +65,19 @@ export default class Presets {
     rederFormPreset() {
         this.container.innerHTML = `
         <div class="container">
-        <form id="formPreset" class="p-5 rounded rounded-10 popreset">
+        <form id="formPreset" class="p-5 rounded rounded-10 popreset mx-auto text-center">
             <h1 class="text-center mb-4">Criar Predefinição</h1>
             <div class="form-group">
-                <label for="name">Nome</label>
                 <input type="text" class="form-control" id="name" placeholder="Digite o nome da sua predefinição">
             </div>
-
+    
             <div class="d-flex justify-content-between mt-4">
                 <button type="button" class="btn btn-outline-danger" id="cancelPresetForm">Voltar</button>
                 <button type="submit" class="btn btn-outline-primary" id="createPresetForm">Próximo</button>
             </div>
         </form>
-        </div> 
+    </div>
+    
         `
         const formPreset = document.querySelector('#formPreset')
         formPreset.addEventListener('submit', e => this.createPreset(e))
