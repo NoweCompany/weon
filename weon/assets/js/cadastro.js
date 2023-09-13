@@ -53,7 +53,7 @@ class Drive{
                 const btn = document.createElement('button');
                 btn.setAttribute('value', key.collectionName);
                 const textbtn = document.createTextNode(key.collectionName);
-                btn.className = 'btn btn-light modal-button';
+                btn.className = 'modal-button';
 
                 btn.appendChild(textbtn);
                 container.appendChild(btn);
@@ -173,7 +173,7 @@ class Drive{
             </div>
             <div> 
             <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-            <button type="submit" form="form" class="btn btn-outline-primary btn-sm-1">Salvar</button>
+            <button type="submit" form="form" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
             </div>
         </div>
     </div>

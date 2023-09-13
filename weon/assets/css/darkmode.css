@@ -36,6 +36,7 @@
     }
     .toggle-button {
       color: #adb5bd;
+      transition: transform 0.2s ease-in-out;
      
     }
 
