@@ -30,11 +30,37 @@ class Drive{
     }
 
     async init(inicialization = false){
-        //this.showForm('clientes')
         if(inicialization) {
             await this.addOptions()
         }
-        this.showDocument('humanos')
+    }
+
+    showItems(items, container) {
+        // Remova todas as classes 'hidden' da barra lateral
+        container.classList.remove('hidden');
+
+        // Limpe os itens antigos da barra lateral
+        container.innerHTML = '';
+
+        if (items.length === 0) {
+            // Adicione uma mensagem quando nenhum item for encontrado
+            const noItemsMessage = document.createElement('p');
+            noItemsMessage.textContent = 'Nenhum item encontrado.';
+            container.appendChild(noItemsMessage);
+        } else {
+            // Adicione os novos itens à barra lateral
+            for (const key of items) {
+                const btn = document.createElement('button');
+                btn.setAttribute('value', key.collectionName);
+                const textbtn = document.createTextNode(key.collectionName);
+                btn.className = 'btn btn-light modal-button';
+
+                btn.appendChild(textbtn);
+                container.appendChild(btn);
+
+                btn.addEventListener('click', (e) => this.showDocument(e.target.value));
+            }
+        }
     }
 
     async showDocument(collectionName = this.presetSelected){
@@ -365,25 +391,27 @@ class Drive{
 
     async addOptions() {
         try {
-            const response = await this.requests.getApiCollections()
-            
-            if(response?.msg) return this.msg(response.msg, false)
-            this.collectionData = response.response; // Salva os dados da tabela para uso posterior
-            for (const key of this.collectionData) {
-                const btn = document.createElement('button');
-                btn.setAttribute('value', key.collectionName);
-                const textbtn = document.createTextNode(key.collectionName);
-                btn.className = 'btn btn-light modal-button'
+            const response = await this.requests.getApiCollections();
 
-                btn.appendChild(textbtn);
-                this.sideBar.appendChild(btn);
+            this.collectionData = response.response; // Salva os dados originais da tabela
+            this.filteredData = [...this.collectionData]; // Inicialmente, os dados filtrados são os dados originais
 
-                btn.addEventListener('click', (e) => this.showDocument(e.target.value))
-            }
+            const sidebarContent = document.getElementById('sidebarContent');
+            const searchInput = document.getElementById('searchInput');
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                this.filteredData = this.collectionData.filter((item) =>
+                    item.collectionName.toLowerCase().includes(searchTerm)
+                );
+                this.showItems(this.filteredData, sidebarContent);
+            });
+
+            // Exibe todos os itens cadastrados inicialmente na barra lateral
+            this.showItems(this.filteredData, sidebarContent);
         } catch (error) {
-            this.msg(error.message, false)
+            this.msg(error.message, false);
         }
-        
     }
 
     msg(msg, success) {
