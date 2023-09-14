@@ -60,6 +60,8 @@ export default class Fields{
             </table>
         `
         await this.setDataColletion()
+        const valuesPreset = await this.api.getVeluesApi(this.collectionSelected)
+        console.log(valuesPreset);
         this.dataCollection.forEach(collection => {
             if(collection.collectionName === collectionSelected){
                 this.currentValuesCollection = {collectionName: collection.collectionName, fields: collection.fields}
@@ -67,7 +69,7 @@ export default class Fields{
                     this.createNewField()
                 }else{
                     collection.fields.forEach(field => {    
-                        this.createNewField(field.key, field.type, field.required)
+                        this.createNewField(field.key, field.type, field.required, valuesPreset)
                     })
                 }
             }
@@ -179,7 +181,14 @@ export default class Fields{
         }
     }
 
-    createNewField(inputValue = '', type = '', isRequired = false) {
+    async existValuesInField(fieldName, valuesPreset){
+        for (const value of valuesPreset) {
+            if(value?.[fieldName]) return true
+        }
+        return false
+    }
+
+    async createNewField(inputValue = '', type = '', isRequired = false, valuesPreset = []) {
         // Criação do container principal
         const trField = document.createElement("tr");
         trField.className = "create-field";
@@ -209,7 +218,8 @@ export default class Fields{
         tdType.className = "mb-4";
         
         const typeSelect = document.createElement("select");
-        if(inputValue) {
+        const existValueField = await this.existValuesInField(inputValue, valuesPreset)
+        if(inputValue && existValueField) {
             typeSelect.setAttribute('arial-label', 'Disabled')
             typeSelect.disabled = true
         }
@@ -268,12 +278,16 @@ export default class Fields{
         deleteButton.innerHTML = '<i class="fa-solid fa-x"></i>';
 
         
-        const handleClickDeleteButton = (e) => {
+        const handleClickDeleteButton = async (e) => {
             e.preventDefault()
             if (table.parentNode.elements.length > 4) {
                 try {
-                    if(inputValue){ 
+                    if(inputValue && existValueField){ 
                         this.showPopUp(trField, inputValue)
+                    }else if(inputValue && !existValueField){
+                        await this.api.deleteField(this.collectionSelected, inputValue)
+                        trField?.remove();
+                        this.messaging.msg("Campo excluido com sucesso.", true)
                     }else{
                         return trField.remove()
                     }
@@ -328,7 +342,6 @@ export default class Fields{
             `   
             this.container.appendChild(containerModal)
             const modal = document.querySelector("#exampleModal")
-            const btnCancel = document.querySelector('#cancelBtn')
             const btnClose = document.querySelector('#btnClose')
             const btnConfirmation = document.querySelector('#confirmationBtn')
 
@@ -343,11 +356,6 @@ export default class Fields{
                 modal.remove()
                 trField.remove()
                 this.fields(this.collectionSelected)
-            })
-
-            btnCancel.addEventListener('click', (e) => {
-                e.preventDefault()
-                modal.remove()
             })
     }
 
@@ -373,7 +381,7 @@ export default class Fields{
                 
                 if(!inputValue || !valueSelectOfTypes ){
                     if(inputValue && !valueSelectOfTypes){
-                        return this.messaging.msg(`O campo de nome ${inputValue} precisa especificar um tipo !`)
+                        return this.messaging.msg(`O campo de nome "${inputValue}" deve especificar um tipo!`)
                     }
                     else{
                         return this.messaging.msg(`O ${i+1}º campo Não foi preenchido corretamente!`)

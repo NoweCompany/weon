@@ -290,6 +290,7 @@ class Drive{
                 }
                 if(!this.isEdit){
                     const response = await this.requests.postApiValues(presetSelected, [valuesForm])
+                    this.isEdit = false
                 }else{
                     const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuesPreset._id)
                     this.isEdit = false
@@ -440,6 +441,7 @@ class Drive{
     }
 
     cleanMsg() {
+        this.containerMsg.innerHTML = '';
         this.containerMsg.className = 'msg';
     }
 }
