@@ -17,12 +17,15 @@ function applyLightTheme() {
     stylesheet.rel = "stylesheet";
     stylesheet.href = "../assets/css/lightmode.css";
     document.head.appendChild(stylesheet);
-    setLocalStorageItem("theme", "light");
-}
+
+    if (darkModeStylesheet) {
+        darkModeStylesheet.remove();
+    }
 
 function applyDarkTheme() {
     htmlElement.setAttribute("data-bs-theme", "dark");
     htmlElement.classList.add("dark-mode");
+
     stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
     stylesheet.href = "../assets/css/darkmode.css";
