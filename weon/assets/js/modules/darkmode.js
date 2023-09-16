@@ -3,23 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const htmlElement = document.documentElement;
     let darkModeStylesheet;
 
-    function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
-        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    function setLocalStorageItem(name, value) {
+        localStorage.setItem(name, value);
     }
 
-    function getCookie(name) {
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookies = decodedCookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                return cookie.substring(name.length + 1);
-            }
-        }
-        return "";
+    function getLocalStorageItem(name) {    
+        return localStorage.getItem(name) || "";
     }
 
     function applyLightTheme() {
@@ -27,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (darkModeStylesheet) {
             darkModeStylesheet.remove();
         }
-        setCookie("theme", "light", 365);
+        setLocalStorageItem("theme", "light");
     }
 
     function applyDarkTheme() {
@@ -37,21 +26,21 @@ document.addEventListener("DOMContentLoaded", function () {
         darkModeStylesheet.rel = "stylesheet";
         darkModeStylesheet.href = "../assets/css/darkmode.css";
         document.head.appendChild(darkModeStylesheet);
-        setCookie("theme", "dark", 365);
+        setLocalStorageItem("theme", "dark");
     }
 
-    function applyThemeFromCookie() {
-        const themeCookie = getCookie("theme");
-        if(darkModeSwitch){
-            if (themeCookie === "dark") {
+    function applyThemeFromLocalStorage() {
+        const themeLocalStorage = getLocalStorageItem("theme");
+        if (darkModeSwitch) {
+            if (themeLocalStorage === "dark") {
                 applyDarkTheme();
                 darkModeSwitch.checked = true;
             } else {
                 applyLightTheme();
                 darkModeSwitch.checked = false;
             }
-        }else{
-            if (themeCookie === "dark") {
+        } else {
+            if (themeLocalStorage === "dark") {
                 applyDarkTheme();
             } else {
                 applyLightTheme();
@@ -59,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    if(darkModeSwitch){
+    if (darkModeSwitch) {
         darkModeSwitch.addEventListener("change", function () {
             if (darkModeSwitch.checked) {
                 applyDarkTheme();
@@ -69,5 +58,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    applyThemeFromCookie();
+    applyThemeFromLocalStorage();
 });

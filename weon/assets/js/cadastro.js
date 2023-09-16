@@ -20,6 +20,10 @@ class Drive{
         this.containerMsg = containerMsg
         this.sideBar = sideBar
 
+        this.itemsPerPage = 10; 
+        this.currentPage = 2; 
+        this.totalPages = 1;
+
         this.requests = requests
 
         this.collectionData = []
@@ -34,6 +38,35 @@ class Drive{
             await this.addOptions()
         }
     }
+
+    calculateTotalPages(totalItems) {
+        this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+    }
+
+    createPaginationButtons() {
+        const paginationContainer = document.querySelector('#paginationContainer');
+        if (!paginationContainer) {
+            return;
+        }
+
+        paginationContainer.innerHTML = ''; // Limpa o conteúdo anterior
+
+        // Crie botões para cada página
+        for (let i = 1; i <= this.totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i;
+            pageButton.classList.add('btn', 'btn-light', 'mr-2', 'page-button');
+
+            // Adicione um ouvinte de eventos para a página clicada
+            pageButton.addEventListener('click', () => {
+                this.currentPage = i;
+                this.showDocument(this.presetSelected);
+            });
+
+            paginationContainer.appendChild(pageButton);
+        }
+    }
+
 
     showItems(items, container) {
         // Remova todas as classes 'hidden' da barra lateral
@@ -63,66 +96,75 @@ class Drive{
         }
     }
 
-    async showDocument(collectionName = this.presetSelected){
+    async showDocument(collectionName = this.presetSelected) {
         try {
-            this.presetSelected = collectionName
-
-            //Promise.all
-            const fieldsCollection = await this.requests.getApiFields(this.presetSelected)
-            const valuesCollection = await this.requests.getVeluesApi(this.presetSelected)
-            
-            if(fieldsCollection.fields.length <= 0) {
+            this.presetSelected = collectionName;
+    
+            const fieldsCollection = await this.requests.getApiFields(this.presetSelected);
+            const valuesCollection = await this.requests.getVeluesApi(this.presetSelected);
+    
+            if (fieldsCollection.fields.length <= 0) {
                 this.container.innerHTML = `
-                <div class="alert alert-warning" role="alert">
-                    <h4 class="galert-headin">Aviso</h4>
-                    <p>Não há nenhum campo criado para essa predefinição</p>
-                    <hr>
-                    <p class="mb-0">Crie seus campos em <a class="alert-link" href="/weon/pages/admin.html"> administração </a> </p>
-                </div>
-                `
-                return
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="galert-headin">Aviso</h4>
+                        <p>Não há nenhum campo criado para essa predefinição</p>
+                        <hr>
+                        <p class="mb-0">Crie seus campos em <a class="alert-link" href="/weon/pages/admin.html"> administração </a> </p>
+                    </div>
+                `;
+                return;
             }
-
-            const {btnCad, thead, tbody} = this.renderTableHtml(collectionName)
-            const btnDelet = document.querySelector("#btnDelet")
-            const btnDownload = document.querySelector("#btnDownload")
-            const childresOfTBody = tbody.children
-
+    
+            // Calcular o número total de páginas com base nos valores recuperados
+            this.calculateTotalPages(valuesCollection.length);
+    
+            const { btnCad, thead, tbody } = this.renderTableHtml(collectionName);
+            const btnDelet = document.querySelector("#btnDelet");
+            const btnDownload = document.querySelector("#btnDownload");
+            const childresOfTBody = tbody.children;
+    
             btnDelet.addEventListener('click', async (e) => {
                 try {
-                    const checkboxes = document.querySelectorAll('.checkBoxDelet')
-                    for(const checkbox of checkboxes){
-                        if(checkbox.checked){
-                            const response = await requests.deleteApiValues(this.presetSelected, checkbox.id)
-                            this.msg(response.success, true)
-                            checkbox.parentNode.remove()
+                    const checkboxes = document.querySelectorAll('.checkBoxDelet');
+                    for (const checkbox of checkboxes) {
+                        if (checkbox.checked) {
+                            const response = await requests.deleteApiValues(this.presetSelected, checkbox.id);
+                            this.msg(response.success, true);
+                            checkbox.parentNode.remove();
                         }
                     }
                 } catch (error) {
-                    this.msg(error.message || 'Ocorreu um erro inesperado 😢', false)
+                    this.msg(error.message || 'Ocorreu um erro inesperado 😢', false);
                 }
-            }) 
-
+            });
+    
             btnDownload.addEventListener('click', async (e) => {
                 try {
-                    const response = await this.requests.download(collectionName)
-                    const data = await response.json()
-                    if(response.status !== 200 ){
-                        return this.msg(data.errors, false)
+                    const response = await this.requests.download(collectionName);
+                    const data = await response.json();
+                    if (response.status !== 200) {
+                        return this.msg(data.errors, false);
                     }
-                
-                    window.location.assign(data.url)
+    
+                    window.location.assign(data.url);
                 } catch (error) {
-                    return this.msg('Ocorreu um erro inesperado 😢', false)
+                    return this.msg('Ocorreu um erro inesperado 😢', false);
                 }
-            })
-
-
-            this.buildTable(thead, tbody, fieldsCollection, valuesCollection)
-        } catch (error) {    
-            this.container.innerHTML = ''
-            return this.msg(error.message || "Ocorreu um erro inesperado")
-       }
+            });
+    
+            // Paginação
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            const valuesToShow = valuesCollection.slice(startIndex, endIndex);
+    
+            this.buildTable(thead, tbody, fieldsCollection, valuesToShow);
+    
+            // Criar os botões de paginação
+            this.createPaginationButtons();
+        } catch (error) {
+            this.container.innerHTML = '';
+            return this.msg(error.message || "Ocorreu um erro inesperado");
+        }
     }
 
     renderTableHtml(presetSelected) {
@@ -292,6 +334,7 @@ class Drive{
                     const response = await this.requests.postApiValues(presetSelected, [valuesForm])
                     this.isEdit = false
                 }else{
+                    
                     const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuesPreset._id)
                     this.isEdit = false
                     this.valuesPreset = {}
@@ -621,18 +664,18 @@ class Requests{
 }
 
 const containerMsg = document.querySelector('.msg');
-const container = document.querySelector('.container')
-const loading = document.querySelector('.loading') 
-const sideBar = document.querySelector('.modal-body')
-
+const container = document.querySelector('.container');
+const loading = document.querySelector('.loading');
+const sideBar = document.querySelector('.modal-body');
 const token = () => {
     const token = document.cookie
         .split("; ")
         .find((row) => row.startsWith("token="))
         .split("=")[1];
-    return token
-}
+    return token;
+};
 
-const requests = new Requests(token(), configs.urlApi, loading)
-const drive = new Drive(containerMsg, container, requests, sideBar)
+const requests = new Requests(token(), configs.urlApi, loading);
+const drive = new Drive(containerMsg, container, requests, sideBar);
+
 drive.init(true)
