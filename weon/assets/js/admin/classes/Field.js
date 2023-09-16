@@ -244,7 +244,7 @@ export default class Fields{
 
         const isRequiredCheckbox = document.createElement("input");
         isRequiredCheckbox.setAttribute("type", "checkbox");
-        isRequiredCheckbox.className = "form-check-input"; // Classe para a caixa de seleção Bootstrap
+        isRequiredCheckbox.className = "form-check-input"; 
         isRequiredCheckbox.setAttribute("id", "isRequired");
         if (isRequired) {
             isRequiredCheckbox.checked = true;

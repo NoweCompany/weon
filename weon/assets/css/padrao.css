@@ -67,7 +67,6 @@
   
 body{
     margin-top: 50px;
-    background-color: #f7f7f7;
     height: 100vh;
     width: 100vw;
     background-size: cover;
@@ -76,16 +75,14 @@ body{
     overflow-x: hidden;
     }
 
-  ::selection {
-    background-color:#b8dcff;
-  }
+  
   
   :root {
     scroll-behavior: smooth;
   }
 
   nav {
-    background-color: #4179d2;
+  
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     width: 100%;
@@ -115,7 +112,7 @@ body{
   
   li a {
     display: block;
-    color: #1f1d1d;
+ 
     text-align: center;
     padding: 20px 30px;
     text-decoration: none;
@@ -166,10 +163,6 @@ li {
   vertical-align: bottom;
 }
 
-#select{
-  color: #f7f7f7;
-  
-}
 
 #logo {
   display: block;
@@ -221,49 +214,4 @@ li {
   position: absolute;
 } */
 
-/* Estilização da barra de rolagem */
-::-webkit-scrollbar {
-  width: 4px; /* Largura da barra de rolagem */
-}
-/* Estilização do trilho da barra de rolagem */
-::-webkit-scrollbar-track {
-  background-color: #ffffff00; /* Cor de fundo do trilho */
 
-}
-/* Estilização do "polegar" da barra de rolagem */
-::-webkit-scrollbar-thumb {
-  background-color: #0000004a; /* Cor do "polegar" */
-  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
-}
-
-/* Estilização do "polegar" da barra de rolagem quando hover */
-::-webkit-scrollbar-thumb:hover {
-  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
-}
-
-/* Estilização da barra de rolagem */
-::-webkit-scrollbar {
-  height: 4px; /* Altura da barra de rolagem */
-}
-
-/* Estilização do trilho da barra de rolagem */
-::-webkit-scrollbar-track {
-  background-color: #ffffff; /* Cor de fundo do trilho */
-}
-
-/* Estilização do "polegar" da barra de rolagem */
-::-webkit-scrollbar-thumb {
-  background-color: #0000004a; /* Cor do "polegar" */
-  border-radius: 40px; /* Arredondamento das bordas do "polegar" */
-}
-
-/* Estilização do "polegar" da barra de rolagem quando hover */
-::-webkit-scrollbar-thumb:hover {
-  background-color: #292929; /* Cor do "polegar" ao passar o mouse */
-}
-
-.dark-mode {
-  background-color: #333; 
-  color: #fff; 
-
-}

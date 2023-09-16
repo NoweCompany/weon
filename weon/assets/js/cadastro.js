@@ -105,7 +105,7 @@ class Drive{
     
             if (fieldsCollection.fields.length <= 0) {
                 this.container.innerHTML = `
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-warning w-50 mx-auto role="alert">
                         <h4 class="galert-headin">Aviso</h4>
                         <p>Não há nenhum campo criado para essa predefinição</p>
                         <hr>
