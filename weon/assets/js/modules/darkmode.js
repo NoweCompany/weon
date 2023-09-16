@@ -17,10 +17,8 @@ function applyLightTheme() {
     stylesheet.rel = "stylesheet";
     stylesheet.href = "../assets/css/lightmode.css";
     document.head.appendChild(stylesheet);
-
-    if (darkModeStylesheet) {
-        darkModeStylesheet.remove();
-    }
+    setLocalStorageItem("theme", "light");
+}
 
 function applyDarkTheme() {
     htmlElement.setAttribute("data-bs-theme", "dark");
