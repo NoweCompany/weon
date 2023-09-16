@@ -1,6 +1,6 @@
 const darkModeSwitch = document.getElementById("darkModeSwitch") || null;
 const htmlElement = document.documentElement;
-let darkModeStylesheet;
+let stylesheet;
 
 function setLocalStorageItem(name, value) {
     localStorage.setItem(name, value);
@@ -12,19 +12,24 @@ function getLocalStorageItem(name) {
 
 function applyLightTheme() {
     htmlElement.setAttribute("data-bs-theme", "light");
+    htmlElement.classList.add("light-mode");
+    stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = "../assets/css/lightmode.css";
+    document.head.appendChild(stylesheet);
+
     if (darkModeStylesheet) {
         darkModeStylesheet.remove();
     }
-    setLocalStorageItem("theme", "light");
-}
 
 function applyDarkTheme() {
     htmlElement.setAttribute("data-bs-theme", "dark");
     htmlElement.classList.add("dark-mode");
-    darkModeStylesheet = document.createElement("link");
-    darkModeStylesheet.rel = "stylesheet";
-    darkModeStylesheet.href = "../assets/css/darkmode.css";
-    document.head.appendChild(darkModeStylesheet);
+
+    stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = "../assets/css/darkmode.css";
+    document.head.appendChild(stylesheet);
     setLocalStorageItem("theme", "dark");
 }
 
