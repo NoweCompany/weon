@@ -15,102 +15,84 @@
   
     nav {
       background-color:	#4179d2;
+  
+    }
+    
+    nav a{
+      color: #161616;
+    }
+
+    li a:before {
+      background-color: #ffffff;
+      transition: transform 0.3s;
+    }
+    
+    li a:hover {
+      color: #ffffff;
+    }
     
 
-    }
-    
-    #navbar a {
-        color: #1f1d1d; 
- 
-    }
-    
     #select{
       color: #f7f7f7;
     
     }
 
     .sidebar {
-      background-color: #2c2c2c;
+      background-color: #ffffff;
      
    
     }
     .toggle-button {
-      color: #adb5bd;
+      color: #424242;
       transition: transform 0.2s ease-in-out;
      
     }
 
    .border{
-    background-color: #2c2c2c;
+    background-color: #ffffff;
     border: 1px solid #495057;
    
    }
 
    #form {
-    background-color: #2c2c2c;
-    border: 1px solid #495057; 
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
    
    }
   
    #FormPreset{
-    background-color: #2c2c2c;
-    border: 1px solid #495057; 
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
   
    }
 
    .popreset{
-    background-color: #2c2c2c;
-
-    border: 1px solid #495057; 
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
    }
 
    #form input[type="text"],
    #form input[type="number"],
    #form textarea,
    #form input[type="date"] {
-    border: 1px solid #495057; 
+    border: 1px solid #e0e3e7; 
    }
    
-   tr:nth-child(even) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
-  
-  tr:nth-child(odd) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
-
-  td:nth-child(even) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
-  
-  td:nth-child(odd) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
 
   .sidebar .modal-button {
-    color: #adb5bd;
+    color: #2b2b2b;
   }
 
   .btn-outline-dark{
-    background-color: #515151;
+    background-color: #e0e3e7;
   }
 
   .popupConfirmation {
     background-color: #ffffff;
-    border: 1px solid #adadad; 
+    border: 1px solid #e0e3e7; 
   }
 
-  .sidebar.closed {
-    background-color:  #b8b4b4;
-  }
+ 
 
   .dark-mode {
     background-color: #333; 

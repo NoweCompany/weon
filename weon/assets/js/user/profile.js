@@ -14,3 +14,4 @@ if(dataUser) {
   messaging.msg('Não foi possível obter dados do usuário')
   logout()
 }
+

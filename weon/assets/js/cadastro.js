@@ -51,21 +51,77 @@ class Drive{
 
         paginationContainer.innerHTML = ''; // Limpa o conteúdo anterior
 
-        // Crie botões para cada página
-        for (let i = 1; i <= this.totalPages; i++) {
-            const pageButton = document.createElement('button');
-            pageButton.innerText = i;
-            pageButton.classList.add('btn', 'btn-light', 'mr-2', 'page-button');
+     // Crie um botão "Anterior"
+const prevButton = document.createElement('button');
+prevButton.innerText = 'Anterior';
+prevButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+prevButton.disabled = this.currentPage === 1; // Desabilita o botão se estiver na primeira página
 
-            // Adicione um ouvinte de eventos para a página clicada
-            pageButton.addEventListener('click', () => {
-                this.currentPage = i;
-                this.showDocument(this.presetSelected);
-            });
-
-            paginationContainer.appendChild(pageButton);
-        }
+// Adicione um ouvinte de eventos para voltar para a página anterior
+prevButton.addEventListener('click', () => {
+    if (this.currentPage > 1) {
+        this.currentPage--;
+        this.showDocument(this.presetSelected);
+        updatePageButtons();
     }
+});
+
+paginationContainer.appendChild(prevButton);
+
+for (let i = 1; i <= this.totalPages; i++) {
+    const pageButton = document.createElement('button');
+    pageButton.innerText = i;
+    pageButton.classList.add('btn', 'btn-outline-secondary', 'm-1', 'page-button');
+
+    // Adicione classes do Bootstrap para destacar a página atual
+    if (i === this.currentPage) {
+        pageButton.classList.remove('btn-outline-secondary');
+        pageButton.classList.add('btn-primary');
+    }
+
+    // Adicione um ouvinte de eventos para a página clicada
+    pageButton.addEventListener('click', () => {
+        this.currentPage = i;
+        this.showDocument(this.presetSelected);
+        updatePageButtons();
+    });
+
+    paginationContainer.appendChild(pageButton);
+}
+
+// Crie um botão "Próximo"
+const nextButton = document.createElement('button');
+nextButton.innerText = 'Próximo';
+nextButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão se estiver na última página
+
+// Adicione um ouvinte de eventos para avançar para a próxima página
+nextButton.addEventListener('click', () => {
+    if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.showDocument(this.presetSelected);
+        updatePageButtons();
+    }
+});
+
+paginationContainer.appendChild(nextButton);
+
+// Função para atualizar o estado dos botões de página
+function updatePageButtons() {
+    const pageButtons = document.querySelectorAll('.page-button');
+    pageButtons.forEach(button => {
+        button.classList.remove('btn-primary'); // Remove a classe 'btn-primary' de todos os botões
+        if (parseInt(button.innerText) === this.currentPage) {
+            button.classList.add('btn-primary'); // Adiciona a classe 'btn-primary' ao botão da página atual
+        }
+    });
+
+    prevButton.disabled = this.currentPage === 1; // Desabilita o botão "Anterior" na primeira página
+    nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão "Próximo" na última página
+}
+
+    }        
+        
 
 
     showItems(items, container) {
