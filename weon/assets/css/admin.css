@@ -204,9 +204,6 @@
   transform: translateX(-50%);
 }
 
-
-
-
 /* tabela */
 
 
@@ -227,11 +224,9 @@
   padding: 3px;
   border-collapse: separate;
   border-spacing: 3px;
+
 }
 
-.table-container th:hover {
-  transform: none; /* Remova a transformação no hover */
-}
 
 .table-container th {
   text-align: center;

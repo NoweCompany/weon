@@ -98,3 +98,14 @@
     background-color: #333; 
     color: #fff; 
   }
+
+  .table-container tr {
+    color: #000; /* Defina a cor original */
+    transition: color 0.2s ease, box-shadow 0.2s ease; /* Adicione a propriedade box-shadow à transição */
+  }
+  
+  .table-container tr:hover {
+    color: #3943d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Defina a sombra desejada aqui */
+  }
+  
