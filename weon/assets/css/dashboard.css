@@ -398,3 +398,50 @@ h1, h2, h3, h4, h5, h6, strong {
 .mb-3 {
   display: none;
 }
+
+.containerCenter{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formTop{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1000px;
+  padding: 20px 50px;
+  border-radius: 5px;
+  background-color: #c5c5c5;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cardDash{
+  width: 500px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+
+
+  border: 3px solid #4469aa;
+  padding: 30px;
+}
+
+.configContent{
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+}

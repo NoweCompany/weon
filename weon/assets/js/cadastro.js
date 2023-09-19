@@ -272,7 +272,6 @@ class Drive{
                         }else {
                             valueInput = element.checked
                         }
-
                     switch(element.type){
                         case 'number':
                             valueInput = Number(valueInput)
