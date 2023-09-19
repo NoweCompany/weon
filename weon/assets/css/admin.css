@@ -204,9 +204,6 @@
   transform: translateX(-50%);
 }
 
-
-
-
 /* tabela */
 
 
@@ -227,11 +224,9 @@
   padding: 3px;
   border-collapse: separate;
   border-spacing: 3px;
+
 }
 
-.table-container th:hover {
-  transform: none; /* Remova a transformação no hover */
-}
 
 .table-container th {
   text-align: center;
@@ -285,8 +280,7 @@ th {
 }
 
 .editPreset{
-  background-color: #ff9d00;
-  color: #fff;
+  color: #000000;
   border: none;
   padding: 10px 20px;
   font-size: 16px;

@@ -70,30 +70,8 @@
    #form input[type="date"] {
     border: 1px solid #495057; 
    }
-   
-   tr:nth-child(even) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
   
-  tr:nth-child(odd) {
-    background-color: #515151;
-    color: #ffffff;
 
-  }
-
-  td:nth-child(even) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
-  
-  td:nth-child(odd) {
-    background-color: #515151;
-    color: #ffffff;
-
-  }
 
   .sidebar .modal-button {
     color: #adb5bd;
@@ -111,3 +89,27 @@
   .sidebar.closed {
     background-color:  #2c2c2c;
   }
+
+  .table-container table tr {
+    color: #c1c1c1;
+    transition: color 0.3s ease; 
+  }
+  
+  .table-container tr:hover {
+    color: #4b62fe;
+    transition: color 0.2s ease; 
+
+  }
+  
+  .table-container table tr:nth-child(even) {
+    background-color: #333333;
+  }
+  
+  .table-container table tr:nth-child(odd) {
+    background-color: #4f4f4f;
+  }
+  
+
+  
+
+  

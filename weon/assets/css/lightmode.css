@@ -1,0 +1,111 @@
+    
+  body{
+    background-color:#f4f4f4;
+  
+    }
+  
+    ::selection {
+      background-color:#b8dcff;
+  
+    }
+    
+    :root {
+      scroll-behavior: smooth;
+    }
+  
+    nav {
+      background-color:	#4179d2;
+  
+    }
+    
+    nav a{
+      color: #161616;
+    }
+
+    li a:before {
+      background-color: #ffffff;
+      transition: transform 0.3s;
+    }
+    
+    li a:hover {
+      color: #ffffff;
+    }
+    
+
+    #select{
+      color: #f7f7f7;
+    
+    }
+
+    .sidebar {
+      background-color: #ffffff;
+     
+   
+    }
+    .toggle-button {
+      color: #424242;
+      transition: transform 0.2s ease-in-out;
+     
+    }
+
+   .border{
+    background-color: #ffffff;
+    border: 1px solid #495057;
+   
+   }
+
+   #form {
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
+   
+   }
+  
+   #FormPreset{
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
+  
+   }
+
+   .popreset{
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
+   }
+
+   #form input[type="text"],
+   #form input[type="number"],
+   #form textarea,
+   #form input[type="date"] {
+    border: 1px solid #e0e3e7; 
+   }
+   
+
+  .sidebar .modal-button {
+    color: #2b2b2b;
+  }
+
+  .btn-outline-dark{
+    background-color: #e0e3e7;
+  }
+
+  .popupConfirmation {
+    background-color: #ffffff;
+    border: 1px solid #e0e3e7; 
+  }
+
+ 
+
+  .dark-mode {
+    background-color: #333; 
+    color: #fff; 
+  }
+
+  .table-container tr {
+    color: #000; /* Defina a cor original */
+    transition: color 0.2s ease, box-shadow 0.2s ease; /* Adicione a propriedade box-shadow à transição */
+  }
+  
+  .table-container tr:hover {
+    color: #3943d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Defina a sombra desejada aqui */
+  }
+  

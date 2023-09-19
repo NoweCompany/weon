@@ -146,70 +146,63 @@ export default class Presets {
 
             //tbody
             for (const preset of data.response) {
-                const { collectionName, fields } = preset
-                //collectionName
-                const tr = document.createElement('tr')
-                const thTable = document.createElement('td')
-                const thTextTable = document.createTextNode(collectionName)
-
-                thTable.appendChild(thTextTable)
-                tr.appendChild(thTable)
-                tbody.appendChild(tr)
-
-                //fields
+                const { collectionName, fields } = preset;
+            
+                // Crie a linha da tabela
+                const tr = document.createElement('tr');
+                tr.classList.add('editPreset');
+            
+                // Adicione um evento de clique à linha da tabela
+                tr.addEventListener('click', (e) => {
+                    // Verifique se o clique ocorreu no botão de exclusão (ou seus descendentes)
+                    if (e.target.closest('.deletPreset')) {
+                        // Se for o botão de exclusão, não faça nada ou realize a ação de exclusão aqui
+                        return;
+                    }
+                    // Se não for o botão de exclusão, chame a função de edição
+                    this.editPreset(e, collectionName);
+                });
+            
+                // collectionName
+                const thTable = document.createElement('td');
+                const thTextTable = document.createTextNode(collectionName);
+                thTable.appendChild(thTextTable);
+                tr.appendChild(thTable);
+            
+                // fields
                 for (let i = 0; i <= maiorLength; i++) {
-                    const thfield = document.createElement('td')
-                    const thTextfield = document.createTextNode(fields[i] ? fields[i].key : '')
-
-                    thfield.appendChild(thTextfield)
-                    tr.appendChild(thfield)
+                    const thfield = document.createElement('td');
+                    const thTextfield = document.createTextNode(fields[i] ? fields[i].key : '');
+                    thfield.appendChild(thTextfield);
+                    tr.appendChild(thfield);
                 }
-
-                //TdEdit
-                const tdEdit = document.createElement('td');
-                tdEdit.setAttribute('id', collectionName + '_edit');
-
-                tdEdit.removeEventListener('click', this.editPreset)
-                tdEdit.addEventListener('click', (e) => this.editPreset(e, collectionName ));
-
-                //TdDelet
+            
+                // TdDelet
                 const tdDelet = document.createElement('td');
                 tdDelet.setAttribute('id', collectionName + '_delete');
-
+            
                 const handleClickTdDelet = (e) => {
                     const popUpAlert = document.querySelector('.popupConfirmation');
                     if (popUpAlert && !popUpAlert.classList.contains('show')) this.showPopUp(popUpAlert, e, collectionName);
                 }
                 tdDelet.removeEventListener('click', handleClickTdDelet)
                 tdDelet.addEventListener('click', handleClickTdDelet);
-
-                //Add Icons 
-                const editIcon = document.createElement('i');
-                editIcon.className = 'fas fa-edit';
-
+            
+                // Add Icons
                 const deletIcon = document.createElement('i');
                 deletIcon.className = 'fas fa-trash-alt';
-
-           
-                tdEdit.appendChild(editIcon);
+            
                 tdDelet.appendChild(deletIcon);
-
-         
-                const tdTextEdit = document.createTextNode('');
+            
                 const tdTextDelet = document.createTextNode('');
-
-            
-                tdEdit.appendChild(tdTextEdit);
                 tdDelet.appendChild(tdTextDelet);
-
-              
-                tdEdit.className = 'editPreset';
                 tdDelet.className = 'deletPreset';
-
             
-                tr.appendChild(tdEdit);
                 tr.appendChild(tdDelet);
+            
+                tbody.appendChild(tr);
             }
+            
         } catch (error) {
             const msgError = error.message
             this.messaging.msg(msgError || 'Algo deu errado tente novamente mais tarde 😢', false)
