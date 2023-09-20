@@ -1,8 +1,4 @@
-    
-  body{
-    background-color:#211e1e;
-  
-    }
+
   
     ::selection {
       background-color:#197eb95c;
@@ -25,7 +21,7 @@
     }
     
     #select{
-      color: #314fd1;
+      color: #ffffff;
     
     }
 
@@ -43,7 +39,6 @@
    .border{
     background-color: #2c2c2c;
     border: 1px solid #495057;
-   
    }
 
    #form {
@@ -109,7 +104,28 @@
     background-color: #4f4f4f;
   }
   
-
+  .cardDash{
+    background-color: #2c2c2c;
+    border: 1px solid #495057;
+  }
   
+
+.table tr:nth-child(even) {
+  background-color: #2c2c2c;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #2c2c2c;
+}
+
+.table td:nth-child(even) {
+  background-color: #2c2c2c;
+}
+
+.table td:nth-child(odd) {
+  background-color: #2c2c2c;
+}
+
+
 
   

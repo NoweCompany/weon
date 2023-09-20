@@ -449,7 +449,7 @@ function updatePageButtons() {
                 if (required) {
                     const asterisk = document.createElement('span');
                     asterisk.innerText = ' *';
-                    asterisk.style.color = 'red'; // Defina a cor do asterisco como vermelha ou outra de sua escolha
+                    asterisk.style.color = 'red'; 
                     label.appendChild(asterisk);
                 }
 
