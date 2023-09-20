@@ -299,6 +299,21 @@ function updatePageButtons() {
             thead.appendChild(th);
         }
 
+            const selectAllCheckbox = document.createElement('input');
+            selectAllCheckbox.setAttribute('type', 'checkbox');
+            selectAllCheckbox.addEventListener('click', () => {
+                const checkboxes = document.querySelectorAll('.checkBoxDelet');
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
+
+        const selectAllTh = document.createElement('th');
+        selectAllTh.appendChild(selectAllCheckbox);
+
+        thead.children[0].insertBefore(selectAllTh, thead.children[0].firstChild);
+
+
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
             //checkbox
