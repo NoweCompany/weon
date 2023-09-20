@@ -190,3 +190,46 @@ const dash = new Dashboard(container, form, selectPreset, selectField01, selectF
 dash.initSelects()
   .then(resolve => resolve)
   .catch(err => console.log(err))
+ 
+
+  //sidebarr
+  function activateSidebarToggle() {
+    var toggleSidebarButton = document.getElementById('toggle-sidebar');
+    var sidebar = document.querySelector('.sidebar');
+    var title = document.getElementById('sidebar-title');
+    var predefinicaoButton = document.getElementById('predefinicao');
+    var isSidebarCollapsed = false;
+    var hasBeenActivated = false;
+  
+    function toggleSidebar() {
+      if (predefinicaoButton.textContent.trim() === 'dashboard') {
+        predefinicaoButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+      } else {
+        predefinicaoButton.innerHTML = 'dashboard <i class="fa-solid fa-chart-line"></i>';
+      }
+  
+      isSidebarCollapsed = !isSidebarCollapsed;
+      sidebar.classList.toggle('collapsed', isSidebarCollapsed);
+      title.classList.toggle('hidden', isSidebarCollapsed);
+    }
+    
+    toggleSidebarButton.addEventListener('click', toggleSidebar);
+  
+    function checkSidebarState() {
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
+      if (screenWidth < 1297) {
+        if (!hasBeenActivated) {
+          toggleSidebar();
+          hasBeenActivated = true;
+        }
+      } else {
+        hasBeenActivated = false;
+      }
+    }
+    window.addEventListener('resize', checkSidebarState);
+    checkSidebarState();
+  }
+  activateSidebarToggle();
+  
+  
