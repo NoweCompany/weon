@@ -36,11 +36,13 @@ class Dashboard {
 
   async initSelects(){
     await this.setCollectionData()
-    //this.listDashs()
+    this.listDashs()
     this.addEnventOnBtns()
   }
 
   async listDashs(){
+    const contDashboards = document.querySelector('#contDashboards')
+    contDashboards.innerHTML = ''
     const response = await this.dashboardRequests.indexDashboards()
     for(let dash of response){
       const card = document.createElement('div')
@@ -77,7 +79,7 @@ class Dashboard {
       
       card.appendChild(chartContent)
       card.appendChild(configContent)
-      this.container.appendChild(card)
+      contDashboards.appendChild(card)
       
       await this.generateChart(dash)
     }
@@ -113,11 +115,11 @@ class Dashboard {
   }
 
   async addEnventOnBtns(){
-    const btnTaFormCreate = document.querySelector('#btnTaFormCreate')
+    const btnToFormCreate = document.querySelector('#btnToFormCreate')
     const btnCreateDash = document.querySelector('#btnCreateDash')
     const btnBack = document.querySelector('#btnBack')
     //Evento para ocultar graficos e mostrar o formulario
-    btnTaFormCreate.addEventListener('click', (e) => {
+    btnToFormCreate.addEventListener('click', (e) => {
       e.preventDefault()
       this.containerCreateDash.style.display = 'flex'
       this.containerCenter.style.display = 'none'
@@ -126,10 +128,27 @@ class Dashboard {
       this.addEventOnSelectPresets()
     })
     //Evento para criar um dashBoard
-    btnCreateDash.addEventListener('click', (e) => {
+    btnCreateDash.addEventListener('click', async (e) => {
       e.preventDefault()
-      this.containerCenter.style.display = 'flex'
-      this.containerCreateDash.style.display = 'none'      
+      const tittleChart = document.querySelector('#tittleChart').value
+      const prestNameChart = this.preset.value
+      const textField = this.field01.value
+      const numberField = this.field02.value
+      const typeChart = document.querySelector('#typeChart').value
+      if(!tittleChart || !prestNameChart || !textField || !numberField || !typeChart) {
+        this.messaging.msg('Preencha todos os campos corretamente', false)
+        return
+      }
+      
+      try{
+        await this.dashboardRequests.postDashboards(tittleChart, prestNameChart, textField, numberField, typeChart)
+        this.messaging.msg('Dashboard criado com sucesso', true)
+        this.containerCenter.style.display = 'flex'
+        this.containerCreateDash.style.display = 'none' 
+        this.listDashs()
+      }catch(error){
+        this.messaging.msg(error, false)
+      }
     })
     //Evento para ocultar formulario e mostrar graficos
     btnBack.addEventListener('click', (e) => {
@@ -157,10 +176,12 @@ class Dashboard {
     
     this.collectionData.forEach((collection, i) => {
       if(collection.collectionName !== this.presetSelected) return
-      collection.fields.forEach((field) => {
-        const option = document.createElement('option')
-        option.innerText = field.key
-        this.field01.appendChild(option)
+        collection.fields.forEach((field) => {
+          if(field.type === 'string'){
+            const option = document.createElement('option')
+            option.innerText = field.key
+            this.field01.appendChild(option)
+          }
       })
     })
 
@@ -184,9 +205,11 @@ class Dashboard {
     this.collectionData.forEach((collection, i) => {
       if(collection.collectionName !== this.presetSelected) return
       collection.fields.forEach((field) => {
-        const option = document.createElement('option')
-        option.innerText = field.key
-        this.field02.appendChild(option)
+        if(field.type === 'int' || field.type === 'double'){
+          const option = document.createElement('option')
+          option.innerText = field.key
+          this.field02.appendChild(option)
+        }
       })
     })
 

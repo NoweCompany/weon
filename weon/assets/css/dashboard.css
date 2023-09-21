@@ -166,8 +166,7 @@
 }
 
 .cardDash {
-  width: 500px;
-  height: 100%; 
+  flex:content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -194,4 +193,20 @@
 
 .rect{
   fill: black;
+}
+
+.containerCreateDash{
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+}
+
+.contDashboards{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#contField01 ,#contField02{
+  display: none;
 }
