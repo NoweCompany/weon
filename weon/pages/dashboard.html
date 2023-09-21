@@ -35,38 +35,44 @@
     </div>
     
     <div class="msg"></div>
-    <div class="containerCenter">
+    <div class="containerCenter" id="containerCenter">
         <form class="formTop">
             <div class="left"><h3>Dashboards</h3></div>
             <div class="rigth">
-                <button type="submit" form="form" class="btn btn-outline-primary sm-4 ms-2">Criar novo Dashboard</button>
+                <button type="submit" id="btnTaFormCreate" class="btn btn-outline-primary sm-4 ms-2">Criar novo Dashboard</button>
             </div>
         </form>
         <div class="container" style="margin-top: 100px;">
-          <!-- <div class="row justify-content-center dp-fixed">
-            <div class="col-lg-6">
-            <form id="fromDash" class="p-4 bg-light">
-              <div class="mb-1">
-                  <label for="presets" class="form-label">Predefinições</label>
-                  <select class="form-control" id="presets">
-                    <option selected >Selecione uma predefinição</option>
-                  </select>
-              </div>
-              <div class="mb-3">
-                  <label for="field01" class="form-label">Field 01:</label>
-                  <select class="form-control" id="field01">
-                    <option selected >Selecione um campo do tipo String</option>
-                  </select>
-              </div>
-              <div class="mb-3">
-                  <label for="field02" class="form-label">Field 02:</label>
-                  <select class="form-control" id="field02">
-                    <option selected >Selecione um campo do tipo Number</option>
-                  </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-          </form> -->
         </div>
+    </div>
+
+    <div class="containerCreateDash" id="containerCreateDash">
+        <form id="formCreateDash">
+            <div class="row justify-content-center dp-fixed">
+                <div class="col-lg-6">
+                <form id="fromDash" class="p-4 bg-light">
+                  <div class="mb-1">
+                      <label for="presets" class="form-label">Predefinições</label>
+                      <select class="form-control" id="presets">
+                        <option selected >Selecione uma predefinição</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="field01" class="form-label">Field 01:</label>
+                      <select class="form-control" id="field01">
+                        <option selected >Selecione um campo do tipo String</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="field02" class="form-label">Field 02:</label>
+                      <select class="form-control" id="field02">
+                        <option selected >Selecione um campo do tipo Number</option>
+                      </select>
+                  </div>
+                  <button name="btnBack" id="btnBack" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+                  <button type="submit" form="formCreateDash" id="btnCreateDash" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
+              </form>
+        </form>
     </div>
   
 

@@ -1,19 +1,23 @@
 import configs from '../modules/configs.js'
 import DashboardRequests from './classes/dashRequests.js'
+import ApiRequests from '../services/ApiRequests.js'
 import Messaging from '../services/Messaging.js'
 import Token from '../services/Token.js'
 import Loading from '../services/Loading.js'
 
 google.charts.load('current', { 'packages': ['corechart'] });
 class Dashboard {
-  constructor(container, form, selectPreset, selectField01, selectField02, api, messaging){
+  constructor(container, containerCenter, containerCreateDash, dashboardRequests, apiRequests, messaging){
     this.container = container
-    this.form = form
-    this.selectPreset = selectPreset
-    this.selectField01 = selectField01
-    this.selectField02 = selectField02
+    this.containerCenter = containerCenter
+    this.containerCreateDash = containerCreateDash
     this.messaging = messaging
-    this.api = api
+    this.dashboardRequests = dashboardRequests
+    this.apiRequests = apiRequests
+
+    this.field01 = document.querySelector('#field01')
+    this.field02 = document.querySelector('#field02')
+    this.preset = document.querySelector('#presets')
 
     this.collectionData = []
     this.presetSelected = ''
@@ -22,7 +26,7 @@ class Dashboard {
 
   async setCollectionData(){
     try {
-      const collectionData = await this.api.getApiCollections()
+      const collectionData = await this.apiRequests.getApiCollections()
       this.collectionData = collectionData.response
       this.messaging.msg('Sucesso', true)
     } catch (error) {
@@ -31,15 +35,13 @@ class Dashboard {
   }
 
   async initSelects(){
-    // await this.setCollectionData()
-    
-    // this.addOptionsInSelectPresets()
-    // this.addEventOnSelectPresets()
-    this.listDashs()
+    await this.setCollectionData()
+    //this.listDashs()
+    this.addEnventOnBtns()
   }
 
   async listDashs(){
-    const response = await this.api.indexDashboards()
+    const response = await this.dashboardRequests.indexDashboards()
     for(let dash of response){
       const card = document.createElement('div')
       card.classList.add('cardDash')
@@ -83,7 +85,7 @@ class Dashboard {
 
   async generateChart(dash){
     // Define the chart to be drawn.
-    const dataOfPreset = await this.api.getVeluesApi(dash.preset)
+    const dataOfPreset = await this.apiRequests.getVeluesApi(dash.preset)
     console.log(dataOfPreset);
     let data = new google.visualization.DataTable();
     data.addColumn('string', dash.textField);
@@ -110,28 +112,55 @@ class Dashboard {
     chart.draw(data, null);
   }
 
+  async addEnventOnBtns(){
+    const btnTaFormCreate = document.querySelector('#btnTaFormCreate')
+    const btnCreateDash = document.querySelector('#btnCreateDash')
+    const btnBack = document.querySelector('#btnBack')
+    //Evento para ocultar graficos e mostrar o formulario
+    btnTaFormCreate.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.containerCreateDash.style.display = 'flex'
+      this.containerCenter.style.display = 'none'
+
+      this.addOptionsInSelectPresets()
+      this.addEventOnSelectPresets()
+    })
+    //Evento para criar um dashBoard
+    btnCreateDash.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.containerCenter.style.display = 'flex'
+      this.containerCreateDash.style.display = 'none'      
+    })
+    //Evento para ocultar formulario e mostrar graficos
+    btnBack.addEventListener('click', (e) => {
+      e.preventDefault()
+      this.containerCenter.style.display = 'flex'
+      this.containerCreateDash.style.display = 'none'
+    })
+  }
+
   addOptionsInSelectPresets(){
     this.collectionData.forEach((value) => {
       if(value.fields.length <= 1) return
       const option = document.createElement('option')
       option.innerText = value.collectionName
-      this.selectPreset.appendChild(option)
+      this.preset.appendChild(option)
     })
   }
 
   addOptionsInSelectField01(){
-    this.selectField01.innerHTML  = ''
+    this.field01.innerHTML  = ''
     const optionDefault = document.createElement('option')
     optionDefault.innerText = 'Selecione um campo do tipo String'
     optionDefault.setAttribute('selected', 'selected')
-    this.selectField01.appendChild(optionDefault)
+    this.field01.appendChild(optionDefault)
     
     this.collectionData.forEach((collection, i) => {
       if(collection.collectionName !== this.presetSelected) return
       collection.fields.forEach((field) => {
         const option = document.createElement('option')
         option.innerText = field.key
-        this.selectField01.appendChild(option)
+        this.field01.appendChild(option)
       })
     })
 
@@ -139,25 +168,25 @@ class Dashboard {
   }
 
   addEventOnSelectField01(){
-    this.selectField01.addEventListener('change', (e) => {
+    this.field01.addEventListener('change', (e) => {
       this.field01Selected = e.target.value
-      this.selectField02.parentNode.style.display = 'block'
+      this.field02.parentNode.style.display = 'block'
     })
   }
 
   addOptionsInSelectField02(){
-    this.selectField02.innerHTML  = ''
+    this.field02.innerHTML  = ''
     const optionDefault = document.createElement('option')
     optionDefault.innerText = 'Selecione um campo do tipo Number'
     optionDefault.setAttribute('selected', 'selected')
-    this.selectField02.appendChild(optionDefault)
+    this.field02.appendChild(optionDefault)
     
     this.collectionData.forEach((collection, i) => {
       if(collection.collectionName !== this.presetSelected) return
       collection.fields.forEach((field) => {
         const option = document.createElement('option')
         option.innerText = field.key
-        this.selectField02.appendChild(option)
+        this.field02.appendChild(option)
       })
     })
 
@@ -165,9 +194,9 @@ class Dashboard {
   }
 
   addEventOnSelectPresets(){
-    this.selectPreset.addEventListener('change', (e) => {
+    this.preset.parentNode.addEventListener('change', (e) => {
       this.presetSelected = e.target.value
-      this.selectField01.parentNode.style.display = 'block'
+      this.field01.parentNode.style.display = 'block'
       this.addOptionsInSelectField01()
       this.addOptionsInSelectField02()
 
@@ -179,14 +208,14 @@ const loading = new Loading(document.querySelector('#loading'))
 const messaging = new Messaging(document.querySelector('.msg'))
 const token = new Token()
 const dashboardRequests = new DashboardRequests(configs.urlApi, token, loading) 
+const apiRequests = new ApiRequests(configs.urlApi, token, loading) 
 
 const form = document.querySelector('#fromDash')
+const containerCenter = document.querySelector('#containerCenter')
+const containerCreateDash = document.querySelector('#containerCreateDash')
 const container = document.querySelector('.container')
-const selectPreset = document.querySelector('#presets')
-const selectField01 = document.querySelector('#field01')
-const selectField02 = document.querySelector('#field02')
 
-const dash = new Dashboard(container, form, selectPreset, selectField01, selectField02, dashboardRequests, messaging)
+const dash = new Dashboard(container, containerCenter, containerCreateDash, dashboardRequests, apiRequests, messaging)
 dash.initSelects()
   .then(resolve => resolve)
   .catch(err => console.log(err))
