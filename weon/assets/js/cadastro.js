@@ -299,8 +299,32 @@ function updatePageButtons() {
             thead.appendChild(th);
         }
 
+        const selectAllCheckbox = document.createElement('input');
+        selectAllCheckbox.setAttribute('type', 'checkbox');
+        selectAllCheckbox.setAttribute('id', 'selectAllCheckbox'); // Adicione um ID
+        selectAllCheckbox.addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('.checkBoxDelet');
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        
+            // Exiba o botão "Deletar Documentos" quando a checkbox geral estiver marcada
+            const btnDelet = document.querySelector('#btnDelet');
+            if (selectAllCheckbox.checked) {
+                btnDelet.classList.remove('d-none'); // Remova a classe 'd-none' para exibir o botão
+            } else {
+                btnDelet.classList.add('d-none'); // Adicione a classe 'd-none' para ocultar o botão
+            }
+        });
+        
+        const selectAllTh = document.createElement('th');
+        selectAllTh.appendChild(selectAllCheckbox);
+        thead.children[0].insertBefore(selectAllTh, thead.children[0].firstChild);
+
+
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
+        
             //checkbox
             const inputCheckBox = document.createElement('input') 
             inputCheckBox.setAttribute('type', 'checkbox')
@@ -449,7 +473,7 @@ function updatePageButtons() {
                 if (required) {
                     const asterisk = document.createElement('span');
                     asterisk.innerText = ' *';
-                    asterisk.style.color = 'red'; // Defina a cor do asterisco como vermelha ou outra de sua escolha
+                    asterisk.style.color = 'red'; 
                     label.appendChild(asterisk);
                 }
 
