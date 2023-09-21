@@ -291,7 +291,7 @@ function updatePageButtons() {
     }
 
     buildTable(thead, tbody, fieldsCollection, valuesCollection) {
-        thead.appendChild(document.createElement('th')).innerText = '✔'
+        thead.appendChild(document.createElement('th')).innerText = ''
         for (const field of fieldsCollection.fields) {
             const th = document.createElement('th');
             const textTh = document.createTextNode(field.key);
@@ -301,6 +301,7 @@ function updatePageButtons() {
 
         const selectAllCheckbox = document.createElement('input');
         selectAllCheckbox.setAttribute('type', 'checkbox');
+        selectAllCheckbox.setAttribute('class', 'checkbox form-check-input form-check-input-lg d-flex')
         selectAllCheckbox.setAttribute('id', 'selectAllCheckbox'); // Adicione um ID
         selectAllCheckbox.addEventListener('click', () => {
             const checkboxes = document.querySelectorAll('.checkBoxDelet');
