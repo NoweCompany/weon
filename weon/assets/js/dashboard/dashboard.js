@@ -19,6 +19,7 @@ class Dashboard {
     this.field02 = document.querySelector('#field02')
     this.preset = document.querySelector('#presets')
 
+    this.valuesMap = new Map()
     this.collectionData = []
     this.presetSelected = ''
     this.field01Selected = ''
@@ -87,8 +88,13 @@ class Dashboard {
 
   async generateChart(dash){
     // Define the chart to be drawn.
-    const dataOfPreset = await this.apiRequests.getVeluesApi(dash.preset)
-    console.log(dataOfPreset);
+    if(!this.valuesMap.get(dash.preset)){
+      let response = await this.apiRequests.getVeluesApi(dash.preset)
+      this.valuesMap.set(dash.preset, response)
+    }
+
+    const dataOfPreset = this.valuesMap.get(dash.preset)
+    
     let data = new google.visualization.DataTable();
     data.addColumn('string', dash.textField);
     data.addColumn('number', dash.numberField);
@@ -159,6 +165,7 @@ class Dashboard {
   }
 
   addOptionsInSelectPresets(){
+    this.preset.innerHTML = ''
     this.collectionData.forEach((value) => {
       if(value.fields.length <= 1) return
       const option = document.createElement('option')
