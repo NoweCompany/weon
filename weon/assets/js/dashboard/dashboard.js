@@ -177,7 +177,7 @@ class Dashboard {
   addOptionsInSelectField01(){
     this.field01.innerHTML  = ''
     const optionDefault = document.createElement('option')
-    optionDefault.innerText = 'Selecione um campo do tipo String'
+    optionDefault.innerText = 'Escolha um campo de texto: '
     optionDefault.setAttribute('selected', 'selected')
     this.field01.appendChild(optionDefault)
     
@@ -205,7 +205,7 @@ class Dashboard {
   addOptionsInSelectField02(){
     this.field02.innerHTML  = ''
     const optionDefault = document.createElement('option')
-    optionDefault.innerText = 'Selecione um campo do tipo Number'
+    optionDefault.innerText = 'Escolha um campo numerico: '
     optionDefault.setAttribute('selected', 'selected')
     this.field02.appendChild(optionDefault)
     

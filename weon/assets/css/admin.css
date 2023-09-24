@@ -288,9 +288,7 @@ th {
   transition: background-color 0.3s ease;
 }
 
-.editPreset:hover{
-  background-color: #ff9d0098
-}
+
 
 .popupConfirmation{
   position: fixed;

@@ -14,6 +14,7 @@ window.addEventListener('load', async (e) => {
     }
 });
 
+
 class Drive{
     constructor(containerMsg, container, requests, sideBar){
         this.container = container
@@ -21,8 +22,8 @@ class Drive{
         this.sideBar = sideBar
 
         this.itemsPerPage = 10; 
-        this.currentPage = 2; 
-        this.totalPages = 1;
+        this.currentPage = 1; 
+        this.totalPages = Infinity;
 
         this.requests = requests
 
@@ -31,8 +32,19 @@ class Drive{
         this.valuesPreset = {}
         
         this.presetSelected = null
+    
+        const totalItems = this.collectionData.length;
+    const itemsPerPage = this.itemsPerPage;
+
+    // Calcule o número total de páginas.
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // Defina currentPage como a última página, a menos que não haja itens.
+    this.currentPage = totalPages > 1 ? totalPages : 1;
+    
     }
 
+    
     async init(inicialization = false){
         if(inicialization) {
             await this.addOptions()
@@ -49,6 +61,7 @@ class Drive{
             return;
         }
 
+    
         paginationContainer.innerHTML = ''; // Limpa o conteúdo anterior
 
      // Crie um botão "Anterior"
@@ -121,7 +134,6 @@ function updatePageButtons() {
 }
 
     }        
-        
 
 
     showItems(items, container) {

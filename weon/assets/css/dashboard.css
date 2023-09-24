@@ -173,6 +173,7 @@
   align-items: center; 
   border-radius: 5px;
   padding: 30px;
+ 
 }
 
 
@@ -188,18 +189,20 @@
   width: 1000px;
   height: 30px;
   border-radius: 10px;
-  margin-top: 5%;
+  
 }
 
+.martop{
+  margin-top: 10%;
+}
 .rect{
   fill: black;
 }
 
 .containerCreateDash{
-  display: none;
-  align-items: center;
   flex-direction: column;
-  width: 500px;
+  height: auto;
+
 }
 
 .contDashboards{
@@ -210,3 +213,9 @@
 #contField01 ,#contField02{
   display: none;
 }
+
+#formCreateDash{
+  border-radius: 10px;
+  margin: 0;
+}
+

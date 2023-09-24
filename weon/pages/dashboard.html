@@ -75,48 +75,72 @@
             <div class="contDashboards" id="contDashboards"></div>
         </div>
          <!-- Form Create Dash -->
-         <div class="containerCreateDash" id="containerCreateDash">
-            <form id="formCreateDash">
+        <div class="containerCreateDash" id="containerCreateDash">
+
+            <div class="form">
+                <div class="d-flex justify-content-center align-items-center mb-5">
+                    <div class="border martop border-horizontal p-5 d-flex justify-content-between align-items-center">
+                        <div class="titulo">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                            <h1 class="display-6">Criar dashboard</h1>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <button name="btnBack" form="formCreateDash" id="btnBack" class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
+                            </div>
+
+                            <div class="me-3">
+                            <button type="submit" form="formCreateDash" id="btnCreateDash" class="btn btn-outline-primary sm-4">Salvar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <form id="formCreateDash" class="p-3 mt-3 w-50 row justify-content-center dp-fixed mx-auto">
                 <div class="row justify-content-center dp-fixed">
                     <div class="mt-5">
                         <div class="mb-3" id="contTittleOfChart">
                             <label for="tittleChart" class="form-label">Título do gráfico</label>
                             <input class="form-control" type="text" id="tittleChart">
                         </div>
-                        <div class="mb-1">
+                        <div class="mb-3">
                             <label for="presets" class="form-label">Predefinições</label>
                             <select class="form-control" id="presets">
-                                <option value='' selected >Selecione uma predefinição</option>
+                                <option value='' selected >Escolha uma predefinição</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField01">
-                            <label for="field01" class="form-label">Field 01:</label>
+                            <label for="field01" class="form-label">Campo 1</label>
                             <select class="form-control" id="field01">
-                                <option value='' selected >Selecione um campo do tipo String</option>
+                                <option value='' selected >Escolha um campo de texto</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField02">
-                            <label for="field02" class="form-label">Field 02:</label>
+                            <label for="field02" class="form-label">Campo 2</label>
                             <select class="form-control" id="field02">
-                                <option value='' selected >Selecione um campo do tipo Number</option>
+                                <option value='' selected >Escolha um campo numerico</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contTypeChart">
-                            <label for="typeChart" class="form-label">Tipo do gráfico</label>
+                            <label for="typeChart" class="form-label">Gráfico</label>
                             <select class="form-control" id="typeChart">
-                            <option value='' selected >Selecione um tipo de gráfico</option>
+                            <option value='' selected >Escolha um tipo de gráfico</option>
                             <option value="line" >Linha</option>
                             <option value="area" >Area</option>
                             <option value="pie" >Setor</option>
                             <option value="column" >Coluna</option>
                             </select>
                             </div>
-                      <button name="btnBack" id="btnBack" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-                      <button type="submit" form="formCreateDash" id="btnCreateDash" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
+                      
             </form>
         </div>
     </div>
-  
+  </div>
     <div id="barchart_material" style="width: 900px; height: 500px;"></div>
     <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
     <script type="module" src="../assets/js/dashboard/dashboard.js"></script> 

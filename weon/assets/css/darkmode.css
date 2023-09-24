@@ -1,4 +1,6 @@
-
+body{
+  background-color: #212529;
+}
   
     ::selection {
       background-color:#197eb95c;
@@ -91,11 +93,12 @@
   }
   
   .table-container tr:hover {
-    color: #4b62fe;
-    transition: color 0.2s ease; 
+    transition: color 0.1s ease-in-out;
+    color: #4179d2;
 
   }
   
+
   .table-container table tr:nth-child(even) {
     background-color: #333333;
   }
@@ -127,5 +130,9 @@
 }
 
 
+#formCreateDash{
+  background-color: #2c2c2c;
+    border: 1px solid #495057;
+}
 
   
