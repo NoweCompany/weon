@@ -118,7 +118,7 @@ body{
 }
 
 .table tr:nth-child(odd) {
-  background-color: #2c2c2c;
+  background-color: #2a2a2a;
 }
 
 .table td:nth-child(even) {

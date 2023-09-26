@@ -100,12 +100,11 @@
 
   .table-container tr {
     color: #000; 
-    transition: color 0.2s ease, box-shadow 0.2s ease; 
+    transition: color 0.1s ease;
   }
   
   .table-container tr:hover {
     color: #3943d0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
   }
   
   .cardDash{

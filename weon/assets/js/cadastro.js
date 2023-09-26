@@ -15,39 +15,30 @@ window.addEventListener('load', async (e) => {
 });
 
 
-class Drive{
-    constructor(containerMsg, container, requests, sideBar){
-        this.container = container
-        this.containerMsg = containerMsg
-        this.sideBar = sideBar
 
-        this.itemsPerPage = 10; 
-        this.currentPage = 1; 
+
+class Drive {
+    constructor(containerMsg, container, requests, sideBar) {
+        this.container = container;
+        this.containerMsg = containerMsg;
+        this.sideBar = sideBar;
+
+        this.itemsPerPage = 10;
+        this.currentPage = 1;
         this.totalPages = Infinity;
 
-        this.requests = requests
+        this.requests = requests;
 
-        this.collectionData = []
-        this.isEdit = false
-        this.valuesPreset = {}
-        
-        this.presetSelected = null
-    
-        const totalItems = this.collectionData.length;
-    const itemsPerPage = this.itemsPerPage;
+        this.collectionData = [];
+        this.isEdit = false;
+        this.valuesPreset = {};
 
-    // Calcule o número total de páginas.
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    // Defina currentPage como a última página, a menos que não haja itens.
-    this.currentPage = totalPages > 1 ? totalPages : 1;
-    
+        this.presetSelected = null;
     }
 
-    
-    async init(inicialization = false){
-        if(inicialization) {
-            await this.addOptions()
+    async init(inicialization = false) {
+        if (inicialization) {
+            await this.addOptions();
         }
     }
 
@@ -60,81 +51,110 @@ class Drive{
         if (!paginationContainer) {
             return;
         }
-
     
-        paginationContainer.innerHTML = ''; // Limpa o conteúdo anterior
-
-     // Crie um botão "Anterior"
-const prevButton = document.createElement('button');
-prevButton.innerText = 'Anterior';
-prevButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
-prevButton.disabled = this.currentPage === 1; // Desabilita o botão se estiver na primeira página
-
-// Adicione um ouvinte de eventos para voltar para a página anterior
-prevButton.addEventListener('click', () => {
-    if (this.currentPage > 1) {
-        this.currentPage--;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    }
-});
-
-paginationContainer.appendChild(prevButton);
-
-for (let i = 1; i <= this.totalPages; i++) {
-    const pageButton = document.createElement('button');
-    pageButton.innerText = i;
-    pageButton.classList.add('btn', 'btn-outline-secondary', 'm-1', 'page-button');
-
-    // Adicione classes do Bootstrap para destacar a página atual
-    if (i === this.currentPage) {
-        pageButton.classList.remove('btn-outline-secondary');
-        pageButton.classList.add('btn-primary');
-    }
-
-    // Adicione um ouvinte de eventos para a página clicada
-    pageButton.addEventListener('click', () => {
-        this.currentPage = i;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    });
-
-    paginationContainer.appendChild(pageButton);
-}
-
-// Crie um botão "Próximo"
-const nextButton = document.createElement('button');
-nextButton.innerText = 'Próximo';
-nextButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
-nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão se estiver na última página
-
-// Adicione um ouvinte de eventos para avançar para a próxima página
-nextButton.addEventListener('click', () => {
-    if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    }
-});
-
-paginationContainer.appendChild(nextButton);
-
-// Função para atualizar o estado dos botões de página
-function updatePageButtons() {
-    const pageButtons = document.querySelectorAll('.page-button');
-    pageButtons.forEach(button => {
-        button.classList.remove('btn-primary'); // Remove a classe 'btn-primary' de todos os botões
-        if (parseInt(button.innerText) === this.currentPage) {
-            button.classList.add('btn-primary'); // Adiciona a classe 'btn-primary' ao botão da página atual
+        paginationContainer.innerHTML = ''; 
+    
+        const maxPageButtons = 5;
+        const middlePage = Math.floor(maxPageButtons / 2);
+    
+        let startPage = Math.max(this.currentPage - middlePage, 1);
+        let endPage = Math.min(this.currentPage + middlePage, this.totalPages);
+    
+        if (this.currentPage <= middlePage) {
+            endPage = maxPageButtons;
+        } else if (this.totalPages - this.currentPage < middlePage) {
+            startPage = this.totalPages - maxPageButtons + 1;
         }
-    });
+    
+        if (this.totalPages <= maxPageButtons) {
+            startPage = 1;
+            endPage = this.totalPages;
+        }
+    
+        const prevButton = document.createElement('button');
+        prevButton.innerText = 'Anterior';
+        prevButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+        prevButton.disabled = this.currentPage === 1;
+    
+        prevButton.addEventListener('click', () => {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            }
+        });
 
-    prevButton.disabled = this.currentPage === 1; // Desabilita o botão "Anterior" na primeira página
-    nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão "Próximo" na última página
-}
+        paginationContainer.appendChild(prevButton);
 
-    }        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i;
+            pageButton.classList.add('btn', 'btn-outline-secondary', 'm-1', 'page-button');
 
+            // Adicione classes do Bootstrap para destacar a página atual
+            if (i === this.currentPage) {
+                pageButton.classList.remove('btn-outline-secondary');
+                pageButton.classList.add('btn-primary');
+            }
+
+            // Adicione um ouvinte de eventos para a página clicada
+            pageButton.addEventListener('click', () => {
+                this.currentPage = i;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            });
+
+            paginationContainer.appendChild(pageButton);
+        }
+
+        const nextButton = document.createElement('button');
+        nextButton.innerText = 'Próximo';
+        nextButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+        nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão se estiver na última página
+
+        // Adicione um ouvinte de eventos para avançar para a próxima página
+        nextButton.addEventListener('click', () => {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            }
+        });
+
+        paginationContainer.appendChild(nextButton);
+
+        // Função para atualizar o estado dos botões de página
+        const updatePageButtons = () => {
+            const pageButtons = document.querySelectorAll('.page-button');
+            pageButtons.forEach(button => {
+                button.classList.remove('btn-primary'); // Remove a classe 'btn-primary' de todos os botões
+                if (parseInt(button.innerText) === this.currentPage) {
+                    button.classList.add('btn-primary'); // Adiciona a classe 'btn-primary' ao botão da página atual
+                }
+            });
+
+            prevButton.disabled = this.currentPage === 1; 
+            nextButton.disabled = this.currentPage === this.totalPages; 
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const table = document.querySelector('.table.table-striped');
+                const paginationContainer = document.querySelector('#paginationContainer');
+            
+                if (table && paginationContainer) {
+                    table.addEventListener('click', function (event) {
+                        const target = event.target;
+            
+                        if (target.tagName === 'TD' && target.classList.contains('clique-aqui')) {
+                            paginationContainer.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        };
+
+    }
+     
+   
 
     showItems(items, container) {
         // Remova todas as classes 'hidden' da barra lateral
@@ -252,7 +272,7 @@ function updatePageButtons() {
     </div>
 
     <div class="container-center">  
-        <table class="table">
+        <table class="table table-striped">
           <thead class="thead">
           </thead>
           
