@@ -1,9 +1,10 @@
-import configs from '../modules/configs.js'
+
+ import configs from '../modules/configs.js'
 import DashboardRequests from './classes/dashRequests.js'
-import ApiRequests from '../services/ApiRequests.js'
-import Messaging from '../services/Messaging.js'
-import Token from '../services/Token.js'
-import Loading from '../services/Loading.js'
+ import ApiRequests from '../services/ApiRequests.js'
+ import Messaging from '../services/Messaging.js'
+ import Token from '../services/Token.js'
+ import Loading from '../services/Loading.js'
 
 google.charts.load('current', { 'packages': ['corechart'] });
 class Dashboard {
@@ -105,8 +106,6 @@ class Dashboard {
       ]);
     }
 
-
-
     // Instantiate and draw the chart.
     const container = document.getElementById(`chartContent_${dash.preset}_${dash.typeChart}`)
     const typeChart = {
@@ -120,11 +119,16 @@ class Dashboard {
     chart.draw(data, null);
   }
 
+
+
   async addEnventOnBtns(){
+    this.containerCreateDash = document.querySelector('#containerCreateDash');
     const btnToFormCreate = document.querySelector('#btnToFormCreate')
     const btnCreateDash = document.querySelector('#btnCreateDash')
     const btnBack = document.querySelector('#btnBack')
-    //Evento para ocultar graficos e mostrar o formulario
+
+    this.containerCreateDash.style.display = 'none';
+
     btnToFormCreate.addEventListener('click', (e) => {
       e.preventDefault()
       this.containerCreateDash.style.display = 'flex'
@@ -163,6 +167,7 @@ class Dashboard {
       this.containerCreateDash.style.display = 'none'
     })
   }
+
 
   addOptionsInSelectPresets(){
     this.preset.innerHTML = ''
@@ -233,6 +238,8 @@ class Dashboard {
     })
   }
 }
+
+  
 
 const loading = new Loading(document.querySelector('#loading'))
 const messaging = new Messaging(document.querySelector('.msg'))
