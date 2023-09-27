@@ -110,11 +110,33 @@
   .cardDash{
     width: 500px;
     background-color: #ffffff;
-    border: 2px solid #f3f3f3;
+    border: 2px solid #dee2e6;
    
   }
 
   #formCreateDash{
     background-color: #ffffff;
-    border: 2px solid #f3f3f3;
+    border: 2px solid #dee2e6;
   }
+
+  /* Personalize a barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Personalize o trilho da barra de rolagem (fundo) */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Cor de fundo do trilho */
+}
+
+/* Personalize o polegar da barra de rolagem (a parte que você arrasta) */
+::-webkit-scrollbar-thumb {
+  background-color: #d6d6d6; /* Cor do polegar */
+  border-radius: 10px; /* Canto arredondado do polegar */
+  transition: background-color 1s;
+}
+
+/* Estilize o polegar da barra de rolagem quando estiver sendo hover (passar o mouse por cima) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; /* Cor do polegar em hover */
+}
