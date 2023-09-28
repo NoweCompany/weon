@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" data-bs-theme="light" data-current-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <title>WEON - Dashboard</title>
@@ -7,14 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/padrao.css">
-    <script  src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../assets/js/modules/darkmode.js"> </script>
 </head>
 <nav class="z-3" id="navbar">
     <ul>
         <li><a href="./cadastro.html"><i class="fa-solid fa-bars-staggered"></i> Documentos</a></li>
         <li><a id="select" href="./dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-        <li><a  href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
+        <li><a href="./admin.html"><i class="fa-solid fa-shield-halved"></i> Administração</a></li>
         <li class="user-icon">
             <a href="./user.html"><i class="fa-solid fa-user"></i></a>
         </li>
@@ -26,81 +27,84 @@
     </ul>
 </nav>
 
-    <div class="sidebar z-2" id="sidebar">
-  
-  <div class="modal-body d-flex flex-column align-items-start justify-content-between">
-    <h1 id="sidebar-title">Dashboard</h1>
-    <hr class="hr-divider">
-    <hr class="mx-auto w-75">
-    <button class="toggle-button" id="predefinicao">
-      dashboard <i class="fa-solid fa-chart-line"></i>
-    </button>
-    <hr class="mx-auto w-75">
-    <hr class="hr-divider">
-    <div class="mx-auto start-0 bottom-100">
-      <button class="btn btn-outline-dark" id="toggle-sidebar">
-        <i class="fa-solid fa-minus"></i>
-      </button>
-    </div>
-  </div>
-   </div>
-   
-    <div class="loading" id="loading">
-        <img  src="../assets/gif/nowecube.gif" width="200" height="200"/>
-    </div>
-    
-    <div class="msg"></div>
+<div class="sidebar z-2" id="sidebar">
 
-    <div class="container">
-        <div class="containerCenter" id="containerCenter">
-            <!-- Form Top -->
-            <div class="form">
-                <div class="d-flex justify-content-center align-items-center mb-5">
-                    <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-                        <div class="titulo">
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                            <h1 class="display-6">Dashboards</h1>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <button type="submit" id="btnToFormCreate" class="btn btn-outline-primary sm-4 ms-2">Criar dashboard</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="contDashboards" id="contDashboards"></div>
+    <div class="modal-body d-flex flex-column align-items-start justify-content-between">
+        <h1 id="sidebar-title">Dashboard</h1>
+        <hr class="hr-divider">
+        <hr class="mx-auto w-75">
+        <button class="toggle-button" id="predefinicao">
+            dashboard <i class="fa-solid fa-chart-line"></i>
+        </button>
+        <hr class="mx-auto w-75">
+        <hr class="hr-divider">
+        <div class="mx-auto start-0 bottom-100">
+            <button class="btn btn-outline-dark" id="toggle-sidebar">
+                <i class="fa-solid fa-minus"></i>
+            </button>
         </div>
-         <!-- Form Create Dash -->
-        <div class="containerCreateDash" id="containerCreateDash">
+    </div>
+</div>
 
-            <div class="form">
-                <div class="d-flex justify-content-center align-items-center mb-5">
-                    <div class="border martop border-horizontal p-5 d-flex justify-content-between align-items-center">
-                        <div class="titulo">
+<div class="loading" id="loading">
+    <img src="../assets/gif/nowecube.gif" width="200" height="200" />
+</div>
+
+<div class="msg"></div>
+
+<div class="container">
+    <div class="containerCenter" id="containerCenter">
+        <!-- Form Top -->
+        <div class="form">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                    <div class="titulo">
                         <div class="row align-items-center">
                             <div class="col-6">
-                            <h1 class="display-6">Criar dashboard</h1>
+                                <h1 class="display-6">Dashboards</h1>
                             </div>
                         </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <button name="btnBack" form="formCreateDash" id="btnBack" class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
-                            </div>
-
-                            <div class="me-3">
-                            <button type="submit" form="formCreateDash" id="btnCreateDash" class="btn btn-outline-primary sm-4">Salvar</button>
-                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <button type="submit" id="btnToFormCreate" class="btn btn-outline-primary sm-4 ms-2">Criar
+                                dashboard</button>
                         </div>
                     </div>
                 </div>
             </div>
-        
-        <div class="containerCenter"> 
+        </div>
+        <div class="contDashboards" id="contDashboards"></div>
+    </div>
+    <!-- Form Create Dash -->
+    <div class="containerCreateDash" id="containerCreateDash">
+
+        <div class="form">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="border martop border-horizontal p-5 d-flex justify-content-between align-items-center">
+                    <div class="titulo">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h1 class="display-6">Criar dashboard</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <button name="btnBack" form="formCreateDash" id="btnBack"
+                                class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
+                        </div>
+
+                        <div class="me-3">
+                            <button type="submit" form="formCreateDash" id="btnCreateDash"
+                                class="btn btn-outline-primary sm-4">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerCenter">
             <form id="formCreateDash" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
                 <div class="row justify-content-center dp-fixed">
                     <div class="mt-5">
@@ -111,39 +115,40 @@
                         <div class="mb-3">
                             <label for="presets" class="form-label">Predefinições</label>
                             <select class="form-control" id="presets">
-                                <option value='' selected >Escolha uma predefinição</option>
+                                <option value='' selected>Escolha uma predefinição</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField01">
                             <label for="field01" class="form-label">Campo 1</label>
                             <select class="form-control" id="field01">
-                                <option value='' selected >Escolha um campo de texto</option>
+                                <option value='' selected>Escolha um campo de texto</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField02">
                             <label for="field02" class="form-label">Campo 2</label>
                             <select class="form-control" id="field02">
-                                <option value='' selected >Escolha um campo numerico</option>
+                                <option value='' selected>Escolha um campo numerico</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contTypeChart">
                             <label for="typeChart" class="form-label">Gráfico</label>
                             <select class="form-control" id="typeChart">
-                            <option value='' selected >Escolha um tipo de gráfico</option>
-                            <option value="line" >Linha</option>
-                            <option value="area" >Area</option>
-                            <option value="pie" >Setor</option>
-                            <option value="column" >Coluna</option>
+                                <option value='' selected>Escolha um tipo de gráfico</option>
+                                <option value="line">Linha</option>
+                                <option value="area">Area</option>
+                                <option value="pie">Setor</option>
+                                <option value="column">Coluna</option>
                             </select>
-                            </div>
-                      
+                        </div>
+
             </form>
         </div>
     </div>
-  </div>
 </div>
-    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
-    <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
-    <script type="module" src="../assets/js/dashboard/dashboard.js"></script> 
+</div>
+<div id="barchart_material" style="width: 900px; height: 500px;"></div>
+<script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
+<script type="module" src="../assets/js/dashboard/dashboard.js"></script>
 </body>
+
 </html>
