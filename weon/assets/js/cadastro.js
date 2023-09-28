@@ -187,7 +187,7 @@ class Drive {
     async showDocument(collectionName = this.presetSelected) {
         try {
             this.presetSelected = collectionName;
-    
+            
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected);
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected);
     
@@ -207,6 +207,7 @@ class Drive {
             this.calculateTotalPages(valuesCollection.length);
     
             const { btnCad, thead, tbody } = this.renderTableHtml(collectionName);
+            document.querySelector('#paginationContainer').style.display = 'block'
             const btnDelet = document.querySelector("#btnDelet");
             const btnDownload = document.querySelector("#btnDownload");
             const childresOfTBody = tbody.children;
@@ -411,6 +412,7 @@ class Drive {
 
     async showForm(presetSelected = this.presetSelected) {
         const { form } = this.renderFormHtml(presetSelected)
+        document.querySelector('#paginationContainer').style.display = 'none'
         await this.addInputsToForm(form, presetSelected)
         
         form.addEventListener('submit', async (e) => {

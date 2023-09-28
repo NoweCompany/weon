@@ -171,6 +171,11 @@ class Dashboard {
 
   addOptionsInSelectPresets(){
     this.preset.innerHTML = ''
+    const optionDefault = document.createElement('option')
+    optionDefault.innerText = 'Escolha uma predefinição'
+    optionDefault.setAttribute('selected', 'selected')
+    this.preset.appendChild(optionDefault)
+
     this.collectionData.forEach((value) => {
       if(value.fields.length <= 1) return
       const option = document.createElement('option')
