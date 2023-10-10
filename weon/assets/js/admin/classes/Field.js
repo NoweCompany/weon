@@ -74,6 +74,7 @@ export default class Fields{
                 }
             }
         });
+    
         return true
     }
 
@@ -127,7 +128,6 @@ export default class Fields{
         <div class="d-flex justify-content-center align-items-center mb-5">
             <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                 <div class="titulo">
-               
                 <div class="row align-items-center">
                     <div class="col-6">
                     <h1 id="tituloPrincipal" class="display-6">Predefinição:</h1>
@@ -189,18 +189,29 @@ export default class Fields{
     }
 
     async createNewField(inputValue = '', type = '', isRequired = false, valuesPreset = []) {
+
         // Criação do container principal
         const trField = document.createElement("tr");
         trField.className = "create-field";
         
+        
+        // Criação do elemento para o nome com classe Bootstrap
+            
         // Criação do elemento para o nome com classe Bootstrap
         const tdName = document.createElement("td");
         tdName.className = "mb-4";
     
+    
+        
+
         
         const nameInput = document.createElement("input");
         nameInput.setAttribute("type", "text");
-        
+
+        // Criação do elemento para o tipo com classe Bootstrap
+        const tdType = document.createElement("td");
+        tdType.className = "mb-4";
+
         if (inputValue) {
             nameInput.setAttribute('value', inputValue);
             nameInput.classList.add("form-control");
@@ -213,9 +224,10 @@ export default class Fields{
         }
         
         
-        // Criação do elemento para o tipo com classe Bootstrap
-        const tdType = document.createElement("td");
-        tdType.className = "mb-4";
+        
+
+        
+       
         
         const typeSelect = document.createElement("select");
         const existValueField = await this.existValuesInField(inputValue, valuesPreset)
@@ -224,9 +236,9 @@ export default class Fields{
             typeSelect.disabled = true
         }
         typeSelect.classList.add("form-select");
-        typeSelect.classList.add("select1"); 
+        typeSelect.classList.add("select1");
         
-
+  
         const typeOptionSelected = document.createElement("option");
         typeOptionSelected.selected = true
         typeOptionSelected.setAttribute("value", type);
@@ -238,17 +250,27 @@ export default class Fields{
         typeOptionStrg.innerText = 'Texto pequeno'
         typeSelect.appendChild(typeOptionStrg)
 
-        // Criação da caixa de seleção (checkbox) e rótulo
+        // Criação da obrigatoriedade com um switch
         const tdRequired = document.createElement("td");
         tdRequired.className = "mb-4";
 
-        const isRequiredCheckbox = document.createElement("input");
-        isRequiredCheckbox.setAttribute("type", "checkbox");
-        isRequiredCheckbox.className = "form-check-input"; 
-        isRequiredCheckbox.setAttribute("id", "isRequired");
+        const switchLabel = document.createElement("label");
+        switchLabel.className = "form-check-input";
+
+        // Criação do switch
+        const isRequiredSwitch = document.createElement("input");
+        isRequiredSwitch.setAttribute("type", "checkbox");
+        isRequiredSwitch.className = "form-check-input";
+        isRequiredSwitch.setAttribute("role", "switch")
+        isRequiredSwitch.setAttribute("id", "isRequired");
         if (isRequired) {
-            isRequiredCheckbox.checked = true;
+            isRequiredSwitch.checked = true;
         }
+
+        const divSwitch = document.createElement('div')
+        divSwitch.className = "form-check form-switch"
+        divSwitch.appendChild(switchLabel)
+        divSwitch.appendChild(isRequiredSwitch)
 
         const typeOptionBoolean = document.createElement("option");
         typeOptionBoolean.setAttribute("value", "bool");
@@ -304,7 +326,7 @@ export default class Fields{
 
         tdName.appendChild(nameInput);
         tdType.appendChild(typeSelect);
-        tdRequired.appendChild(isRequiredCheckbox)
+        tdRequired.appendChild(divSwitch);
         tdBtnDelete.appendChild(deleteButton)
 
         trField.appendChild(tdName);
@@ -390,8 +412,8 @@ export default class Fields{
 
                  // Verifica se a caixa de seleção está marcada e se o campo está vazio
                  if (validationCheckbox.checked && inputValue.trim() === '') {
-                     return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
-                 }
+                    return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
+                }
 
                 dados[i] = {
                     name: inputValue,
