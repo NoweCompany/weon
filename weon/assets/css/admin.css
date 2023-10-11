@@ -17,6 +17,9 @@
   max-width: 100%;
 }
 
+.hidden {
+  display: none !important;
+}
 
 #form {
   flex-direction: column;
@@ -288,9 +291,7 @@ th {
   transition: background-color 0.3s ease;
 }
 
-.editPreset:hover{
-  background-color: #ff9d0098
-}
+
 
 .popupConfirmation{
   position: fixed;

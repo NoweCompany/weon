@@ -1,4 +1,6 @@
-
+body{
+  background-color: #212529;
+}
   
     ::selection {
       background-color:#197eb95c;
@@ -72,9 +74,6 @@
     color: #adb5bd;
   }
 
-  .btn-outline-dark{
-    background-color: #515151;
-  }
 
   .popupConfirmation {
     background-color: #2c2c2c;
@@ -91,11 +90,12 @@
   }
   
   .table-container tr:hover {
-    color: #4b62fe;
-    transition: color 0.2s ease; 
+    transition: color 0.1s ease-in-out;
+    color: #4179d2;
 
   }
   
+
   .table-container table tr:nth-child(even) {
     background-color: #333333;
   }
@@ -115,7 +115,7 @@
 }
 
 .table tr:nth-child(odd) {
-  background-color: #2c2c2c;
+  background-color: #2a2a2a;
 }
 
 .table td:nth-child(even) {
@@ -127,5 +127,29 @@
 }
 
 
+#formCreateDash{
+  background-color: #2c2c2c;
+    border: 1px solid #495057;
+}
 
   
+/* Personalize a barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Personalize o trilho da barra de rolagem (fundo) */
+::-webkit-scrollbar-track {
+  background-color: #212529; /* Cor de fundo do trilho */
+}
+
+/* Personalize o polegar da barra de rolagem (a parte que você arrasta) */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor do polegar */
+  border-radius: 10px; /* Canto arredondado do polegar */
+}
+
+/* Estilize o polegar da barra de rolagem quando estiver sendo hover (passar o mouse por cima) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cor do polegar em hover */
+}

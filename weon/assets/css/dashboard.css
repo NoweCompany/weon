@@ -121,6 +121,8 @@
 
 #sidebar-title.hidden {
   visibility: hidden;
+ 
+
 }
 
 .toggle-button i.icon-hidden {
@@ -166,14 +168,14 @@
 }
 
 .cardDash {
-  width: 500px;
-  height: 100%; 
+  flex:content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; 
   border-radius: 5px;
   padding: 30px;
+ 
 }
 
 
@@ -189,9 +191,34 @@
   width: 1000px;
   height: 30px;
   border-radius: 10px;
-  margin-top: 5%;
+  
 }
 
+.martop{
+  margin-top: 10%;
+}
 .rect{
   fill: black;
 }
+
+.containerCreateDash{
+  flex-direction: column;
+  height: auto;
+
+
+}
+
+.contDashboards{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#contField01 ,#contField02{
+  display: none;
+}
+
+#formCreateDash{
+  border-radius: 10px;
+  margin: 0;
+}
+

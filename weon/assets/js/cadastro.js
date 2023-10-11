@@ -14,28 +14,32 @@ window.addEventListener('load', async (e) => {
     }
 });
 
-class Drive{
-    constructor(containerMsg, container, requests, sideBar){
-        this.container = container
-        this.containerMsg = containerMsg
-        this.sideBar = sideBar
 
-        this.itemsPerPage = 10; 
-        this.currentPage = 2; 
-        this.totalPages = 1;
 
-        this.requests = requests
 
-        this.collectionData = []
-        this.isEdit = false
-        this.valuesPreset = {}
-        
-        this.presetSelected = null
+class Drive {
+    constructor(containerMsg, container, requests, sideBar) {
+        this.container = container;
+        this.containerMsg = containerMsg;
+        this.sideBar = sideBar;
+
+        this.itemsPerPage = 10;
+        this.currentPage = 1;
+        this.totalPages = Infinity;
+
+        this.requests = requests;
+
+        this.collectionData = [];
+        this.isEdit = false;
+        this.valuesPreset = {};
+
+        this.presetSelected = null;
+       
     }
 
-    async init(inicialization = false){
-        if(inicialization) {
-            await this.addOptions()
+    async init(inicialization = false) {
+        if (inicialization) {
+            await this.addOptions();
         }
     }
 
@@ -48,82 +52,121 @@ class Drive{
         if (!paginationContainer) {
             return;
         }
-
-        paginationContainer.innerHTML = ''; // Limpa o conteúdo anterior
-
-     // Crie um botão "Anterior"
-const prevButton = document.createElement('button');
-prevButton.innerText = 'Anterior';
-prevButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
-prevButton.disabled = this.currentPage === 1; // Desabilita o botão se estiver na primeira página
-
-// Adicione um ouvinte de eventos para voltar para a página anterior
-prevButton.addEventListener('click', () => {
-    if (this.currentPage > 1) {
-        this.currentPage--;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    }
-});
-
-paginationContainer.appendChild(prevButton);
-
-for (let i = 1; i <= this.totalPages; i++) {
-    const pageButton = document.createElement('button');
-    pageButton.innerText = i;
-    pageButton.classList.add('btn', 'btn-outline-secondary', 'm-1', 'page-button');
-
-    // Adicione classes do Bootstrap para destacar a página atual
-    if (i === this.currentPage) {
-        pageButton.classList.remove('btn-outline-secondary');
-        pageButton.classList.add('btn-primary');
-    }
-
-    // Adicione um ouvinte de eventos para a página clicada
-    pageButton.addEventListener('click', () => {
-        this.currentPage = i;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    });
-
-    paginationContainer.appendChild(pageButton);
-}
-
-// Crie um botão "Próximo"
-const nextButton = document.createElement('button');
-nextButton.innerText = 'Próximo';
-nextButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
-nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão se estiver na última página
-
-// Adicione um ouvinte de eventos para avançar para a próxima página
-nextButton.addEventListener('click', () => {
-    if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.showDocument(this.presetSelected);
-        updatePageButtons();
-    }
-});
-
-paginationContainer.appendChild(nextButton);
-
-// Função para atualizar o estado dos botões de página
-function updatePageButtons() {
-    const pageButtons = document.querySelectorAll('.page-button');
-    pageButtons.forEach(button => {
-        button.classList.remove('btn-primary'); // Remove a classe 'btn-primary' de todos os botões
-        if (parseInt(button.innerText) === this.currentPage) {
-            button.classList.add('btn-primary'); // Adiciona a classe 'btn-primary' ao botão da página atual
+    
+        paginationContainer.innerHTML = ''; 
+    
+        const maxPageButtons = 5;
+        const middlePage = Math.floor(maxPageButtons / 2);
+    
+        let startPage = Math.max(this.currentPage - middlePage, 1);
+        let endPage = Math.min(this.currentPage + middlePage, this.totalPages);
+    
+        if (this.currentPage <= middlePage) {
+            endPage = maxPageButtons;
+        } else if (this.totalPages - this.currentPage < middlePage) {
+            startPage = this.totalPages - maxPageButtons + 1;
         }
-    });
+    
+        if (this.totalPages <= maxPageButtons) {
+            startPage = 1;
+            endPage = this.totalPages;
+        }
+    
+        const prevButton = document.createElement('button');
+        prevButton.innerText = 'Anterior';
+        prevButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+        prevButton.disabled = this.currentPage === 1;
+    
+        prevButton.addEventListener('click', () => {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            }
+        });
 
-    prevButton.disabled = this.currentPage === 1; // Desabilita o botão "Anterior" na primeira página
-    nextButton.disabled = this.currentPage === this.totalPages; // Desabilita o botão "Próximo" na última página
-}
+        paginationContainer.appendChild(prevButton);
 
-    }        
-        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i;
+            pageButton.classList.add('btn', 'btn-outline-secondary', 'm-1', 'page-button');
 
+            if (i === this.currentPage) {
+                pageButton.classList.remove('btn-outline-secondary');
+                pageButton.classList.add('btn-primary');
+            }
 
+  
+            pageButton.addEventListener('click', () => {
+                this.currentPage = i;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            });
+
+            paginationContainer.appendChild(pageButton);
+        }
+
+        const nextButton = document.createElement('button');
+        nextButton.innerText = 'Próximo';
+        nextButton.classList.add('btn', 'btn-outline-secondary', 'm-1');
+        nextButton.disabled = this.currentPage === this.totalPages; 
+
+        nextButton.addEventListener('click', () => {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.showDocument(this.presetSelected);
+                updatePageButtons();
+            }
+        });
+
+        paginationContainer.appendChild(nextButton);
+
+    
+        const updatePageButtons = () => {
+            const pageButtons = document.querySelectorAll('.page-button');
+            pageButtons.forEach(button => {
+                button.classList.remove('btn-primary'); 
+                if (parseInt(button.innerText) === this.currentPage) {
+                    button.classList.add('btn-primary'); 
+                }
+            });
+
+            prevButton.disabled = this.currentPage === 1;
+            nextButton.disabled = this.currentPage === this.totalPages;
+
+           
+            if (this.paginationVisible) {
+                paginationContainer.style.display = 'block';
+            } else {
+                paginationContainer.style.display = 'none';
+            }
+        };
+
+        const addButton = document.querySelector('#btnCad');
+        const backButton = document.querySelector('#back');
+
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                this.togglePaginationVisibility(false); 
+            });
+        }
+
+       if (backButton) {
+            backButton.addEventListener('click', () => {
+                this.togglePaginationVisibility(true); 
+            });
+        }
+    }
+
+    togglePaginationVisibility(visible) {
+        this.paginationVisible = visible;
+        const paginationContainer = document.querySelector('#paginationContainer');
+        if (paginationContainer) {
+            paginationContainer.style.display = visible ? 'block' : 'none';
+        }
+    }
+     
     showItems(items, container) {
         // Remova todas as classes 'hidden' da barra lateral
         container.classList.remove('hidden');
@@ -155,7 +198,7 @@ function updatePageButtons() {
     async showDocument(collectionName = this.presetSelected) {
         try {
             this.presetSelected = collectionName;
-    
+            
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected);
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected);
     
@@ -175,6 +218,7 @@ function updatePageButtons() {
             this.calculateTotalPages(valuesCollection.length);
     
             const { btnCad, thead, tbody } = this.renderTableHtml(collectionName);
+            document.querySelector('#paginationContainer').style.display = 'block'
             const btnDelet = document.querySelector("#btnDelet");
             const btnDownload = document.querySelector("#btnDownload");
             const childresOfTBody = tbody.children;
@@ -240,7 +284,7 @@ function updatePageButtons() {
     </div>
 
     <div class="container-center">  
-        <table class="table">
+        <table class="table table-striped">
           <thead class="thead">
           </thead>
           
@@ -302,6 +346,7 @@ function updatePageButtons() {
         const selectAllCheckbox = document.createElement('input');
         selectAllCheckbox.setAttribute('class', 'checkBox form-check-input form-check-input-lg d-flex m-0')
         selectAllCheckbox.setAttribute('type', 'checkbox');
+        selectAllCheckbox.setAttribute('class', 'checkbox form-check-input form-check-input-lg d-flex')
         selectAllCheckbox.setAttribute('id', 'selectAllCheckbox'); // Adicione um ID
         selectAllCheckbox.addEventListener('click', () => {
             const checkboxes = document.querySelectorAll('.checkBoxDelet');
@@ -379,6 +424,7 @@ function updatePageButtons() {
 
     async showForm(presetSelected = this.presetSelected) {
         const { form } = this.renderFormHtml(presetSelected)
+        document.querySelector('#paginationContainer').style.display = 'none'
         await this.addInputsToForm(form, presetSelected)
         
         form.addEventListener('submit', async (e) => {

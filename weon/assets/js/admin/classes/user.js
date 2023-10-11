@@ -18,7 +18,6 @@ class Presets {
 
     createPreset(e) {
         e.preventDefault();
-        // Lógica para criar um novo preset
     }
 
     event() {
@@ -30,5 +29,5 @@ class Presets {
     }
 }
 
-const container = document.getElementById('container'); // Substitua 'container' pelo ID do elemento onde você deseja renderizar o formulário.
+const container = document.getElementById('container'); 
 const presets = new Presets(container);
