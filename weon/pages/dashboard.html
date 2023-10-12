@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../assets/css/padrao.css">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../assets/js/modules/darkmode.js"> </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/3.3.0/gridstack.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/3.3.0/gridstack-h5.js"></script>
 </head>
 <nav class="z-3" id="navbar">
     <ul>
@@ -99,48 +101,19 @@
                 </div>
             </div>
         </div>
-        <div class="containerCenter">
-            <form id="formCreateDash" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
-                <div class="row justify-content-center dp-fixed">
-                    <div class="mt-5">
-                        <div class="mb-3" id="contTittleOfChart">
-                            <label for="tittleChart" class="form-label">Título do gráfico</label>
-                            <input class="form-control" type="text" id="tittleChart">
-                        </div>
-                        <div class="mb-3">
-                            <label for="presets" class="form-label">Predefinições</label>
-                            <select class="form-control" id="presets">
-                                <option value='' selected>Escolha uma predefinição</option>
-                            </select>
-                        </div>
-                        <div class="mb-3" id="contField01">
-                            <label for="field01" class="form-label">Campo 1</label>
-                            <select class="form-control" id="field01">
-                                <option value='' selected>Escolha um campo de texto</option>
-                            </select>
-                        </div>
-                        <div class="mb-3" id="contField02">
-                            <label for="field02" class="form-label">Campo 2</label>
-                            <select class="form-control" id="field02">
-                                <option value='' selected>Escolha um campo numerico</option>
-                            </select>
-                        </div>
-                        <div class="mb-3" id="contTypeChart">
-                            <label for="typeChart" class="form-label">Gráfico</label>
-                            <select class="form-control" id="typeChart">
-                                <option value='' selected>Escolha um tipo de gráfico</option>
-                                <option value="line">Linha</option>
-                                <option value="area">Area</option>
-                                <option value="pie">Setor</option>
-                                <option value="column">Coluna</option>
-                            </select>
-                    </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
+                
 
+          <div class="grid-container">
+            <div id="grid-stack"></div>
+        </div>
+        
+        <script type="text/javascript">
+          document.addEventListener('DOMContentLoaded', function () {
+            var grid = GridStack.init({staticGrid: false, animate: true}, document.getElementById('grid-stack'));
+            grid.addWidget({w: 3, h: 2, content: '<div style="border: 1px solid #ccc; padding: 10px; background-color: #f5f5f5;">Meu Widget</div>'});
+          });
+        </script>
+        
 
 
 <div id="barchart_material" style="width: 900px; height: 500px;"></div>

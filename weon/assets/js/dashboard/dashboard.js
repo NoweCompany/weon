@@ -87,7 +87,8 @@ class Dashboard {
   async listCharts(dataChart){
     const contDashboards = document.querySelector('#contDashboards')
     const card = document.createElement('div')
-    card.classList.add('cardDash')
+    card.classList.add('cardDash' , 'draggable')
+    card.draggable = true; 
   
     const configContent = document.createElement('div')
     configContent.id = 'configContent'
@@ -123,6 +124,34 @@ class Dashboard {
     contDashboards.appendChild(card)
     
     await this.generateChart(dataChart)
+    let startX, startY, cardStartX, cardStartY;
+
+  card.addEventListener('dragstart', (e) => {
+    card.classList.add('dragging');
+    startX = e.clientX;
+    startY = e.clientY;
+    cardStartX = card.offsetLeft;
+    cardStartY = card.offsetTop;
+    e.dataTransfer.setData('text/plain', ''); // Para o Firefox
+  });
+
+  document.addEventListener('dragover', (e) => {
+    e.preventDefault(); 
+
+    if (!card.classList.contains('dragging')) return;
+
+    let x = cardStartX + (e.clientX - startX);
+    let y = cardStartY + (e.clientY - startY);
+    
+    card.style.left = x + 'px';
+    card.style.top = y + 'px';
+    card.style.position = 'absolute';
+  });
+
+  card.addEventListener('dragend', () => {
+    card.classList.remove('dragging');
+  });
+
   }
 
   async generateChart(dash){
@@ -295,43 +324,6 @@ dash.initSelects()
   .then(resolve => resolve)
   .catch(err => console.log(err ))
 
-  // //sidebarr
-  // function activateSidebarToggle() {
-  //   var toggleSidebarButton = document.getElementById('toggle-sidebar');
-  //   var sidebar = document.querySelector('.sidebar');
-  //   var title = document.getElementById('sidebar-title');
-  //   var predefinicaoButton = document.getElementById('predefinicao');
-  //   var isSidebarCollapsed = false;
-  //   var hasBeenActivated = false;
+
   
-  //   function toggleSidebar() {
-  //     if (predefinicaoButton.textContent.trim() === 'dashboard') {
-  //       predefinicaoButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
-  //     } else {
-  //       predefinicaoButton.innerHTML = 'dashboard <i class="fa-solid fa-chart-line"></i>';
-  //     }
-  
-  //     isSidebarCollapsed = !isSidebarCollapsed;
-  //     sidebar.classList.toggle('collapsed', isSidebarCollapsed);
-  //     title.classList.toggle('hidden', isSidebarCollapsed);
-  //   }
-    
-  //   toggleSidebarButton.addEventListener('click', toggleSidebar);
-  
-  //   function checkSidebarState() {
-  //     var screenWidth = window.innerWidth;
-  //     var screenHeight = window.innerHeight;
-  //     if (screenWidth < 1297) {
-  //       if (!hasBeenActivated) {
-  //         toggleSidebar();
-  //         hasBeenActivated = true;
-  //       }
-  //     } else {
-  //       hasBeenActivated = false;
-  //     }
-  //   }
-  //   window.addEventListener('resize', checkSidebarState);
-  //   checkSidebarState();
-  // }
-  // activateSidebarToggle();
   

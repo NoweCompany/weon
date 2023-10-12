@@ -224,3 +224,18 @@
   margin: 0;
 }
 
+.draggable {
+  cursor: move;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.grid-container {
+  position: relative; /* Isso garante que os cards se posicionem em relação a este container. */
+  border: 2px dashed red; /* Isso permitirá que você veja claramente os limites do container. */
+  height: 500px; /* Ajuste conforme necessário. */
+  overflow: auto; /* Isso permitirá que os cards possam ser arrastados para fora da vista e que o container possa ser rolado. */
+}
+
