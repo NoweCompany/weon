@@ -1,9 +1,10 @@
 export default class FormCreateChart{
-  constructor(apiRequests, messaging, containerCreateDash, containerCenter){
+  constructor(apiRequests, dashboardRequests, messaging, containerCreateDash, containerCenter){
     this.containerCreateDash = containerCreateDash
     this.containerCenter = containerCenter
 
     this.apiRequests = apiRequests
+    this.dashboardRequests = dashboardRequests
     this.messaging = messaging
 
     this.field01 = document.querySelector('#field01')
@@ -110,7 +111,7 @@ export default class FormCreateChart{
     this.addEventOnSelectField01()
   }
 
-  async createChart(){
+  async createChart(currentDashboard){
     const tittleChart = document.querySelector('#tittleChart').value
     const prestNameChart = this.preset.value
     const textField = this.field01.value
@@ -120,13 +121,11 @@ export default class FormCreateChart{
     if(!tittleChart || !prestNameChart || !textField || !numberField || !typeChart) {
       this.messaging.msg('Preencha todos os campos corretamente', false)
       return
-    }else if(!this.currentDashboard.nameFormated){
-      this.messaging.msg('Selecione um Dashboard antes de tentar criarum gráfico.')
-      return
     }
     
     try{
-      await this.dashboardRequests.postChart(this.currentDashboard.nameFormated, tittleChart, prestNameChart, textField, numberField, typeChart)
+      console.log(this.dashboardRequests);
+      await this.dashboardRequests.postChart(currentDashboard.nameFormated, tittleChart, prestNameChart, textField, numberField, typeChart)
 
       this.messaging.msg('Dashboard criado com sucesso', true)
 

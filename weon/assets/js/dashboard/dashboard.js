@@ -107,7 +107,7 @@ class Dashboard {
     //Evento para criar um dashBoard
     btnCreateDash.addEventListener('click', async (e) => {
       e.preventDefault()
-      await this.formCreateChart.createChart()
+      await this.formCreateChart.createChart(this.currentDashboard)
     })
     //Evento para ocultar formulario e mostrar graficos
     btnBack.addEventListener('click', (e) => {
@@ -127,7 +127,7 @@ const containerCenter = document.querySelector('#containerCenter')
 const containerCreateDash = document.querySelector('#containerCreateDash')
 const container = document.querySelector('.container')
 
-const formCreateChart = new FormCreateChart(apiRequests, messaging, containerCreateDash, containerCenter)
+const formCreateChart = new FormCreateChart(apiRequests, dashboardRequests, messaging, containerCreateDash, containerCenter)
 const charts = new Charts(apiRequests, messaging)
 const dash = new Dashboard(
   container,
