@@ -30,7 +30,7 @@ export default class DashboardRequests{
     }
   }
 
-  async postDashboards(tittleChart, prestNameChart, textField, numberField, typeChart) {
+  async postChart(dashboardName, tittleChart, prestNameChart, textField, numberField, typeChart) {
     this.loading.addLoading()
     const headers = new Headers({
         "Content-Type": "application/json",
@@ -39,6 +39,7 @@ export default class DashboardRequests{
 
     try {
       const myBody = JSON.stringify( {
+        dashboardName,
         name: tittleChart,
         preset: prestNameChart,
         textField: textField,
@@ -46,7 +47,7 @@ export default class DashboardRequests{
         typeChart: typeChart
       })
 
-      const response = await fetch(`${this.apiUrl}/dashboard`, {
+      const response = await fetch(`${this.apiUrl}/chart`, {
         method: 'POST',
         headers: headers,
         body: myBody
