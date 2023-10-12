@@ -5,29 +5,28 @@ export default class DashboardRequests{
     this.loading = loading
   } 
 
-  async indexDashboards() {
-    this.loading.addLoading()
-    const headers = new Headers({
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${this.token}`
-    });
-
+  async getApiDashBoards() {
     try {
+        this.loading.addLoading()
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.token}`
+        });
+
         const response = await fetch(`${this.apiUrl}/dashboard`, {
+            method: 'GET',
             headers: headers
         });
 
-        if (response.status !== 200) {
-            const data = await response.json();
-            throw new Error(data.errors);
-        }
-
         const data = await response.json();
+
+        if(response.status !== 200) throw new Error(data.errors)
+
         this.loading.removeLoading()
-        return data;
-    } catch (error) {
+        return data
+    } catch (e) {
         this.loading.removeLoading()
-        throw new Error("Erro ao listar DashBoards: " + error.message);
+        throw new Error(e.message || 'Ocorreu um erro inesperado')
     }
   }
 

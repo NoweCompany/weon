@@ -201,7 +201,9 @@
   fill: black;
 }
 
+
 .containerCreateDash{
+  display: none;
   flex-direction: column;
   height: auto;
 

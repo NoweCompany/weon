@@ -1,10 +1,10 @@
 
- import configs from '../modules/configs.js'
+import configs from '../modules/configs.js'
 import DashboardRequests from './classes/dashRequests.js'
- import ApiRequests from '../services/ApiRequests.js'
- import Messaging from '../services/Messaging.js'
- import Token from '../services/Token.js'
- import Loading from '../services/Loading.js'
+import ApiRequests from '../services/ApiRequests.js'
+import Messaging from '../services/Messaging.js'
+import Token from '../services/Token.js'
+import Loading from '../services/Loading.js'
 
 google.charts.load('current', { 'packages': ['corechart'] });
 class Dashboard {
@@ -30,61 +30,99 @@ class Dashboard {
     try {
       const collectionData = await this.apiRequests.getApiCollections()
       this.collectionData = collectionData.response
-      this.messaging.msg('Sucesso', true)
     } catch (error) {
       this.messaging.msg(error.message || 'Ocorreu um erro inesperado!', false)
     }
   }
 
   async initSelects(){
+    console.log(this.collectionData);
     await this.setCollectionData()
-    this.listDashs()
+    await this.listDashs()
     this.addEnventOnBtns()
   }
 
   async listDashs(){
-    const contDashboards = document.querySelector('#contDashboards')
-    contDashboards.innerHTML = ''
-    const response = await this.dashboardRequests.indexDashboards()
-    for(let dash of response){
-      const card = document.createElement('div')
-      card.classList.add('cardDash')
-    
-      const configContent = document.createElement('div')
-      configContent.id = 'configContent'
-      configContent.classList.add('configContent')
+    try {
+      const modalbtnsSideBar = document.querySelector('.modalbtnsSideBar')
+      const data = await this.apiRequests.getApiDashBoards()
+      //armazenar "data" para otimizar o carregamento de dados
+      for (const dash of data) {
+        const dashName = dash.name.replace('dashboard_', '').split('_').join(' ')
+        
+        const btnDash = document.createElement('button')
+        btnDash.className = 'toggle-button'
+        btnDash.id = `dashBtn_${dash.name}`
+        btnDash.innerHTML += `${dashName}`
+        const divisior  = document.createElement('hr')
+        divisior.className = 'mx-auto w-75'
+        modalbtnsSideBar.appendChild(btnDash)
+        modalbtnsSideBar.appendChild(divisior)
+        
 
-      const name = document.createElement('label')
-      name.innerHTML = `<strong>Nome:</strong> ${dash.name}`
+        btnDash.addEventListener('click', (e) => {
+          this.loadDashBoard({name: dash.name, nameFormated: dashName, values: dash.values})
+        })
+      }
 
-      const preset = document.createElement('label')
-      preset.innerHTML = `<strong>Predefinição:</strong> ${dash.preset}`
-
-      const textField = document.createElement('label')
-      textField.innerHTML = `<strong>Campo tipo texto:</strong> ${dash.textField}`
-
-      const numberField = document.createElement('label')
-      numberField.innerHTML = `<strong>Campo tipo número:</strong> ${dash.numberField}`
-      
-      const typeChart = document.createElement('label')
-      typeChart.innerHTML = `<strong>Tipo do gráfico:</strong> ${dash.typeChart}` 
-
-      configContent.appendChild(name)
-      configContent.appendChild(preset)
-      configContent.appendChild(textField)
-      configContent.appendChild(numberField)
-      configContent.appendChild(typeChart)
-      
-      const chartContent = document.createElement('div')
-      chartContent.id = `chartContent_${dash.preset}_${dash.typeChart}`
-      chartContent.classList.add('chartContent')
-      
-      card.appendChild(chartContent)
-      card.appendChild(configContent)
-      contDashboards.appendChild(card)
-      
-      await this.generateChart(dash)
+      //Adicionar evento em cada btn para rederizar o dashboard na tela
+    } catch (error) {
+      return this.messaging.msg(error)
     }
+  }
+
+  async loadDashBoard(dashboardProps){
+    const {name, nameFormated, values} = dashboardProps
+
+    const title = document.querySelector('#title')
+    title.innerText = name
+
+    for (const entity of values) {
+      if(entity.title === 'chart'){
+        this.listCharts(entity)
+      }
+    }
+  }
+
+  async listCharts(dataChart){
+    const contDashboards = document.querySelector('#contDashboards')
+    const card = document.createElement('div')
+    card.classList.add('cardDash')
+  
+    const configContent = document.createElement('div')
+    configContent.id = 'configContent'
+    configContent.classList.add('configContent')
+
+    const name = document.createElement('label')
+    name.innerHTML = `<strong>Nome:</strong> ${dataChart.name}`
+
+    const preset = document.createElement('label')
+    preset.innerHTML = `<strong>Predefinição:</strong> ${dataChart.preset}`
+
+    const textField = document.createElement('label')
+    textField.innerHTML = `<strong>Campo tipo texto:</strong> ${dataChart.textField}`
+
+    const numberField = document.createElement('label')
+    numberField.innerHTML = `<strong>Campo tipo número:</strong> ${dataChart.numberField}`
+    
+    const typeChart = document.createElement('label')
+    typeChart.innerHTML = `<strong>Tipo do gráfico:</strong> ${dataChart.typeChart}` 
+
+    configContent.appendChild(name)
+    configContent.appendChild(preset)
+    configContent.appendChild(textField)
+    configContent.appendChild(numberField)
+    configContent.appendChild(typeChart)
+    
+    const chartContent = document.createElement('div')
+    chartContent.id = `chartContent_${dataChart.preset}_${dataChart.typeChart}`
+    chartContent.classList.add('chartContent')
+    
+    card.appendChild(chartContent)
+    card.appendChild(configContent)
+    contDashboards.appendChild(card)
+    
+    await this.generateChart(dataChart)
   }
 
   async generateChart(dash){
@@ -119,8 +157,6 @@ class Dashboard {
     chart.draw(data, null);
   }
 
-
-
   async addEnventOnBtns(){
     this.containerCreateDash = document.querySelector('#containerCreateDash');
     const btnToFormCreate = document.querySelector('#btnToFormCreate')
@@ -129,6 +165,7 @@ class Dashboard {
 
     this.containerCreateDash.style.display = 'none';
 
+    //Evendo de exibição do formulário de criação de dash
     btnToFormCreate.addEventListener('click', (e) => {
       e.preventDefault()
       this.containerCreateDash.style.display = 'flex'
@@ -154,8 +191,7 @@ class Dashboard {
         await this.dashboardRequests.postDashboards(tittleChart, prestNameChart, textField, numberField, typeChart)
         this.messaging.msg('Dashboard criado com sucesso', true)
         this.containerCenter.style.display = 'flex'
-        this.containerCreateDash.style.display = 'none' 
-        this.listDashs()
+        this.containerCreateDash.style.display = 'none'
       }catch(error){
         this.messaging.msg(error, false)
       }
@@ -167,7 +203,6 @@ class Dashboard {
       this.containerCreateDash.style.display = 'none'
     })
   }
-
 
   addOptionsInSelectPresets(){
     this.preset.innerHTML = ''
@@ -244,8 +279,6 @@ class Dashboard {
   }
 }
 
-  
-
 const loading = new Loading(document.querySelector('#loading'))
 const messaging = new Messaging(document.querySelector('.msg'))
 const token = new Token()
@@ -260,46 +293,45 @@ const container = document.querySelector('.container')
 const dash = new Dashboard(container, containerCenter, containerCreateDash, dashboardRequests, apiRequests, messaging)
 dash.initSelects()
   .then(resolve => resolve)
-  .catch(err => console.log(err))
- 
+  .catch(err => console.log(err ))
 
-  //sidebarr
-  function activateSidebarToggle() {
-    var toggleSidebarButton = document.getElementById('toggle-sidebar');
-    var sidebar = document.querySelector('.sidebar');
-    var title = document.getElementById('sidebar-title');
-    var predefinicaoButton = document.getElementById('predefinicao');
-    var isSidebarCollapsed = false;
-    var hasBeenActivated = false;
+  // //sidebarr
+  // function activateSidebarToggle() {
+  //   var toggleSidebarButton = document.getElementById('toggle-sidebar');
+  //   var sidebar = document.querySelector('.sidebar');
+  //   var title = document.getElementById('sidebar-title');
+  //   var predefinicaoButton = document.getElementById('predefinicao');
+  //   var isSidebarCollapsed = false;
+  //   var hasBeenActivated = false;
   
-    function toggleSidebar() {
-      if (predefinicaoButton.textContent.trim() === 'dashboard') {
-        predefinicaoButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
-      } else {
-        predefinicaoButton.innerHTML = 'dashboard <i class="fa-solid fa-chart-line"></i>';
-      }
+  //   function toggleSidebar() {
+  //     if (predefinicaoButton.textContent.trim() === 'dashboard') {
+  //       predefinicaoButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+  //     } else {
+  //       predefinicaoButton.innerHTML = 'dashboard <i class="fa-solid fa-chart-line"></i>';
+  //     }
   
-      isSidebarCollapsed = !isSidebarCollapsed;
-      sidebar.classList.toggle('collapsed', isSidebarCollapsed);
-      title.classList.toggle('hidden', isSidebarCollapsed);
-    }
+  //     isSidebarCollapsed = !isSidebarCollapsed;
+  //     sidebar.classList.toggle('collapsed', isSidebarCollapsed);
+  //     title.classList.toggle('hidden', isSidebarCollapsed);
+  //   }
     
-    toggleSidebarButton.addEventListener('click', toggleSidebar);
+  //   toggleSidebarButton.addEventListener('click', toggleSidebar);
   
-    function checkSidebarState() {
-      var screenWidth = window.innerWidth;
-      var screenHeight = window.innerHeight;
-      if (screenWidth < 1297) {
-        if (!hasBeenActivated) {
-          toggleSidebar();
-          hasBeenActivated = true;
-        }
-      } else {
-        hasBeenActivated = false;
-      }
-    }
-    window.addEventListener('resize', checkSidebarState);
-    checkSidebarState();
-  }
-  activateSidebarToggle();
+  //   function checkSidebarState() {
+  //     var screenWidth = window.innerWidth;
+  //     var screenHeight = window.innerHeight;
+  //     if (screenWidth < 1297) {
+  //       if (!hasBeenActivated) {
+  //         toggleSidebar();
+  //         hasBeenActivated = true;
+  //       }
+  //     } else {
+  //       hasBeenActivated = false;
+  //     }
+  //   }
+  //   window.addEventListener('resize', checkSidebarState);
+  //   checkSidebarState();
+  // }
+  // activateSidebarToggle();
   

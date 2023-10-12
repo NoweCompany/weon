@@ -79,6 +79,60 @@ export default class ApiRequests {
 
     }
 
+    async getApiDashBoards() {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            });
+
+            const response = await fetch(`${this.apiUrl}/dashboard`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            const data = await response.json();
+
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.loading.removeLoading()
+            return data
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || 'Ocorreu um erro inesperado')
+        }
+    }
+
+    async postApiDashboard(dashboardName) {
+        try {
+                this.loading.addLoading()
+                dashboardName = dashboardName.trim()
+                const myBody = JSON.stringify({ name: dashboardName })
+
+                const headers = new Headers({
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${this.token}`
+                })
+
+                const response = await fetch(`${this.apiUrl}/dashboard`, {
+                    method: 'POST',
+
+                    headers: headers,
+
+                    body: myBody
+                })
+                const data = await response.json()
+                if(response.status !== 200) throw new Error(data.errors)
+
+                this.loading.removeLoading()
+                return data
+        } catch (e) {
+                this.loading.removeLoading()
+                throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
     async deletePreset(collectionName) {
         try {
             this.loading.addLoading()
@@ -183,7 +237,6 @@ export default class ApiRequests {
                 throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }
     }
-  
     async postApiTemplate(name, type, collectionName, fieldRequired) {
         try {
             this.loading.addLoading()

@@ -13,6 +13,7 @@ import ApiRequests from '../services/ApiRequests.js'
 import Messaging from '../services/Messaging.js'
 import Token from '../services/Token.js'
 import Loading from '../services/Loading.js'
+import Dashboard from './classes/Dashboard.js'
 
 window.addEventListener('load', async (e) => {
     const logado = new Logado()
@@ -33,27 +34,29 @@ const messaging = new Messaging(document.querySelector('#msg'))
 const preset = new Presets(document.querySelector('.container'), messaging, api)
 const fields = new Fields(document.querySelector('.container'), messaging, api)
 const trash  = new Trash(document.querySelector('.container'), messaging, api)
+const dashboard = new Dashboard(document.querySelector('.container'), messaging, api)
 
 fields.presetController = preset
 preset.fieldController = fields
 
-await preset.preset()
-
+//await preset.preset()
+await dashboard.dashboard()
 async function handleClick(e){
     try {
         const el = e.target
         const id = el.getAttribute('id')
 
-        if (id === 'predefinicao' && screen !== id) await preset.preset()
-        else if (id === 'campos' && screen !== id)  await fields.fields()
-        else if (id === 'lixeira' && screen !== id) await trash.trash()
+        if (id === 'predefinicao') await preset.preset()
+        else if (id === 'campos')  await fields.fields()
+        else if (id === 'lixeira') await trash.trash()
+        else if (id === 'dashboard') await dashboard.dashboard()
         else return
     } catch (error) {
-         messaging.msg('Houve um erro inesperado, Tente novamente mais tarde !')
-         setTimeout(()=> { 
+        messaging.msg('Houve um erro inesperado, Tente novamente mais tarde !')
+        setTimeout(()=> { 
             window.location.assign(`${urlWebsite}/home.html`)
-         }, 1500)
-         return 
+        }, 1500)
+        return 
     }
 }
 
