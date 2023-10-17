@@ -202,12 +202,10 @@
 }
 
 
-.containerCreateDash{
+.containerCreateKpi, .containerCreateChart{
   display: none;
   flex-direction: column;
   height: auto;
-
-
 }
 
 .contDashboards{

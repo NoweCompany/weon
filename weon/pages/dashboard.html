@@ -64,8 +64,12 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="me-3">
-                            <button type="submit" id="btnToFormCreate" class="btn btn-outline-primary sm-4 ms-2">Criar
-                                dashboard</button>
+                            <button type="submit" id="btnToFormCreateChart" class="btn btn-outline-primary sm-4 ms-2">
+                                Criar Gráfico
+                            </button>
+                            <button type="submit" id="btnToFormCreateKpi" class="btn btn-outline-primary sm-4 ms-2">
+                                Criar Kpi
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -73,26 +77,24 @@
         </div>
         <div class="contDashboards" id="contDashboards"></div>
     </div>
-    <div class="containerCreateDash" id="containerCreateDash">
-
+    <div class="containerCreateChart" id="containerFormCreateChart">
         <div class="form">
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <div class="border martop border-horizontal p-5 d-flex justify-content-between align-items-center">
                     <div class="titulo">
                         <div class="row align-items-center">
                             <div class="col-6">
-                                <h1 class="display-6">Criar dashboard</h1>
+                                <h1 class="display-6">Criar Gráfico</h1>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="me-3">
-                            <button name="btnBack" form="formCreateDash" id="btnBack"
+                            <button name="btnBack" form="formCreateChart" id="btnBackChart"
                                 class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
                         </div>
-
                         <div class="me-3">
-                            <button type="submit" form="formCreateDash" id="btnCreateDash"
+                            <button type="submit" form="formCreateChart" id="btnCreateChart"
                                 class="btn btn-outline-primary sm-4">Salvar</button>
                         </div>
                     </div>
@@ -100,7 +102,7 @@
             </div>
         </div>
         <div class="containerCenter">
-            <form id="formCreateDash" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
+            <form id="formCreateChart" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
                 <div class="row justify-content-center dp-fixed">
                     <div class="mt-5">
                         <div class="mb-3" id="contTittleOfChart">
@@ -108,20 +110,20 @@
                             <input class="form-control" type="text" id="tittleChart">
                         </div>
                         <div class="mb-3">
-                            <label for="presets" class="form-label">Predefinições</label>
-                            <select class="form-control" id="presets">
+                            <label for="presetsChart" class="form-label">Predefinições</label>
+                            <select class="form-control" id="presetsChart">
                                 <option value='' selected>Escolha uma predefinição</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField01">
-                            <label for="field01" class="form-label">Campo 1</label>
-                            <select class="form-control" id="field01">
+                            <label for="field01Chart" class="form-label">Campo 1</label>
+                            <select class="form-control" id="field01Chart">
                                 <option value='' selected>Escolha um campo de texto</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField02">
-                            <label for="field02" class="form-label">Campo 2</label>
-                            <select class="form-control" id="field02">
+                            <label for="field02Chart" class="form-label">Campo 2</label>
+                            <select class="form-control" id="field02Chart">
                                 <option value='' selected>Escolha um campo numerico</option>
                             </select>
                         </div>
@@ -134,11 +136,69 @@
                                 <option value="pie">Setor</option>
                                 <option value="column">Coluna</option>
                             </select>
+                        </div>
                     </div>
+                </div>
             </form>
         </div>
     </div>
-</div>
+    <div class="containerCreateKpi" id="containerFormCreateKpi">
+        <div class="form">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="border martop border-horizontal p-5 d-flex justify-content-between align-items-center">
+                    <div class="titulo">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h1 class="display-6">Criar Indicador</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <button name="btnBack" form="formCreateKpi" id="btnBackKpi"
+                                class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
+                        </div>
+                        <div class="me-3">
+                            <button type="submit" form="formCreateKpi" id="btnCreateKpi"
+                                class="btn btn-outline-primary sm-4">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="containerCenter">
+            <form id="formCreateKpi" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
+                <div class="row justify-content-center dp-fixed">
+                    <div class="mt-5">
+                        <div class="mb-3" id="contTittleOfKpi">
+                            <label for="tittleKpi" class="form-label">Título do Indicador</label>
+                            <input class="form-control" type="text" id="tittleKpi">
+                        </div>
+                        <div class="mb-3">
+                            <label for="presetsKpi" class="form-label">Predefinições</label>
+                            <select class="form-control" id="presetsKpi">
+                                <option value='' selected>Escolha uma predefinição</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="contField01">
+                            <label for="field01Kpi" class="form-label">Campo 1</label>
+                            <select class="form-control" id="field01Kpi">
+                                <option value='' selected>Escolha um campo de numérico</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="contTypeKpi">
+                            <label for="typeKpi" class="form-label">Gráfico</label>
+                            <select class="form-control" id="typeKpi">
+                                <option value='' selected>Escolha um tipo de Indicador</option>
+                                <option value="common">Moda</option>
+                                <option value="totalSum">Soma total</option>
+                                <option value="average">Média</option>
+                            </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 

@@ -1,23 +1,22 @@
-export default class FormCreateChart{
-  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateChart, containerCenter){
-    this.containerFormCreateChart = containerFormCreateChart
+export default class FormCreateKpi{
+  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateKpi, containerCenter){
+    this.containerFormCreateKpi = containerFormCreateKpi
     this.containerCenter = containerCenter
 
     this.apiRequests = apiRequests
     this.dashboardRequests = dashboardRequests
     this.messaging = messaging
 
-    this.tittleChart = document.querySelector('#tittleChart')
-    this.field01 = document.querySelector('#field01Chart')
-    this.field02 = document.querySelector('#field02Chart')
-    this.preset = document.querySelector('#presetsChart')
-    this.typeChart = document.querySelector('#typeChart')
+    this.tittleKpi = document.querySelector('#tittleKpi')
+    this.field01 = document.querySelector('#field01Kpi')
+    this.preset = document.querySelector('#presetsKpi')
+    this.typeKpi = document.querySelector('#typeKpi')
     
     this.collectionData = []
   }
 
   initializeForm(){
-    this.containerFormCreateChart.style.display = 'block'
+    this.containerFormCreateKpi.style.display = 'block'
     this.containerCenter.style.display = 'none'
 
     this.addOptionsInSelectPresets()
@@ -26,7 +25,7 @@ export default class FormCreateChart{
 
   finishForm(){
     this.containerCenter.style.display = 'flex'
-    this.containerFormCreateChart.style.display = 'none'
+    this.containerFormCreateKpi.style.display = 'none'
   }
 
   async setCollectionData(){
@@ -58,7 +57,6 @@ export default class FormCreateChart{
       this.presetSelected = e.target.value
       this.field01.parentNode.style.display = 'block'
       this.addOptionsInSelectField01()
-      this.addOptionsInSelectField02()
 
     })
   }
@@ -67,14 +65,14 @@ export default class FormCreateChart{
   addOptionsInSelectField01(){
     this.field01.innerHTML  = ''
     const optionDefault = document.createElement('option')
-    optionDefault.innerText = 'Escolha um campo de texto: '
+    optionDefault.innerText = 'Escolha um campo de numérico: '
     optionDefault.setAttribute('selected', 'selected')
     this.field01.appendChild(optionDefault)
     
     this.collectionData.forEach((collection, i) => {
       if(collection.collectionName !== this.presetSelected) return
         collection.fields.forEach((field) => {
-          if(field.type === 'string'){
+          if(field.type === 'int' || field.type === 'double'){
             const option = document.createElement('option')
             option.innerText = field.key
             this.field01.appendChild(option)
@@ -88,52 +86,30 @@ export default class FormCreateChart{
   addEventOnSelectField01(){
     this.field01.addEventListener('change', (e) => {
       this.field01Selected = e.target.value
-      this.field02.parentNode.style.display = 'block'
     })
   }
 
-  addOptionsInSelectField02(){
-    this.field02.innerHTML  = ''
-    const optionDefault = document.createElement('option')
-    optionDefault.innerText = 'Escolha um campo numerico: '
-    optionDefault.setAttribute('selected', 'selected')
-    this.field02.appendChild(optionDefault)
-    
-    this.collectionData.forEach((collection, i) => {
-      if(collection.collectionName !== this.presetSelected) return
-      collection.fields.forEach((field) => {
-        if(field.type === 'int' || field.type === 'double'){
-          const option = document.createElement('option')
-          option.innerText = field.key
-          this.field02.appendChild(option)
-        }
-      })
-    })
+  async createKpi(currentDashboard){
+    const dashboardName = currentDashboard.nameFormated
+    const tittleKpi = this.tittleKpi.value
+    const prestNameKpi = this.preset.value
+    const numerField = this.field01.value
+    const typeKpi = this.typeKpi.value
 
-    this.addEventOnSelectField01()
-  }
-
-  async createChart(currentDashboard){
-    const tittleChart = this.tittleChart.value
-    const prestNameChart = this.preset.value
-    const textField = this.field01.value
-    const numberField = this.field02.value
-    const typeChart = this.typeChart.value
-
-    if(!tittleChart || !prestNameChart || !textField || !numberField || !typeChart) {
+    if(!tittleKpi || !prestNameKpi || !numerField || !typeKpi) {
       this.messaging.msg('Preencha todos os campos corretamente', false)
       return
     }
     
     try{
-      await this.dashboardRequests.postChart(currentDashboard.nameFormated, tittleChart, prestNameChart, textField, numberField, typeChart)
+      await this.dashboardRequests.postKpi(dashboardName, tittleKpi, prestNameKpi, numerField, typeKpi)
 
-      this.messaging.msg('Gráfico criado com sucesso', true)
+      this.messaging.msg('Kpi criado com sucesso', true)
 
       this.containerCenter.style.display = 'flex'
-      this.containerFormCreateChart.style.display = 'none'
+      this.containerFormCreateKpi.style.display = 'none'
     }catch(error){
-      this.messaging.msg(error, false)
+      throw new Error(error.message)
     }
   }
 }

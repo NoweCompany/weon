@@ -66,4 +66,41 @@ export default class DashboardRequests{
         throw new Error("Erro ao criar dashboard: " + error.message);
     }
   }
+
+  async postKpi(dashboardName, tittleChart, prestNameChart, numberField, typeKpi) {
+    this.loading.addLoading()
+    const headers = new Headers({
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${this.token}`
+    });
+
+    try {
+      const myBody = JSON.stringify( {
+        dashboardName: dashboardName,
+        name: tittleChart,
+        preset: prestNameChart,
+        numberField: numberField,
+        typekpi: typeKpi
+      })
+      
+      const response = await fetch(`${this.apiUrl}/kpi`, {
+        method: 'POST',
+        headers: headers,
+        body: myBody
+      });
+
+      if (response.status !== 200) {
+          const data = await response.json();
+          throw new Error(data.errors);
+      }
+
+      const data = await response.json();
+      this.loading.removeLoading()
+      return data;
+    } catch (error) {
+      console.log(error);
+      this.loading.removeLoading()
+      throw new Error("Erro ao criar dashboard: " + error.message);
+    }
+  }
 }
