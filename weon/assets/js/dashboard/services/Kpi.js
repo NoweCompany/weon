@@ -38,6 +38,12 @@ export default class Kpi{
       case 'common':
         this.generateCommonKpi(container, dataOfPreset, dataKpi)
       break
+      case 'average':
+        this.generateAverageKpi(container, dataOfPreset, dataKpi)
+      break
+      case 'totalSum':
+        this.generateTotalSumKpi(container, dataOfPreset, dataKpi)
+      break
       default:
         console.log('Default');
       break
@@ -65,5 +71,27 @@ export default class Kpi{
     }
 
     container.innerHTML = `<h1>${highestFrequencyNumber}</h1>` 
+  }
+
+  generateAverageKpi(container, dataOfPreset, dataKpi){
+    const totalSum = dataOfPreset.reduce((ac, vl) => {
+      const fieldValue = vl[dataKpi.numberField]
+      
+      return ac += fieldValue
+    }, 0)
+
+    const average = (totalSum / dataOfPreset.length).toFixed(2)
+
+    container.innerHTML = `<h1>${average}</h1>` 
+  }
+
+  generateTotalSumKpi(container, dataOfPreset, dataKpi){
+    const totalSum = dataOfPreset.reduce((ac, vl) => {
+      const fieldValue = vl[dataKpi.numberField]
+      
+      return ac += fieldValue
+    }, 0)
+
+    container.innerHTML = `<h1>${totalSum}</h1>` 
   }
 }

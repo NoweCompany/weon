@@ -157,6 +157,9 @@
   justify-content: center;
 }
 
+#formHeader{
+  display: none;
+}
 
 .container{
   display: flex;

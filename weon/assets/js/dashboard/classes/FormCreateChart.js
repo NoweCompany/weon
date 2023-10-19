@@ -1,7 +1,7 @@
 export default class FormCreateChart{
-  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateChart, containerCenter){
+  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateChart, formHeader){
     this.containerFormCreateChart = containerFormCreateChart
-    this.containerCenter = containerCenter
+    this.formHeader = formHeader
 
     this.apiRequests = apiRequests
     this.dashboardRequests = dashboardRequests
@@ -18,14 +18,14 @@ export default class FormCreateChart{
 
   initializeForm(){
     this.containerFormCreateChart.style.display = 'block'
-    this.containerCenter.style.display = 'none'
+    this.formHeader.style.display = 'none'
 
     this.addOptionsInSelectPresets()
     this.addEventOnSelectPresets()
   }
 
   finishForm(){
-    this.containerCenter.style.display = 'flex'
+    this.formHeader.style.display = 'flex'
     this.containerFormCreateChart.style.display = 'none'
   }
 
@@ -130,8 +130,9 @@ export default class FormCreateChart{
 
       this.messaging.msg('Gráfico criado com sucesso', true)
 
-      this.containerCenter.style.display = 'flex'
+      this.formHeader.style.display = 'flex'
       this.containerFormCreateChart.style.display = 'none'
+      return true
     }catch(error){
       this.messaging.msg(error, false)
     }

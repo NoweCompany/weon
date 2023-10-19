@@ -1,7 +1,7 @@
 export default class FormCreateKpi{
-  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateKpi, containerCenter){
+  constructor(apiRequests, dashboardRequests, messaging, containerFormCreateKpi, formHeader){
     this.containerFormCreateKpi = containerFormCreateKpi
-    this.containerCenter = containerCenter
+    this.formHeader = formHeader
 
     this.apiRequests = apiRequests
     this.dashboardRequests = dashboardRequests
@@ -17,14 +17,14 @@ export default class FormCreateKpi{
 
   initializeForm(){
     this.containerFormCreateKpi.style.display = 'block'
-    this.containerCenter.style.display = 'none'
+    this.formHeader.style.display = 'none'
 
     this.addOptionsInSelectPresets()
     this.addEventOnSelectPresets()
   }
 
   finishForm(){
-    this.containerCenter.style.display = 'flex'
+    this.formHeader.style.display = 'flex'
     this.containerFormCreateKpi.style.display = 'none'
   }
 
@@ -106,8 +106,9 @@ export default class FormCreateKpi{
 
       this.messaging.msg('Kpi criado com sucesso', true)
 
-      this.containerCenter.style.display = 'flex'
+      this.formHeader.style.display = 'flex'
       this.containerFormCreateKpi.style.display = 'none'
+      return true
     }catch(error){
       throw new Error(error.message)
     }

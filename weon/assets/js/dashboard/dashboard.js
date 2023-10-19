@@ -30,7 +30,7 @@ google.charts.load('current', { 'packages': ['corechart'] });
 
 class Dashboard {
   constructor(container,
-  containerCenter,
+  formHeader,
   containerFormCreateChart,
   dashboardRequests,
   apiRequests,
@@ -42,7 +42,7 @@ class Dashboard {
   ){
     
     this.container = container
-    this.containerCenter = containerCenter
+    this.formHeader = formHeader
     this.containerFormCreateChart = containerFormCreateChart
     this.messaging = messaging
     this.dashboardRequests = dashboardRequests
@@ -67,6 +67,7 @@ class Dashboard {
     try {
       const modalbtnsSideBar = document.querySelector('.modalbtnsSideBar')
       const dataDashboard = await this.apiRequests.getApiDashBoards()
+      console.log(dataDashboard);
       //armazenar "dataDashboard(dados)" para otimizar o carregamento de dados
       for (const dash of dataDashboard) {
         const dashName = formaterNameDash(dash.name)
@@ -82,6 +83,7 @@ class Dashboard {
         
 
         btnDash.addEventListener('click', (e) => {
+          this.formHeader.style.display = 'block'
           this.currentDashboard = {name: dash.name, nameFormated: dashName, values: dash.values}
           this.loadDashBoard(this.currentDashboard)
         })
@@ -124,9 +126,6 @@ class Dashboard {
     const btnCreateChart = document.querySelector('#btnCreateChart')
     const btnCreateKpi = document.querySelector('#btnCreateKpi')
 
-    this.containerFormCreateChart.style.display = 'none';
-    this.containerFormCreateKpi.style.display = 'none';
-
     //Evento de exibição de formulário
     btnToFormCreateChart.addEventListener('click', (e) => {
       if(Object.values(this.currentDashboard).length <= 0){
@@ -136,7 +135,7 @@ class Dashboard {
     })
     btnToFormCreateKpi.addEventListener('click', (e) => {
       if(Object.values(this.currentDashboard).length <= 0){
-        return this.messaging.msg('Selecione um Dashboard para realizar a criação de seu gráfico!')
+        return this.messaging.msg('Selecione um Dashboard para realizar a criação de seu Indicador!')
       }
       this.formCreateKpi.initializeForm()
     })
@@ -155,7 +154,8 @@ class Dashboard {
     btnCreateKpi.addEventListener('click', async (e) => {
       e.preventDefault()
       try{
-        await this.formCreateKpi.createKpi(this.currentDashboard)
+        const response = await this.formCreateKpi.createKpi(this.currentDashboard)
+        if(response) console.log('Atualiza dadso');
       }catch (error) {
         this.messaging.msg(error.message, false)
       }
@@ -181,7 +181,7 @@ const token = new Token()
 const dashboardRequests = new DashboardRequests(configs.urlApi, token, loading) 
 const apiRequests = new ApiRequests(configs.urlApi, token, loading) 
 
-const containerCenter = document.querySelector('#containerCenter')
+const formHeader = document.querySelector('#formHeader')
 const containerFormCreateChart = document.querySelector('#containerFormCreateChart')
 const containerFormCreateKpi = document.querySelector('#containerFormCreateKpi')
 const container = document.querySelector('.container')
@@ -191,7 +191,7 @@ const formCreateChart = new FormCreateChart(
   dashboardRequests,
   messaging,
   containerFormCreateChart,
-  containerCenter
+  formHeader
 )
 
 const formCreateKpi = new FormCreateKpi(
@@ -199,7 +199,7 @@ const formCreateKpi = new FormCreateKpi(
   dashboardRequests,
   messaging,
   containerFormCreateKpi,
-  containerCenter
+  formHeader
 )
 
 const charts = new Charts(apiRequests, messaging)
@@ -207,7 +207,7 @@ const kpi = new Kpi(apiRequests, messaging)
 
 const dash = new Dashboard(
   container,
-  containerCenter,
+  formHeader,
   containerFormCreateChart,
   dashboardRequests,
   apiRequests,
