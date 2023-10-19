@@ -63,6 +63,19 @@ class Dashboard {
     this.addEnventOnBtns()
   }
 
+  async refreshValuesOfCurrentDashboard(){
+    try {
+      if(Object.values(this.currentDashboard).length <= 0) throw new Error('Não há nenhum dashBoard selecionado')
+
+      const dashBoardName = this.currentDashboard.nameFormated
+      const valuesUpdated = await this.dashboardRequests.showetDashboard(dashBoardName)
+      this.currentDashboard.values = valuesUpdated
+      return true
+    } catch (error) {
+      this.messaging.msg(error.message, false)
+    }
+  }
+
   async listDashs(){
     try {
       const modalbtnsSideBar = document.querySelector('.modalbtnsSideBar')
@@ -144,7 +157,11 @@ class Dashboard {
     btnCreateChart.addEventListener('click', async (e) => {
       e.preventDefault()
       try {
-        await this.formCreateChart.createChart(this.currentDashboard)
+        const response = await this.formCreateChart.createChart(this.currentDashboard)
+        if(response) {
+          await this.refreshValuesOfCurrentDashboard()
+          this.loadDashBoard(this.currentDashboard)
+        }
 
       } catch (error) {
         this.messaging.msg(error.message, false)
@@ -155,7 +172,10 @@ class Dashboard {
       e.preventDefault()
       try{
         const response = await this.formCreateKpi.createKpi(this.currentDashboard)
-        if(response) console.log('Atualiza dadso');
+        if(response) {
+          await this.refreshValuesOfCurrentDashboard()
+          this.loadDashBoard(this.currentDashboard)
+        }
       }catch (error) {
         this.messaging.msg(error.message, false)
       }

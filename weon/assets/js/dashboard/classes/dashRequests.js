@@ -103,4 +103,26 @@ export default class DashboardRequests{
       throw new Error("Erro ao criar dashboard: " + error.message);
     }
   }
+
+  async showetDashboard(dashboardName) {
+    try {
+        this.loading.addLoading()
+        const response = await fetch(`${this.apiUrl}/dashboard/${dashboardName}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if(response.status !== 200) throw new Error(data.errors)
+        
+        this.loading.removeLoading()
+        return data;
+    } catch (error) {
+        this.loading.removeLoading()
+        throw new Error(e.message || 'Ocorreu um erro inesperado')
+    }
+}
 }
