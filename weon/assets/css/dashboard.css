@@ -178,9 +178,15 @@
   align-items: center; 
   border-radius: 5px;
   padding: 30px;
- 
 }
 
+.cardDash h1{
+  flex:content;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 50%;
+}
 
 .configContent{
   display: flex;
@@ -195,14 +201,13 @@
   height: 30px;
   border-radius: 10px;
   
+  
 }
 
 .martop{
   margin-top: 10%;
 }
-.rect{
-  fill: black;
-}
+
 
 
 .containerCreateKpi, .containerCreateChart{

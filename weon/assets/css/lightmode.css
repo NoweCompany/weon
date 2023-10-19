@@ -109,12 +109,18 @@
   
   .cardDash{
     width: 500px;
-    background-color: #ffffff;
+    background-color: #ffffff00;
     border: 2px solid #dee2e6;
    
   }
 
   #formCreateDash{
+    background-color: #ffffff;
+    border: 2px solid #dee2e6;
+  }
+
+
+  .form1{
     background-color: #ffffff;
     border: 2px solid #dee2e6;
   }

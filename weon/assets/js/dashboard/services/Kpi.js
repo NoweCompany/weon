@@ -12,7 +12,7 @@ export default class Kpi{
     const card = document.createElement('div')
     card.classList.add('cardDash')
 
-    const titleCard = document.createElement('h2')
+    const titleCard = document.createElement('h1')
     titleCard.innerText = name
 
     const contentKpi = document.createElement('div')
