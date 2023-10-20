@@ -27,30 +27,29 @@
     </ul>
 </nav>
 
-<div class="sidebar z-2" id="sidebar">
-
-    <div class="modal-body d-flex flex-column align-items-start justify-content-between">
-        <h1 id="sidebar-title">Dashboard</h1>
-        <hr class="hr-divider">
-        <div class="modalbtnsSideBar">
-            
+<div class="sidebar" id="sidebar">
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <div class="input-group">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control mt-5" placeholder="Buscar">
+                </div>
+            </div>
         </div>
-        <hr class="hr-divider">
-         <div class="mx-auto start-0 bottom-100">
-            <button class="btn btn-outline-dark" id="toggle-sidebar">
-                <i class="fa-solid fa-minus"></i>
-            </button>
-        </div> 
     </div>
-</div>
+    <div id="SidebarElement" class="modalbtnsSideBar">
+    </div>
+    </div> 
+    
+  <button id="toggleButton" class="toggle-button btn btn-outline-primary position-fixed bottom-0 start-0 m-3"><i class="fa-solid fa-bars"></i></button>
 
-<div class="loading" id="loading">
-    <img src="../assets/gif/nowecube.gif" width="200" height="200" />
-</div>
+    <div class="loading" id="loading">
+        <img src="../assets/gif/nowecube.gif" width="200" height="200" />
+    </div>
 
-<div class="msg"></div>
+    <div class="msg"></div>
 
-<div class="container">
+    <div class="container">
     <div class="containerCenter" id="formHeader">
         <div class="form">
             <div class="d-flex justify-content-center align-items-center mb-5">
@@ -209,6 +208,7 @@
 <div id="barchart_material" style="width: 900px; height: 500px;"></div>
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 <script type="module" src="../assets/js/dashboard/dashboard.js"></script>
+<script src="../assets/js/modules/sidebarcad.js"> </script>
 </body>
 
 </html>

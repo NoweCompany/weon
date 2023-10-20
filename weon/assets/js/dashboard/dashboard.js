@@ -76,6 +76,32 @@ class Dashboard {
     }
   }
 
+  
+async addOptions() {
+  try {
+      const response = await this.requests.getApiDashBoards();
+
+      this.dataDashboard = response.response; 
+      this.filteredData = [...this.dataDashboard]; 
+
+      const sidebarContent = document.getElementById('SidebarElement');
+      const searchInput = document.getElementById('searchInput');
+
+      searchInput.addEventListener('input', () => {
+          const searchTerm = searchInput.value.toLowerCase();
+          this.filteredData = this.dataDashboard.filter((item) =>
+              item.dataDashboard.toLowerCase().includes(searchTerm)
+          );
+          this.showItems(this.filteredData, sidebar);
+      });
+
+      // Exibe todos os itens cadastrados inicialmente na barra lateral
+      this.showItems(this.filteredData, sidebar);
+  } catch (error) {
+      this.msg(error.message, false);
+  }
+}
+
   async listDashs(){
     try {
       const modalbtnsSideBar = document.querySelector('.modalbtnsSideBar')
@@ -89,10 +115,8 @@ class Dashboard {
         btnDash.className = 'toggle-button'
         btnDash.id = `dashBtn_${dash.name}`
         btnDash.innerHTML += `${dashName}`
-        const divisior  = document.createElement('hr')
-        divisior.className = 'mx-auto w-75'
         modalbtnsSideBar.appendChild(btnDash)
-        modalbtnsSideBar.appendChild(divisior)
+      
         
 
         btnDash.addEventListener('click', (e) => {
@@ -241,3 +265,5 @@ const dash = new Dashboard(
 dash.initSelects()
   .then(resolve => resolve)
   .catch(err => console.log(err ))
+
+//filtro
