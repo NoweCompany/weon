@@ -1,30 +1,39 @@
 function activateSidebarToggle() {
-  var toggleSidebarButton = document.getElementById('toggle-sidebar');
-  var sidebar = document.querySelector('.sidebar');
-  var titles = document.querySelectorAll('.sidebar h1');
-  var predefinicaoButton = document.getElementById('predefinicao');
-  var dashboardButton = document.getElementById('dashboard-button');
-  var isSidebarCollapsed = false;
+    var toggleSidebarButton = document.getElementById('toggle-sidebar');
+    var sidebar = document.querySelector('.sidebar');
+    var titles = document.querySelectorAll('.sidebar h1');
+    var predefinicaoButton = document.getElementById('predefinicao');
+    var historicoButton = document.getElementById('historico');
+    var dashboardButton = document.getElementById('dashboard');
 
-  function toggleSidebar() {
-      isSidebarCollapsed = !isSidebarCollapsed;
+    var isSidebarCollapsed = false;
+  
+    function toggleSidebar() {
+      // Alternando texto dos botões
+      if (isSidebarCollapsed) {
+          predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>';
+          historicoButton.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i>';
+          dashboardButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+      } else {
+          predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>';
+          historicoButton.innerHTML = 'Histórico <i class="fa-solid fa-clock-rotate-left"></i>';
+          dashboardButton.innerHTML = 'Dashboards <i class="fa-solid fa-chart-line"></i>';
+      }
 
-      sidebar.classList.toggle('collapsed', isSidebarCollapsed);
-
+      // Alternando a visualização dos títulos
       titles.forEach(title => {
           title.classList.toggle('hidden', isSidebarCollapsed);
       });
 
-      if (isSidebarCollapsed) {
-          predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>';
-          dashboardButton.innerHTML = '<i id="dashboard" class="fa-solid fa-chart-line"></i>';
-      } else {
-          predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>';
-          dashboardButton.innerHTML = 'Dashboards <i class="fa-solid fa-chart-line"></i>';
-      }
-  }
+      // Alternando o tamanho da sidebar
+      sidebar.classList.toggle('collapsed', isSidebarCollapsed);
 
-  toggleSidebarButton.addEventListener('click', toggleSidebar);
+      // Alternando a flag
+      isSidebarCollapsed = !isSidebarCollapsed;
+    }
+
+    // Associando a função ao evento de clique do botão
+    toggleSidebarButton.addEventListener('click', toggleSidebar);
 }
 
 activateSidebarToggle();

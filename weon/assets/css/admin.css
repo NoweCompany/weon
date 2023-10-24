@@ -21,6 +21,12 @@
   display: none !important;
 }
 
+.sidebar.collapsed {
+  width: 50px; /* Ou o valor que você deseja */
+  overflow: hidden; /* Para garantir que nenhum conteúdo exceda o limite da sidebar */
+}
+
+
 #form {
   flex-direction: column;
   width: 100%;
