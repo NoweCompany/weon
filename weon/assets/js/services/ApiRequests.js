@@ -237,6 +237,7 @@ export default class ApiRequests {
                 throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }
     }
+
     async postApiTemplate(name, type, collectionName, fieldRequired) {
         try {
             this.loading.addLoading()
@@ -367,6 +368,56 @@ export default class ApiRequests {
         } catch (e) {
             this.loading.removeLoading()
             throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
+    async indexHistoric() {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            });
+
+            const response = await fetch(`${this.apiUrl}/historic`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            const data = await response.json();
+
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.loading.removeLoading()
+            return data
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || 'Ocorreu um erro inesperado')
+        }
+
+    }
+
+    async deleteHistoric(id){
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+        
+            const response = await fetch(`${this.apiUrl}/historic/${id}`, {
+                method: 'DELETE',
+                headers: headers,
+            })
+
+            const data = await response.json()
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.loading.removeLoading()
+            return data
+        } catch (error) {
+            this.loading.removeLoading()
+            throw new Error(error.message || 'Ocorreu um erro inesperado')
         }
     }
 }
