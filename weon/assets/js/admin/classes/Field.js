@@ -252,15 +252,15 @@ export default class Fields{
 
         // Criação da obrigatoriedade com um switch
         const tdRequired = document.createElement("td");
-        tdRequired.className = "mb-4";
+        tdRequired.className = "d-flex justify-content-center align-items-center p-3";
 
         const switchLabel = document.createElement("label");
-        switchLabel.className = "form-check-input";
+        switchLabel.className = "d-flex justify-content-center align-items-center";
 
         // Criação do switch
         const isRequiredSwitch = document.createElement("input");
         isRequiredSwitch.setAttribute("type", "checkbox");
-        isRequiredSwitch.className = "form-check-input";
+        isRequiredSwitch.className = "form-check-input d-flex justify-content-center align-items-center";
         isRequiredSwitch.setAttribute("role", "switch")
         isRequiredSwitch.setAttribute("id", "isRequired");
         if (isRequired) {
@@ -268,7 +268,7 @@ export default class Fields{
         }
 
         const divSwitch = document.createElement('div')
-        divSwitch.className = "form-check form-switch"
+        divSwitch.className = "form-check form-switch d-flex justify-content-center align-items-center"
         divSwitch.appendChild(switchLabel)
         divSwitch.appendChild(isRequiredSwitch)
 

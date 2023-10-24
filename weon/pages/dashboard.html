@@ -27,30 +27,29 @@
     </ul>
 </nav>
 
-<div class="sidebar z-2" id="sidebar">
-
-    <div class="modal-body d-flex flex-column align-items-start justify-content-between">
-        <h1 id="sidebar-title">Dashboard</h1>
-        <hr class="hr-divider">
-        <div class="modalbtnsSideBar">
-            
+<div class="sidebar" id="sidebar">
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <div class="input-group">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control mt-5" placeholder="Buscar">
+                </div>
+            </div>
         </div>
-        <hr class="hr-divider">
-        <!-- <div class="mx-auto start-0 bottom-100">
-            <button class="btn btn-outline-dark" id="toggle-sidebar">
-                <i class="fa-solid fa-minus"></i>
-            </button>
-        </div> -->
     </div>
-</div>
+    <div id="SidebarElement" class="modalbtnsSideBar">
+    </div>
+    </div> 
+    
+  <button id="toggleButton" class="toggle-button btn btn-outline-primary position-fixed bottom-0 start-0 m-3"><i class="fa-solid fa-bars"></i></button>
 
-<div class="loading" id="loading">
-    <img src="../assets/gif/nowecube.gif" width="200" height="200" />
-</div>
+    <div class="loading" id="loading">
+        <img src="../assets/gif/nowecube.gif" width="200" height="200" />
+    </div>
 
-<div class="msg"></div>
+    <div class="msg"></div>
 
-<div class="container">
+    <div class="container">
     <div class="containerCenter" id="formHeader">
         <div class="form">
             <div class="d-flex justify-content-center align-items-center mb-5">
@@ -68,7 +67,7 @@
                                 Criar Gráfico
                             </button>
                             <button type="submit" id="btnToFormCreateKpi" class="btn btn-outline-primary sm-4 ms-2">
-                                Criar Kpi
+                                Criar Indicador
                             </button>
                         </div>
                     </div>
@@ -89,6 +88,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
+
                         <div class="me-3">
                             <button name="btnBack" form="formCreateChart" id="btnBackChart"
                                 class="btn btn-outline-danger sm-4 ms-2 ">Voltar</button>
@@ -97,38 +97,40 @@
                             <button type="submit" form="formCreateChart" id="btnCreateChart"
                                 class="btn btn-outline-primary sm-4">Salvar</button>
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="containerCenter">
-            <form id="formCreateChart" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
+            <form id="formCreateChart" class="form1 p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
                 <div class="row justify-content-center dp-fixed">
                     <div class="mt-5">
                         <div class="mb-3" id="contTittleOfChart">
-                            <label for="tittleChart" class="form-label">Título do gráfico</label>
+                            <label for="tittleChart" class="h5">Título do gráfico</label>
                             <input class="form-control" type="text" id="tittleChart">
                         </div>
                         <div class="mb-3">
-                            <label for="presetsChart" class="form-label">Predefinições</label>
+                            <label for="presetsChart" class="h5">Predefinições</label>
                             <select class="form-control" id="presetsChart">
                                 <option value='' selected>Escolha uma predefinição</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField01">
-                            <label for="field01Chart" class="form-label">Campo 1</label>
+                            <label for="field01Chart" class="h5">Campo 1</label>
                             <select class="form-control" id="field01Chart">
                                 <option value='' selected>Escolha um campo de texto</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField02">
-                            <label for="field02Chart" class="form-label">Campo 2</label>
+                            <label for="field02Chart" class="h5">Campo 2</label>
                             <select class="form-control" id="field02Chart">
                                 <option value='' selected>Escolha um campo numerico</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contTypeChart">
-                            <label for="typeChart" class="form-label">Gráfico</label>
+                            <label for="typeChart" class="h5">Gráfico</label>
                             <select class="form-control" id="typeChart">
                                 <option value='' selected>Escolha um tipo de gráfico</option>
                                 <option value="line">Linha</option>
@@ -167,27 +169,27 @@
             </div>
         </div>
         <div class="containerCenter">
-            <form id="formCreateKpi" class="p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
+            <form id="formCreateKpi" class="form1 p-3 mt-1 w-50 row justify-content-center dp-fixed mx-auto">
                 <div class="row justify-content-center dp-fixed">
                     <div class="mt-5">
                         <div class="mb-3" id="contTittleOfKpi">
-                            <label for="tittleKpi" class="form-label">Título do Indicador</label>
+                            <label for="tittleKpi" class="h5">Título do Indicador</label>
                             <input class="form-control" type="text" id="tittleKpi">
                         </div>
                         <div class="mb-3">
-                            <label for="presetsKpi" class="form-label">Predefinições</label>
+                            <label for="presetsKpi" class="h5">Predefinições</label>
                             <select class="form-control" id="presetsKpi">
                                 <option value='' selected>Escolha uma predefinição</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contField01">
-                            <label for="field01Kpi" class="form-label">Campo 1</label>
+                            <label for="field01Kpi" class="h5">Campo 1</label>
                             <select class="form-control" id="field01Kpi">
                                 <option value='' selected>Escolha um campo de numérico</option>
                             </select>
                         </div>
                         <div class="mb-3" id="contTypeKpi">
-                            <label for="typeKpi" class="form-label">Gráfico</label>
+                            <label for="typeKpi" class="h5">Gráfico</label>
                             <select class="form-control" id="typeKpi">
                                 <option value='' selected>Escolha um tipo de Indicador</option>
                                 <option value="common">Moda</option>
@@ -206,6 +208,7 @@
 <div id="barchart_material" style="width: 900px; height: 500px;"></div>
 <script src="https://kit.fontawesome.com/2d9d8db956.js" crossorigin="anonymous"></script>
 <script type="module" src="../assets/js/dashboard/dashboard.js"></script>
+<script src="../assets/js/modules/sidebarcad.js"> </script>
 </body>
 
 </html>

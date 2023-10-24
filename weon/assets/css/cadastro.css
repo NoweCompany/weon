@@ -40,7 +40,6 @@ body {
     }
   }
   
-  /* Restante do seu CSS continua igual */
   
   /* sidebar aberta */
   .sidebar {
@@ -48,11 +47,11 @@ body {
     background-color: #ffffff;
     height: 100%;
     position: fixed;
-    top: 0; /* Corrija o valor de "top" para 0 */
-    left: -200px; /* Inicialmente, posicione a barra fora da tela */
+    top: 0; 
+    left: -200px; 
     overflow-x: hidden;
     padding-top: 30px;
-    animation: slide-in 0.5s ease; /* Use a animação slide-in */
+    animation: slide-in 0.5s ease;
   }
   
   /* sidebar fechada */
@@ -141,7 +140,7 @@ body {
 
   .sidebar.closed {
     transform: translateX(-100%);
-    transition: transform 0.5s ease; /* Posicione a barra lateral fora da tela */
+    transition: transform 0.5s ease; 
   }
 
 
