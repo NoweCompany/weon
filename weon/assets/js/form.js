@@ -9,9 +9,6 @@ const containerMsg = document.querySelector('.msg')
 const url = configs.urlApi
 const urlWebsite = configs.urlWebsiteRelativa()
 
-console.log(urlWebsite);
-console.log(configs.urlWebsiteRelativa());
-
 window.addEventListener('load', async e => {
   const logado = new Logado()
   if (await logado.userLogado()) {
