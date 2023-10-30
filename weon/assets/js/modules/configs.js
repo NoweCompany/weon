@@ -1,5 +1,5 @@
 export default {
-    urlApi: 'http://154.56.41.79:3300',
+    urlApi: 'https://apiweon.nowecompany.com.br',
     urlWebsiteDefault: 'https://nowecompany.com.br/weon',
     urlWebsiteRelativa: () => {
         const urlWebsite = document.location.href
