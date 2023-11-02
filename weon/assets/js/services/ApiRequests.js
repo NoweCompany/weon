@@ -296,6 +296,34 @@ export default class ApiRequests {
         }
     }
 
+    async postApiUser(email, password, permission) {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const myBody = JSON.stringify({
+                email,
+                password,
+                permission,
+            })
+            const response = await fetch(`${this.apiUrl}/users`, {
+                method: 'POST',
+
+                headers: headers,
+                body: myBody
+            })
+
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
     async updateApiTemplate(collectionName, fieldName, newFieldName, fieldRequired, newValues) {
         try {
             this.loading.addLoading()
