@@ -8,6 +8,7 @@ import Fields from './classes/Field.js'
 import Trash from './classes/Trash.js'
 import Historic from './classes/Historic.js'
 import Dashboard from './classes/Dashboard.js'
+import User from './classes/user.js'
 //Modulos
 import Logado from "../modules/Logado.js";
 //Services
@@ -37,11 +38,12 @@ const fields = new Fields(document.querySelector('.container'), messaging, api)
 const trash  = new Trash(document.querySelector('.container'), messaging, api)
 const dashboard = new Dashboard(document.querySelector('.container'), messaging, api)
 const historic = new Historic(document.querySelector('.container'), messaging, api)
+const users = new User(document.querySelector('.container'), messaging, api)
 
 fields.presetController = preset
 preset.fieldController = fields
 
-await preset.preset()
+await users.user()
 async function handleClick(e){
     try {
         const el = e.target
@@ -52,6 +54,7 @@ async function handleClick(e){
         else if (id === 'lixeira') await trash.trash()
         else if (id === 'dashboard') await dashboard.dashboard()
         else if (id === 'historico') await historic.historic()
+        else if (id === 'usuarios') await users.user()
         else return
     } catch (error) {
         messaging.msg('Houve um erro inesperado, Tente novamente mais tarde !')

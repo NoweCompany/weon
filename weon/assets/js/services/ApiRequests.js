@@ -53,6 +53,31 @@ export default class ApiRequests {
         }
     }
 
+    async getIndexUser() {
+        const headers = new Headers({
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.token}`
+        });
+        this.loading.addLoading()
+        try {
+            const response = await fetch(`${this.apiUrl}/users`, {
+                headers: headers
+            });
+
+            if (response.status !== 200) {
+                const data = await response.json();
+                throw new Error(data.errors);
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error("Erro ao obter usuários: " + error.message);
+        }finally{
+            this.loading.removeLoading()
+        }
+    }
+
     async getApiCollections() {
         try {
             this.loading.addLoading()
