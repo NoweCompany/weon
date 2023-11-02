@@ -473,4 +473,27 @@ export default class ApiRequests {
             throw new Error(error.message || 'Ocorreu um erro inesperado')
         }
     }
+
+
+    async restoreItem(itemId, collectionName){
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/trash/${itemId}/${collectionName}`, {
+                method: 'PUT',
+
+                headers: headers,
+            })
+            console.log(response);
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
 }
