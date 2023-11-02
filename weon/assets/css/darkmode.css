@@ -156,3 +156,11 @@ body{
   background-color: #555; /* Cor do polegar em hover */
 }
 
+.beta{
+  color: rgb(213, 213, 213);
+  border: solid 2px rgb(208, 99, 99);
+  border-radius: 4px;
+  background-color: rgb(196, 58, 58);
+  padding: 2px;
+ 
+}

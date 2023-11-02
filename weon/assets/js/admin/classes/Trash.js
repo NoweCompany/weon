@@ -15,6 +15,7 @@ export default class Trash{
             trashItems.forEach(collection => {
                 const label = document.createElement('div')
                 const textLabel = document.createTextNode(collection.collectionName)
+                console.log('collection')
                 label.appendChild(textLabel)
                 this.container.appendChild(label)
                 collection.values.forEach((documents, index) => {
@@ -26,7 +27,6 @@ export default class Trash{
         }
     }
     
-
     // Chamar este método para exibir os itens da lixeira
     trash() {
         this.renderTrashItems();

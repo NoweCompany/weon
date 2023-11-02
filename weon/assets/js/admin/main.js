@@ -55,6 +55,7 @@ async function handleClick(e){
         else if (id === 'dashboard') await dashboard.dashboard()
         else if (id === 'historico') await historic.historic()
         else if (id === 'usuarios') await users.user()
+        else if (id === 'Lixeira') await trash.trash()
         else return
     } catch (error) {
         messaging.msg('Houve um erro inesperado, Tente novamente mais tarde !')
