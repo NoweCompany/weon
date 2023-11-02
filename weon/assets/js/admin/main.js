@@ -43,7 +43,7 @@ const users = new User(document.querySelector('.container'), messaging, api)
 fields.presetController = preset
 preset.fieldController = fields
 
-await users.user()
+await preset.preset()
 async function handleClick(e){
     try {
         const el = e.target

@@ -76,7 +76,6 @@
   }
 
   .sidebar .toggle-button{
-    display: block;
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
@@ -87,10 +86,12 @@
     background: none;
     position: relative;
     display: flex;
-    margin-left: 15px;
 
   }
 
+  #title{
+    width: 500px;
+  }
   #sidebarContent{
     margin-left: 20px;
   }

@@ -92,6 +92,6 @@ export default class Kpi{
       return ac += fieldValue
     }, 0)
 
-    container.innerHTML = `<h1>${totalSum}</h1>` 
+    container.innerHTML = `<h1>${totalSum.toFixed(2)}</h1>` 
   }
 }
