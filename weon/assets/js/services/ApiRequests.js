@@ -496,4 +496,29 @@ export default class ApiRequests {
             throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }
     }
+
+    async deletePermanent(itemId, collectionName) {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+        
+            const response = await fetch(`${this.apiUrl}/value/${itemId}/${collectionName}/true`, {
+                method: 'DELETE',
+                headers: headers,
+            })
+
+            const data = await response.json()
+            if(response.status !== 200) throw new Error(data.errors)
+
+            this.loading.removeLoading()
+            return data
+        } catch (error) {
+            console.log(error);
+            this.loading.removeLoading()
+            throw new Error(error.message || 'Ocorreu um erro inesperado')
+        }
+    }
 }

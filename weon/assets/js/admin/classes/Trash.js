@@ -8,7 +8,6 @@ export default class Trash {
     async renderTrashItems() {
         try {
             const trashItems = await this.api.getIndexItemsInTrash();
-
             this.container.innerHTML = '';
 
             const title = document.createElement('h3');
@@ -31,24 +30,37 @@ export default class Trash {
 
                 collection.values.forEach(documents => {
                     const li = document.createElement('li');
-                    li.className = 'd-flex';
+                    li.className = 'd-flex align-items-center';
 
-                    const actionButton = document.createElement('button');
-                    actionButton.className = 'dropdown-item';
-                    actionButton.type = 'button';
-                    actionButton.textContent = Object.entries(documents).slice(2).map(entry => entry.join(' ')).join(' ');
+                    const labelDocument = document.createElement('label');
+                    labelDocument.className = 'dropdown-item';
+                    labelDocument.type = 'button';
+                    const valueLabel = Object.entries(documents).slice(1).map(entry => {
+                        const key = `<strong>${entry[0]}</strong>`
+                        const value = `<p>${entry[1]}</p>`
 
+                        return key + value
+                    }).join(' ');
+                    labelDocument.innerHTML = valueLabel
                     
                     const restoreButton = document.createElement('button');
-                    restoreButton.className = 'btn btn-info ms-2';
+                    restoreButton.className = 'btn btn-info ms-2 h-100';
                     restoreButton.textContent = 'Restaurar';
-                    restoreButton.id = documents._id;
-                    
-                    restoreButton.addEventListener('click', () => this.restoreItem(documents._id, collection.collectionName));
+                    restoreButton.addEventListener('click',
+                        () => this.restoreItem(documents._id, collection.collectionName, li)
+                    );
+
+                    const deletePermanentButton = document.createElement('button');
+                    deletePermanentButton.className = 'btn btn-warning ms-2 h-100';
+                    deletePermanentButton.textContent = 'Deletear';
+                    deletePermanentButton.addEventListener('click', 
+                        () => this.deletePermanent(documents._id, collection.collectionName, li)
+                    );
 
 
-                    li.appendChild(actionButton);
+                    li.appendChild(labelDocument);
                     li.appendChild(restoreButton);
+                    li.appendChild(deletePermanentButton);
                     dropdownMenu.appendChild(li);
                 });
 
@@ -60,10 +72,25 @@ export default class Trash {
             console.error('Erro ao renderizar os itens da lixeira:', error);
         }
     }
- 
-    async restoreItem(itemId, collectionName) {
-        await this.api.restoreItem(itemId, collectionName)
-        console.log(`Restaurando item com ID: ${itemId}`);
+
+    async restoreItem(itemId, collectionName, li) {
+        try {
+            await this.api.restoreItem(itemId, collectionName)
+            li.remove()
+            this.messaging.msg('Documento restaurado com sucesso!', true)
+        } catch (error) {
+            this.messaging.msg('Ocorreu um erro ao restaurado o documento :(, tente novamente mais tarde.', false)
+        }
+    }
+
+    async deletePermanent(itemId, collectionName, li) {
+        try {
+            await this.api.deletePermanent(itemId, collectionName)
+            li.remove()
+            this.messaging.msg('Documento deletado permanentemente!', true)
+        } catch (error) {
+            this.messaging.msg('Ocorreu um erro ao deletar o documento :(, tente novamente mais tarde.', false)
+        }
     }
     
     trash() {
