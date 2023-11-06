@@ -1,5 +1,6 @@
 export default {
-    urlApi: 'http://localhost:3300',
+    //urlApi: 'http://localhost:3300', //localhost
+    urlApi: 'https://apiweon.nowecompany.com.br',
     urlWebsiteDefault: 'https://nowecompany.com.br/weon',
     urlWebsiteRelativa: () => {
         const urlWebsite = document.location.href

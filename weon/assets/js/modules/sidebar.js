@@ -5,6 +5,7 @@ function activateSidebarToggle() {
     var predefinicaoButton = document.getElementById('predefinicao');
     var historicoButton = document.getElementById('historico');
     var dashboardButton = document.getElementById('dashboard');
+    var UsuarioButton = document.getElementById('usuarios')
 
     var isSidebarCollapsed = false;
   
@@ -14,10 +15,12 @@ function activateSidebarToggle() {
           predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>';
           historicoButton.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i>';
           dashboardButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
+          UsuarioButton.innerHTML = '<i class="fa-solid fa-users"></i>'
       } else {
           predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>';
-          historicoButton.innerHTML = 'Histórico <i class="fa-solid fa-clock-rotate-left"></i>';
+          historicoButton.innerHTML = ' Histórico <span id="historico" class="beta">BETA</span> <i class="fa-solid fa-clock-rotate-left"></i>';
           dashboardButton.innerHTML = 'Dashboards <i class="fa-solid fa-chart-line"></i>';
+          UsuarioButton.innerHTML =''
       }
 
       // Alternando a visualização dos títulos

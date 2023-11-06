@@ -10,9 +10,14 @@ export default class Trash {
             const trashItems = await this.api.getIndexItemsInTrash();
             this.container.innerHTML = '';
 
-            const title = document.createElement('h3');
-            title.textContent = 'Lixeira';
-            this.container.appendChild(title);
+            const navtitle = document.createElement('div');
+            navtitle.innerHTML= `<div class="d-flex justify-content-center align-items-center mb-5">
+            <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+              <div class="titulo">
+                <h1 id="tituloPrincipal" class="display-6">Lixeira</h1>
+            </div>`
+              
+            this.container.appendChild(navtitle);
 
             trashItems.forEach(collection => {
                 const btnGroupDiv = document.createElement('div');
@@ -20,13 +25,13 @@ export default class Trash {
                 
                 const dropdownButton = document.createElement('button');
                 dropdownButton.type = 'button';
-                dropdownButton.className = 'btn btn-secondary dropdown-toggle';
+                dropdownButton.className = 'btn lixeira dropdown-toggle';
                 dropdownButton.setAttribute('data-bs-toggle', 'dropdown');
                 dropdownButton.setAttribute('data-bs-display', 'static');
                 dropdownButton.textContent = collection.collectionName;
 
                 const dropdownMenu = document.createElement('ul');
-                dropdownMenu.className = 'dropdown-menu dropdown-menu-lg-end';
+                dropdownMenu.className = 'dropdown-menu dropdown-menu-lg-end scroll';
 
                 collection.values.forEach(documents => {
                     const li = document.createElement('li');
@@ -44,15 +49,15 @@ export default class Trash {
                     labelDocument.innerHTML = valueLabel
                     
                     const restoreButton = document.createElement('button');
-                    restoreButton.className = 'btn btn-info ms-2 h-100';
-                    restoreButton.textContent = 'Restaurar';
+                    restoreButton.className = 'btn btn-outline-success ms-2 h-100';
+                    restoreButton.innerHTML = '<i class="fa-solid fa-rotate-left"></i>';
                     restoreButton.addEventListener('click',
                         () => this.restoreItem(documents._id, collection.collectionName, li)
                     );
 
                     const deletePermanentButton = document.createElement('button');
-                    deletePermanentButton.className = 'btn btn-warning ms-2 h-100';
-                    deletePermanentButton.textContent = 'Deletear';
+                    deletePermanentButton.className = 'btn btn-outline-danger ms-2 h-100';
+                    deletePermanentButton.innerHTML = '<i class="fa-solid fa-trash"></i>'
                     deletePermanentButton.addEventListener('click', 
                         () => this.deletePermanent(documents._id, collection.collectionName, li)
                     );

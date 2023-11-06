@@ -316,13 +316,38 @@ th {
 
 .popupConfirmation {
   position: absolute;
-  top: 1px; /* Ajuste a distância desejada a partir do topo */
-  right: 10px; /* Ajuste a distância desejada a partir da direita */
+  top: 1px;
+  right: 10px;
   background-color: #f0f0f0;
   width: 15%;
 }
 
 .popreset{
   background-color: #ffffff;
+}
+
+.lixeira{
+  margin-top: 5px;
+  width: 50px;
+  align-items: start;
+  display: flex;
+  background-color: #fff;
+
+}
+
+.scroll{
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-item{
+  border: solid 3px;
+  border-radius: 10px;
+  margin-top: 10px;
+  align-items: center;
+  display: inline;
+  padding: 10px;
+  width: 230px;
+  max-width: 230px;
 }
 
