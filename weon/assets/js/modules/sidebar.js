@@ -5,37 +5,37 @@ function activateSidebarToggle() {
     var predefinicaoButton = document.getElementById('predefinicao');
     var historicoButton = document.getElementById('historico');
     var dashboardButton = document.getElementById('dashboard');
-    var UsuarioButton = document.getElementById('usuarios')
+    var UsuarioButton = document.getElementById('usuarios');
+    var LixeiraButton = document.getElementById('Lixeira')
 
     var isSidebarCollapsed = false;
   
     function toggleSidebar() {
-      // Alternando texto dos botões
       if (isSidebarCollapsed) {
           predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>';
           historicoButton.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i>';
           dashboardButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
           UsuarioButton.innerHTML = '<i class="fa-solid fa-users"></i>'
+          LixeiraButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
       } else {
           predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>';
           historicoButton.innerHTML = ' Histórico <span id="historico" class="beta">BETA</span> <i class="fa-solid fa-clock-rotate-left"></i>';
           dashboardButton.innerHTML = 'Dashboards <i class="fa-solid fa-chart-line"></i>';
-          UsuarioButton.innerHTML =''
+          UsuarioButton.innerHTML =' Usuários <span id="usuarios" class="beta">BETA</span> <i class="fa-solid fa-users"></i>';
+          LixeiraButton.innerHTML = ' Lixeira<span id="Lixeira" class="beta">BETA</span> <i class="fa-solid fa-trash-can"></i>';
       }
 
-      // Alternando a visualização dos títulos
       titles.forEach(title => {
           title.classList.toggle('hidden', isSidebarCollapsed);
       });
 
-      // Alternando o tamanho da sidebar
+     
       sidebar.classList.toggle('collapsed', isSidebarCollapsed);
 
-      // Alternando a flag
+
       isSidebarCollapsed = !isSidebarCollapsed;
     }
 
-    // Associando a função ao evento de clique do botão
     toggleSidebarButton.addEventListener('click', toggleSidebar);
 }
 
