@@ -75,7 +75,6 @@ export default class User {
         this.container.innerHTML = `
             <div class="container">
                 <form id="formUsers" class="p-5 rounded rounded-10 d-flex flex-column popreset mx-auto mt-2 text-start">
-                    <h1 class="text-center mb-4">Criando usuário</h1>
                     <div class="mb-3">
                         <label for="emailUser" class="form-label">Email</label>
                         <input type="email" class="form-control" id="emailUser" placeholder="exemplo@exemplo.com" aria-describedby="emailHelp">
@@ -114,7 +113,7 @@ export default class User {
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                     <div class="ml-auto">
-                        <h1 class="mb-0 display-6"> Criando novo usuário </h1>
+                        <h1 class="mb-0 display-6"> Criar usúario </h1>
                     </div>
                     <div> 
                         <button id="btnCancelUserForm" class="btn btn-outline-danger btn-sm-4">Voltar</button>

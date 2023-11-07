@@ -1,4 +1,4 @@
-function activateSidebarToggle() {
+    function activateSidebarToggle() {
     var toggleSidebarButton = document.getElementById('toggle-sidebar');
     var sidebar = document.querySelector('.sidebar');
     var titles = document.querySelectorAll('.sidebar h1');
@@ -40,3 +40,7 @@ function activateSidebarToggle() {
 }
 
 activateSidebarToggle();
+
+
+
+  
