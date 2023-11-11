@@ -11,6 +11,12 @@ function getLocalStorageItem(name) {
 }
 
 function applyLightTheme() {
+    
+    const homelogo = document.getElementById('homelogo')
+    if (homelogo){
+        homelogo.src = "../assets/img/weonpreto.png"
+    }
+
     htmlElement.setAttribute("data-bs-theme", "light");
     htmlElement.classList.add("light-mode");
     stylesheet = document.createElement("link");
@@ -21,6 +27,12 @@ function applyLightTheme() {
 }
 
 function applyDarkTheme() {
+
+    const homelogo = document.getElementById('homelogo')
+    if (homelogo){
+        homelogo.src = "../assets/img/weonbranco.png"
+    }
+
     htmlElement.setAttribute("data-bs-theme", "dark");
     htmlElement.classList.add("dark-mode");
 

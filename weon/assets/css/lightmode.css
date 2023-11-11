@@ -183,3 +183,11 @@
   background-color: #ebebeb;
 
 }
+
+.logo{
+  background-image: url(../img/nobackground.png);
+}
+
+.oi{
+  color: #333;
+}
