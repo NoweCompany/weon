@@ -5,7 +5,7 @@
 
 
 .loading {
-  position: fixed; /* Tornar o elemento fixo na tela */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
@@ -14,16 +14,13 @@
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 2; /* Um valor alto para garantir que fique acima de outros elementos */
-  backdrop-filter: blur(10px); /* Aumente o valor para um efeito de desfoque mais forte */
-  -webkit-backdrop-filter: blur(10px); /* Suporte para navegadores baseados em WebKit */
+  z-index: 2; 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
 
 }
 
-  .gif {
-    max-width: 100%;
-    max-height: 100%;
-  }
+  
 
 @font-face {
 
@@ -129,7 +126,6 @@ body{
   
  
 li a {
-  /* Restante das propriedades CSS */
   position: relative;
   overflow: hidden;
   transition: color 0.3s;
@@ -171,12 +167,10 @@ li {
   left: 3%;
 }
 
-
 #logo img {
   width: 100px;
   
 }
-
 
 .msg{
   z-index: 100;
@@ -186,8 +180,6 @@ li {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-
 }
 
 .form1{

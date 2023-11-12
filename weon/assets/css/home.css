@@ -54,12 +54,11 @@ background-color: #dddddd;
 .img {
     display: block;
     margin: 0 auto;
-    max-width:25%;
+    max-width:30%;
     height: auto;
     position: fixed;
     margin-top: 20%;
   }
-
   
 .button-container {
   display: flex;

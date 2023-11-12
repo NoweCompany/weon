@@ -14,9 +14,12 @@ function applyLightTheme() {
     
     const homelogo = document.getElementById('homelogo')
     if (homelogo){
-        homelogo.src = "../assets/img/weonpreto.png"
+        homelogo.src = "../assets/img/weoncruzadapreta.png"
     }
 
+   
+        
+    
     htmlElement.setAttribute("data-bs-theme", "light");
     htmlElement.classList.add("light-mode");
     stylesheet = document.createElement("link");
@@ -30,9 +33,10 @@ function applyDarkTheme() {
 
     const homelogo = document.getElementById('homelogo')
     if (homelogo){
-        homelogo.src = "../assets/img/weonbranco.png"
+        homelogo.src = "../assets/img/weoncruzadabranca.png"
     }
-
+   
+    
     htmlElement.setAttribute("data-bs-theme", "dark");
     htmlElement.classList.add("dark-mode");
 
