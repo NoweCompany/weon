@@ -85,13 +85,11 @@
     transition: transform 0.3s ease;
     background: none;
     display: flex;
-    align-items: start;
-    justify-content: start;
-    margin-left: 16px;
-
-
   }
 
+  #title{
+    width: 500px;
+  }
   #sidebarContent{
     margin-left: 20px;
   }
