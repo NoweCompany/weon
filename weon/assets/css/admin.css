@@ -315,3 +315,12 @@ th {
 /* .space{
   margin: 10px;
 } */
+
+/* form create user */
+
+.formcaduser{
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ padding: 50px;
+}

@@ -72,55 +72,71 @@ export default class User {
     }
 
     renderForm() {
-        this.container.innerHTML = `
-            <div class="container">
-                <form id="formUsers" class="p-5 rounded rounded-10 d-flex flex-column popreset mx-auto mt-2 text-start">
-                    <div class="mb-3">
-                        <label for="emailUser" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="emailUser" placeholder="exemplo@exemplo.com" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="passwordUser" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="passwordUser" placeholder="SenhaSegura123">
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPasswordUser" class="form-label">Confirme sua senha</label>
-                        <input type="password" class="form-control" id="confirmPasswordUser" placeholder="SenhaSegura123">
-                    </div>
-                    <h4>Permissões</h4>
-                    <div class="mb-1 form-check">
-                        <input type="checkbox" class="form-check-input" id="admUserCheckBox">
-                        <label class="form-check-label" for="admUserCheckBox">Administrador</label>
-                    </div>
-
-                    <div class="mb-1 form-check">
-                        <input type="checkbox" class="form-check-input" id="insertUserCheckBox">
-                        <label class="form-check-label" for="insertUserCheckBox">Inserção</label>
-                    </div>
-
-                    <div class="mb-1 form-check">
-                        <input type="checkbox" class="form-check-input" id="EditUserCheckBox">
-                        <label class="form-check-label" for="EditUserCheckBox">Edição</label>
-                    </div>
-
-                    <div class="mb-4 form-check">
-                        <input type="checkbox" class="form-check-input" id="DeletUserCheckBox">
-                        <label class="form-check-label" for="DeletUserCheckBox">Deleção</label>
-                    </div>
-                </form>
-            </div>
-        
-            <div class="d-flex justify-content-center align-items-center mb-5">
-                <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-                    <div class="ml-auto">
-                        <h1 class="mb-0 display-6"> Criar usúario </h1>
-                    </div>
-                    <div> 
-                        <button id="btnCancelUserForm" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-                        <button id="createDashboardForm" form="formUsers" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
-                    </div>
+        this.container.innerHTML = ` <div class="d-flex justify-content-center align-items-center mb-5">
+            <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                <div class="ml-auto">
+                    <h1 class="mb-0 display-6"> Criar usúario </h1>
                 </div>
-            </div>`
+                <div>
+                    <button id="btnCancelUserForm" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+                    <button id="createDashboardForm" form="formUsers"
+                            class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+        
+        <form id="formUsers" class="formcaduser mx-auto w-100">
+        <h1>Acesso</h1>
+    
+        <div class="row mb-3">
+            <div class="col-md-4 form-group">
+                <label for="emailUser" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailUser" placeholder="Email">
+            </div>
+    
+            <div class="col-md-4 form-group">
+                <label for="passwordUser" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="passwordUser" placeholder="Senha">
+            </div>
+    
+            <div class="col-md-4 form-group">
+                <label for="confirmPasswordUser" class="form-label">Confirmar</label>
+                <input type="password" class="form-control" id="confirmPasswordUser" placeholder="Confirmar Senha">
+            </div>
+        </div>
+    
+        <hr class="mt-4">
+    
+        <h1>Permissões</h1>
+    
+        <div class="row mb-3">
+
+            <div class="col-md-4 p-2 form-group">
+                <input type="checkbox" class="form-check-input" id="admUserCheckBox">
+                <label class="form-check-label mt-1" for="admUserCheckBox">Administração</label>
+            </div>
+    
+            <div class="col-md-4 p-2 form-group">
+                <input type="checkbox" class="form-check-input" id="insertUserCheckBox">
+                <label class="form-check-label mt-1" for="insertUserCheckBox">Inserção</label>
+            </div>
+        </div>
+    
+        <div class="row mb-3">
+            <div class="col-md-4 p-2 form-group">
+                <input type="checkbox" class="form-check-input" id="EditUserCheckBox">
+                <label class="form-check-label mt-1" for="EditUserCheckBox">Edição</label>
+            </div>
+    
+            <div class="col-md-4 p-2 form-group">
+                <input type="checkbox" class="form-check-input" id="DeletUserCheckBox">
+                <label class="form-check-label mt-1" for="DeletUserCheckBox">Deleção</label>
+            </div>
+        </div>
+    </form>
+    `
 
         const formUsers = document.querySelector('#formUsers')
         const btnCancelUserForm = document.querySelector('#btnCancelUserForm')

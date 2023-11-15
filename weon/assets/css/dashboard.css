@@ -85,6 +85,9 @@
     transition: transform 0.3s ease;
     background: none;
     display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 10px;
   }
 
   #title{

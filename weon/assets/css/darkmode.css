@@ -106,7 +106,7 @@ body{
   
   .cardDash{
     background-color: #2c2c2c00;
-    border: 2px solid #495057;
+    border: 1px solid #495057;
   }
   
 
@@ -133,7 +133,7 @@ body{
 }
 .form1{ 
   background-color: #2c2c2c;
-    border: 2px solid #495057;
+    border: 1px solid #495057;
 }  
 /* Personalize a barra de rolagem */
 ::-webkit-scrollbar {
@@ -167,7 +167,7 @@ body{
 
 .lixeira{
   background-color: #2c2c2c;
-  border: 2px solid #495057;
+  border: 1px solid #495057;
   margin-top: 5px;
   width: 50px;
   align-items: start;
@@ -188,7 +188,7 @@ body{
 }
 
 .dropdown-item{
-  border: solid 2px rgb(95, 95, 95);
+  border: solid 1px rgb(95, 95, 95);
   background-color: #2c2c2c;
   border-radius: 10px;
   margin-top: 10px;
@@ -200,7 +200,7 @@ body{
 }
 
 .dropdown-item:hover{
-  border: solid 3px rgb(95, 95, 95);
+  border: solid 1px rgb(95, 95, 95);
   background-color: #353535;
 
 }
@@ -208,3 +208,9 @@ body{
 .oi{
   color: white;
 }
+
+.formcaduser{
+  border: solid 1px #495057;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+ }

@@ -188,3 +188,13 @@
 .oi{
   color: #333;
 }
+
+.checkboxform-align{
+  margin-top: 0;
+  vertical-align: middle;
+}
+
+.formcaduser{
+  border: 2px solid #dee2e6;
+  background-color: #ebebeb;
+ }
