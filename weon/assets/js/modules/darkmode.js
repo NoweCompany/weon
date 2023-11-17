@@ -14,7 +14,7 @@ function applyLightTheme() {
     
     const homelogo = document.getElementById('homelogo')
     if (homelogo){
-        homelogo.src = "../assets/img/weoncruzadapreta.png"
+        homelogo.src = "../assets/img/weonpreto.png"
     }
 
    
@@ -33,7 +33,7 @@ function applyDarkTheme() {
 
     const homelogo = document.getElementById('homelogo')
     if (homelogo){
-        homelogo.src = "../assets/img/weoncruzadabranca.png"
+        homelogo.src = "../assets/img/weonbranco.png"
     }
    
     
