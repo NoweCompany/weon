@@ -132,15 +132,13 @@ export default class Fields{
                     <div class="col-6">
                     <h1 id="tituloPrincipal" class="display-6">Predefinição:</h1>
                     </div>
-                    <div class="col-5">
-                    <div class="form-group ms-3">
+                </div>
+                </div>
+                <div class="form-group ms-3">
                         <select id="selectTableName" class="form-select">
                         <option value="" selected></option>
                         </select>
                     </div>
-                    </div>
-                </div>
-                </div>
                 <div class="d-flex align-items-center">
                     <div class="newfield me-3">
                         <button id="newField" class="btn btn-outline-primary">Adicionar Campo</button>
