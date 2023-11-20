@@ -211,12 +211,11 @@ class Drive {
             // Calcular o número total de páginas com base nos valores recuperados
             this.calculateTotalPages(valuesCollection.length);
     
-            const { btnCad, thead, tbody } = this.renderTableHtml(collectionName);
+            const { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet } = this.renderTableHtml(collectionName);
+        
             document.querySelector('#paginationContainer').style.display = 'block'
-            const btnDelet = document.querySelector("#btnDelet");
-            const btnDownload = document.querySelector("#btnDownload");
             const childresOfTBody = tbody.children;
-    
+
             btnDelet.addEventListener('click', async (e) => {
                 try {
                     const checkboxes = document.querySelectorAll('.checkBoxDelet');
@@ -245,6 +244,35 @@ class Drive {
                     return this.msg('Ocorreu um erro inesperado 😢', false);
                 }
             });
+
+            btnUpload.addEventListener('click', (e) => {
+                const { form, inputFile, back,} = this.renderFormUpload()
+
+                back.addEventListener('click', (e) => this.showDocument())
+
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault()
+
+                    const file = inputFile.files[0]
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    formData.append('collectionName', this.presetSelected)
+
+                    try {
+                        console.log(file, this.presetSelected);
+                        const response = await this.requests.upload(formData);
+                        const data = await response.json();
+                        if (response.status !== 200) {
+                            return this.msg(data.errors, false);
+                        }
+        
+                        this.showDocument('testeUpload')
+                    } catch (error) {
+                        console.log(error);
+                        return this.msg('Ocorreu um erro inesperado 😢', false);
+                    }
+                })
+            })
     
             // Paginação
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -261,34 +289,66 @@ class Drive {
         }
     }
 
+    renderFormUpload(){
+        this.container.innerHTML = `
+        <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                    <div class="ml-auto" >
+                        <h1 class="mb-0">${this.presetSelected}</h1>
+                    </div>
+                    <div id="headerTable"> 
+                        <button id="back" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="fileInput">Escolha um arquivo JSON ou XLSX:</label>
+            <input type="file" id="fileInput" name="file" accept=".json, .xlsx" required>
+
+            <button id="EnviarFormUpload" type="submit">Enviar</button>
+        </form>
+        ` 
+
+        const form = document.querySelector('#uploadForm');
+        const back = document.querySelector('#back');
+        const inputFile = document.querySelector('#fileInput');
+
+        return {
+            form,
+            inputFile,
+            back,
+        };
+    }
+
     renderTableHtml(presetSelected) {
         this.container.innerHTML = `
             <div class="d-flex justify-content-center align-items-center mb-5">
-        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <div class="ml-auto" >
-                <h1 class="mb-0">${presetSelected}</h1>
+                <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                    <div class="ml-auto" >
+                        <h1 class="mb-0">${presetSelected}</h1>
+                    </div>
+                    <div id="headerTable"> 
+                        <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
+                        <button id="btnUpload" class="btn btn-outline-warning "> <i class="fas fa-upload"></i>  </button>
+                        <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
+                        <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
+                    </div>
+                </div>
             </div>
-            <div id="headerTable"> 
-            <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
-            <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
-            <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
-
+            <div class="container-center">  
+                <table class="table table-striped">
+                    <thead class="thead">
+                    </thead>
+                    <tbody class="tbody">
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-
-    <div class="container-center">  
-        <table class="table table-striped">
-          <thead class="thead">
-          </thead>
-          
-          <tbody class="tbody">
-          </tbody>
-        </table>
-        </div>
         `;
         const form = document.querySelector('#form')
         const btnCad = document.querySelector('#btnCad');
+        const btnDownload = document.querySelector('#btnDownload');
+        const btnUpload = document.querySelector('#btnUpload');
+        const btnDelet = document.querySelector('#btnDelet');
         const thead = document.querySelector('.thead');
         const tbody = document.querySelector('.tbody');
     
@@ -296,24 +356,24 @@ class Drive {
             this.showForm();
         });
     
-        return { form, btnCad, thead, tbody };
+        return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet };
     }
     
     
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
-        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-            <div class="ml-auto">
-                <h1 class="mb-0">${presetSelected}</h1>
-            </div>
-            <div> 
-            <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-            <button type="submit" form="form" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
+            <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+                <div class="ml-auto">
+                    <h1 class="mb-0">${presetSelected}</h1>
+                </div>
+                <div> 
+                    <button id="back" name="btnCad" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+                    <button type="submit" form="form" class="btn btn-outline-primary sm-4 ms-2">Salvar</button>
+                </div>
             </div>
         </div>
-    </div>
-    <form id="form" class="formPreset"> </form>
+        <form id="form" class="formPreset"> </form>
         `
 
         const form = document.querySelector('#form')
@@ -635,7 +695,7 @@ class Requests{
             return response
         } catch (e) {
             this.removeLoading()
-             throw new Error(e.message || 'Ocorreu um erro inesperado')
+            throw new Error(e.message || 'Ocorreu um erro inesperado')
         }
     }
 
@@ -655,6 +715,27 @@ class Requests{
             this.removeLoading()
             return response
         } catch (e) {
+            this.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
+    async upload(formData){
+        try {
+            this.addLoading(formData)
+            const headers = new Headers({
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/upload`, {
+                method: 'POST',
+                headers: headers,
+                body: formData
+            })
+            this.removeLoading()
+            return response
+        } catch (e) {
+            console.log(e);
             this.removeLoading()
             throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
         }
@@ -799,4 +880,3 @@ const requests = new Requests(token(), configs.urlApi, loading);
 const drive = new Drive(containerMsg, container, requests, sideBar);
 
 drive.init(true)
-//drive.showDocument('testeUpload')
