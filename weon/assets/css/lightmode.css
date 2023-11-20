@@ -1,6 +1,7 @@
     
   body{
     background-color:#f4f4f4;
+    transition: all 0.2s ease-in-out;
   
     }
   
@@ -15,12 +16,22 @@
   
     nav {
       background-color:	#4179d2;
+      transition: all 0.2s ease-in-out;
   
     }
-    
+
+    #select{
+      color: white;
+    }
+
     nav a{
       color: #161616;
     }
+
+    #navbar a:hover{
+      color: #ffffff;
+    }
+
 
     li a:before {
       background-color: #ffffff;
@@ -31,11 +42,6 @@
       color: #ffffff;
     }
     
-
-    #select{
-      color: #f7f7f7;
-    
-    }
 
     .sidebar {
       background-color: #ffffff;
@@ -186,7 +192,9 @@
 
 
 .oi{
-  color: #333;
+  color: #000000;
+  font-family: 'sfpro';
+  
 }
 
 .checkboxform-align{
@@ -198,3 +206,5 @@
   border: 2px solid #dee2e6;
   background-color: #ebebeb;
  }
+
+
