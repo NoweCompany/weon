@@ -266,7 +266,7 @@ class Drive {
                             return this.msg(data.errors, false);
                         }
         
-                        this.showDocument('testeUpload')
+                        this.showDocument()
                     } catch (error) {
                         console.log(error);
                         return this.msg('Ocorreu um erro inesperado 😢', false);
