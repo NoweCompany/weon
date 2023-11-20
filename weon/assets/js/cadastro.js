@@ -33,8 +33,7 @@ class Drive {
         this.isEdit = false;
         this.valuesPreset = {};
 
-        this.presetSelected = null;
-       
+        this.presetSelected = null;   
     }
 
     async init(inicialization = false) {
@@ -166,21 +165,16 @@ class Drive {
             paginationContainer.style.display = visible ? 'block' : 'none';
         }
     }
-     
     showItems(items, container) {
-        // Remova todas as classes 'hidden' da barra lateral
         container.classList.remove('hidden');
 
-        // Limpe os itens antigos da barra lateral
         container.innerHTML = '';
 
         if (items.length === 0) {
-            // Adicione uma mensagem quando nenhum item for encontrado
             const noItemsMessage = document.createElement('p');
             noItemsMessage.textContent = 'Nenhum item encontrado.';
             container.appendChild(noItemsMessage);
         } else {
-            // Adicione os novos itens à barra lateral
             for (const key of items) {
                 const btn = document.createElement('button');
                 btn.setAttribute('value', key.collectionName);
@@ -685,7 +679,7 @@ class Requests{
             return response
         } catch (e) {
             this.removeLoading()
-             throw new Error('Ocorreu um erro inesperado')
+            throw new Error('Ocorreu um erro inesperado')
         }
     }
 
@@ -805,3 +799,4 @@ const requests = new Requests(token(), configs.urlApi, loading);
 const drive = new Drive(containerMsg, container, requests, sideBar);
 
 drive.init(true)
+//drive.showDocument('testeUpload')
