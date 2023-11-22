@@ -298,14 +298,13 @@ class Drive {
                     </div>
                     <div id="headerTable"> 
                         <button id="back" class="btn btn-outline-danger btn-sm-4">Voltar</button>
+                        <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary" type="submit">Enviar</button>
                     </div>
                 </div>
             </div>
         <form id="uploadForm" enctype="multipart/form-data">
-            <label for="fileInput">Escolha um arquivo JSON ou XLSX:</label>
+            <h1> Escolha um arquivo JSON ou XLSX:</h1>
             <input type="file" id="fileInput" name="file" accept=".json, .xlsx" required>
-
-            <button id="EnviarFormUpload" type="submit">Enviar</button>
         </form>
         ` 
 
@@ -329,7 +328,7 @@ class Drive {
                     </div>
                     <div id="headerTable"> 
                         <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
-                        <button id="btnUpload" class="btn btn-outline-warning "> <i class="fas fa-upload"></i>  </button>
+                        <button id="btnUpload" class="btn btn-outline-warning sm-4 ms-2 "> <i class="fas fa-upload"></i>  </button>
                         <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
                         <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
                     </div>
