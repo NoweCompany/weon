@@ -298,7 +298,7 @@ class Drive {
                     </div>
                     <div id="headerTable"> 
                         <button id="back" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-                        <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary" type="submit">Enviar</button>
+                        <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary ms-2" type="submit">Enviar</button>
                     </div>
                 </div>
             </div>
