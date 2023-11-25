@@ -33,16 +33,18 @@ const api       = new ApiRequests(configs.urlApi, token, loading)
 const messaging = new Messaging(document.querySelector('#msg'))
 
 //Inicializando Classes
-const preset = new Presets(document.querySelector('.container'), messaging, api)
-const fields = new Fields(document.querySelector('.container'), messaging, api)
-const trash  = new Trash(document.querySelector('.container'), messaging, api)
-const dashboard = new Dashboard(document.querySelector('.container'), messaging, api)
-const historic = new Historic(document.querySelector('.container'), messaging, api)
-const users = new User(document.querySelector('.container'), messaging, api)
+const container = document.querySelector('.container')
+
+const preset    = new Presets(container, messaging, api)
+const fields    = new Fields(container, messaging, api)
+const trash     = new Trash(container, messaging, api)
+const dashboard = new Dashboard(container, messaging, api)
+const historic  = new Historic(container, messaging, api)
+const users     = new User(container, messaging, api)
 
 fields.presetController = preset
 preset.fieldController = fields
-
+await users.user()
 async function handleClick(e){
     try {
         const el = e.target

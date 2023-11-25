@@ -188,8 +188,8 @@ export default class Presets {
                 const handleClickTdDelet = (e) => {
                     const popUpAlert = document.querySelector('.popupConfirmation');
                     if (popUpAlert && !popUpAlert.classList.contains('show')) this.showPopUp(popUpAlert, e, collectionName);
+                    else this.messaging.msg("Erro ao exibir o popUp de confirmação😭, tente novamente mais tarde!")
                 }
-                tdDelet.removeEventListener('click', handleClickTdDelet)
                 tdDelet.addEventListener('click', handleClickTdDelet);
             
                 // Add Icons
@@ -228,7 +228,9 @@ export default class Presets {
         
         btnClosePopUp.addEventListener('click', (e) => {
             inputAlertConfimation.value = ''
+            console.log(popUpAlert);
             popUpAlert.classList.remove("show")
+            console.log(popUpAlert);
         })
 
         const handleSubmitFormAlertConfirmation = async (e) => {

@@ -64,6 +64,7 @@ export default class User {
                     this.initializeTable()
                     return
                 } catch (error) {
+                    console.log(error);
                     this.messaging.msg(error.message, false)
                     return
                 }
@@ -243,9 +244,9 @@ export default class User {
             tdUpdatedAt.innerText = new Date(user.updatedAt).toLocaleString()
 
             const tdDeleteTr = document.createElement('td')
-            tdDeleteTr.id = user._id
-            tdDeleteTr.innerHTML = `<i class="fas fa-trash-alt"></i>`
-            this.addEventOnBtnDelete(tr, tdDeleteTr)
+            tdDeleteTr.id = user.id
+            tdDeleteTr.innerHTML = `<i id="${user.id}" class="fas fa-trash-alt"></i>`
+            this.addEventOnBtnDelete(tr, tdDeleteTr, user.email)
 
             tr.appendChild(tdEmailUser)
             tr.appendChild(tdAdmP)
@@ -269,13 +270,20 @@ export default class User {
         }
     }
 
-    addEventOnBtnDelete(row, button) {
+    addEventOnBtnDelete(row, button, email) {
         button.addEventListener('click', async (e) => {
         const confirmation = confirm(`Deseja mesmo excluir esse registro?`)
         if (confirmation) {
-            const id = e.target.id
-            row.remove()
-            alert('Usuário romovido ;)')
+            try{
+                const id = e.target.id
+                console.log(id);
+                const response = await this.api.deleteApiUser(id)
+                row.remove()
+                alert(`Usuário com o email ${email} foi removido com sucesso!`)
+            }catch(error){
+                console.error(error);
+                this.messaging.msg(error, false)
+            }
         }
         })
     }

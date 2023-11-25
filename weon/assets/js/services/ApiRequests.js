@@ -78,6 +78,32 @@ export default class ApiRequests {
         }
     }
 
+    async deleteApiUser(id) {
+        try {
+            this.loading.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/users/${id}`, {
+                method: 'DELETE',
+                headers: headers,
+            })
+
+            const responseData = await response.json()
+            if(response.status !== 200){
+                throw new Error(responseData.errors)
+            }
+
+            this.loading.removeLoading()
+            return response
+        } catch (e) {
+            this.loading.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
+    }
+
     async getApiCollections() {
         try {
             this.loading.addLoading()
@@ -315,6 +341,11 @@ export default class ApiRequests {
                 headers: headers,
                 body: myBody
             })
+
+            const responseData = await response.json()
+            if(response.status !== 200){
+                throw new Error(responseData.errors)
+            }
 
             this.loading.removeLoading()
             return response
