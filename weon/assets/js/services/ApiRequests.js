@@ -505,7 +505,6 @@ export default class ApiRequests {
         }
     }
 
-
     async restoreItem(itemId, collectionName){
         try {
             this.loading.addLoading()

@@ -211,7 +211,7 @@ class Drive {
             // Calcular o número total de páginas com base nos valores recuperados
             this.calculateTotalPages(valuesCollection.length);
     
-            const { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet } = this.renderTableHtml(collectionName);
+            const { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnUpload, btnDelet } = this.renderTableHtml(collectionName);
         
             document.querySelector('#paginationContainer').style.display = 'block'
             const childresOfTBody = tbody.children;
@@ -241,6 +241,21 @@ class Drive {
     
                     window.location.assign(data.url);
                 } catch (error) {
+                    return this.msg('Ocorreu um erro inesperado 😢', false);
+                }
+            });
+            
+            btnDownloadDefault.addEventListener('click', async (e) => {
+                try {
+                    const response = await this.requests.downloadDefaultSheet(collectionName);
+                    const data = await response.json();
+                    if (response.status !== 200) {
+                        return this.msg(data.errors, false);
+                    }
+    
+                    window.location.assign(data.url);
+                } catch (error) {
+                    console.log(error);
                     return this.msg('Ocorreu um erro inesperado 😢', false);
                 }
             });
@@ -327,7 +342,8 @@ class Drive {
                         <h1 class="mb-0">${presetSelected}</h1>
                     </div>
                     <div id="headerTable"> 
-                        <button id="btnDownload" class="btn btn-outline-success "> <i class="fas fa-download"></i>  </button>
+                        <button id="btnDownloadDefault" class="btn btn-outline-info"> <i class="fas fa-download"></i> Planilha padrão  </button>
+                        <button id="btnDownload" class="btn btn-outline-success sm-4 ms-2"> <i class="fas fa-download"></i>  </button>
                         <button id="btnUpload" class="btn btn-outline-warning sm-4 ms-2 "> <i class="fas fa-upload"></i>  </button>
                         <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
                         <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
@@ -346,6 +362,7 @@ class Drive {
         const form = document.querySelector('#form')
         const btnCad = document.querySelector('#btnCad');
         const btnDownload = document.querySelector('#btnDownload');
+        const btnDownloadDefault = document.querySelector('#btnDownloadDefault');
         const btnUpload = document.querySelector('#btnUpload');
         const btnDelet = document.querySelector('#btnDelet');
         const thead = document.querySelector('.thead');
@@ -355,7 +372,7 @@ class Drive {
             this.showForm();
         });
     
-        return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet };
+        return { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnUpload, btnDelet };
     }
     
     
@@ -673,6 +690,26 @@ class Requests{
         this.token = token
         this.apiUrl = apiUrl
         this.loading = loading
+    }
+    async downloadDefaultSheet(collectionName){
+        try {
+            this.addLoading()
+            const headers = new Headers({
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            })
+
+            const response = await fetch(`${this.apiUrl}/download/${collectionName}`, {
+                method: 'GET',
+
+                headers: headers,
+            })
+            this.removeLoading()
+            return response
+        } catch (e) {
+            this.removeLoading()
+            throw new Error(e.message || "Algo deu errado tente novamente mais tarde 😢")
+        }
     }
 
     async postApiValues(collectionName, values) {
