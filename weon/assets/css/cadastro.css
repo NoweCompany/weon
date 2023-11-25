@@ -290,33 +290,21 @@ body {
 
 input[type=file]::file-selector-button {
   margin-right: 20px;
-  border: none;
-  background: #084cdf;
+  border: 1px solid #0a6ffb;
+  color: #0a6ffb;
+  background: none;
   padding: 10px 20px;
-  border-radius: 10px;
-  color: #fff;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background .2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 input[type=file]::file-selector-button:hover {
-  background: #0d45a5;
+  background: #0a6ffb;
+  color: #ffffff;
 }
 
-#EnviarFormUpload{
-  margin-right: 20px;
-  border: none;
-  background: #3c78fa;
-  padding: 10px 30px;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  transition: background .2s ease-in-out;
 
-  &:hover{
-    background: #0d45a5;
-  }
-}
 
 #uploadForm{
   display: flex;
@@ -326,9 +314,6 @@ input[type=file]::file-selector-button:hover {
 
   row-gap: 3em;
   font-size: 24px;
-
-  border: 1px solid #cfcfcf;
-  background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 5em;
 }

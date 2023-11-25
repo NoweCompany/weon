@@ -76,7 +76,7 @@ export default class User {
         this.container.innerHTML = ` <div class="d-flex justify-content-center align-items-center mb-5">
             <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                 <div class="ml-auto">
-                    <h1 class="mb-0 display-6"> Criar usúario </h1>
+                    <h1 class="mb-0 display-6"> Criar usuário </h1>
                 </div>
                 <div>
                     <button id="btnCancelUserForm" class="btn btn-outline-danger btn-sm-4">Voltar</button>

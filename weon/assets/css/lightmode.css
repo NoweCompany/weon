@@ -1,6 +1,6 @@
     
   body{
-    background-color:#f4f4f4;
+    background-color:#efeaea;
     transition: all 0.2s ease-in-out;
   
     }
@@ -207,4 +207,7 @@
   background-color: #ebebeb;
  }
 
-
+ #uploadForm{
+  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+ }
