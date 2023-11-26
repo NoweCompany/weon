@@ -341,25 +341,19 @@ input[type=file]::file-selector-button:hover {
 .dropdown-gaveta {
   display: none;
   position: absolute;
-  background-color: #313131;
   min-width: 100px;
   max-width: 100px;
   z-index: 1;
   border-radius: 5px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-gaveta a {
-  color: white; /* Mudança de cor para garantir visibilidade */
   padding: 8px 16px; /* Espaçamento para cada item */
   text-decoration: none;
   display: block;
   text-align: center; /* Alinhamento do texto */
 }
 
-.dropdown-gaveta a:hover {
-  background-color: #505050; /* Efeito hover para os itens */
-}
 
 .dropdown:hover .dropdown-gaveta {
   display: block;

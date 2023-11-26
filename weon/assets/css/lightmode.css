@@ -211,3 +211,17 @@
   border: 1px solid #dee2e6;
   background-color: #ffffff;
  }
+
+ .dropdown-gaveta {
+  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+}
+
+.dropdown-gaveta a {
+  color: #292929;
+  transition: all 0.1s ease-in-out;
+}
+
+.dropdown-gaveta a:hover{
+  color: #4179d2;
+}
