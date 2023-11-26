@@ -341,11 +341,20 @@ class Drive {
                     <div class="ml-auto" >
                         <h1 class="mb-0">${presetSelected}</h1>
                     </div>
+
+
                     <div id="headerTable"> 
-                        <button id="btnDownloadDefault" class="btn btn-outline-info"> <i class="fas fa-download"></i> Planilha padrão  </button>
-                        <button id="btnDownload" class="btn btn-outline-success sm-4 ms-2"> <i class="fas fa-download"></i>  </button>
-                        <button id="btnUpload" class="btn btn-outline-warning sm-4 ms-2 "> <i class="fas fa-upload"></i>  </button>
+                    
+                    <div class="dropdown">
+                    <button class="dropdown-toggle" id="dropdownMenuButton">Arquivo</button>
+                    <div class="dropdown-gaveta" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-a" id="btnUpload">Importar</a>
+                      <a class="dropdown-a" id="btnDownload">Exportar</a>
+                    </div>
+                  </div>
+                  
                         <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
+                        <button id="btnDownloadDefault" class="btn btn-outline-info ms-2"> <i class="fas fa-download"></i> Planilha padrão  </button>
                         <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
                     </div>
                 </div>
