@@ -24,7 +24,6 @@
 
 @font-face {
 
-
     font-family: sfpro;
     src: url("/fonte/SF-Pro-Display-Medium.otf");
   }
@@ -184,3 +183,8 @@ li {
   border-radius: 10px;
 }
 
+@media screen and (max-width: 668px) {
+  .navlogo{
+    display: none;
+  }
+}
