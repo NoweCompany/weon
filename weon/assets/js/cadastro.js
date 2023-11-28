@@ -15,15 +15,14 @@ window.addEventListener('load', async (e) => {
 });
 
 
-
-
 class Drive {
     constructor(containerMsg, container, requests, sideBar) {
         this.container = container;
         this.containerMsg = containerMsg;
         this.sideBar = sideBar;
 
-        this.itemsPerPage = 10;
+    
+        this.itemsPerPage = 10
         this.currentPage = 1;
         this.totalPages = Infinity;
 
@@ -141,6 +140,7 @@ class Drive {
         };
 
         const addButton = document.querySelector('#btnCad');
+        const importbtn = document.querySelector('#btnUpload');
         const backButton = document.querySelector('#back');
 
         if (addButton) {
@@ -149,10 +149,20 @@ class Drive {
             });
         }
 
+        if(importbtn){
+            importbtn.addEventListener('click', () =>{
+                this.togglePaginationVisibility(false)
+            })
+        }
+
         if (backButton) {
             backButton.addEventListener('click', () => {
                 this.togglePaginationVisibility(true); 
             });
+        }
+
+        if(this.totalPages <= 1){
+            this.togglePaginationVisibility(false)
         }
     }
 
@@ -505,6 +515,7 @@ class Drive {
                 btnDelet.classList.add('btn-gray', 'disabled');
                 btnDelet.disabled = true; 
             }
+
         });
         
         const selectAllTh = document.createElement('th');
