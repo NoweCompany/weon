@@ -321,9 +321,10 @@ class Drive {
                         <h1 class="mb-0">${this.presetSelected}</h1>
                     </div>
                     <div id="headerTable"> 
-                    <button id="btnDownloadDefault" class="btn btn-outline-success ms-2"> <i class="fas fa-download"></i> Download planilha padrão</button>
-                    <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary ms-2" type="submit">Enviar</button>
+                    <button id="btnDownloadDefault" class="btn btn-outline-success ms-2"> </i> Baixar Modelo</button>
                     <button id="back" class="btn btn-outline-danger ms-2">Voltar</button>
+                    <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary ms-2" type="submit">Enviar</button>
+                    
                     </div>
                 </div>
             </div>
