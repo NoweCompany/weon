@@ -317,11 +317,72 @@ class Drive {
                     </div>
                 </div>
             </div>
-        <form id="uploadForm" enctype="multipart/form-data">
-            <h1> Escolha um arquivo JSON ou XLSX:</h1>
-            <input type="file" id="fileInput" name="file" accept=".json, .xlsx" required>
-        </form>
+            <div id="drop-area">
+            <form id="uploadForm" enctype="multipart/form-data">
+
+            <div class="container text-center">
+            <h1>Arraste e solte os arquivos JSON ou XLSX:</h1>
+            <h4 class="fw-light">Faça upload de arquivos</h4>
+            </div>
+        
+                <i class="fa-solid fa-file-arrow-up icone-tam" id="fileIcon"></i>
+                <input type="file" id="fileInput" accept=".json, .xlsx" required>
+                
+            </form>
+        </div>
         ` 
+        document.getElementById('fileIcon').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        
+        let dropArea = document.getElementById('drop-area');
+        let fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dropArea.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            dropArea.classList.remove('highlight');
+        }
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+
+            fileInput.files = files;
+
+            updateUIWithFiles(files);
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function() {
+            var fileName = '';
+            if (this.files && this.files.length > 0) {
+                fileName = this.files[0].name;
+            }
+            document.getElementById('fileNameDisplay').innerText = fileName;
+        });
+        
 
         const form = document.querySelector('#uploadForm');
         const back = document.querySelector('#back');

@@ -315,8 +315,11 @@ input[type=file]::file-selector-button:hover {
   row-gap: 3em;
   font-size: 24px;
   border-radius: 10px;
-  padding: 5em;
+  padding: 2em;
+  width: 90%;
+  margin: 0 auto;
 }
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -368,4 +371,14 @@ input[type=file]::file-selector-button:hover {
   border: 1px solid #292929;
   color: #333333;
   background: none;
+}
+
+.icone-tam{
+  font-size: 100px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.icone-tam:hover{
+  color: #007bff;
 }
