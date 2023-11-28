@@ -205,12 +205,12 @@ class Drive {
                 `;
                 return;
             }
-    
+
             // Calcular o número total de páginas com base nos valores recuperados
             this.calculateTotalPages(valuesCollection.length);
-    
-            const { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnDelet } = this.renderTableHtml(collectionName);
-        
+
+            const { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnDelet, selectFieldSearch, searchBar } = this.renderTableHtml(collectionName);
+
             document.querySelector('#paginationContainer').style.display = 'block'
             const childresOfTBody = tbody.children;
 
@@ -228,7 +228,7 @@ class Drive {
                     this.msg(error.message || 'Ocorreu um erro inesperado 😢', false);
                 }
             });
-    
+
             btnDownload.addEventListener('click', async (e) => {
                 try {
                     const response = await this.requests.download(collectionName);
@@ -242,7 +242,6 @@ class Drive {
                     return this.msg('Ocorreu um erro inesperado 😢', false);
                 }
             });
-            
 
             btnUpload.addEventListener('click', (e) => {
                 const { form, back, inputFile, btnDownloadDefault } = this.renderFormUpload()
@@ -287,18 +286,45 @@ class Drive {
                     }
                 });
             })
+
+            await this.searchBarConfig(selectFieldSearch, searchBar, fieldsCollection.fields, valuesCollection, tbody)
+
     
-            // Paginação
-            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-            const endIndex = startIndex + this.itemsPerPage;
-            const valuesToShow = valuesCollection.slice(startIndex, endIndex);
-    
-            this.buildTable(thead, tbody, fieldsCollection, valuesToShow);
+            this.buildTable(thead, tbody, fieldsCollection, valuesCollection);
     
             // Criar os botões de paginação
             this.createPaginationButtons();
         } catch (error) {
             this.container.innerHTML = '';
+            return this.msg(error.message || "Ocorreu um erro inesperado");
+        }
+    }
+
+    async searchBarConfig(selectFieldSearch, searchBar, fieldsCollection, valuesCollection, tbody){
+        try {
+            for(let field of fieldsCollection){
+                if(field.type === 'bool') continue
+                const option = document.createElement('option')
+                option.innerText = field.key
+                selectFieldSearch.appendChild(option)
+            }
+            
+            function filterArr(searchTerm, array){
+                const valuesCollection = array.filter((value) => {
+                    const fieldSelected = String(value[selectFieldSearch.value]).toLowerCase()
+                    if(fieldSelected.includes(searchTerm)){
+                        return value
+                    }
+                });
+                return valuesCollection
+            }
+
+            searchBar.addEventListener("keyup", (e) => {
+                const searchTerm = e.target.value.trim().toLowerCase()
+                const arrayFiltred = filterArr(searchTerm, valuesCollection)
+                this.loadTbody(tbody, arrayFiltred)
+            })
+        } catch (error) {
             return this.msg(error.message || "Ocorreu um erro inesperado");
         }
     }
@@ -360,6 +386,15 @@ class Drive {
                     </div>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <div class="border border-horizontal p-5 d-flex align-items-center">
+                    <select id="selectFieldSearch">
+                    </select>
+                    <input type="search" id="searchBar" placeholder="Pesquise pelo campo..."/>
+                </div>
+            </div>
+
             <div class="container-center">  
                 <table class="table table-striped">
                     <thead class="thead">
@@ -376,12 +411,14 @@ class Drive {
         const btnDelet = document.querySelector('#btnDelet');
         const thead = document.querySelector('.thead');
         const tbody = document.querySelector('.tbody');
-    
+        const selectFieldSearch = document.querySelector('#selectFieldSearch');
+        const searchBar = document.querySelector('#searchBar');
+
         btnCad.addEventListener('click', () => {
             this.showForm();
         });
     
-        return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet };
+        return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet, selectFieldSearch, searchBar };
     }
     
     
@@ -414,6 +451,15 @@ class Drive {
     }
 
     buildTable(thead, tbody, fieldsCollection, valuesCollection) {
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const endIndex = startIndex + this.itemsPerPage;
+        valuesCollection = valuesCollection.slice(startIndex, endIndex);
+
+        this.loadHead(thead, fieldsCollection)
+        this.loadTbody(tbody, valuesCollection)
+    }
+
+    loadHead(thead, fieldsCollection){
         thead.appendChild(document.createElement('th')).innerText = ''
         for (const field of fieldsCollection.fields) {
             const th = document.createElement('th');
@@ -446,12 +492,14 @@ class Drive {
                 btnDelet.disabled = true; 
             }
         });
-        
+
         const selectAllTh = document.createElement('th');
         selectAllTh.appendChild(selectAllCheckbox);
         thead.children[0].insertBefore(selectAllTh, thead.children[0].firstChild);
+    }
 
-
+    loadTbody(tbody, valuesCollection){
+        tbody.innerHTML = ''
         for (const field of valuesCollection) {
             const tr = document.createElement('tr');
         
