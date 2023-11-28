@@ -96,7 +96,6 @@ class Drive {
                 pageButton.classList.add('btn-primary');
             }
 
-  
             pageButton.addEventListener('click', () => {
                 this.currentPage = i;
                 this.showDocument(this.presetSelected);
@@ -134,7 +133,6 @@ class Drive {
             prevButton.disabled = this.currentPage === 1;
             nextButton.disabled = this.currentPage === this.totalPages;
 
-           
             if (this.paginationVisible) {
                 paginationContainer.style.display = 'block';
             } else {
@@ -151,7 +149,7 @@ class Drive {
             });
         }
 
-       if (backButton) {
+        if (backButton) {
             backButton.addEventListener('click', () => {
                 this.togglePaginationVisibility(true); 
             });
@@ -211,7 +209,7 @@ class Drive {
             // Calcular o número total de páginas com base nos valores recuperados
             this.calculateTotalPages(valuesCollection.length);
     
-            const { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnUpload, btnDelet } = this.renderTableHtml(collectionName);
+            const { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnDelet } = this.renderTableHtml(collectionName);
         
             document.querySelector('#paginationContainer').style.display = 'block'
             const childresOfTBody = tbody.children;
@@ -245,23 +243,9 @@ class Drive {
                 }
             });
             
-            btnDownloadDefault.addEventListener('click', async (e) => {
-                try {
-                    const response = await this.requests.downloadDefaultSheet(collectionName);
-                    const data = await response.json();
-                    if (response.status !== 200) {
-                        return this.msg(data.errors, false);
-                    }
-    
-                    window.location.assign(data.url);
-                } catch (error) {
-                    console.log(error);
-                    return this.msg('Ocorreu um erro inesperado 😢', false);
-                }
-            });
 
             btnUpload.addEventListener('click', (e) => {
-                const { form, inputFile, back,} = this.renderFormUpload()
+                const { form, back, inputFile, btnDownloadDefault } = this.renderFormUpload()
 
                 back.addEventListener('click', (e) => this.showDocument())
 
@@ -287,6 +271,21 @@ class Drive {
                         return this.msg('Ocorreu um erro inesperado 😢', false);
                     }
                 })
+
+                btnDownloadDefault.addEventListener('click', async (e) => {
+                    try {
+                        const response = await this.requests.downloadDefaultSheet(collectionName);
+                        const data = await response.json();
+                        if (response.status !== 200) {
+                            return this.msg(data.errors, false);
+                        }
+        
+                        window.location.assign(data.url);
+                    } catch (error) {
+                        console.log(error);
+                        return this.msg('Ocorreu um erro inesperado 😢', false);
+                    }
+                });
             })
     
             // Paginação
@@ -312,8 +311,9 @@ class Drive {
                         <h1 class="mb-0">${this.presetSelected}</h1>
                     </div>
                     <div id="headerTable"> 
-                        <button id="back" class="btn btn-outline-danger btn-sm-4">Voltar</button>
-                        <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary ms-2" type="submit">Enviar</button>
+                    <button id="btnDownloadDefault" class="btn btn-outline-success ms-2"> <i class="fas fa-download"></i> Download planilha padrão</button>
+                    <button id="EnviarFormUpload" form="uploadForm" class="btn btn-outline-primary ms-2" type="submit">Enviar</button>
+                    <button id="back" class="btn btn-outline-danger ms-2">Voltar</button>
                     </div>
                 </div>
             </div>
@@ -325,12 +325,14 @@ class Drive {
 
         const form = document.querySelector('#uploadForm');
         const back = document.querySelector('#back');
+        const btnDownloadDefault = document.querySelector('#btnDownloadDefault');
         const inputFile = document.querySelector('#fileInput');
 
         return {
             form,
-            inputFile,
             back,
+            inputFile,
+            btnDownloadDefault,
         };
     }
 
@@ -346,15 +348,13 @@ class Drive {
                     <div id="headerTable"> 
                     
                     <div class="dropdown">
-                    <button class="dropdown-toggle" id="dropdownMenuButton">Arquivo</button>
-                    <div class="dropdown-gaveta" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-a" id="btnUpload">Importar</a>
-                      <a class="dropdown-a" id="btnDownload">Exportar</a>
+                        <button class="dropdown-toggle" id="dropdownMenuButton">Arquivo</button>
+                        <div class="dropdown-gaveta" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-a" id="btnUpload">Importar</a>
+                            <a class="dropdown-a" id="btnDownload">Exportar</a>
+                        </div>
                     </div>
-                  </div>
-                  
                         <button id="btnDelet" name="btnDelet" class="btn  ms-2 btn-gray disabled ">Deletar</button>
-                        <button id="btnDownloadDefault" class="btn btn-outline-info ms-2"> <i class="fas fa-download"></i> Planilha padrão  </button>
                         <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
                     </div>
                 </div>
@@ -371,7 +371,6 @@ class Drive {
         const form = document.querySelector('#form')
         const btnCad = document.querySelector('#btnCad');
         const btnDownload = document.querySelector('#btnDownload');
-        const btnDownloadDefault = document.querySelector('#btnDownloadDefault');
         const btnUpload = document.querySelector('#btnUpload');
         const btnDelet = document.querySelector('#btnDelet');
         const thead = document.querySelector('.thead');
@@ -381,7 +380,7 @@ class Drive {
             this.showForm();
         });
     
-        return { form, btnCad, thead, tbody, btnDownload, btnDownloadDefault, btnUpload, btnDelet };
+        return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet };
     }
     
     
