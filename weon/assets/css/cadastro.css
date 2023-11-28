@@ -358,3 +358,14 @@ input[type=file]::file-selector-button:hover {
 .dropdown:hover .dropdown-gaveta {
   display: block;
 }
+
+.btn-gray{
+  border: 1px solid #292929;
+  color: #333333;
+}
+
+.btn-gray:hover{
+  border: 1px solid #292929;
+  color: #333333;
+  background: none;
+}
