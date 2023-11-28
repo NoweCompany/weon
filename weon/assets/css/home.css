@@ -97,6 +97,9 @@ transition: background-color 0.3s;
 }
 }
 
-@media (max-width: 750px) {
   
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Padrão para a maioria dos navegadores */
 }
