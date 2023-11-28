@@ -353,7 +353,7 @@ class Drive {
                     </div>
                   </div>
                   
-                        <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 d-none">Deletar</button>
+                        <button id="btnDelet" name="btnDelet" class="btn btn-outline-danger ms-2 disabled ">Deletar</button>
                         <button id="btnDownloadDefault" class="btn btn-outline-info ms-2"> <i class="fas fa-download"></i> Planilha padrão  </button>
                         <button id="btnCad" name="btnCad" class="btn btn-outline-primary sm-4 ms-2">Adicionar</button>
                     </div>
@@ -436,9 +436,9 @@ class Drive {
             // Exiba o botão "Deletar Documentos" quando a checkbox geral estiver marcada
             const btnDelet = document.querySelector('#btnDelet');
             if (selectAllCheckbox.checked) {
-                btnDelet.classList.remove('d-none'); // Remova a classe 'd-none' para exibir o botão
+                btnDelet.classList.remove('disabled'); // Remova a classe 'd-none' para exibir o botão
             } else {
-                btnDelet.classList.add('d-none'); // Adicione a classe 'd-none' para ocultar o botão
+                btnDelet.classList.add('disabled'); // Adicione a classe 'd-none' para ocultar o botão
             }
         });
         
@@ -465,9 +465,9 @@ class Drive {
                     return false
                 }
                 if(btnDelet && containCheckBoxChecked()){
-                    btnDelet.classList.remove('d-none')
+                    btnDelet.classList.remove('disabled')
                 }else{
-                    btnDelet.classList.add('d-none')
+                    btnDelet.classList.add('disabled')
                 }
 
             })
