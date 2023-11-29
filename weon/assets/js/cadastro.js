@@ -436,7 +436,7 @@ class Drive {
 
     renderTableHtml(presetSelected) {
         this.container.innerHTML = `
-            <div class="d-flex justify-content-center align-items-center mb-5">
+            <div class="d-flex justify-content-center align-items-center mb-2">
                 <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                     <div class="ml-auto" >
                         <h1 class="mb-0">${presetSelected}</h1>
@@ -458,13 +458,13 @@ class Drive {
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center align-items-center mb-5">
-                <div class="border border-horizontal p-5 d-flex align-items-center">
-                    <select id="selectFieldSearch">
-                    </select>
-                    <input type="search" id="searchBar" placeholder="Pesquise pelo campo..."/>
-                </div>
+            <div class="d-flex justify-content-center align-items-center mb-3">
+            <div class="border-filter border-horizontal p-5 d-flex align-items-center">
+                <select class="form-control me-2 filter-select custom-select" id="selectFieldSearch">
+                </select>
+                <input type="search" id="searchBar" class="form-control filter mr-3" placeholder="Pesquise pelo campo..."/>
             </div>
+        </div>
 
             <div class="container-center">  
                 <table class="table table-striped">

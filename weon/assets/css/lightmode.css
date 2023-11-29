@@ -225,3 +225,8 @@
 .dropdown-gaveta a:hover{
   color: #4179d2;
 }
+
+.border-filter{
+  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+ }

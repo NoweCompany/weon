@@ -271,18 +271,43 @@ body {
 
 
   .border{
-    background-color: #ffffff;
     width: 1000px;
     height: 30px;
     justify-content: center;
     border-radius: 10px;
-    
   }
 
+  .border-filter{
+    width: 1000px;
+    height: 10px;
+    justify-content: start;
+    border-radius: 10px;
+  }
+
+.filter{
+  width: 70%;
+}
+
+.filter-select{
+  width: 30%;
+}
  .form-check-input{
   height: 20px;
   width: 20px;
  }
+
+ .custom-select {
+  position: relative;
+}
+
+.custom-select:after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
 
 .pop{
   border-radius: 20px;
