@@ -460,7 +460,7 @@ class Drive {
 
             <div class="d-flex justify-content-center align-items-center mb-3">
             <div class="border-filter border-horizontal p-5 d-flex align-items-center">
-                <select class="form-control me-2 filter-select custom-select" id="selectFieldSearch">
+                <select class="form-select me-2 filter-select" id="selectFieldSearch" aria-label="select example">
                 </select>
                 <input type="search" id="searchBar" class="form-control filter mr-3" placeholder="Pesquise pelo campo..."/>
             </div>
