@@ -14,17 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleButton.addEventListener("click", openSidebar);
   }
 
-  function checkScreenSize() {
-    const screenWidth = window.innerWidth;
+ function AbreFecha() {
 
-    if (screenWidth >= 1407) {
-      openSidebar();
-    } else {
+    if (openSidebar) {
       closeSidebar();
+    } else {
+      openSidebar();
     }
   }
 
-  checkScreenSize();
-
-  window.addEventListener("resize", checkScreenSize);
+  document.getElementById('toggleButton').addEventListener("click", AbreFecha);
 });
