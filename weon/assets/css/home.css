@@ -103,3 +103,22 @@ transition: background-color 0.3s;
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Padrão para a maioria dos navegadores */
 }
+
+@media (max-width: 768px) {
+  .img {
+    max-width:70%;
+    margin-top: 60%;
+  }
+
+  .word{
+    color: #000000;
+    margin-top: 90%;
+    position: fixed;
+    font-size: 20px;
+  }
+
+  .imagem-pequena img {
+    display: none;  
+  }
+
+}

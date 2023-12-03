@@ -207,8 +207,6 @@
   margin-top: 10%;
 }
 
-
-
 .containerCreateKpi, .containerCreateChart{
   display: none;
   flex-direction: column;
@@ -229,3 +227,62 @@
   margin: 0;
 }
 
+.container-mobile-title{
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 150px;
+    z-index: 1;
+  }
+
+  .sidebar.closed {
+    width: 150px;
+    z-index: 1;
+  }
+
+  .sidebar .modal-button{
+    z-index: 1000000000;
+
+  }
+
+  .container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.container-mobile-title{
+  display: block;
+}
+
+.container-desktop{
+  display: none;
+}
+
+#title{
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardDash {
+  flex:content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+
+}

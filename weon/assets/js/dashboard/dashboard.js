@@ -266,4 +266,12 @@ dash.initSelects()
   .then(resolve => resolve)
   .catch(err => console.log(err ))
 
-//filtro
+
+//mobile form
+
+// function MobileForm(){
+//   const btnGrafico = document.getElementById('btnToFormCreateChart')
+//   const containermobiletitle = document.getElementsByClassName('container-mobile-title')
+
+
+// }

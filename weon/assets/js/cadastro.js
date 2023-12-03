@@ -436,10 +436,20 @@ class Drive {
 
     renderTableHtml(presetSelected) {
         this.container.innerHTML = `
+        
+        <div class="container-mobile-title">
+        <div class="d-flex justify-content-center align-items-center mb-2">
+        <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
+            <div class="ml-auto" >
+                <h1 class="mb-0 titlemobile">${presetSelected}</h1>
+            </div>
+        </div>
+    </div>
+ </div> 
             <div class="d-flex justify-content-center align-items-center mb-2">
                 <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
                     <div class="ml-auto" >
-                        <h1 class="mb-0">${presetSelected}</h1>
+                        <h1 class="mb-0 titulopreset">${presetSelected}</h1>
                     </div>
 
 
@@ -466,7 +476,8 @@ class Drive {
             </div>
         </div>
 
-            <div class="container-center">  
+       
+            <div class="container-center tabela-container">  
                 <table class="table table-striped">
                     <thead class="thead">
                     </thead>
@@ -474,6 +485,7 @@ class Drive {
                     </tbody>
                 </table>
             </div>
+        
         `;
         const form = document.querySelector('#form')
         const btnCad = document.querySelector('#btnCad');

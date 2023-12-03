@@ -28,17 +28,7 @@
       color: #161616;
     }
 
-    #navbar a:hover{
-      color: #ffffff;
-    }
-
-
-    li a:before {
-      background-color: #ffffff;
-      transition: transform 0.3s;
-    }
-    
-    li a:hover {
+    a.nav-link:hover{
       color: #ffffff;
     }
     
@@ -115,7 +105,7 @@
   
   .cardDash{
     width: 500px;
-    background-color: #ffffff00;
+    background-color: #ffffff;
     border: 2px solid #dee2e6;
    
   }
