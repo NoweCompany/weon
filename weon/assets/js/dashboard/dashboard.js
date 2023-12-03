@@ -272,6 +272,6 @@ dash.initSelects()
 // function MobileForm(){
 //   const btnGrafico = document.getElementById('btnToFormCreateChart')
 //   const containermobiletitle = document.getElementsByClassName('container-mobile-title')
-
-
+//desisti no meio do caminho nao entendi oq ta acontendo alguem pode me explicar pq as coisas param de funcionar do dia pra noite 
+//eu soq ueria so queria saber certinmho :(
 // }

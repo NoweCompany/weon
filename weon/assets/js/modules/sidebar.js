@@ -12,17 +12,17 @@
   
     function toggleSidebar() {
       if (isSidebarCollapsed) {
-          predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>';
-          historicoButton.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i>';
-          dashboardButton.innerHTML = '<i class="fa-solid fa-chart-line"></i>';
-          UsuarioButton.innerHTML = '<i class="fa-solid fa-users"></i>'
-          LixeiraButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+          predefinicaoButton.innerHTML = '<i id="predefinicao" class="fa-solid fa-bars-staggered"></i>'
+          historicoButton.innerHTML = '<i id="historico" class="fa-solid fa-clock-rotate-left"></i>'
+          dashboardButton.innerHTML = '<i id="dashboard" class="fa-solid fa-chart-line"></i>'
+          UsuarioButton.innerHTML = '<i id="usuarios" class="fa-solid fa-users"></i>'
+          LixeiraButton.innerHTML = '<i id="Lixeira" class="fa-solid fa-trash-can"></i>'
       } else {
-          predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>';
-          historicoButton.innerHTML = ' Histórico <span id="historico" class="beta">BETA</span> <i class="fa-solid fa-clock-rotate-left"></i>';
-          dashboardButton.innerHTML = 'Dashboards <i class="fa-solid fa-chart-line"></i>';
-          UsuarioButton.innerHTML =' Usuários <span id="usuarios" class="beta">BETA</span> <i class="fa-solid fa-users"></i>';
-          LixeiraButton.innerHTML = ' Lixeira<span id="Lixeira" class="beta">BETA</span> <i class="fa-solid fa-trash-can"></i>';
+          predefinicaoButton.innerHTML = 'Predefinições <i class="fa-solid fa-bars-staggered"></i>'
+          historicoButton.innerHTML = ' Histórico <span id="historico" class="beta">BETA</span> <i class="fa-solid fa-clock-rotate-left"></i>'
+          dashboardButton.innerHTML = 'Dashboards<i class="fa-solid fa-chart-line"></i>'
+          UsuarioButton.innerHTML =' Usuários <span id="usuarios" class="beta">BETA</span> <i class="fa-solid fa-users"></i>'
+          LixeiraButton.innerHTML = ' Lixeira<span id="Lixeira" class="beta">BETA</span> <i class="fa-solid fa-trash-can"></i>'
       }
 
       titles.forEach(title => {
