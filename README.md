@@ -1,16 +1,15 @@
-<div align="center"><img src="./assets/img/slogan.jpg" width="100%" aling-item="center"/></div>
+# [Nowe](https://nowe.netlify.app/)
+- Nowe é uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirin, essa empresa tem como objetivo vender softwares de gestão e logística 
 
-# Nesse repositório você encontra:
-- [Nowe](https://nowecompany.com.br/) uma empresa fictícia criada para o TCC do curso de informática do colégio bento quirino, essa empresa tem como objetivo vender softwares de gestão e logística. 
+# [Weon](https://weonsystem.netlify.app/pages/drive.html)
 
-- [Weon](https://nowecompany.com.br/weon) um software web oferecido pela nowe para fazer a gestão e logística de documentos.
+- Weon é um software oferecido pela nowe para fazer a gestão e logística de dados e documentos 
 
-## Login para visitantes 
-- Email: visitante@nowe.com
-- Senha: 123456
-
-## Grupo
+# Grupo
 * [Moyseys](https://github.com/Moyseys) - Dev FullStack
-* [Geovani Orsoli](https://github.com/geovaniorsoli) - Dev FrontEnd
-* [Murilo Silva](https://github.com/Silvalindo) - Coordenador
-
+* [Geovaniorsoli](https://github.com/geovaniorsoli) - Dev FrontEnd
+* [paderao](https://github.com/paderao) - Auxiliar BackEnd
+* [pedroka_3](https://github.com/pedroka3) - Auxiliar BackEnd
+* [felipe](https://github.com/palmaazx) - Gestor de diagramas
+* [Silvalindo](https://github.com/Silvalindo) - Coordenador e responsável pela documentação 
+* [Ramond](https://github.com/) - Gerenciador de dashboard 

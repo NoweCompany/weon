@@ -25,7 +25,7 @@
 @font-face {
 
     font-family: sfpro;
-    src: url("/fonte/SF-Pro-Display-Medium.otf");
+    src: url("../../SF-Pro-Display-Medium.otf");
   }
 
   /* Estilos específicos para dispositivos móveis */
