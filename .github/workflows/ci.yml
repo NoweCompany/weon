@@ -13,11 +13,31 @@ jobs:
       - name: Build
         run: echo Building aplication...
   
+  deploy-homologation:
+    runs-on: ubuntu-22.04
+    environment:
+      name: hmlg
+    needs: build
+    steps:
+    - name: Repo Checkout
+      uses: actions/checkout@v4
+    - name: Hotinger Deployment
+      uses: appleboy/ssh-action@v1.0.1
+      with:
+        host: ${{ vars.HOST }}
+        username: ${{ vars.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ vars.PORT }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /home/hmlg.weon.nowecompany.com.br/public_html
+          git pull origin main
+
   deploy-Production:
     runs-on: ubuntu-22.04
     environment:
       name: production
-    needs: build
+    needs: deploy-homologation
     steps:
     - name: Repo Checkout
       uses: actions/checkout@v4
@@ -32,4 +52,3 @@ jobs:
         script: |
           cd /home/weon.nowecompany.com.br/puclic_html
           git pull origin main
-          echo Deploying prodiction complet
