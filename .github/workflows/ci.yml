@@ -24,10 +24,10 @@ jobs:
     - name: Hotinger Deployment
       uses: appleboy/ssh-action@v1.0.1
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
+        host: ${{ vars.HOST }}
+        username: ${{ vars.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
+        port: ${{ vars.PORT }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
           cd /home/weon.nowecompany.com.br/puclic_html
