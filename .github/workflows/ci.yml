@@ -8,27 +8,28 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Build
         run: echo Building aplication...
   
   deploy-Production:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment:
       name: production
-      url: ${{vars.URL}}
     needs: build
     steps:
     - name: Repo Checkout
       uses: actions/checkout@v4
     - name: Hotinger Deployment
-      uses: easingthemes/ssh-deploy@main
+      uses: appleboy/ssh-action@v1.0.1
       with:
-        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-        ARGS: "-rlgoDzvc --delete"
-        SOURCE: "./"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-        TARGET: ${{ secrets.REMOTE_TARGET }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /home/weon.nowecompany.com.br/puclic_html
+          git pull origin main
+          echo Deploying prodiction complet
