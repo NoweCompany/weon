@@ -1,0 +1,35 @@
+name: weon.nowecompany.hostinger
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  
+  workflow_dispatch:
+
+jobs:
+    build:
+      runs-on: ubunto-latest
+      steps:
+        - name: Build
+          run: echo Building aplication... 
+    deploy-production:
+      runs-on: ubunto-latest
+      environment:
+        name: production
+        url: https://weon.nowecompany.com.br
+      needs: build
+      steps:
+        - name: Repo Checkout
+          uses: actions/checkout@v1
+        - name: Hotinger Deployment
+          uses: easingthemes/ssh-deploy@main
+          with:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            ARGS: "-rlgoDzvc --delete"
+            SOURCE: "./"
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
