@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @media (max-width: 768px) {
   .conteiner {
     align-items: flex-start;
@@ -35,6 +36,8 @@
     
   }
 }
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 @keyframes entrada {
   0% {
@@ -47,6 +50,7 @@
   }
 }
 
+<<<<<<< HEAD
 
 
 h1 {
@@ -55,12 +59,15 @@ h1 {
 
 }
 
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 body {
   background: linear-gradient(to right, #4179d2 50%, #f7f7f7 50%);
    overflow: hidden;
 }
 
 form {
+<<<<<<< HEAD
   margin: auto;
   width: 14%;
   height: auto;
@@ -68,6 +75,11 @@ form {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   box-shadow: 0 20px 50px 0 rgba(65, 65, 65, 0.5);
+=======
+  padding: 5%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   color: #3a3a36;
   position: fixed;
   left: 26%;
@@ -76,6 +88,7 @@ form {
   animation: entrada 1s ease;
 }
 
+<<<<<<< HEAD
 .btn {
   display: flex;
   justify-content: center;
@@ -119,6 +132,9 @@ select {
   font-size: 20px;
   background-color: #ededed;
 }
+=======
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .imagem {
   display: flex;
   width: 20%;
@@ -128,8 +144,11 @@ select {
 transform: translateY(-50%);
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .imagem img {
   max-width: 100%;
   height: auto;
@@ -158,5 +177,45 @@ transform: translateY(-50%);
   display: block;
   margin-bottom: 10%x;
   font-size: 20px;
+<<<<<<< HEAD
   border-radius: 10px;
 }
+=======
+}
+
+
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(to bottom, #4179d2 50%, #4179d2 50%);
+  }
+
+  form {
+    padding: 5%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: #3a3a36;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: entrada 1s ease;
+  }
+  
+  .imagem {
+    display: flex;
+    width: 30%;
+    position: fixed;
+    left: -10%; /* Centralize horizontalmente */
+    top: 10%; 
+    transform: translateX(-50%); /* Apenas translateX para centralizar horizontalmente */
+  }
+  
+  .imagem img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+
+  
+}
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292

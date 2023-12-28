@@ -4,6 +4,7 @@
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 .msg {
   display: none;
 }
@@ -201,11 +202,37 @@ li {
 #delete {
   margin-left: 23%;
 }
+=======
+
+.container {
+  margin-top: 5%;
+  display: fixed;
+  flex-direction: column;
+  width: 70%;
+  max-height: 300px;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.sidebar.collapsed {
+  width: 50px; /* Ou o valor que você deseja */
+  overflow: hidden; /* Para garantir que nenhum conteúdo exceda o limite da sidebar */
+}
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 #form {
   flex-direction: column;
   width: 100%;
   height: auto;
+<<<<<<< HEAD
   animation: fade-in 0.5s ease;
   background-color: #ededed;
   border-radius: 0 0 10px 10px;
@@ -368,6 +395,42 @@ li {
 
   width: 200px;
   background-color: #ffffff;
+=======
+  overflow-y: scroll;
+  max-height: 500px;
+  min-height: 300px;
+}
+
+
+.create-field td {
+  margin: 0  auto;
+  text-align: center;
+}
+
+.input-fild{
+  margin: 0 auto;
+  width: 70%;
+}
+
+
+.select1{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form-check-input{
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  margin-top: 6px;
+  
+}
+
+
+/* bar */
+.sidebar {
+  width: 200px;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   height: 100%;
   position: fixed;
   top: 1;
@@ -375,6 +438,10 @@ li {
   overflow-x: hidden;
   padding-top: 30px;
   animation: slide-in 0.5s ease;
+<<<<<<< HEAD
+=======
+  transition: width 0.5s; 
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 @keyframes slide-in {
@@ -392,6 +459,7 @@ li {
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
+<<<<<<< HEAD
 }
 
 .sidebar h1 {
@@ -406,10 +474,30 @@ li {
   width: 100%;
   padding: 12px;
   margin-bottom: 10px;
+=======
+  z-index: 10;
+  
+}
+
+
+.sidebar h1 {
+  text-align: center;
+}
+
+.sidebar .toggle-button:hover {
+ color:	#4179d2;
+
+}
+
+.toggle-button {
+  width: 100%;
+  padding: 1px;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   border: none;
   text-decoration: none;
   font-size: 16px;
   color: #333333;
+<<<<<<< HEAD
   transition: transform 0.3s ease;
   background: none;
   text-align: left;
@@ -444,6 +532,39 @@ li {
 
 .sidebar .modal-button:hover {
   transform: scale(1.1);
+=======
+  background: none;
+  text-align: left;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+  margin: 5px;
+}
+
+.sidebar.collapsed {
+  width: 80px; 
+  overflow-x: hidden;
+}
+
+.sidebar.collapsed .toggle-button {
+  padding-right: 0;
+  justify-content: center;
+}
+
+.sidebar.collapsed .toggle-button i {
+  margin-right: 5%; 
+}
+
+
+#sidebar-title.hidden {
+  visibility: hidden;
+}
+
+.toggle-button i.icon-hidden {
+  visibility: hidden;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 .deletPreset{
@@ -461,6 +582,7 @@ li {
 }
 
 .criarnovatabela {
+<<<<<<< HEAD
   position: fixed;
   margin-bottom: 5%;
   bottom: 50px;
@@ -483,6 +605,18 @@ li {
   background-color: #292929;
 }
 
+=======
+  width: 60px;
+  height: 49px;
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* tabela */
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 .container {
   margin-top: 5%;
@@ -490,6 +624,7 @@ li {
   display: flex;
   flex-direction: column;
   width: 70%;
+<<<<<<< HEAD
   max-height: 600px;
   /* Altura máxima para a rolagem vertical */
 }
@@ -520,14 +655,36 @@ li {
   /* Cor da linha vertical */
 }
 
+=======
+  max-height: 700px;
+  /* Altura máxima para a rolagem vertical */
+}
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .table-container table {
   width: 100%;
   margin-bottom: 0;
   color: #000000;
   padding: 3px;
+<<<<<<< HEAD
 }
 
 .table-container th,
+=======
+  border-collapse: separate;
+  border-spacing: 3px;
+
+}
+
+
+.table-container th {
+  text-align: center;
+  font-size: 15px;
+  padding: .5rem;
+  border-radius: 5px;
+}
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .table-container td {
   text-align: center;
   font-size: 15px;
@@ -546,7 +703,11 @@ li {
 
 /* linhas ímpares */
 .table-container tr:nth-child(odd) {
+<<<<<<< HEAD
   background-color: #efefef;
+=======
+  background-color: #e3e3e3;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 /* linhas pares */
@@ -555,6 +716,7 @@ li {
 }
 
 
+<<<<<<< HEAD
 /* aaa */
 #formPreset {
   width: 50%;
@@ -646,7 +808,105 @@ td {
 
  
 
+=======
+td {
+  cursor: pointer;
+}
+
+th {
+  background-color: #292929;
+  color: #f7f7f7;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+
+#formPreset {
+  width: 30%; 
+  
+}
+
+.editPreset{
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 
 
+<<<<<<< HEAD
+=======
+.popupConfirmation{
+  position: fixed;
+  margin-top: 70px;
+  z-index: 1;
+}
+
+
+.border{
+  background-color: #ffffff;
+  width: 1000px;
+  height: 30px;
+  border-radius: 10px;
+  margin-top: -30px;
+}
+
+.popupConfirmation {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  background-color: #f0f0f0;
+  width: 15%;
+}
+
+.popreset{
+  background-color: #ffffff;
+}
+
+.lixeira{
+  margin-top: 5px;
+  width: 50px;
+  align-items: start;
+  display: flex;
+  background-color: #fff;
+
+}
+
+.scroll{
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-item{
+  border: solid 3px;
+  border-radius: 10px;
+  margin-top: 10px;
+  align-items: center;
+  display: inline;
+  padding: 10px;
+  width: 230px;
+  max-width: 230px;
+}
+ 
+.action-bar{
+  z-index: 2000000000000000000;
+} 
+
+/* .space{
+  margin: 10px;
+} */
+
+/* form create user */
+
+.formcaduser{
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ padding: 50px;
+ border-radius:10px ;
+}
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292

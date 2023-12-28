@@ -1,0 +1,254 @@
+body{
+  background-color: #212529;
+  transition: all 0.2s ease-in-out;
+}
+  
+    ::selection {
+      background-color:#197eb95c;
+  
+    }
+    
+    :root {
+      scroll-behavior: smooth;
+    }
+  
+    nav {
+      background-color:	#2c2c2c;
+      transition: all 0.2s ease-in-out;
+    
+    }
+    
+    nav a {
+        color: #cfcfcf; 
+ 
+    }
+    
+    nav a:hover {
+      color: #5d92cb; 
+
+  }
+
+    li a:before {
+      background-color:#5d92cb;
+      transition: transform 0.3s;
+    }
+    
+    li a:hover {
+      color: #5d92cb;
+    }
+
+    #select{
+      color:#5d92cb; 
+    }
+
+    .sidebar {
+      background-color: #2c2c2c;
+     
+   
+    }
+    .toggle-button {
+      color: #adb5bd;
+      transition: transform 0.2s ease-in-out;
+     
+    }
+
+   .border{
+    background-color: #2c2c2c;
+    border: 1px solid #495057;
+   }
+
+   #form {
+    background-color: #2c2c2c;
+    border: 1px solid #495057; 
+   
+   }
+  
+   #FormPreset{
+    background-color: #2c2c2c;
+    border: 1px solid #495057; 
+  
+   }
+
+   .popreset{
+    background-color: #2c2c2c;
+
+    border: 1px solid #495057; 
+   }
+
+   #form input[type="text"],
+   #form input[type="number"],
+   #form textarea,
+   #form input[type="date"] {
+    border: 1px solid #495057; 
+   }
+  
+
+
+  .sidebar .modal-button {
+    color: #adb5bd;
+  }
+
+
+  .popupConfirmation {
+    background-color: #2c2c2c;
+    border: 1px solid #495057; 
+  }
+
+  .sidebar.closed {
+    background-color:  #2c2c2c;
+  }
+
+  .table-container table tr {
+    color: #c1c1c1;
+    transition: color 0.3s ease; 
+  }
+  
+  .table-container tr:hover {
+    transition: color 0.1s ease-in-out;
+    color: #4179d2;
+
+  }
+  
+
+  .table-container table tr:nth-child(even) {
+    background-color: #333333;
+  }
+  
+  .table-container table tr:nth-child(odd) {
+    background-color: #4f4f4f;
+  }
+  
+  .cardDash{
+    background-color: #2c2c2c00;
+    border: 1px solid #495057;
+  }
+  
+
+.table tr:nth-child(even) {
+  background-color: #2c2c2c;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #2a2a2a;
+}
+
+.table td:nth-child(even) {
+  background-color: #2c2c2c;
+}
+
+.table td:nth-child(odd) {
+  background-color: #2c2c2c;
+}
+
+
+#formCreateDash{
+  background-color: #2c2c2c;
+    border: 1px solid #495057;
+}
+.form1{ 
+  background-color: #2c2c2c;
+    border: 1px solid #495057;
+}  
+/* Personalize a barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Personalize o trilho da barra de rolagem (fundo) */
+::-webkit-scrollbar-track {
+  background-color: #212529; /* Cor de fundo do trilho */
+}
+
+/* Personalize o polegar da barra de rolagem (a parte que você arrasta) */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor do polegar */
+  border-radius: 10px; /* Canto arredondado do polegar */
+}
+
+/* Estilize o polegar da barra de rolagem quando estiver sendo hover (passar o mouse por cima) */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cor do polegar em hover */
+}
+
+.beta{
+  color: rgb(213, 213, 213);
+  border: solid 2px rgb(208, 99, 99);
+  border-radius: 4px;
+  background-color: rgb(196, 58, 58);
+  padding: 2px;
+ 
+}
+
+.lixeira{
+  background-color: #2c2c2c;
+  border: 1px solid #495057;
+  margin-top: 5px;
+  width: 50px;
+  align-items: start;
+  display: flex;
+}
+
+.lixeira:hover{
+  background-color: #2c2c2c;
+  border: 2px solid #4179d2;
+  color: #4179d2;
+}
+
+
+
+.scroll{
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-item{
+  border: solid 1px rgb(95, 95, 95);
+  background-color: #2c2c2c;
+  border-radius: 10px;
+  margin-top: 10px;
+  align-items: center;
+  display: inline;
+  padding: 10px;
+  width: 230px;
+  max-width: 230px;
+}
+
+.dropdown-item:hover{
+  border: solid 1px rgb(95, 95, 95);
+  background-color: #353535;
+
+}
+
+.oi{
+  color: white;
+}
+
+.formcaduser{
+  border: solid 1px #495057;
+  background-color: #2c2c2c;
+  border-radius: 10px;
+ }
+
+ #uploadForm{
+  border: solid 1px #495057;
+  background-color: #2c2c2c;
+}
+
+.dropdown-gaveta {
+  border: solid 1px #495057;
+  background-color: #2c2c2c;
+}
+
+.dropdown-gaveta a {
+  color: #ffffff;
+  transition: all 0.1s ease-in-out;
+}
+
+.dropdown-gaveta a:hover{
+  color: #4179d2;
+}
+
+.border-filter{
+  border: solid 1px #495057;
+  background-color: #2c2c2c;
+}

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 .options-window {
   display: none;
   position: absolute;
@@ -23,6 +24,8 @@
   display: flex;
   flex-direction: column;
 }
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 .options a {
 display: block;
@@ -32,10 +35,13 @@ text-decoration: none;
 transition: background-color 0.3s;
 }
 
+<<<<<<< HEAD
 .options a:hover {
 background-color: #dddddd;
 }
 
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 .conteiner{
   display: flex;
@@ -54,12 +60,19 @@ background-color: #dddddd;
 .img {
     display: block;
     margin: 0 auto;
+<<<<<<< HEAD
     max-width:25%;
+=======
+    max-width:30%;
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
     height: auto;
     position: fixed;
     margin-top: 20%;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   
 .button-container {
   display: flex;
@@ -70,6 +83,7 @@ background-color: #dddddd;
   font-family:'sfpro';
 }
 
+<<<<<<< HEAD
 .button {
   background-color: rgb(45, 107, 207);
   color: white;
@@ -92,6 +106,8 @@ background-color: #dddddd;
   font-family:'sfpro';
 }
 
+=======
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 .imagem-pequena {
   position: fixed;
@@ -112,12 +128,20 @@ background-color: #dddddd;
 }
 
 .word{
+<<<<<<< HEAD
   color: #333333;
   margin-top: 32%;
   position: fixed;
 }
 
 
+=======
+  color: #000000;
+  margin-top: 30%;
+  position: fixed;
+}
+
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .tracking-in-expand {
 -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
@@ -148,3 +172,13 @@ background-color: #dddddd;
   opacity: 1;
 }
 }
+<<<<<<< HEAD
+=======
+
+  
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Padrão para a maioria dos navegadores */
+}
+>>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
