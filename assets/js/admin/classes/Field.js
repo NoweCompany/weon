@@ -187,26 +187,15 @@ export default class Fields{
     }
 
     async createNewField(inputValue = '', type = '', isRequired = false, valuesPreset = []) {
-
-        // Criação do container principal
         const trField = document.createElement("tr");
         trField.className = "create-field";
         
-        
-        // Criação do elemento para o nome com classe Bootstrap
-            
-        // Criação do elemento para o nome com classe Bootstrap
         const tdName = document.createElement("td");
         tdName.className = "mb-4";
     
-    
-        
-
-        
         const nameInput = document.createElement("input");
         nameInput.setAttribute("type", "text");
 
-        // Criação do elemento para o tipo com classe Bootstrap
         const tdType = document.createElement("td");
         tdType.className = "mb-4";
 
@@ -220,12 +209,6 @@ export default class Fields{
             nameInput.classList.add("input-fild"); 
             nameInput.id = 'post';
         }
-        
-        
-        
-
-        
-       
         
         const typeSelect = document.createElement("select");
         const existValueField = await this.existValuesInField(inputValue, valuesPreset)
@@ -341,29 +324,21 @@ export default class Fields{
     showPopUp(trField, fieldName){
         const containerModal = document.createElement('div')
         containerModal.innerHTML = `
-        <div class="modal mt-5" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deseja apagar o campo "${fieldName}"?</h5>
-                </div>
-                <div class="modal-body">
-                    Se você confirmar essa ação, seus valores ainda persistirão em sua predefinição, porém não será possível alterá-los.
-                </div>
-                <div class="modal-footer">
-                <button type="button" id="btnClose" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" id="confirmationBtn" class="btn btn-outline-danger">Excluir</button>
-                
-                </div>
-            </div>
-        </div>
-    </div>
-    
-            `   
+            <div class="popupConfirmation alert alert-secondary alert-dismissible position-fixed" role="alert">
+                <h4>Tem certeza que deseja <strong>excluir</strong> o campo <strong>"${fieldName}"</strong></h4>
+                <p>Lembre-se de que os dados que esse campo contém serão apagados completamente.</p>
+                <form id="formAlertConfirmation">
+                    <div class="mb-3">
+                        <label for="inputPopUpFields" id="" class="form-label">Digite o nome do campo a ser excluido: "${fieldName}"</label>
+                        <input type="text" class="form-control" id="inputPopUpFields" aria-describedby="">
+                    </div>
+                    <button type="submit" id="btnConfirmationPopUpFields" class="btn btn-primary">Enviar</button>
+                </form>
+                <button type="button" id="btnClosePopUpFields" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`   
             this.container.appendChild(containerModal)
-            const modal = document.querySelector("#exampleModal")
-            const btnClose = document.querySelector('#btnClose')
-            const btnConfirmation = document.querySelector('#confirmationBtn')
+            const btnClose = document.querySelector('#btnClosePopUpFields')
+            const btnConfirmation = document.querySelector('#btnConfirmationPopUpFields')
 
             btnClose.addEventListener('click', (e) => {
                 e.preventDefault()
@@ -371,11 +346,18 @@ export default class Fields{
             })
             btnConfirmation.addEventListener('click', async (e) => {
                 e.preventDefault()
-                await this.api.deleteField(this.collectionSelected, fieldName)
-                this.messaging.msg("Campo excluido com sucesso.", true)
-                modal.remove()
-                trField.remove()
-                this.fields(this.collectionSelected)
+                const textToConfirmation = String(document.querySelector('#inputPopUpFields').value)
+
+                if(textToConfirmation === fieldName){
+                    await this.api.deleteField(this.collectionSelected, fieldName)
+                    this.messaging.msg("Campo excluido com sucesso.", true)
+                    containerModal.remove()
+                    trField.remove()
+                    //this.fields(this.collectionSelected)
+                    return
+                }
+
+                this.messaging.msg("Digite o nome do campo correto para que ele seje excluído.", false)
             })
     }
 
@@ -409,7 +391,7 @@ export default class Fields{
                 }
 
                  // Verifica se a caixa de seleção está marcada e se o campo está vazio
-                 if (validationCheckbox.checked && inputValue.trim() === '') {
+                if (validationCheckbox.checked && inputValue.trim() === '') {
                     return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
                 }
 
