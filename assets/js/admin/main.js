@@ -44,7 +44,7 @@ const users     = new User(container, messaging, api)
 
 fields.presetController = preset
 preset.fieldController = fields
-await fields.fields('Vendas')
+
 async function handleClick(e){
     try {
         const el = e.target
