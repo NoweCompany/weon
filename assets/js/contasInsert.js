@@ -7,12 +7,12 @@ import Logado from "./modules/Logado.js"
 window.addEventListener('load', async (e) => {
     const logado = new Logado()
     if(!(await logado.userLogado())){
-      return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`)
+        return window.location.assign(`${urlWebsite.split('/').slice(0, -2).join('/')}/index.html`)
     }else{
-      return
+        return
     }
-  })
-  
+})
+
 class FormInsert{
 
     validate(){

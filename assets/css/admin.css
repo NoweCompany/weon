@@ -4,205 +4,6 @@
   flex-direction: column;
 }
 
-<<<<<<< HEAD
-.msg {
-  display: none;
-}
-
-.error {
-  display: block;
-  text-align: center;
-  color: #ffffff;
-  background-color: #c05454;
-  padding: 10px 100px 10px 100px;
-  margin-top: 20px;
-  border-radius: 10px;
-  position: absolute;
-}
-
-.success {
-  margin-top: 100px;
-  z-index: 1;
-  display: block;
-  text-align: center;
-  color: #ffffff;
-  background-color: #54c06a;
-  padding: 10px 100px 10px 100px;
-  margin-top: 20px;
-  border-radius: 10px;
-  position: absolute;
-}
-
-
-.imagem-pequena {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  border-radius: 10%;
-  overflow: hidden;
-  width: 100px;
-  height: 10 0px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.imagem-pequena img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.image-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 40%;
-}
-
-.options-window {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  padding: 10px;
-  border-radius: 10px;
-  transition: opacity 0.3s;
-}
-
-.user-icon:hover .options-window {
-  display: block;
-  opacity: 1;
-
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
-.options a {
-  display: block;
-  color: #000000;
-  padding: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.options a:hover {
-  background-color: #ddd;
-}
-
-
-li a {
-  /* Restante das propriedades CSS */
-  position: relative;
-  overflow: hidden;
-  transition: color 0.3s;
-}
-
-li a:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #4469aa;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s;
-}
-
-li a:hover {
-  color: #4469aa;
-}
-
-li a:hover:before {
-  transform: scaleX(1);
-}
-
-
-li {
-  /* Restante das propriedades CSS */
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: bottom;
-}
-
-.container {
-  margin-top: 5%;
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  max-height: 300px;
-  /* Altura máxima para a rolagem vertical */
-}
-
-
-.table-container {
-  overflow-x: auto;
-  /* Adiciona rolagem horizontal quando necessário */
-  max-width: 100%;
-  border-collapse: separate;
-  border-spacing: 15px; /* Define o espaço entre as células */
-}
-
-/* Form preset */
-
-.cont-btn-form-preset {
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  column-gap: 30px;
-
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.block {
-  background-color: #292929;
-  border-radius: 10px 10px 0px 0px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-  color: #f7f7f7;
-  font-size: 25px;
-  animation: fade-in 0.4s ease-out;
-}
-
-
-#campos1 {
-  margin-left: 7%;
-}
-
-#tipo {
-  margin-left: 20%;
-}
-
-#obrigatorio {
-  margin-left: 20%;
-}
-
-#delete {
-  margin-left: 23%;
-}
-=======
 
 .container {
   margin-top: 5%;
@@ -226,176 +27,11 @@ li {
   overflow: hidden; /* Para garantir que nenhum conteúdo exceda o limite da sidebar */
 }
 
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 #form {
   flex-direction: column;
   width: 100%;
   height: auto;
-<<<<<<< HEAD
-  animation: fade-in 0.5s ease;
-  background-color: #ededed;
-  border-radius: 0 0 10px 10px;
-  overflow-y: scroll;
-  max-height: 300px;
-}
-
-#form select {
-  font-size: 20px;
-  border-radius: 10px;
-  margin-top: 10px;
-  width: 40%;
-  border: none;
-  height: auto;
-  text-align: center;
-  margin-right: 300px;
-  font-family: 'sfpro';
-  margin-left: -50px;
-
-}
-
-.container #form input {
-  margin-top: 10px;
-  font-size: 20px;
-  border-radius: 10px;
-  padding: 1px;
-  margin-bottom: 10px;
-  width: 100%;
-  border: none;
-  height: auto;
-  text-align: left;
-  margin-left: 8%;
-}
-
-.create-field {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  gap: 102px;
-}
-
-.btn-delete {
-  border-radius: 9px;
-  outline: none;
-  padding: 10px;
-  cursor: pointer;
-  background-color: #ff0000;
-  color: #ffffff;
-  border: none;
-  font-size: 10px;
-  transition: background-color 0.3s;
-  width: 40px;
-  height: 40px;
-}
-
-
-.btn-delete:hover {
-  background-color: #fc4848;
-}
-
-
-#tituloPrincipal {
-  font-size: 40px;
-  font-weight: bold;
-  color: #3a3a36;
-  text-align: center;
-  margin-top: 30px;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#selectTableName {
-  width: 200px;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ededed;
-  outline: none;
-  margin-top: -2%;
-  position: fixed;
-  font-family: 'sfpro';
-}
-
-#newField {
-  background-color: #4179d2;
-  border: none;
-  color: white;
-  padding: 10px 30px;
-  text-align: center;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-top: 5%;
-  float: right;
-  transition: background-color 0.3s;
-}
-
-#newField:hover {
-  background-color: #6694e2;
-}
-
-
-
-/* Media queries para telas menores */
-@media (max-width: 1512px) {
-
-  #obrigatorio {
-    margin-left: 15%;
-  }
-
-  #delete {
-    margin-left: 20%;
-  }
-
-}
-
-@media (max-width: 1406px) {
-
-  #obrigatorio {
-    margin-left: 10%;
-  }
-
-  #delete {
-    margin-left: 15%;
-  }
-
-}
-
-
-#createField {
-  border: none;
-  color: white;
-  text-align: center;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  position: fixed;
-  right: 15%;
-  bottom: 30px;
-  background-color: #4179d2;
-  padding: 10px 30px;
-  transition: background-color 0.3s;
-}
-
-#createField:hover {
-  background-color: #6694e2;
-}
-
-
-
-
-
-
-/* bar */
-.sidebar {
-
-  width: 200px;
-  background-color: #ffffff;
-=======
   overflow-y: scroll;
   max-height: 500px;
   min-height: 300px;
@@ -430,7 +66,6 @@ li {
 /* bar */
 .sidebar {
   width: 200px;
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   height: 100%;
   position: fixed;
   top: 1;
@@ -438,10 +73,7 @@ li {
   overflow-x: hidden;
   padding-top: 30px;
   animation: slide-in 0.5s ease;
-<<<<<<< HEAD
-=======
   transition: width 0.5s; 
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 @keyframes slide-in {
@@ -459,22 +91,6 @@ li {
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-<<<<<<< HEAD
-}
-
-.sidebar h1 {
-  text-align: center;
-  margin-left: 10%;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.sidebar .modal-button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-=======
   z-index: 10;
   
 }
@@ -492,47 +108,10 @@ li {
 .toggle-button {
   width: 100%;
   padding: 1px;
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
   border: none;
   text-decoration: none;
   font-size: 16px;
   color: #333333;
-<<<<<<< HEAD
-  transition: transform 0.3s ease;
-  background: none;
-  text-align: left;
-  position: relative;
-  /* Adiciona posição relativa aos botões */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 10px;
-
-}
-
-.sidebar .modal-button:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #e9e9e9;
-  /* Define a cor da linha */
-}
-
-.sidebar .modal-button:last-child:after {
-  display: none;
-  /* Remove a linha do último botão */
-}
-
-.sidebar .modal-body>*:not(h3) {
-  margin-left: 0;
-}
-
-.sidebar .modal-button:hover {
-  transform: scale(1.1);
-=======
   background: none;
   text-align: left;
   position: relative;
@@ -564,7 +143,6 @@ li {
 
 .toggle-button i.icon-hidden {
   visibility: hidden;
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 .deletPreset{
@@ -582,30 +160,6 @@ li {
 }
 
 .criarnovatabela {
-<<<<<<< HEAD
-  position: fixed;
-  margin-bottom: 5%;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #4179d2;
-  color: white;
-  font-size: 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease;
-}
-
-
-/* tabela */
-
-.criarnovatabela:hover {
-  background-color: #292929;
-}
-
-=======
   width: 60px;
   height: 49px;
   position: fixed;
@@ -616,7 +170,6 @@ li {
 
 /* tabela */
 
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 
 .container {
   margin-top: 5%;
@@ -624,53 +177,15 @@ li {
   display: flex;
   flex-direction: column;
   width: 70%;
-<<<<<<< HEAD
-  max-height: 600px;
-  /* Altura máxima para a rolagem vertical */
-}
-
-.table-container {
-  border-collapse: separate;
-  /* Separação das bordas das células */
-  border-spacing: 10px;
-  /* Espaçamento zero entre as células */
-  max-height: 500px;
-  /* Altura máxima para a rolagem vertical */
-  overflow: auto;
-  position: relative;
-  /* Posição relativa para posicionamento do pseudo-elemento */
-
-}
-
-.table-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -2px;
-  /* Posição à esquerda da tabela */
-  height: 100%;
-  width: 2px;
-  /* Largura da linha vertical */
-  background-color: #000000;
-  /* Cor da linha vertical */
-}
-
-=======
   max-height: 700px;
   /* Altura máxima para a rolagem vertical */
 }
 
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .table-container table {
   width: 100%;
   margin-bottom: 0;
   color: #000000;
   padding: 3px;
-<<<<<<< HEAD
-}
-
-.table-container th,
-=======
   border-collapse: separate;
   border-spacing: 3px;
 
@@ -684,7 +199,6 @@ li {
   border-radius: 5px;
 }
 
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 .table-container td {
   text-align: center;
   font-size: 15px;
@@ -703,11 +217,7 @@ li {
 
 /* linhas ímpares */
 .table-container tr:nth-child(odd) {
-<<<<<<< HEAD
-  background-color: #efefef;
-=======
   background-color: #e3e3e3;
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 /* linhas pares */
@@ -716,99 +226,6 @@ li {
 }
 
 
-<<<<<<< HEAD
-/* aaa */
-#formPreset {
-  width: 50%;
-  height: 40%;
-  max-width: 400px;
-  border-radius: 20px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #ededed
-}
-
-#formPreset h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-#formPreset div {
-  margin-bottom: 1rem;
-}
-
-#formPreset label {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 0.2rem;
-}
-
-#formPreset input[type="text"] {
-  width: calc(300px - 2rem);
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-}
-
-
-.btn1 input[type="button"] {
-  padding: 9px;
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  border-radius: 150px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.btn2 input[type="submit"] {
-  padding: 10px 20px;
-  background-color: #4179d2;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn2 input[type="submit"]:hover {
-  background-color: #292929;
-}
-
-#h3 {
-  margin-bottom: 10px;
-}
-
-#titulotabela{
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  background-color: #292929;
-  border-radius: 10px 10px 0px 0px;
-  color: #ddd;
-  padding: 1rem;
-
-}
-
-th,
-td {
-  padding: 10px;
-  border-radius: 5px;
-
- 
-
-=======
 td {
   cursor: pointer;
 }
@@ -833,13 +250,10 @@ th {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
 }
 
 
 
-<<<<<<< HEAD
-=======
 .popupConfirmation{
   position: fixed;
   margin-top: 70px;
@@ -909,4 +323,3 @@ th {
  padding: 50px;
  border-radius:10px ;
 }
->>>>>>> e6531ba7ccee4d08b394482305ba6818a33b1292
