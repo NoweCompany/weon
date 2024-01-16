@@ -89,7 +89,7 @@ export default class Fields{
             case 'date':
                 return 'Data'
 
-            case 'int':
+            case 'long':
                 return 'Número Inteiros'
             
             case 'bool':
@@ -259,7 +259,7 @@ export default class Fields{
         typeSelect.appendChild(typeOptionBoolean)
 
         const typeOptionInt = document.createElement("option");
-        typeOptionInt.setAttribute("value", "int");
+        typeOptionInt.setAttribute("value", "long");
         typeOptionInt.innerText = 'Número Inteiros'
         typeSelect.appendChild(typeOptionInt)
 
