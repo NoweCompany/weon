@@ -641,34 +641,32 @@ class Drive {
                 const elements = e.target.elements
 
                 let valuesForm = {}
+                let formIsEmpty = true
                 for(const element of elements){
                     if(!element.id || !element.type) continue
-                        let valueInput = ''
-                        if(element.type !== 'checkbox') {
-                            valueInput = element.value
-                        }else {
-                            valueInput = element.checked
-                        }
+                    if(element.value || element.type === 'checkbox') formIsEmpty = false
+                    let valueInput = ''
+                    
                     switch(element.type){
                         case 'number':
-                            valueInput = Number(valueInput)
+                            valueInput = Number(element.value)
                         break
-
                         case 'checkbox':
-                            valueInput = Boolean(valueInput)
+                            valueInput = Boolean(element.checked)
                             break
-
                         case 'date':
-                            valueInput = new Date(valueInput).toISOString()
+                            valueInput = new Date(element.value)
+                        break
                     }
-
                     valuesForm[element.id] = valueInput
                 }
+
+                if(formIsEmpty) throw new Error("FALHA AO CADASTRAR DOCUMENTO, o documeto deve pelo menos ter um campom com valor.")
+
                 if(!this.isEdit){
                     const response = await this.requests.postApiValues(presetSelected, [valuesForm])
                     this.isEdit = false
                 }else{
-                    
                     const response = await this.requests.updateApiValues(presetSelected, valuesForm, this.valuesPreset._id)
                     this.isEdit = false
                     this.valuesPreset = {}
@@ -679,6 +677,7 @@ class Drive {
                 }
                 return form
             } catch (error) {
+                console.log(error);
                 this.msg(error, false)
             }
         })
