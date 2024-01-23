@@ -173,6 +173,7 @@ class Drive {
             paginationContainer.style.display = visible ? 'block' : 'none';
         }
     }
+
     showItems(items, container) {
         container.classList.remove('hidden');
 
@@ -492,7 +493,6 @@ class Drive {
         return { form, btnCad, thead, tbody, btnDownload, btnUpload, btnDelet, selectFieldSearch, searchBar };
     }
     
-    
     renderFormHtml(presetSelected) {
         this.container.innerHTML = `
         <div class="d-flex justify-content-center align-items-center mb-5">
@@ -526,8 +526,10 @@ class Drive {
         const endIndex = startIndex + this.itemsPerPage;
         valuesCollection = valuesCollection.slice(startIndex, endIndex);
 
+        const fieldOrder = fieldsCollection.fields
+
         this.loadHead(thead, fieldsCollection)
-        this.loadTbody(tbody, valuesCollection)
+        this.loadTbody(tbody, fieldOrder, valuesCollection)
     }
 
     loadHead(thead, fieldsCollection){
@@ -570,9 +572,10 @@ class Drive {
         thead.children[0].insertBefore(selectAllTh, thead.children[0].firstChild);
     }
 
-    loadTbody(tbody, valuesCollection){
+    loadTbody(tbody, fieldOrder, valuesCollection){
         tbody.innerHTML = ''
-        for (const field of valuesCollection) {
+        //Criadno as tr's que contém as td's
+        for (const documentValue of valuesCollection) {
             const tr = document.createElement('tr');
         
             //checkbox
@@ -600,34 +603,44 @@ class Drive {
                 }
 
             })
-            for (const key in field) {
+            //Criando as td's (Contém os valores dos documentos)
+            let keysOfdocumentValue = Object.keys(documentValue);
+
+            for (let i = 0; i < keysOfdocumentValue.length; i++) {
+                const key = keysOfdocumentValue[i];
+                console.log(key);
                 if(key === '_id') {
-                    inputCheckBox.setAttribute('id', field[key])
-                    tr.setAttribute('id', field[key])
+                    inputCheckBox.setAttribute('id', documentValue[key])
+                    tr.setAttribute('id', documentValue[key])
                     continue
                 }
-                const value = field[key];
+                
+                
+                const keyInOrder = fieldOrder[i-1].key
+                const value = documentValue[keyInOrder];
                 const td = document.createElement('td');
 
-                td.addEventListener('click', (e) => {
-                    tr.childNodes.forEach((td, i) => {
-                        const valueTd = td.innerText
-                        const idTd = td.id
-                        this.valuesPreset[idTd] = valueTd
-                    })
-                    this.valuesPreset._id = tr.getAttribute('id')
-                    this.isEdit = true
-                    this.showForm()
-                })
+                td.addEventListener('click', (e) => this.onClickInTdDocument(e, tr, td))
 
                 const textTd = document.createTextNode(value);
                 td.appendChild(textTd);
-                td.setAttribute('id', key)
-                tr.appendChild(td);
+                td.setAttribute('id', keyInOrder)
+                
+                tr.appendChild(td)
                 tbody.appendChild(tr);
             }
-
         }
+    }
+
+    onClickInTdDocument(e, tr, td){
+        tr.childNodes.forEach((td, i) => {
+            const valueTd = td.innerText
+            const idTd = td.id
+            this.valuesPreset[idTd] = valueTd
+        })
+        this.valuesPreset._id = tr.getAttribute('id')
+        this.isEdit = true
+        this.showForm()
     }
 
     async showForm(presetSelected = this.presetSelected) {
@@ -682,7 +695,7 @@ class Drive {
             }
         })
 
-        }
+    }
 
     async addInputsToForm(form, presetSelected = this.presetSelected){
         try {
