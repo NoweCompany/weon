@@ -659,7 +659,6 @@ class Drive {
                     if(!element.id || !element.type) continue
                     if(element.value || element.type === 'checkbox') formIsEmpty = false
                     let valueInput = ''
-                    
                     switch(element.type){
                         case 'number':
                             valueInput = Number(element.value)
@@ -669,7 +668,10 @@ class Drive {
                             break
                         case 'date':
                             valueInput = new Date(element.value)
-                        break
+                            break
+                        default:
+                            valueInput = element.value
+                            break
                     }
                     valuesForm[element.id] = valueInput
                 }
