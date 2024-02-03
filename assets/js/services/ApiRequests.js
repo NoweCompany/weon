@@ -211,15 +211,15 @@ export default class ApiRequests {
         }
     }
 
-    async deleteField(collectionName, fieldName){
+    async deleteField(collectionName, fieldName, originalName){
         try {
             this.loading.addLoading()
             const headers = new Headers({
                 "Content-Type": "application/json",
                 "authorization": `Bearer ${this.token}`
             })
-        
-            const response = await fetch(`${this.apiUrl}/field/${collectionName}/${fieldName}`, {
+            console.log(`${this.apiUrl}/field/${collectionName}/${fieldName}/${originalName}`);
+            const response = await fetch(`${this.apiUrl}/field/${collectionName}/${fieldName}/${originalName}`, {
                 method: 'DELETE',
                 headers: headers,
             })
@@ -355,7 +355,12 @@ export default class ApiRequests {
         }
     }
 
-    async updateApiTemplate(collectionName, fieldName, newFieldName, fieldRequired, newValues) {
+    async updateApiTemplate(
+        collectionName,
+        fieldName,
+        originalName,
+        newValues
+    ) {
         try {
             this.loading.addLoading()
             const headers = new Headers({
@@ -363,14 +368,24 @@ export default class ApiRequests {
                 "authorization": `Bearer ${this.token}`
             })
             
+            const { 
+                newFieldName,
+                fieldRequired,
+                type,
+                description
+            } = newValues
+
             const myBody = JSON.stringify({
                 collectionName,
                 fieldName,
-                newFieldName,
-                fieldRequired,
-                newValues
+                originalName,
+                newValues: {
+                    newFieldName,
+                    fieldRequired,
+                    type,
+                    description
+                }
             })
-            console.log(myBody);
             const response = await fetch(`${this.apiUrl}/field`, {
                 method: 'PUT',
 

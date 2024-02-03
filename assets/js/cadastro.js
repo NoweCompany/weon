@@ -176,7 +176,6 @@ class Drive {
 
     showItems(items, container) {
         container.classList.remove('hidden');
-
         container.innerHTML = '';
 
         if (items.length === 0) {
@@ -204,7 +203,7 @@ class Drive {
             
             const fieldsCollection = await this.requests.getApiFields(this.presetSelected);
             const valuesCollection = await this.requests.getVeluesApi(this.presetSelected);
-    
+            console.log(fieldsCollection);
             if (fieldsCollection.fields.length <= 0) {
                 this.container.innerHTML = `
                     <div class="alert alert-warning w-50 mx-auto role="alert">
@@ -306,6 +305,7 @@ class Drive {
             // Criar os botões de paginação
             this.createPaginationButtons();
         } catch (error) {
+            console.log(error);
             this.container.innerHTML = '';
             return this.msg(error.message || "Ocorreu um erro inesperado");
         }
@@ -313,17 +313,19 @@ class Drive {
 
     async searchBarConfig(selectFieldSearch, searchBar, fieldsCollection, valuesCollection, tbody){
         try {
+            console.log(valuesCollection);
             for(let field of fieldsCollection){
                 if(field.type === 'bool') continue
                 const option = document.createElement('option')
                 option.innerText = field.key
+                option.value = field.originalName
                 selectFieldSearch.appendChild(option)
             }
             
             function filterArr(searchTerm, array){
                 const valuesCollection = array.filter((value) => {
-                    const fieldSelected = String(value[selectFieldSearch.value]).toLowerCase()
-                    if(fieldSelected.includes(searchTerm)){
+                    const valuesOfField = String(value[selectFieldSearch.value]).toLowerCase()
+                    if(valuesOfField.includes(searchTerm)){
                         return value
                     }
                 });
@@ -333,7 +335,8 @@ class Drive {
             searchBar.addEventListener("keyup", (e) => {
                 const searchTerm = e.target.value.trim().toLowerCase()
                 const arrayFiltred = filterArr(searchTerm, valuesCollection)
-                this.loadTbody(tbody, arrayFiltred)
+
+                this.loadTbody(tbody, fieldsCollection, arrayFiltred)
             })
         } catch (error) {
             return this.msg(error.message || "Ocorreu um erro inesperado");
@@ -575,6 +578,7 @@ class Drive {
     loadTbody(tbody, fieldOrder, valuesCollection){
         tbody.innerHTML = ''
         //Criadno as tr's que contém as td's
+        console.log(valuesCollection);
         for (const documentValue of valuesCollection) {
             const tr = document.createElement('tr');
         
@@ -608,15 +612,13 @@ class Drive {
 
             for (let i = 0; i < keysOfdocumentValue.length; i++) {
                 const key = keysOfdocumentValue[i];
-                console.log(key);
                 if(key === '_id') {
                     inputCheckBox.setAttribute('id', documentValue[key])
                     tr.setAttribute('id', documentValue[key])
                     continue
                 }
-                
-                
-                const keyInOrder = fieldOrder[i-1].key
+
+                const keyInOrder = fieldOrder[i-1].originalName
                 const value = documentValue[keyInOrder];
                 const td = document.createElement('td');
 
@@ -635,6 +637,7 @@ class Drive {
     onClickInTdDocument(e, tr, td){
         tr.childNodes.forEach((td, i) => {
             const valueTd = td.innerText
+            console.log(td.id);
             const idTd = td.id
             this.valuesPreset[idTd] = valueTd
         })
@@ -653,6 +656,7 @@ class Drive {
                 e.preventDefault()
                 const elements = e.target.elements
 
+                console.log(this);
                 let valuesForm = {}
                 let formIsEmpty = true
                 for(const element of elements){
@@ -679,6 +683,7 @@ class Drive {
                 if(formIsEmpty) throw new Error("FALHA AO CADASTRAR DOCUMENTO, o documeto deve pelo menos ter um campom com valor.")
 
                 if(!this.isEdit){
+                    console.log(valuesForm);
                     const response = await this.requests.postApiValues(presetSelected, [valuesForm])
                     this.isEdit = false
                 }else{
@@ -708,11 +713,11 @@ class Drive {
             response.fields.reverse().forEach((field, index, array) => {
                 const containerInputLabel = document.createElement('div')
                 containerInputLabel.classList.add('containerInputLabel')
-                const {key, type, required} = field
+                const {key, type, required, currentName, originalName} = field
                 const typeInput = this.transformType(type)
 
                 const input = document.createElement('input')
-                input.setAttribute('id', key)
+                input.setAttribute('id', originalName)
                 
                 if (typeInput !== 'checkbox') {
                     if(required){
@@ -724,10 +729,10 @@ class Drive {
     
                 input.setAttribute('type', typeInput);
 
-                if(type === 'int') input.setAttribute('step', '1')
+                if(type === 'long') input.setAttribute('step', '1')
                 if(type === 'double') input.setAttribute('step', '0.1')
-                if(this.isEdit && this.valuesPreset[key]){
-                    const valuesOfField = this.valuesPreset[key]
+                if(this.isEdit && this.valuesPreset[originalName]){
+                    const valuesOfField = this.valuesPreset[originalName]
                     
                     if(typeInput === 'checkbox'){
                         input.checked = valuesOfField === 'true'
@@ -736,9 +741,10 @@ class Drive {
                     }
                 }
                 const label = document.createElement('label')
-                label.setAttribute('for', key)
+                label.setAttribute('for', originalName)
                 label.innerText = key
 
+                console.log(field);
                 if (required) {
                     const asterisk = document.createElement('span');
                     asterisk.innerText = ' *';
@@ -875,7 +881,7 @@ class Requests{
                 },
                 body: JSON.stringify({ collectionName, values })
             })
-
+            
             const data = await response.json();
             if(response.status !== 200) throw new Error(data.errors)
 

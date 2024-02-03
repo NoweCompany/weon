@@ -61,7 +61,7 @@ export default class Fields{
         `
         await this.setDataColletion()
         const valuesPreset = await this.api.getVeluesApi(this.collectionSelected)
-        console.log(valuesPreset);
+        console.log(this);
         this.dataCollection.forEach(collection => {
             if(collection.collectionName === collectionSelected){
                 this.currentValuesCollection = {collectionName: collection.collectionName, fields: collection.fields}
@@ -69,7 +69,12 @@ export default class Fields{
                     this.createNewField()
                 }else{
                     collection.fields.forEach(field => {    
-                        this.createNewField(field.key, field.type, field.required, valuesPreset)
+                        this.createNewField(field.key,
+                            field.type,
+                            field.required,
+                            valuesPreset,
+                            field.originalName
+                            )
                     })
                 }
             }
@@ -186,9 +191,10 @@ export default class Fields{
         return false
     }
 
-    async createNewField(inputValue = '', type = '', isRequired = false, valuesPreset = []) {
+    async createNewField(inputValue = '', type = '', isRequired = false, valuesPreset = [], originalName = '') {
         const trField = document.createElement("tr");
         trField.className = "create-field";
+        trField.id = originalName
         
         const tdName = document.createElement("td");
         tdName.className = "mb-4";
@@ -203,15 +209,14 @@ export default class Fields{
             nameInput.setAttribute('value', inputValue);
             nameInput.classList.add("form-control");
             nameInput.classList.add("input-fild"); 
-            nameInput.id = 'update';
         } else {
             nameInput.classList.add("form-control");
             nameInput.classList.add("input-fild"); 
-            nameInput.id = 'post';
         }
         
         const typeSelect = document.createElement("select");
-        const existValueField = await this.existValuesInField(inputValue, valuesPreset)
+        console.log(valuesPreset);
+        const existValueField = await this.existValuesInField(originalName, valuesPreset)
         if(inputValue && existValueField) {
             typeSelect.setAttribute('arial-label', 'Disabled')
             typeSelect.disabled = true
@@ -219,7 +224,6 @@ export default class Fields{
         typeSelect.classList.add("form-select");
         typeSelect.classList.add("select1");
         
-  
         const typeOptionSelected = document.createElement("option");
         typeOptionSelected.selected = true
         typeOptionSelected.setAttribute("value", type);
@@ -285,14 +289,19 @@ export default class Fields{
             e.preventDefault()
             if (table.parentNode.elements.length > 4) {
                 try {
+                    console.log(inputValue, existValueField);
                     if(inputValue && existValueField){ 
-                        this.showPopUp(trField, inputValue)
+                        this.showPopUp(trField, originalName)
+
                     }else if(inputValue && !existValueField){
-                        await this.api.deleteField(this.collectionSelected, inputValue)
+                        const fieldName = inputValue
+                        await this.api.deleteField(this.collectionSelected, fieldName, originalName)
                         trField?.remove();
                         this.messaging.msg("Campo excluido com sucesso.", true)
+
                     }else{
                         return trField.remove()
+
                     }
                 } catch (error) {
                     console.log(error);
@@ -321,8 +330,9 @@ export default class Fields{
         table.appendChild(tbody)
     }
 
-    showPopUp(trField, fieldName){
+    showPopUp(trField, originalName){
         const containerModal = document.createElement('div')
+        const fieldName = originalName.split("_")[0]
         containerModal.innerHTML = `
             <div class="popupConfirmation alert alert-secondary alert-dismissible position-fixed" role="alert">
                 <h4>Tem certeza que deseja <strong>excluir</strong> o campo <strong>"${fieldName}"</strong></h4>
@@ -349,7 +359,7 @@ export default class Fields{
                 const textToConfirmation = String(document.querySelector('#inputPopUpFields').value)
 
                 if(textToConfirmation === fieldName){
-                    await this.api.deleteField(this.collectionSelected, fieldName)
+                    await this.api.deleteField(this.collectionSelected, fieldName, originalName)
                     this.messaging.msg("Campo excluido com sucesso.", true)
                     containerModal.remove()
                     trField.remove()
@@ -394,13 +404,14 @@ export default class Fields{
                 if (validationCheckbox.checked && inputValue.trim() === '') {
                     return this.messaging.msg(`O campo de nome ${inputValue} não pode estar vazio quando a validação está marcada!`);
                 }
-
+                const fieldName = this.currentValuesCollection?.fields[i]?.key
                 dados[i] = {
-                    name: inputValue,
+                    fieldName: fieldName,
+                    originalName: elementOfRowForm.id,
                     type: valueSelectOfTypes,
-                    method: method,
-                    fieldName: this.currentValuesCollection?.fields[i]?.key,
                     fieldRequired: validationCheckbox.checked,
+                    newFieldName: inputValue,
+                    method: elementOfRowForm.id ? 'PUT' : 'POST'
                 }
             } 
 
@@ -408,17 +419,27 @@ export default class Fields{
 
             for (let i in dados) {
                 const field = dados[i]
-                const {name, type, fieldName, fieldRequired, method} = field
+                console.log(field);
+                const { fieldName, method, newFieldName, originalName, type, fieldRequired} = field
                 let response = {}
-                if(method ===  'post'){
-                    response = await this.api.postApiTemplate(name, type, collectionName, fieldRequired)
-                }else if(method ===  'update'){
-                    const newValues = {type: type, description: ''}
+                if(method === 'POST'){
+                    response = await this.api.postApiTemplate(
+                        newFieldName,
+                        type, 
+                        collectionName, 
+                        fieldRequired
+                    )
+                }else if(method === 'PUT'){
+                    const newValues = { 
+                        newFieldName: newFieldName,
+                        fieldRequired: fieldRequired,
+                        type: type,
+                        description: '',
+                    }
                     response = await this.api.updateApiTemplate(
                         collectionName,
                         fieldName,
-                        name,
-                        fieldRequired,
+                        originalName,
                         newValues
                     )
                 }else{  

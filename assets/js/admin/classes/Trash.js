@@ -13,10 +13,10 @@ export default class Trash {
             const navtitle = document.createElement('div');
             navtitle.innerHTML= `<div class="d-flex justify-content-center align-items-center mb-5">
             <div class="border border-horizontal p-5 d-flex justify-content-between align-items-center">
-              <div class="titulo">
+            <div class="titulo">
                 <h1 id="tituloPrincipal" class="display-6">Lixeira</h1>
             </div>`
-              
+            
             this.container.appendChild(navtitle);
 
             trashItems.forEach(collection => {
@@ -40,11 +40,12 @@ export default class Trash {
                     const labelDocument = document.createElement('label');
                     labelDocument.className = 'dropdown-item';
                     labelDocument.type = 'button';
-                    const valueLabel = Object.entries(documents).slice(1).map(entry => {
-                        const key = `<strong>${entry[0]}</strong>`
-                        const value = `<p>${entry[1]}</p>`
+                    const valueLabel = Object.entries(documents).slice(1).map(entry => { 
+                        //document keys -> NameOfField_randonId
+                        const key = (entry[0]).split('_')[0]
+                        const value = entry[1]
 
-                        return key + value
+                        return `<strong>${key}</strong> <p>${value}</p>`
                     }).join(' ');
                     labelDocument.innerHTML = valueLabel
                     
