@@ -1,0 +1,131 @@
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.mainform {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    border: solid 1px #e6e6e6;
+    margin: 1rem auto;
+    height: 25rem;
+}
+
+.formTitle {
+    font-family: extrabold;
+    font-size: 2rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    justify-content: center;
+    align-items: start;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+
+}
+
+.input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 20rem;
+    border: solid 1px #e6e6e6;
+}
+
+.button {
+    background-color: #000;
+    color: white;
+    border: solid 1px #010101;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.button:hover {
+    background-color: #000000e8;
+    color: white;
+}
+
+
+.img {
+    width: 20%;
+    height: auto;
+    margin: 2rem auto;
+}
+
+.icon {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 80px;
+    border-radius: 5px;
+    height: auto;
+
+}
+
+.background {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to left, #f1f1f1 50%, #356abe 50%);
+}
+
+@media (max-width:600px) {
+    .background {
+        background: none;
+        background-color: #356abe;
+    }
+
+    .mainContainer {
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .img {
+        display: none;
+    }
+
+    .mainform {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        height: auto;
+    }
+    
+    .input {
+        padding: 10px;
+        border-radius: 5px;
+        width: 15rem;
+        border: solid 1px #e6e6e6;
+    }
+
+    .icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        border-radius: 5px;
+        height: auto;
+    
+    }
+}

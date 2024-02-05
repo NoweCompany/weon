@@ -1,0 +1,27 @@
+@font-face {
+  font-family: medium;
+  src: url(../public/font/OverusedGrotesk-Medium.otf);
+}
+
+@font-face {
+  font-family: bold;
+  src: url(../public/font/OverusedGrotesk-SemiBold.otf);
+}
+
+@font-face {
+  font-family: extrabold;
+  src: url(../public/font/OverusedGrotesk-ExtraBold.otf);
+}
+
+*{
+  font-family: medium;
+
+}
+
+body{
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+}
