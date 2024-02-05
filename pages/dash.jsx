@@ -1,9 +1,9 @@
 import NavBar from "../components/Navbar"
-export default function docs(){
+export default function dash(){
     return(
         <>
         <NavBar />
-        <h1>docs</h1>
+        <h1>dash</h1>
         </>
     )
 }
