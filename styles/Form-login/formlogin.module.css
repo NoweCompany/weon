@@ -47,22 +47,6 @@
     border: solid 1px #e6e6e6;
 }
 
-.button {
-    background-color: #000;
-    color: white;
-    border: solid 1px #010101;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all .1s ease-in-out;
-}
-
-.button:hover {
-    background-color: #000000e8;
-    color: white;
-}
-
-
 .img {
     width: 20%;
     height: auto;
@@ -86,13 +70,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to left, #f1f1f1 50%, #356abe 50%);
+    background: linear-gradient(to left, #f1f1f1 50%, #0063da 50%);
 }
 
 @media (max-width:600px) {
     .background {
         background: none;
-        background-color: #356abe;
+        background-color: #0063da;
     }
 
     .mainContainer {

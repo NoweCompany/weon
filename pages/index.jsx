@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import sty from "../styles/Form-login/formlogin.module.css"
 export default function formLogin() {
     return (
@@ -14,7 +15,8 @@ export default function formLogin() {
                         <label className={sty.label} htmlFor="username">Senha</label>
                         <input className={sty.input} type="text" placeholder="Senha" name="password" />
                     </div>
-                    <button className={sty.button}> acessar </button>
+                    <Button>Acessar</Button>
+
                 </form>
 
 
