@@ -7,19 +7,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script
-          type="module"
-          src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `if (!('noModule' in HTMLScriptElement.prototype)) {
-                        const script = document.createElement('script');
-                        script.src = 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js';
-                        document.body.appendChild(script);
-                      }`,
-          }}
-        />
       </body>
     </Html>
   );

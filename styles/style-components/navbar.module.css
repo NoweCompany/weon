@@ -1,14 +1,15 @@
 .navBody {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #0063da;
     padding: 15px;
     gap: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navImg {
-    width: 5%;
+    max-width: 5%;
+    height: auto; 
     position: absolute;
     left: 0;
     margin-left: 2rem;
@@ -18,7 +19,7 @@
 
 .navItenContainer{
     display: flex;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .navItem {
@@ -42,6 +43,10 @@
     margin-right: 3rem;
     font-family: bold;
     transition: all .1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
 .navUser:hover {
@@ -58,10 +63,10 @@
 
 .menuIcon{
     display: none;
-    color: white;
+    color: rgb(0, 0, 0);
+    margin-top: -10px;
 }
 /* mobile */
-
 
 @media screen and (max-width: 768px) {
     .drawer {
@@ -87,11 +92,11 @@
 
     .drawerItem {
         font-family: bold;
-        color: #ffffff;
+        color: #000000;
         text-decoration: none;
         padding: 10px;
         transition: color 0.1s ease-in-out;
-        display: block;
+        display: grid;
     }
 
     .drawerItem:hover {
@@ -103,11 +108,12 @@
     }
 
     .navImg {
-        width: 20%;
-        position: absolute;
-        left: 0;
+        max-width: 60px;
         margin-left: 2rem;
+        margin-top: -5px;
+        display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .navUser {
@@ -117,10 +123,18 @@
         display: block;
         position: absolute;
         right: 0;
-        margin-right: 3rem;
+        margin-right: 1rem;
+        z-index: 3;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        display: flex;
     }
 
     .navBody {
         padding: 25px;
+        display: flex;
     }
+
+   
 }
