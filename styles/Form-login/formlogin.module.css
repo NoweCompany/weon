@@ -53,15 +53,6 @@
     margin: 2rem auto;
 }
 
-.icon {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    width: 80px;
-    border-radius: 5px;
-    height: auto;
-
-}
 
 .background {
     margin: 0;
