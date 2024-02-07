@@ -1,0 +1,39 @@
+.card{
+    width: 40%;
+    margin: 2rem auto;
+    height: 50vh;
+
+}
+.title{
+    font-size: 2rem;
+    font-family: extrabold;
+}
+
+.cardHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtitle{
+    font-size: 1rem;
+    font-family: extrabold;
+}
+
+.tooltipArea{
+    display: flex;
+}
+
+.icon{
+    width: 20px;
+    height: auto;
+    margin: 0;
+    color: rgb(73, 96, 196);
+}
+
+.info{
+    color: #a3a3a3;
+}
+.cardContent{
+    margin: 1rem auto;
+}

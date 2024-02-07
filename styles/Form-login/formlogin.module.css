@@ -64,6 +64,34 @@
     background: linear-gradient(to left, #f1f1f1 50%, #0063da 50%);
 }
 
+@media (max-width:1200px){
+    .background {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to left, #0063da 50%, #0063da 50%);
+    }
+
+    .img {
+        width: 20%;
+        height: auto;
+        margin: 2rem auto;
+        display: none;
+    }
+
+    .mainform {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        height: auto;
+    }
+    
+    
+}
+
 @media (max-width:600px) {
     .background {
         background: none;

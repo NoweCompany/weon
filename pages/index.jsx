@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import sty from "../styles/Form-login/formlogin.module.css"
+import IconeNowe from "../components/IconeNowe";
 export default function formLogin() {
     return (
         <div className={sty.background}>
@@ -21,7 +22,7 @@ export default function formLogin() {
 
 
                 <img className={sty.img} src="/img/black.png" alt="" />
-                <img className={sty.icon} src="/img/blackIco.png" alt="" />
+                <IconeNowe />
             </div>
         </div>
     )
