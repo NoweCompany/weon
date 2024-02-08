@@ -19,7 +19,7 @@ export default function Nav() {
     const isActive = (pathname) => router.pathname === pathname ? sty.activeLink : '';
 
     return (
-        <>
+        <>    
             <nav className={`${sty.navBody} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.navItems}>
                     <Link className={sty.navImg} href="/home"> <img src="/Img/white.png" alt="Logo" /></Link>
@@ -59,6 +59,13 @@ export default function Nav() {
            <nav className={`${sty.drawer} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.drawerItem}>
                     <div className={sty.drawerItem}>
+
+                    <div className={sty.drawerItem}>
+                            <Link href="/home">
+                                <div className={isActive('/home')}>Home</div>
+                            </Link>
+                        </div>
+
                         <div className={sty.drawerItem}>
                             <Link href="/docs">
                                 <div className={isActive('/docs')}>docs</div>

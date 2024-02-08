@@ -5,6 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .navImg {

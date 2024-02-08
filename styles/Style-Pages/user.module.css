@@ -1,9 +1,11 @@
 .card{
     width: 40%;
-    margin: 2rem auto;
-    height: 50vh;
+    margin: 3rem auto;
+    margin-top: 5rem;
+    height: auto;
 
 }
+
 .title{
     font-size: 2rem;
     font-family: extrabold;
@@ -22,6 +24,7 @@
 
 .tooltipArea{
     display: flex;
+    gap: .5rem;
 }
 
 .icon{
@@ -36,4 +39,24 @@
 }
 .cardContent{
     margin: 1rem auto;
+}
+
+.btnLogout {
+    margin-top: 5rem;
+}
+
+.option{
+    font-family: bold;
+    margin-left: .5rem;
+}
+
+@media (max-width: 600px){
+    .card{
+        width: 90%;
+        margin: 1rem auto;
+        margin-top: 5rem;
+        height: auto;
+    }
+    
+    
 }
