@@ -6,10 +6,41 @@ import sty from "../styles/style-components/floatnav.module.css";
 export default function FloatNav({ title, buttonContent, placeholderSelect, labelSelect, showSelect }) {
     return (
         <>
-            <Card className={sty.card}>
-                <CardHeader className={sty.cardHeader}>
-                    <CardTitle className={sty.cardTitle}>{title}</CardTitle>
-                </CardHeader>
+            <div className={sty.containerDesktop}>
+                <Card className={sty.card}>
+                    <CardHeader className={sty.cardHeader}>
+                        <CardTitle className={sty.cardTitle}>{title}</CardTitle>
+                    </CardHeader>
+                    <div className={sty.buttonContainer}>
+                        {buttonContent.map((content, index) => (
+                            <Button key={index}>{content}</Button>
+                        ))}
+                        {showSelect && (
+                            <Select>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder={placeholderSelect} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel> {labelSelect} </SelectLabel>
+                                        <SelectItem value="download"> Baixar</SelectItem>
+                                        <SelectItem value="upload"> Upload</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        )}
+                    </div>
+                </Card>
+            </div>
+
+            <div className={sty.containerMobile}>
+                <Card className={sty.card}>
+                    <CardHeader className={sty.cardHeader}>
+                        <CardTitle className={sty.cardTitle}>{title}</CardTitle>
+                    </CardHeader>
+                </Card>
+           
+            <Card className={sty.cardButtonMobile}>
                 <div className={sty.buttonContainer}>
                     {buttonContent.map((content, index) => (
                         <Button key={index}>{content}</Button>
@@ -17,7 +48,7 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                     {showSelect && (
                         <Select>
                             <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder={placeholderSelect}/>
+                                <SelectValue placeholder={placeholderSelect} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -29,7 +60,8 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                         </Select>
                     )}
                 </div>
-            </Card>
+            </Card> 
+            </div>
         </>
     );
 }

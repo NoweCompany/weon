@@ -8,7 +8,7 @@ export default function home(){
         <NavBar />
         <div className={sty.containerCenter}>
             <img className={sty.img} src="./img/black.png" alt="" />
-            <h1 className={sty.imgDescription}> Bem-vindo a weon</h1>
+            <h1 className={sty.imgDescription}> gerencie seus documentos com facilidade</h1>
         </div>
 
 

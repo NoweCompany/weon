@@ -1,12 +1,11 @@
 import NavBar from "../components/Navbar"
 import FloatNav from "../components/FloatNav"
 export default function docs(){
-    const buttonContent = ["inserir"];
+    const buttonContent = ["Adicionar", "Deletar"];
     return(
         <>
-        <FloatNav title="docs" buttonContent={buttonContent} placeholderSelect="Exportação" labelSelect="Execel" showSelect={false}/>
+        <FloatNav title="docs" buttonContent={buttonContent} placeholderSelect="Exportação" labelSelect="Execel" showSelect={true}/>
         <NavBar />
-        <h1>docs</h1>
         </>
     )
 }

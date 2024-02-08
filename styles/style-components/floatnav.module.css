@@ -25,3 +25,42 @@
     gap: .5rem;
     margin-right: 3rem;
 }
+
+.containerMobile{
+    display: none;
+    margin: 0 auto;
+}
+
+@media (max-width:600px){
+  .containerMobile{
+    display: flex;
+  }
+
+  .containerDesktop{
+    display: none;
+  }
+
+  .card {
+    width: 90%;
+    margin-top: 5rem;
+    height: auto;
+    padding: 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardButtonMobile{
+    width: 90%;
+    height: auto;
+    padding: .5rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -80px;
+
+}
+  
+}
