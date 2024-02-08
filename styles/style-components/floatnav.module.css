@@ -1,0 +1,23 @@
+.card {
+    width: 60%;
+    margin: 6rem auto;
+    height: auto;
+    padding: .5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardTitle {
+    font-size: 3rem;
+}
+
+.cardHeader {
+    display: flex;
+    flex-grow: 1; /* Adiciona crescimento flexível para ocupar espaço restante */
+}
+
+.buttonContainer {
+    display: flex;
+}

@@ -3,7 +3,6 @@
     margin: 3rem auto;
     margin-top: 5rem;
     height: auto;
-
 }
 
 .title{
@@ -42,12 +41,16 @@
 }
 
 .btnLogout {
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 .option{
     font-family: bold;
     margin-left: .5rem;
+}
+
+.margin{
+    padding: 2rem;
 }
 
 @media (max-width: 600px){

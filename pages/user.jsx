@@ -95,19 +95,25 @@ export default function CardWithForm() {
           <RadioGroup defaultValue="option-one">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="option-one" id="option-one" />
-              <Label className={sty.option} htmlFor="option-one">Night</Label>
+              <Label className={sty.option} htmlFor="option-one">Light</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="option-two" id="option-two" />
-              <Label className={sty.option} htmlFor="option-two">Red</Label>
+              <Label className={sty.option} htmlFor="option-two">Night</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="option-three" id="option-two" />
+              <Label className={sty.option} htmlFor="option-two">Red</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="option-four" id="option-two" />
               <Label className={sty.option} htmlFor="option-two">Blue</Label>
             </div>
           </RadioGroup>
         </CardContent>
       </Card>
+
+      <div className={sty.margin}></div>
     </>
   )
 }
