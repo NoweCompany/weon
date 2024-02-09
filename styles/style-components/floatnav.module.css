@@ -33,7 +33,7 @@
 
 @media (max-width:600px){
   .containerMobile{
-    display: flex;
+    display: block;
   }
 
   .containerDesktop{

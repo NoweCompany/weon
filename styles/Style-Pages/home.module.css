@@ -35,5 +35,10 @@
         width: 50%;
         height: auto;
     }
+
+    .imgDescription{
+        font-size: 1rem;
+
+    }
     
 }

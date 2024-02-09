@@ -1,9 +1,14 @@
 import NavBar from "../components/Navbar"
+import Sidebar from "../components/Sidebar"
 export default function admin(){
     return(
         <>
-        <NavBar />
-        <h1>admin</h1>
+         <NavBar /> 
+
+        <Sidebar 
+        
+        />
+
         </>
     )
 }
