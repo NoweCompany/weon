@@ -2,6 +2,7 @@ import sty from "../styles/style-components/sidebar.module.css";
 import { Users, FileSliders, History, Trash, BarChart4 } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
+
 import {
     Drawer,
     DrawerClose,
@@ -11,7 +12,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-  } from "@/components/ui/drawer"
+ } from "@/components/ui/drawer"
 
 export default function Sidebar({ title }) {
     return (
