@@ -1,12 +1,19 @@
 import sty from "../styles/style-components/sidebar.module.css";
-import { AlertTriangle, ActivitySquare, Users, FileSliders, History, Trash, BarChart4 } from 'lucide-react';
+import { Users, FileSliders, History, Trash, BarChart4 } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { useState } from "react";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
 
 export default function Sidebar({ title }) {
-    const [position, setPosition] = useState("bottom")
     return (
         <>
             <div className={sty.desktopSidebar}>
@@ -62,22 +69,34 @@ export default function Sidebar({ title }) {
             <div className={sty.mobileSidebar}>
                 <div className={sty.mobileContentSidebar}>
                     <div className={sty.mobileSidebarItems}>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button className={sty.mobileButtonAbas}>Abas</Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>Admin</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-                                    <DropdownMenuRadioItem value="Usuários">Usuários</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="Predefinições">Predefinições</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="Historico">Historico</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="Lixeira">Lixeira</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="Dashboard">Dashboard</DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                    <Drawer>
+      <DrawerTrigger asChild>
+        <Button className={sty.mobileButtonAbas}>abas</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader>
+            <DrawerDescription>Escolha onde quiser ir</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <div className="flex items-center justify-center space-x-2">
+                <div className={sty.mobileDrawerContent}>
+                <Button className={sty.mobileButtonDrawerContent} variant="outline"> Usuário</Button>
+                <Button className={sty.mobileButtonDrawerContent} variant="outline"> Predefinições</Button>
+                <Button className={sty.mobileButtonDrawerContent} variant="outline"> Historico</Button>
+                <Button className={sty.mobileButtonDrawerContent} variant="outline"> Lixeira</Button>
+                <Button className={sty.mobileButtonDrawerContent} variant="outline"> Dashboard</Button>
+                </div>
+            </div>
+          </div>
+          <DrawerFooter>
+            <DrawerClose asChild>
+              <Button variant="outline">Fechar</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>
+      </DrawerContent>
+    </Drawer>
                     </div>
                 </div>
             </div>

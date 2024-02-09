@@ -68,4 +68,12 @@
         width: 250px;
       }
       
+      .mobileDrawerContent{
+        display: grid;
+        gap: .4rem;
+      }
+
+      .mobileButtonDrawerContent{
+        width: 250px;
+      }
 }
