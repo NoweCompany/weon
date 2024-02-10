@@ -10,7 +10,7 @@
 }
 
 @layer base {
-  :root {
+  :dark {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -33,7 +33,7 @@
     --radius: 0.3rem;
   }
 
-  .dark {
+  .root {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -83,5 +83,4 @@ body{
   height: 100vh;
 
 }
-
 

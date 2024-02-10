@@ -78,7 +78,7 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                                         </div>
                                         <DrawerFooter>
                                             <DrawerClose asChild>
-                                                <Button variant="outline">Fechar</Button>
+                                                <Button>Fechar</Button>
                                             </DrawerClose>
                                         </DrawerFooter>
                                     </div>

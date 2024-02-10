@@ -2,13 +2,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import sty from '../styles/style-components/navbar.module.css';
-
 import { User } from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
 import { AlignJustify } from 'lucide-react';
 
 
-export default function Nav() {
+export default function Nav({ adminPages   }) {
     const [showDrawer, setShowDrawer] = useState(false);
     const router = useRouter()
 
@@ -19,26 +18,25 @@ export default function Nav() {
     const isActive = (pathname) => router.pathname === pathname ? sty.activeLink : '';
 
     return (
-        <>    
+        <>
             <nav className={`${sty.navBody} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.navItems}>
                     <Link className={sty.navImg} href="/home"> <img src="/Img/white.png" alt="Logo" /></Link>
                     <div className={sty.navItenContainer}>
                         <div className={sty.navItem}>
                             <Link href="/docs">
-                                <div className={isActive('/docs')}>docs</div>
+                                <div className={isActive('/docs')}>Dados</div>
                             </Link>
                         </div>
 
                         <div className={sty.navItem}>
                             <Link href="/dash">
-                                <div className={isActive('/dash')}>dash</div>
+                                <div className={isActive('/dash')}>Dashboard</div>
                             </Link>
                         </div>
-
                         <div className={sty.navItem}>
                             <Link href="/admin">
-                                <div className={isActive('/admin')}>admin</div>
+                                <div className={adminPages ? sty.activeLink : ''}>Gestão</div>
                             </Link>
                         </div>
 
@@ -49,18 +47,18 @@ export default function Nav() {
                         </div>
 
                         <div className={sty.menuIcon} onClick={toggleDrawer}>
-                                <div><AlignJustify /></div>
-                            </div>
+                            <div><AlignJustify /></div>
+                        </div>
                     </div>
                 </div>
             </nav>
 
 
-           <nav className={`${sty.drawer} ${showDrawer ? sty.open : ''}`}>
+            <nav className={`${sty.drawer} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.drawerItem}>
                     <div className={sty.drawerItem}>
 
-                    <div className={sty.drawerItem}>
+                        <div className={sty.drawerItem}>
                             <Link href="/home">
                                 <div className={isActive('/home')}>Home</div>
                             </Link>
@@ -68,19 +66,19 @@ export default function Nav() {
 
                         <div className={sty.drawerItem}>
                             <Link href="/docs">
-                                <div className={isActive('/docs')}>docs</div>
+                                <div className={isActive('/docs')}>Dados</div>
                             </Link>
                         </div>
 
                         <div className={sty.drawerItem}>
                             <Link href="/dash">
-                                <div className={isActive('/dash')}>dash</div>
+                                <div className={isActive('/dash')}>Dashboard</div>
                             </Link>
                         </div>
 
                         <div className={sty.drawerItem}>
-                            <Link href="/admin">
-                                <div className={isActive('/admin')}>admin</div>
+                            <Link href="/admin" as="/admin/tables">
+                                <div className={adminPages ? sty.activeLink: ''}>Gestão</div>
                             </Link>
                         </div>
 
@@ -91,12 +89,12 @@ export default function Nav() {
                         </div>
 
 
-                        </div>
-                            <div className={sty.menuIcon} onClick={toggleDrawer}>
-                                <div> <ArrowLeft /> </div>
-                            </div>
                     </div>
-               
+                    <div className={sty.menuIcon} onClick={toggleDrawer}>
+                        <div> <ArrowLeft /> </div>
+                    </div>
+                </div>
+
             </nav>
 
         </>

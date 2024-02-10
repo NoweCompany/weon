@@ -3,11 +3,8 @@ import Sidebar from "../components/Sidebar"
 export default function admin(){
     return(
         <>
-         <NavBar /> 
-
-        <Sidebar 
-        
-        />
+         <NavBar adminPages={true} /> 
+        <Sidebar />
 
         </>
     )
