@@ -1,17 +1,8 @@
 import sty from "../styles/style-components/sidebar.module.css";
 import { Users, FileSliders, History, Trash, BarChart4 } from 'lucide-react';
 import { Button } from "@/components/ui/button"
-import { Tooltip } from "@nextui-org/react";
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTrigger,
-} from "@/components/ui/drawer"
-
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer"
+import { Separator } from "@/components/ui/Separator"
 import Link from "next/link";
 
 export default function Sidebar({ routeUsers, routeTable, routeHistory, routeTrash, routeDash, routeLog }) {
@@ -19,54 +10,56 @@ export default function Sidebar({ routeUsers, routeTable, routeHistory, routeTra
         <>
             <div className={sty.desktopSidebar}>
                 <div className={sty.sidebar}>
-                    <div className={sty.sidebarItems}>
-
-                        <Tooltip className={sty.toolTip} content="Tabelas" placement="right">
-                            <Link href="/admin/tables">
-                                <div className={sty.icon}> 
-                                <FileSliders className={routeTable ? sty.onRoute : ''} />
-                                </div>
-                            </Link>
-                        </Tooltip>
-
-
-                        <Tooltip className={sty.toolTip} content="Dashboard" placement="right">
-                            <Link href="/admin/dash">
-                            <div className={sty.icon}> 
-                                <BarChart4 className={routeDash ? sty.onRoute : ''} />
-                                </div>
-                            </Link>
-                        </Tooltip>
-
-
-                        <Tooltip className={sty.toolTip} content="Histórico" placement="right">
-                            <Link href="/admin/history">
-                            <div className={sty.icon}> 
-                                <History className={routeHistory ? sty.onRoute : ''} />
-                                </div>
-                            </Link>
-                        </Tooltip>
-
-                        <Tooltip className={sty.toolTip} content="Lixeira" placement="right">
-                            <Link href="/admin/trash">
-                            <div className={sty.icon}> 
-                                <Trash className={routeTrash ? sty.onRoute : ''} />
-                                </div>
-                            </Link>
-                        </Tooltip>
-                        
-                        <Tooltip className={sty.toolTip} content="Usuários" placement="right">
-                            <Link href="/admin/users">
-                            <div className={sty.icon}> 
-                                <Users className={routeUsers ? sty.onRoute : ''} />
-                                </div>
-                            </Link>
-                        </Tooltip>
-
+                    <div className={sty.sidebarHeader}>
+                        <h1 className={sty.sidebarHeaderContent}> Gestão </h1>
                     </div>
+                    <div className={sty.sidebarItems}>
+                        <Link href="/admin/tables">
+                            <div className={sty.iconContainer}>
+                                <FileSliders className={`${sty.customIcon} ${routeTable ? sty.onRoute : ''}`} />
+                                <h1 className={routeTable ? sty.onRoute : ''}> Tabelas </h1>
+                            </div>
+                        </Link>
+                        <Link href="/admin/dash">
+                            <div className={sty.iconContainer}>
+                                <BarChart4 className={`${sty.customIcon} ${routeDash ? sty.onRoute : ''}`} />
+                                <h1 className={routeDash ? sty.onRoute : ''}> Dashboard </h1>
+                            </div>
+                        </Link>
+                        <Separator />
+                    </div>
+
+                    <div className={sty.sidebarHeaderMid}>
+                        <h1 className={sty.sidebarHeaderContent}> Controle </h1>
+                    </div>
+
+                    <div className={sty.sidebarItems}>
+                    <Link href="/admin/history">
+                        <div className={sty.iconContainer}>
+                            <History className={`${sty.customIcon} ${routeHistory ? sty.onRoute : ''}`} />
+                            <h1 className={routeHistory ? sty.onRoute : ''}> Histórico </h1>
+                        </div>
+                    </Link>
+
+                    <Link href="/admin/trash">
+                        <div className={sty.iconContainer}>
+                            <Trash className={`${sty.customIcon} ${routeTrash ? sty.onRoute : ''}`} />
+                            <h1 className={routeTrash ? sty.onRoute : ''}> Lixeira </h1>
+                        </div>
+                    </Link>
+                  
+                   
+                    <Link href="/admin/users">
+                        <div className={sty.iconContainer}>
+                            <Users className={`${sty.customIcon} ${routeUsers ? sty.onRoute : ''}`} />
+                            <h1 className={routeUsers ? sty.onRoute : ''}> Usuários </h1>
+                        </div>
+                    </Link>
+                     </div>
                 </div>
             </div>
 
+            <Separator />
             <div className={sty.mobileSidebar}>
                 <div className={sty.mobileContentSidebar}>
                     <div className={sty.mobileSidebarItems}>
