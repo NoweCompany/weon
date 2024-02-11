@@ -1,8 +1,8 @@
 .sidebar {
-    width: 5rem; 
+    width: 3.5em; 
     background-color: #ffffff; 
     color: #5b5b5b; 
-    padding: 20px;
+    padding: 20px;  
     height: 100vh;
   }
   
@@ -35,6 +35,16 @@
 
 .onRoute{
   color: #0063da;
+}
+
+.icon{
+  padding:10px;
+  border-radius: 5px;
+  transition: all .1s ease-in-out;
+}
+
+.icon:hover{
+  background-color: #f3f3f3;
 }
 
 .toolTip{

@@ -9,7 +9,6 @@ import {
     DrawerDescription,
     DrawerFooter,
     DrawerHeader,
-    DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
 
@@ -24,35 +23,43 @@ export default function Sidebar({ routeUsers, routeTable, routeHistory, routeTra
 
                         <Tooltip className={sty.toolTip} content="Tabelas" placement="right">
                             <Link href="/admin/tables">
+                                <div className={sty.icon}> 
                                 <FileSliders className={routeTable ? sty.onRoute : ''} />
+                                </div>
                             </Link>
                         </Tooltip>
 
 
                         <Tooltip className={sty.toolTip} content="Dashboard" placement="right">
                             <Link href="/admin/dash">
+                            <div className={sty.icon}> 
                                 <BarChart4 className={routeDash ? sty.onRoute : ''} />
+                                </div>
                             </Link>
                         </Tooltip>
 
 
                         <Tooltip className={sty.toolTip} content="Histórico" placement="right">
                             <Link href="/admin/history">
+                            <div className={sty.icon}> 
                                 <History className={routeHistory ? sty.onRoute : ''} />
+                                </div>
                             </Link>
                         </Tooltip>
-
 
                         <Tooltip className={sty.toolTip} content="Lixeira" placement="right">
                             <Link href="/admin/trash">
+                            <div className={sty.icon}> 
                                 <Trash className={routeTrash ? sty.onRoute : ''} />
+                                </div>
                             </Link>
                         </Tooltip>
-
                         
                         <Tooltip className={sty.toolTip} content="Usuários" placement="right">
                             <Link href="/admin/users">
+                            <div className={sty.icon}> 
                                 <Users className={routeUsers ? sty.onRoute : ''} />
+                                </div>
                             </Link>
                         </Tooltip>
 
