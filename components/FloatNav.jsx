@@ -7,6 +7,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dr
 export default function FloatNav({ title, buttonContent, placeholderSelect, labelSelect, showSelect }) {
     return (
         <>
+        {/* desktop  */}
             <div className={sty.containerDesktop}>
                 <Card className={sty.card}>
                     <CardHeader className={sty.cardHeader}>
@@ -41,6 +42,7 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                     </CardHeader>
                 </Card>
 
+{/*  mobile */}
                 <div className={sty.mobileSidebar}>
                     <div className={sty.mobileContentSidebar}>
                         <div className={sty.mobileSidebarItems}>
