@@ -1,12 +1,15 @@
 .card {
-    width: 60%;
-    margin: 6rem auto;
-    height: auto;
-    padding: .5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  width: 60%;
+  height: auto;
+  padding: .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6rem;
 }
 
 .cardTitle {

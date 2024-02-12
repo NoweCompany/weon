@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import sty from "../styles/style-components/floatnav.module.css";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger, } from "@/components/ui/drawer"
 
-export default function FloatNav({ title, buttonContent, placeholderSelect, labelSelect, showSelect }) {
+export default function FloatNav({ title, buttonContent, placeholderSelect, labelSelect, showSelect, onButtonClick }) {
     return (
         <>
         {/* desktop  */}
@@ -15,7 +15,7 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                     </CardHeader>
                     <div className={sty.buttonContainer}>
                         {buttonContent.map((content, index) => (
-                            <Button key={index}>{content}</Button>
+                            <Button key={index} onClick={onButtonClick}> {content}</Button>
                         ))}
                         {showSelect && (
                             <Select>
@@ -59,7 +59,7 @@ export default function FloatNav({ title, buttonContent, placeholderSelect, labe
                                             <div className="flex items-center justify-center space-x-2">
                                                 <div className={sty.mobileDrawerContent}>
                                                     {buttonContent.map((content, index) => (
-                                                        <Button variant="outline" className={sty.mobileButtonDrawerContent} key={index}>{content}</Button>
+                                                        <Button variant="outline" className={sty.mobileButtonDrawerContent} key={index} onClick={onButtonClick}> {content} </Button>
                                                     ))}
                                                     {showSelect && (
                                                         <Select>

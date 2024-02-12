@@ -1,5 +1,5 @@
 import NavBar from "../components/Navbar"
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../components/AdminSidebar"
 export default function admin(){
     return(
         <>

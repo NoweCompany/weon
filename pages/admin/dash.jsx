@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar"
-import Sidebar from "../../components/Sidebar"
+import Sidebar from "../../components/AdminSidebar"
 import FloatNav from "../../components/FloatNav"
 export default function adminDash(){
     const buttonContent = ["Adicionar"]
