@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import sty from "../styles/style-components/sidebar.module.css";
+import sty from "../styles/style-components/dataSidebar.module.css";
 import { Button } from "@/components/ui/button";
+import {Tooltip, button} from "@nextui-org/react";
 import {
     CommandDialog,
     CommandEmpty,
@@ -52,7 +53,12 @@ const Sidebar: React.FC<SidebarProps> = ({ itens }) => {
                         </CommandDialog>
                     </div>
                     <div className={sty.sidebarItems}>
-                        <Button className={sty.buttonSearch} onClick={toggleDialog}>Pesquisar ⌘S</Button>
+                    <Tooltip className='toolTip' placement="top" content=" Ctrl + S"> 
+                        <Button className={sty.buttonSearch} onClick={toggleDialog}>Pesquisar</Button>
+                        </Tooltip>
+                        {itens.map((item, index) =>(
+                            <Button className={sty.sidebarItems} variant="outline"key={index}> {item} </Button>
+                        ))}
                     </div>
                 </div>
             </div>

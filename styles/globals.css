@@ -84,3 +84,9 @@ body{
 
 }
 
+.toolTip{
+  padding: 3px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(149, 149, 149);
+}
