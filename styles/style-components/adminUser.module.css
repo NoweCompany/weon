@@ -1,0 +1,36 @@
+.card{
+    width: 50%;
+    margin: 15rem auto;
+    padding: 3rem;  
+}
+
+.cardTitle{
+    font-size: 2rem;
+    font-family: extrabold;
+    margin: 0% auto;
+}
+
+.cardSubTitle{
+    margin: 0 auto;
+}
+.cardForm{
+    display: flex;
+}
+
+.formSubtitle{
+    font-size: 1.5rem;
+    font-family: bold;
+    margin-top: 1.5rem;
+}
+
+.inputGroup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: .5rem;
+    gap: 2rem;
+}
+
+.inputGroupCheckBox{
+    margin-top: .5rem;
+}

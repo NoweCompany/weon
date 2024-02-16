@@ -6,10 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 6rem;
+  margin: 0 auto;
 }
 
 .cardTitle {
