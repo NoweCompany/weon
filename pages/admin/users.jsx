@@ -7,8 +7,8 @@ export default function adminTables(){
     return(
         <>
         <Navbar adminPages={true}/>
-        <FloatNav title="Usuários" buttonContent={buttonContent}/>
         <Sidebar routeUsers={true}/>
+        <FloatNav title="Usuários" buttonContent={buttonContent}/>
         <AdminUser />
         
         </>

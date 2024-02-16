@@ -3,7 +3,7 @@ import NavBar from "../components/Navbar"
 import DataSideBar from "../components/DataSidebar"
 import NoContentDisplay from "../components/NoContentDisplay";
 export default function dash() {
-    const buttonContent = ["Criar"];
+    const buttonContent = ["oi"];
     const itens = ["Dashboard", "Dashboard2", "Dashboard3", "Dashboard4" , "Dashboard4" , "Dashboard4" , "Dashboard4", "Dashboard4", "Dashboard4", "Dashboard4", "Dashboard4"]
     const text = "Selecione um Dashboard para começar."
     return (
