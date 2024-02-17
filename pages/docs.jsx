@@ -16,7 +16,7 @@ export default function docs() {
                 labelSelect="Execel"
                 showSelect={true}
                 showSearch={true} /> 
-            <DataSideBar itens={itens} />
+                <DataSideBar itens={itens} />
             <NoContentDisplay text={text} />
 
         </>

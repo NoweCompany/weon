@@ -6,8 +6,8 @@ export default function adminTrash(){
     return(
         <>
         <Navbar adminPages={true}/>
-        <FloatNav title="Lixeira" buttonContent={buttonContent}/>
         <Sidebar routeTrash={true}/>
+        <FloatNav title="Lixeira" buttonContent={buttonContent}/>
         
         </>
     )

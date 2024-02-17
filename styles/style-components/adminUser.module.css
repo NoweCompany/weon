@@ -1,3 +1,7 @@
+.containerMain{
+    height: auto;
+}
+
 .card{
     width: 50%;
     margin: 1rem auto;
@@ -33,4 +37,28 @@
 
 .inputGroupCheckBox{
     margin-top: .5rem;
+}
+
+@media (max-width: 600px){
+    .card{
+        width: 90%;
+        margin: 1rem auto;
+        padding: 1rem;  
+    }
+  
+     .cardTitle{
+        font-size: 1.5rem;
+    }
+
+    .inputGroup{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        margin-top: .5rem;
+        gap: 1rem;
+    }
+    
+    .containerMain{
+        height: 110tvh;
+    }
 }

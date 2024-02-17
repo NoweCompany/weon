@@ -21,7 +21,7 @@ export default function Nav({ adminPages   }) {
         <>
             <nav className={`${sty.navBody} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.navItems}>
-                    <Link className={sty.navImg} href="/home"> <img src="/Img/white.png" alt="Logo" /></Link>
+                    <Link href="/home"> <img className={sty.navImg} src="/Img/white.png" alt="Logo" /></Link>
                     <div className={sty.navItenContainer}>
                         <div className={sty.navItem}>
                             <Link href="/docs">

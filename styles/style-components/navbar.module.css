@@ -11,15 +11,19 @@
     z-index: 44444;
 }
 
+
 .navImg {
-    max-width: 5%;
+    max-width: 100%;
+    width: 70px;
     height: auto; 
     position: absolute;
     left: 0;
     margin-left: 2rem;
     display: flex;
     align-items: center;
+    margin-top: 3.5px;
 }
+
 
 .navItenContainer{
     display: flex;

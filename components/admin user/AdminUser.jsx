@@ -13,6 +13,7 @@ import sty from "../../styles/style-components/adminUser.module.css"
 export default function adminuser() {
     return (
         <>
+        <div className={sty.containerMain}>     
             <Card className={sty.card}>
                 <CardHeader>
                     <CardTitle className={sty.cardTitle}>Novo usuário</CardTitle>
@@ -73,7 +74,7 @@ export default function adminuser() {
                     </form>
                 </CardContent>
             </Card>
-
+            </div>
         </>
     )
 }
