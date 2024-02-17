@@ -1,0 +1,15 @@
+
+.noContentDisplayText{
+    font-size: 3rem;
+    color: #d4d4d4;
+    font-family: extrabold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}

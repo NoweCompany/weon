@@ -1,0 +1,109 @@
+
+.sidebar {
+    width: 10.5rem; 
+    background-color: #ffffff; 
+    color: #000000; 
+    padding: 20px;  
+    height: 100vh;  
+    position: fixed;
+  }
+  
+  .sidebarHeader {
+    font-size: 1rem; 
+    margin-bottom: 0rem;
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidebarHeaderContent{
+    font-family: bold;
+  }
+
+  .sidebarHeaderMid{
+    font-size: 1rem; 
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .sidebarItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 130px;
+  }
+  
+.desktopSidebar{
+    display: block;
+}
+
+.mobileSidebar{
+    display: none;
+}
+
+
+.customIcon{
+  margin-right: 1.5rem;
+  width: 20px;
+  height: auto;
+}
+
+.buttonSearch{
+    width: 130px;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 600px){
+    .desktopSidebar{
+        display: none;
+    }
+    
+    .mobileSidebar{
+        display: block;
+    }
+
+    .mobileSidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5rem;
+        background-color: #ffffff;
+        color: #5b5b5b;
+      }
+      
+      .mobileContentSidebar {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .mobileSidebarItems {
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .mobileButtonAbas{
+        width: 250px;
+      }
+      
+      .mobileDrawerContent{
+        display: grid;
+        gap: .4rem;
+      }
+
+      .mobileButtonDrawerContent{
+        width: 250px;
+      }
+
+      .mobileButtonAction{
+        width: 250px;
+      }
+}

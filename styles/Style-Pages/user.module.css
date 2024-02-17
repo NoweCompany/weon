@@ -1,0 +1,65 @@
+.card{
+    width: 40%;
+    margin: 3rem auto;
+    margin-top: 5rem;
+    height: auto;
+}
+
+.title{
+    font-size: 2rem;
+    font-family: extrabold;
+}
+
+.cardHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtitle{
+    font-size: 1rem;
+    font-family: extrabold;
+}
+
+.tooltipArea{
+    display: flex;
+    gap: .5rem;
+}
+
+.icon{
+    width: 20px;
+    height: auto;
+    margin: 0;
+    color: rgb(73, 96, 196);
+}
+
+.info{
+    color: #a3a3a3;
+}
+.cardContent{
+    margin: 1rem auto;
+}
+
+.btnLogout {
+    margin-top: 2rem;
+}
+
+.option{
+    font-family: bold;
+    margin-left: .5rem;
+}
+
+.margin{
+    padding: 2rem;
+}
+
+@media (max-width: 600px){
+    .card{
+        width: 90%;
+        margin: 1rem auto;
+        margin-top: 5rem;
+        height: auto;
+    }
+    
+    
+}
