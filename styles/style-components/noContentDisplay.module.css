@@ -1,4 +1,3 @@
-
 .noContentDisplayText{
     font-size: 2rem;
     color: #d4d4d4;
@@ -17,8 +16,9 @@
 @media (max-width:600px){
     .noContentDisplayText{
         font-size: 1.5rem;
-        width: 100%;
+        width: 60%;
         position: fixed;
-        left: 60%;
+        left: 55%;
         }
 }
+

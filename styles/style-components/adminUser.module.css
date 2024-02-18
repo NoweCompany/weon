@@ -6,6 +6,10 @@
     width: 50%;
     margin: 1rem auto;
     padding: 3rem;  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .cardTitle{
@@ -41,9 +45,13 @@
 
 @media (max-width: 600px){
     .card{
-        width: 90%;
-        margin: 1rem auto;
+        width: 95%;
+        margin-top: 1rem;
         padding: 1rem;  
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    
     }
   
      .cardTitle{
@@ -59,6 +67,19 @@
     }
     
     .containerMain{
-        height: 110tvh;
+        height: 100vh;
+    }
+}
+
+
+
+@media (max-width: 1000px){
+  
+    .inputGroup{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        margin-top: .5rem;
+        gap: 1rem;
     }
 }

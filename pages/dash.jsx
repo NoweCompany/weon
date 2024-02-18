@@ -14,7 +14,7 @@ export default function dash() {
                 buttonContent={buttonContent}
                 showSelect={false}
                 showSearch={true} /> 
-            <DataSideBar itens={itens} />
+        <DataSideBar itens={itens} />
             <NoContentDisplay text={text} />
 
         </>

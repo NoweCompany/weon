@@ -1,8 +1,22 @@
-import AdminUser from "../components/admin user/AdminUser"
-export default function teste(){
-    return(
+import NavBar from "../components/Navbar"
+import Sidebar from "../components/AdminSidebar"
+import Dataform from "../components/DataForms"
+export default function test(){
+    const campos = [
+        "maçã", "banana", "laranja", "uva", "morango",
+        "abacaxi", "kiwi", "melancia", "pêssego", "manga",
+        "abacate", "ameixa", "cereja", "limão", "pera",
+        "framboesa", "caju", "melão", "goiaba", "abóbora" ,
+        "maçã", "banana", "laranja", "uva", "morango",
+        "abacaxi", "kiwi", "melancia", "pêssego", "manga",
+        "abacate", "ameixa", "cereja", "limão", "pera",
+        "framboesa", "caju", "melão", "goiaba", "abóbora" ,
+      ];
+          return(
         <>
-        <AdminUser />
+         <NavBar adminPages={true} /> 
+        <Sidebar />
+        <Dataform campos={campos}/>
         </>
     )
 }

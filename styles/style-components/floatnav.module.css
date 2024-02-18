@@ -7,8 +7,10 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  margin-top: 5rem;
-
+  position: fixed;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -50%);
 }
 
 .cardTitle {
@@ -44,15 +46,8 @@
   }
 
   .card {
-    width: 90%;
-    margin-top: 5rem;
-    height: auto;
-    padding: 0rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+   display: none;
+  }
 
 .cardButtonMobile{
     width: 90%;
@@ -63,7 +58,7 @@
     justify-content: center;
     align-items: center;
     margin-top: -80px;
-
+    z-index: 44444444444444;
 }
 
 .mobileDrawerContent{
@@ -85,6 +80,8 @@
   height: 5rem;
   background-color: #ffffff;
   color: #5b5b5b;
+  z-index: 4;
+
 }
 
 .mobileContentSidebar {

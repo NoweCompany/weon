@@ -9,6 +9,9 @@ export default function docs() {
     return (
         <>
             <NavBar />
+
+            <DataSideBar itens={itens} />
+
              <FloatNav title="docs"
                 itens={itens}
                 buttonContent={buttonContent}
@@ -16,7 +19,7 @@ export default function docs() {
                 labelSelect="Execel"
                 showSelect={true}
                 showSearch={true} /> 
-                <DataSideBar itens={itens} />
+                
             <NoContentDisplay text={text} />
 
         </>

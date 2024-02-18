@@ -1,0 +1,110 @@
+.containerMain{
+    height: auto;
+}
+
+.card{
+    width: 50%;
+    margin: 1rem auto;
+    padding: 1rem;  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cardTitle{
+    font-size: 2rem;
+    font-family: extrabold;
+    margin: 0% auto;
+}
+
+.cardSubTitle{
+    margin: 0 auto;
+}
+
+.formContent{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.cardForm{
+    display: flex;
+}
+
+.formSubtitle{
+    font-size: 1.5rem;
+    font-family: bold;
+    margin-top: 1.5rem;
+}
+
+.inputGroup{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-top: .5rem;
+    gap: 2rem;
+    flex-basis: calc(25% - 1rem);
+}
+
+.inputGroupCheckBox{
+    margin-top: .5rem;
+}
+
+.scrollArea {
+    overflow-y: auto; 
+    max-height: 400px; 
+  }
+
+@media (max-width: 600px){
+    .inputGroup{
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-top: .5rem;
+        flex-basis: calc(80% - 10rem);
+    }
+
+    .formContent{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    
+.card{
+    width: 90%;
+    margin: 1rem auto;
+    padding: .5rem;  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+}
+
+
+@media (max-width: 1000px){
+    .inputGroup{
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-top: .5rem;
+        gap: 1rem;
+        flex-basis: calc(95% - 10rem);
+    }
+
+    .formContent{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+}
+
+
