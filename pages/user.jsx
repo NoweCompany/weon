@@ -1,5 +1,5 @@
 import sty from "../styles/Style-Pages/user.module.css"
-import Navbar from "../components/Navbar"
+import Navbar from "../components/global/Navbar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"

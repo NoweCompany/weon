@@ -1,4 +1,4 @@
-import sty from "../styles/style-components/iconeNowe.module.css";
+import sty from "../../styles/style-components/iconeNowe.module.css";
 import Link from "next/link";
 
 export default function IconeNowe() {

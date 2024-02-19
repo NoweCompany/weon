@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import sty from "../styles/Form-login/formlogin.module.css"
-import IconeNowe from "../components/IconeNowe";
+import IconeNowe from "../components/global/IconeNowe";
 export default function formLogin() {
     return (
         <div className={sty.background}>

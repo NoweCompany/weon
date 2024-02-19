@@ -1,6 +1,6 @@
-import Navbar from "../../components/Navbar"
-import Sidebar from "../../components/AdminSidebar"
-import FloatNav from "../../components/FloatNav"
+import Navbar from "../../components/global/Navbar"
+import Sidebar from "../../components/sidebar/AdminSidebar"
+import FloatNav from "../../components/global/FloatNav"
 import AdminUser from "../../components/adminComponents/AdminUser"
 export default function adminTables(){
     const buttonContent = ["Criar Usuário"]

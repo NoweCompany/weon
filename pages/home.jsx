@@ -1,6 +1,6 @@
-import NavBar from "../components/Navbar"
+import NavBar from "../components/global/Navbar"
 import sty from "../styles/Style-Pages/home.module.css"
-import IconeNowe from "../components/IconeNowe";
+import IconeNowe from "../components/global/IconeNowe";
 export default function home(){
 
     return(

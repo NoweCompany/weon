@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import sty from '../styles/style-components/navbar.module.css';
+import sty from '../../styles/style-components/navbar.module.css';
 import { User } from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
 import { AlignJustify } from 'lucide-react';

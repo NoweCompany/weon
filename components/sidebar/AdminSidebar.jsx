@@ -1,8 +1,8 @@
-import sty from "../styles/style-components/sidebar.module.css";
+import sty from "../../styles/style-components/sidebar.module.css";
 import { Users, FileSliders, History, Trash, BarChart4 } from 'lucide-react';
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer"
-import { Separator } from "@/components/ui/Separator"
 import Link from "next/link";
 
 export default function Sidebar({ routeUsers, routeTable, routeHistory, routeTrash, routeDash, routeLog }) {
