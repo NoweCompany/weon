@@ -53,5 +53,13 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  }
+  },
+  "description": "![Nowe Company Banne](https://github.com/NoweCompany/Weon/blob/hmlg/assets/img/the%20future%20is%20nowe%20banner.png)\r # Weon",
+  "main": "postcss.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
