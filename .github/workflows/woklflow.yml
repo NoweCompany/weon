@@ -1,0 +1,92 @@
+name: weon.nowecompany.hostinger
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+
+  buildInHomologation:
+    runs-on: ubuntu-22.04
+    environment:
+      name: hmlg
+    needs: build
+    steps:
+      - name: Build aplication in environment of homologation
+        uses: appleboy/ssh-action@v1.0.1
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ vars.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ vars.PORT }}
+          script: |
+            cd /home/hmlg.weon.nowecompany.com.br/public_html
+            git pull origin main
+            npm install
+            npm run build
+
+  upContainerInHomologation:
+    runs-on: ubuntu-22.04
+    environment:
+      name: hmlg
+    needs: buildInHomologation
+    steps:
+      - name: Up containers in environment of homologation
+        uses: appleboy/ssh-action@v1.0.1
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ vars.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ vars.PORT }}
+          script: |
+            cd /home/hmlg.weon.nowecompany.com.br/public_html
+            docker-compose up -d
+            docker-compose restart
+
+  buildInProduction:
+    runs-on: ubuntu-22.04
+    environment:
+      name: production
+    needs: upContainerInHomologation
+    steps:
+      - name: Build aplication in environment of production
+        uses: appleboy/ssh-action@v1.0.1
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ vars.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ vars.PORT }}
+          script: |
+            cd /home/weon.nowecompany.com.br/puclic_html
+            git pull origin main
+            npm install
+            npm run build
+
+  deployProduction:
+    runs-on: ubuntu-22.04
+    environment:
+      name: production
+    needs: buildInProduction
+    steps:
+      - name: Up containers in environment of Production
+        uses: appleboy/ssh-action@v1.0.1
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ vars.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ vars.PORT }}
+          script: |
+            cd /home/weon.nowecompany.com.br/puclic_html
+            docker-compose up -d
+            docker-compose restart

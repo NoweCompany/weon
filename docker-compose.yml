@@ -1,0 +1,18 @@
+version: '3'
+services:
+  weon:
+    build: .
+    container_name: "${CONTAINER_NAME}"
+    volumes:
+      - ./.next:/home/weon/.next
+    ports:
+      - "${CONTAINER_PORT}:3000"
+    env_file:
+      - .env
+    command: npm start
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
