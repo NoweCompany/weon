@@ -33,6 +33,32 @@
     align-items: start;
 }
 
+.inputPassword{
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inputPassword {
+    display: flex;
+    align-items: start;
+    position: relative;
+}
+
+.showPasswordButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
 .label {
     font-weight: bold;
     font-size: 1rem;
