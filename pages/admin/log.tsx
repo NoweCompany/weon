@@ -1,5 +1,5 @@
-import Navbar from "../../components/Navbar"
-import Sidebar from "../../components/AdminSidebar"
+import Navbar from "../../components/global/Navbar"
+import Sidebar from "../../components/sidebar/AdminSidebar"
 export default function adminLog(){
     return(
         <>

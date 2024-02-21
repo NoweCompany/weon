@@ -1,9 +1,10 @@
 import NavBar from "../components/global/Navbar"
 import Sidebar from "../components/sidebar/AdminSidebar"
-export default function admin(){
+
+export default function Admin(){
     return(
         <>
-         <NavBar adminPages={true} /> 
+        <NavBar adminPages={true} /> 
         <Sidebar />
 
         </>

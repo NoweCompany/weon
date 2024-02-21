@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import sty from '../styles/style-components/floatnav.module.css';
+import sty from '../../styles/style-components/floatnav.module.css';
 import {
   Select,
   SelectContent,
@@ -47,7 +47,7 @@ interface FloatNavProps {
   showSelect?: boolean;
   showSearch?: boolean;
   onButtonClick?: () => void;
-  itens?: string; 
+  itens?: string[]; 
 }
 
 const FloatNav: React.FC<FloatNavProps> = ({
@@ -116,9 +116,11 @@ const FloatNav: React.FC<FloatNavProps> = ({
           <CommandList>
             <CommandEmpty>Nada encontrado...</CommandEmpty>
             <CommandGroup heading="tabelas">
-              {itens.map((item, index) => (
-                <CommandItem key={index}>{item}</CommandItem>
-              ))}
+              {
+                itens ? itens.map((item: string, index: number) => (
+                  <CommandItem key={index}>{item}</CommandItem>
+                )) : <span></span>
+              }
             </CommandGroup>
           </CommandList>
         </CommandDialog>

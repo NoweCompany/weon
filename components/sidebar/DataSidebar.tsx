@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import sty from '../styles/style-components/dataSidebar.module.css';
+import sty from '../../styles/style-components/dataSidebar.module.css';
 import { Button } from '@/components/ui/button';
 import { Tooltip} from '@nextui-org/react';
 import {

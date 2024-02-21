@@ -1,37 +1,35 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from "@/components/ui/button";
 import sty from "../styles/Form-login/formlogin.module.css";
 import IconeNowe from "../components/global/IconeNowe";
-import { useEffect, useState } from 'react';
-
 import { token } from '@/apiRequests/';
 import { messaging, auth } from '@/services/'
-import { useRouter } from 'next/router';
 
 export default function FormLogin() {
-    const router = useRouter()
-    
+    const router = useRouter();
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState(''); 
 
     useEffect(() => {
-        if(auth.getToken()) router.replace('/home')
-    }, [])
+        if(auth.getToken()) router.replace('/home');
+    }, []);
 
-    async function handleSubmit(event) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        if(!email || !password) return messaging.send('Valores invalidos', false)
+        if(!email || !password) return messaging.send('Valores invalidos', false);
         
-        const response = await token.postApi(email, password)
+        const response = await token.postApi(email, password);
             
-        if(response?.error) return messaging.send(response.error, false)
+        if(response?.error) return messaging.send(response.error, false);
     
-        const { token: userToken, ...userData} = response
-        auth.setToken(userToken)
-        auth.setUserData(userData)
+        const { token: userToken, ...userData} = response;
+        auth.setToken(userToken);
+        auth.setUserData(userData);
 
-        router.replace('/home')
-        return
+        router.replace('/home');
+        return;
     }
 
     return (

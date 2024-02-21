@@ -5,7 +5,18 @@ import { Separator } from "@/components/ui/separator"
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer"
 import Link from "next/link";
 
-export default function Sidebar({ routeUsers, routeTable, routeHistory, routeTrash, routeDash, routeLog }) {
+interface SideBarProps {
+    routeUsers?: boolean;
+    routeTable?: boolean;
+    routeHistory?: boolean;
+    routeTrash?: boolean;
+    routeDash?: boolean;
+    routeLog?: boolean;
+}
+
+export default function Sidebar(props: SideBarProps) {
+    const { routeUsers, routeTable, routeHistory, routeTrash, routeDash, routeLog } = props
+
     return (
         <>
             <div className={sty.desktopSidebar}>

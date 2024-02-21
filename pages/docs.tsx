@@ -1,7 +1,7 @@
-import NavBar from "../components/Navbar"
-import FloatNav from "../components/FloatNav"
-import DataSideBar from "../components/DataSidebar"
-import NoContentDisplay from "../components/NoContentDisplay";
+import NavBar from "../components/global/Navbar"
+import FloatNav from "../components/global/FloatNav"
+import DataSideBar from "../components/sidebar/DataSidebar"
+import NoContentDisplay from "../components/global/NoContentDisplay";
 export default function docs() {
     const buttonContent = ["Adicionar", "Deletar"];
     const itens = ["tabela1", "tabela2", "tabela3", "ldjslajdlak"]
@@ -12,7 +12,7 @@ export default function docs() {
 
             <DataSideBar itens={itens} />
 
-             <FloatNav title="docs"
+            <FloatNav title="docs"
                 itens={itens}
                 buttonContent={buttonContent}
                 placeholderSelect="Exportação"
