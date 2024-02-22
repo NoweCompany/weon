@@ -1,16 +1,15 @@
 .card {
   width: 60%;
-  height: auto;
+  max-width: 700px;
+  height: 10%;
+  max-height: 80px;
   padding: .5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  position: fixed;
-  left: 50%;
-  top: 15%;
-  transform: translate(-50%, -50%);
+  margin-top: 4rem;
 }
 
 .cardTitle {
