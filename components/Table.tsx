@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import sty from "../styles/style-components/table.module.css"
 interface Field {
   key: string;
   type: string;
@@ -39,40 +39,46 @@ export default function Test(props: PropsTable) {
     setSelectedAll(allSelected);
   };
 
-  return (
-    <table>
-      <caption>Aqui estão os dados da tabela {collectionName}</caption>
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
+return (
+  <div className={sty.containerMain}>
+    <table className={`${sty.tableBody} ${sty.customTable}`}>
+      <caption className={sty.caption}> {collectionName}</caption>
+      <thead >
+        <tr className={sty.tableRow}>
+          <th className={sty.allCheck}>
+            <input type="checkbox" className={sty.checkbox} checked={selectedAll} onChange={handleSelectAll} />
           </th>
           {tableColumns.map((fieldinf: Field) => {
             headerOrder.push(fieldinf.originalName);
             return (
-              <th key={fieldinf.originalName}>{fieldinf.currentName}</th>
+              <th key={fieldinf.originalName} className={sty.tableHeader}>{fieldinf.currentName}</th>
             );
           })}
         </tr>
       </thead>
-      <tbody>
+      <tbody className={sty.tbody}>
         {tableRows.map((currentData: Data) => (
-          <tr key={currentData._id}>
+          <tr key={currentData._id} className={sty.tableRow}>
             <td>
-              <input type="checkbox" checked={selectedItems[currentData._id] || false} onChange={
-                () => handleSelectItem(currentData._id)
-              } />
+              <input
+                type="checkbox"
+                className={sty.checkbox}
+                checked={selectedItems[currentData._id] || false}
+                onChange={() => handleSelectItem(currentData._id)}
+              />
             </td>
             {tableColumns.map((fieldinf: Field, index) => {
               const microDataInOrder = headerOrder[index];
               const microDataValue = currentData[microDataInOrder];
               return (
-                <td key={microDataInOrder}>{microDataValue}</td>
+                <td key={microDataInOrder} className={sty.tableCell}>{microDataValue}</td>
               );
             })}
           </tr>
         ))}
       </tbody>
     </table>
-  );
+  </div>
+);
+
 }
