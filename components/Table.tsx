@@ -40,6 +40,7 @@ export default function Test(props: PropsTable) {
   };
 
 return (
+  <div className={sty.containerMobile}> 
   <div className={sty.containerMain}>
     <table className={`${sty.tableBody} ${sty.customTable}`}>
       <caption className={sty.caption}> {collectionName}</caption>
@@ -78,6 +79,7 @@ return (
         ))}
       </tbody>
     </table>
+  </div>
   </div>
 );
 
