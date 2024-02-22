@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import sty from "../styles/style-components/table.module.css"
-interface Field {
-  key: string;
-  type: string;
-  required: boolean;
-  allNames: string[];
-  currentName: string;
-  originalName: string;
-}
+import Field from '../interfaces/Field'
 
 type Data = { _id: string; [key: string]: any };
 
@@ -17,7 +10,7 @@ interface PropsTable {
   collectionName: string;
 }
 
-export default function Test(props: PropsTable) {
+export default function Table(props: PropsTable) {  
   const { collectionName, tableColumns, tableRows } = props;
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: boolean }>({});
@@ -48,12 +41,14 @@ return (
           <th className={sty.allCheck}>
             <input type="checkbox" className={sty.checkbox} checked={selectedAll} onChange={handleSelectAll} />
           </th>
-          {tableColumns.map((fieldinf: Field) => {
-            headerOrder.push(fieldinf.originalName);
-            return (
-              <th key={fieldinf.originalName} className={sty.tableHeader}>{fieldinf.currentName}</th>
-            );
-          })}
+            {
+              tableColumns.map((fieldinf: Field) => {
+                headerOrder.push(fieldinf.originalName);
+                return (
+                  <th key={fieldinf.originalName} className={sty.tableHeader}>{fieldinf.currentName}</th>
+                );
+              }
+            )}
         </tr>
       </thead>
       <tbody className={sty.tbody}>
@@ -80,5 +75,4 @@ return (
     </table>
   </div>
 );
-
 }

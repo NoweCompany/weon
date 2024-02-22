@@ -11,21 +11,36 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 
-  
+import Field from '@/interfaces/Field';
+interface CollectionInfo {
+  collectionName: string,
+  fields: Field[]
+}
+
 interface SidebarProps {
-  itens: string[];
+  collectionsInfo: CollectionInfo[];
   placeholderSelect?: string;
   labelSelect?: string;
   showSelect?: boolean;
+  handleClickInCollectionBtn: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string) => void;
   onButtonClick?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ itens, placeholderSelect, labelSelect, showSelect, onButtonClick }) => {
+const Sidebar: React.FC<SidebarProps> = ({ 
+  collectionsInfo,
+  placeholderSelect,
+  labelSelect,
+  showSelect,
+  handleClickInCollectionBtn,
+  onButtonClick 
+}) => {
   const [open, setOpen] = useState(false);
 
   const toggleDialog = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+  
+  
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -50,9 +65,11 @@ const Sidebar: React.FC<SidebarProps> = ({ itens, placeholderSelect, labelSelect
               <CommandList>
                 <CommandEmpty>Nada encontrado...</CommandEmpty>
                 <CommandGroup heading="tabelas">
-                  {itens.map((item, index) => (
-                    <CommandItem key={index}>{item}</CommandItem>
-                  ))}
+                  {
+                    collectionsInfo.map((collectionInfo, index) => (
+                      <CommandItem key={index}>{collectionInfo.collectionName}</CommandItem>
+                    ))
+                  }
                 </CommandGroup>
               </CommandList>
             </CommandDialog>
@@ -63,11 +80,16 @@ const Sidebar: React.FC<SidebarProps> = ({ itens, placeholderSelect, labelSelect
                 Pesquisar
               </Button>
             </Tooltip>
-            {itens.map((item, index) => (
-              <Button className={sty.sidebarItems} variant="outline" key={index}>
-                {item}
-              </Button>
-            ))}
+              {collectionsInfo.map((collectionInfo, index) => (
+                <Button 
+                  className={sty.sidebarItems} 
+                  variant="outline" 
+                  key={index}
+                  onClick={(e) => handleClickInCollectionBtn(e, collectionInfo.collectionName)}  
+                >
+                  {collectionInfo.collectionName}
+                </Button>
+              ))}
           </div>
         </div>
       </div>

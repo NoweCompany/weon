@@ -1,22 +1,24 @@
 import Messaging from '@/services/Messaging';
 import ApiConfig from './apiConfig';
+import Auth from '@/services/Auth';
 
-export default class Token extends ApiConfig {
+export default class Collection extends ApiConfig {
   private messagingService
-  constructor(messagingService: Messaging){
+  private auth
+  constructor(messagingService: Messaging, auth: Auth){
     super()
     this.messagingService = messagingService
+    this.auth = auth
   }
 
-  public async postApi(email: string, password: string) {
+  public async getApi() {
     try {
-      const body = JSON.stringify({email, password})
-      const response = await fetch(this.url + '/token',
+      const response = await fetch(this.url + '/collection',
         {
-          method: "POST",
-          headers:{ "Content-Type": "application/json"},
-          body: body
-
+          headers:{ 
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
         });
 
       const data = await response.json();
@@ -25,8 +27,7 @@ export default class Token extends ApiConfig {
         return { error: data.error }
       }
       
-      console.log(data);      
-      return data;
+      return data.response;
     } catch (e) {
       console.log(e);      
       this.messagingService.send('Falha na conexão com o servidor', false);
