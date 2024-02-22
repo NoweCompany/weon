@@ -4,12 +4,12 @@
 
 .card{
     width: 50%;
-    margin: 1rem auto;
+    max-width: 600px;
     padding: 3rem;  
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 2rem auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 
 .cardTitle{
@@ -43,15 +43,20 @@
     margin-top: .5rem;
 }
 
+.navegationMobile{
+    display: none;
+}
+
+
 @media (max-width: 600px){
     .card{
-        width: 95%;
-        margin-top: 1rem;
-        padding: 1rem;  
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    
+        width: 90%;
+        max-width: 600px;
+        padding: 3rem;  
+        margin: 3rem auto;
+        display: grid;
+        align-items: center;
+        justify-content: center;
     }
   
      .cardTitle{
@@ -68,6 +73,13 @@
     
     .containerMain{
         height: 100vh;
+        margin-top: 1rem;
+    }
+
+    .navegationMobile{
+        display: block;
+        margin-top: 4rem;
+        margin-left: 1rem;
     }
 }
 
@@ -82,4 +94,12 @@
         margin-top: .5rem;
         gap: 1rem;
     }
+}
+
+@media (max-width:1360px){
+    .card{
+        padding: 1rem;  
+        margin: 1rem auto;
+    }
+    
 }

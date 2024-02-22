@@ -10,12 +10,12 @@ export default function Dash() {
     return (
         <>
             <Navbar adminPages={true}/>
+            <DataSideBar itens={itens} />
             <FloatNav title="Dashboard"
                 itens={itens}
                 buttonContent={buttonContent}
                 showSelect={false}
                 showSearch={true} /> 
-            <DataSideBar itens={itens} />
             <NoContentDisplay text={text} />
 
         </>

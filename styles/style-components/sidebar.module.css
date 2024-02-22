@@ -5,6 +5,7 @@
     padding: 20px;  
     height: 100vh;
     position: fixed;
+    overflow-y: auto;
   }
   
   .sidebarHeader {
@@ -40,10 +41,6 @@
   }
   
 .desktopSidebar{
-
-
-
-  
     display: block;
 }
 
