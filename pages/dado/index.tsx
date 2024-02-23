@@ -109,6 +109,8 @@ return (
                 ) : (
                   <>
                     <NoContentDisplay text={text} />
+                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
+
                   </>
                 )
               }

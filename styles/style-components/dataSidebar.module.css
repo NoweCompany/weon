@@ -5,8 +5,7 @@
     padding: 20px;  
     height: 100vh;  
     position: fixed;
-    overflow-y: auto;
-    margin-top: -50px;
+    top: 3px;
   }
   
   .sidebarHeader {
