@@ -22,14 +22,13 @@ export default class Token extends ApiConfig {
       const data = await response.json();
       
       if(response.status !== 200){
-        return { error: data.error }
+        
       }
       
       console.log(data);      
       return data;
     } catch (e) {
-      console.log(e);      
-      this.messagingService.send('Falha na conexão com o servidor', false);
+      return { error: 'Falha na conexão com o servidor' }
     }
   };
 }
