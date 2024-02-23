@@ -1,4 +1,4 @@
 export default class ApiConfig{
-  // protected url = "https://hmlg.apiweon.nowecompany.com.br"
-  protected url = "http://localhost:3310"
+  protected url = "https://hmlg.apiweon.nowecompany.com.br"
+  //protected url = "http://localhost:3310"
 }

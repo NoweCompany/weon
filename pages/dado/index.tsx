@@ -44,15 +44,18 @@ export default function Dados({collectionNameUrl}: DadosProps) {
     collection.getApi()
         .then((info: CollectionInfo[] | {error: string}) => {
           if('error' in info) return messaging.send(info.error, false)
+
+          console.log(info);
           setCollectionInfos(info)
           console.log(collectionsInfos);
         })
         .catch((error) => messaging.send(error, false))
 
     if(collectionName){ 
+      console.log(collectionsInfos)      
       generateTable(collectionName)
     }
-  }, []);
+  }, [collectionName]);
 
 function generateTable(collectionName: string){
   const currentCollection = collectionsInfos?.find((collectionInfo) => {
@@ -72,8 +75,9 @@ function generateTable(collectionName: string){
     .catch(error => messaging.send(error, false))
   setText('')
 }
+
 function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string){
-  router.push(`${collectionName}`)
+  router.push(`/dado/${collectionName}`)
   setCollectionName(collectionName)
   generateTable(collectionName)
 }
