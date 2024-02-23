@@ -3,7 +3,7 @@ import FloatNav from "../../components/global/FloatNav"
 import DataSideBar from "../../components/sidebar/DataSidebar"
 import NoContentDisplay from "../../components/global/NoContentDisplay";
 
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Field from '@/interfaces/Field';
@@ -24,7 +24,7 @@ interface DadosProps {
   collectionNameUrl?: string
 }
 
-export default function Dados({ collectionNameUrl }: DadosProps) {
+export default function Dados({ collectionNameUrl }: DadosProps)  {
   const router = useRouter();
   const buttonContent = ["Adicionar", "Deletar"];
 
@@ -37,29 +37,34 @@ export default function Dados({ collectionNameUrl }: DadosProps) {
   const [tableRows, setTableRows] = useState<tableRowsType>([])
 
 
-  useEffect(() => {  
-    console.log('effect');
-      
+  useEffect(() => {
+    if(!collectionsInfos) loadSideBarOptions()
+  }, []);
+
+  useEffect(() => {
+    if(collectionName && collectionsInfos){
+      generateTable(collectionName, collectionsInfos)    
+    }
+  }, [collectionName, collectionsInfos])
+
+async function loadSideBarOptions(){
+  try {
     collection.getApi()
         .then((info: CollectionInfo[] | {error: string}) => {
           if('error' in info) return messaging.send(info.error, false)
 
-          console.log(info);
           setCollectionInfos(info)
-          console.log(collectionsInfos);
         })
         .catch((error) => messaging.send(error, false))
+  } catch (error: any) {
+    messaging.send(error, false);
+  }
+}
 
-    if(collectionName){ 
-      console.log(collectionsInfos)      
-      generateTable(collectionName)
-    }
-  }, [collectionName]);
-
-function generateTable(collectionName: string){
+function generateTable(collectionName: string, collectionsInfos: CollectionInfo[]){
   const currentCollection = collectionsInfos?.find((collectionInfo) => {
       return collectionInfo.collectionName === collectionName
-    })      
+    })     
   if(!currentCollection) {
     return setText(`A tabela ${collectionName} não existe, selecione uma tabela existente.`) 
   }
@@ -78,7 +83,7 @@ function generateTable(collectionName: string){
 function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string){
   router.push(`/dado/${collectionName}`)
   setCollectionName(collectionName)
-  generateTable(collectionName)
+
 }
 
 return (
@@ -110,7 +115,6 @@ return (
                   <>
                     <NoContentDisplay text={text} />
                     <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-
                   </>
                 )
               }
