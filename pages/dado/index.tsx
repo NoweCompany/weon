@@ -17,25 +17,24 @@ interface CollectionInfo {
 }
 type Data = { _id: string; [key: string]: any };
 
-type tableColumns = Field[];
-type tableRows = Data[];
+type tableColumnsType = Field[];
+type tableRowsType = Data[];
 
 interface DadosProps {
   collectionNameUrl?: string
 }
 
-export default function Dados({collectionNameUrl}: DadosProps) {
+export default function Dados({ collectionNameUrl }: DadosProps) {
   const router = useRouter();
   const buttonContent = ["Adicionar", "Deletar"];
 
   const [text, setText] = useState("Selecione uma tabela para começar.")
   const [collectionsInfos, setCollectionInfos] = useState<CollectionInfo[] | null>(null);
-  
+
   const [collectionName, setCollectionName] = useState<string>(collectionNameUrl || '')
   const [existCollection, setExistCollection] = useState(false)
-  const [tableColumns, setTableColumns] = useState<tableColumns>([])
-  const [tableRows, setTableRows] = useState<tableRows>([])
-  
+  const [tableColumns, setTableColumns] = useState<tableColumnsType>([])
+  const [tableRows, setTableRows] = useState<tableRowsType>([])
 
 
   useEffect(() => {  
@@ -86,11 +85,14 @@ return (
     <>
         <NavBar />
         {
-        collectionsInfos ?(
+          
+          collectionsInfos ?(
             <>
               {
+                
                 existCollection ? (
                   <>
+                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
                     <FloatNav title={collectionName}
                     buttonContent={buttonContent}
                     placeholderSelect="Exportação"
@@ -98,7 +100,6 @@ return (
                     showSelect={true}
                     showSearch={true} /> 
                     <NoContentDisplay text={text} />
-                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
                     <Table  
                       collectionName={collectionName}
                       tableColumns={tableColumns}
@@ -107,7 +108,6 @@ return (
                   </>
                 ) : (
                   <>
-                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
                     <NoContentDisplay text={text} />
                   </>
                 )
@@ -117,8 +117,8 @@ return (
             <>
                 <NoContentDisplay 
                     text={"Não há nenhuma tabela criada."} 
-                    link={"/admin"} 
-                    linText={"Link para administração para realizar a criação das tabelas"}    
+                    link={"/admin/tables"} 
+                    linkText={"clique para começar"}    
                 />
             </>
             )

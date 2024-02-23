@@ -3,14 +3,15 @@ import Link from 'next/link';
 interface Props {
     text: string
     link?: string
-    linText?: string
+    linkText?: string
 }
 export default function NoContentDisplay(props: Props){
-    const { text, link, linText } = props
+    const { text, link, linkText } = props
     return(
+        
         <div className={sty.noContentDisplayContainer}>
             <h1 className={sty.noContentDisplayText}> {text} 
-            <Link className='text-base' href={link || "/"}>{linText}</Link> </h1>
+            <Link className={sty.description} href={link || "/"}>{linkText}</Link> </h1>
         </div>
     )
 }
