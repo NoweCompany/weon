@@ -29,32 +29,35 @@
 .tableBody {
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+    border-collapse: separate; 
+    border-spacing: 5px;
+
 }
 
 .tableRow:nth-child(odd) {
-    background-color: #f5f5f5;
+    background-color: #e0e0e0;
 }
 
-.tableRow:hover {
-    background-color: #e6e6e6;
+.tableRow:hover{
+    color: #0063da;
+    cursor: pointer;
 }
 
 .checkbox {
     margin-right: 5px;
     appearance: none;
     padding: 9px;
-    margin-left: 1rem;
+    margin-left: 6px;
     border-radius: 5px;
     outline: none;
     cursor: pointer;
     position: relative;
-    border: solid 1px #d6d6d6;
+    border: solid 1px #b4b4b4;
+    background-color: #ffffff;
     align-items: center;
     display: flex;
     justify-content: center;
-    min-width: 10px;
+
 
 }
 
@@ -85,7 +88,6 @@
 .tableCell {
     padding: 12px;
     text-align: start;
-    border-bottom: 1px solid #e0e0e0;
 }
 
 .tbody {
