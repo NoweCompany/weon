@@ -1,24 +1,16 @@
 import Navbar from "../../components/global/Navbar"
 import Sidebar from "../../components/sidebar/AdminSidebar"
 import FloatNav from "../../components/global/FloatNav"
-import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
-import sty from "../../styles/Style-Pages/router.module.css"
-import Link from "next/link";
-export default function adminHistory(){
-  
+import BreadCrumber from "@/components/adminComponents/BreadCrumber"
+export default function adminHistory() {
+    const BreadCrumberRoute = ["histórico"]
     const buttonContent = ["Filtrar"]
-    return(
+    return (
         <>
-         <div className={sty.navegationMobile}>
-                <Breadcrumbs>
-                    <BreadcrumbItem> <Link href="/admin">Gestão </Link> </BreadcrumbItem>
-                    <BreadcrumbItem>Histórico</BreadcrumbItem>
-                </Breadcrumbs>
-            </div>
-
-        <Navbar adminPages={true}/>
-        <Sidebar routeHistory={true}/>
-        <FloatNav title="Histórico" buttonContent={buttonContent}/>
+            <BreadCrumber page={BreadCrumberRoute} />
+            <Navbar adminPages={true} />
+            <Sidebar routeHistory={true} />
+            <FloatNav title="Histórico" buttonContent={buttonContent} />
 
         </>
     )

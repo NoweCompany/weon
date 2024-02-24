@@ -67,7 +67,7 @@ const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
                         </div>
                         <div className={sty.drawerItem}>
                             <Link href="/dado">
-                                <div className={isActive('/dado')}>Dados</div>
+                                <div className={dataPages ? sty.activeLink : ''}>Dados</div>
                             </Link>
                         </div>
                         <div className={sty.drawerItem}>
@@ -82,7 +82,7 @@ const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
                         </div>
                         <div className={sty.drawerItem}>
                             <Link href="/user">
-                                <div className={isActive('/user')}>user</div>
+                                <div className={isActive('/user')}>Usuário</div>
                             </Link>
                         </div>
                     </div>
