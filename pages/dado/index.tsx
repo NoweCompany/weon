@@ -87,45 +87,47 @@ function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, Mouse
 
 return (
     <>
-      <NavBar />
-      {
-        collectionsInfos ? (
-          <>
-            {
-            existCollection ? (
-              <>
-                <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-                <FloatNav title={collectionName}
-                buttonContent={buttonContent}
-                placeholderSelect="Exportação"
-                labelSelect="Execel"
-                showSelect={true}
-                showSearch={true} /> 
-                <NoContentDisplay text={text} />
-                <Table  
-                  collectionName={collectionName}
-                  tableColumns={tableColumns}
-                  tableRows={tableRows}>
-                </Table>
-              </>
-            ) : (
-              <>
-                <NoContentDisplay text={text} />
-                <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-              </>
+        <NavBar dataPages={true}/>
+        {
+          
+          collectionsInfos ?(
+            <>
+              {
+                
+                existCollection ? (
+                  <>
+                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
+                    <FloatNav title={collectionName}
+                    buttonContent={buttonContent}
+                    placeholderSelect="Exportação"
+                    labelSelect="Execel"
+                    showSelect={true}
+                    showSearch={true} /> 
+                    <NoContentDisplay text={text} />
+                    <Table  
+                      collectionName={collectionName}
+                      tableColumns={tableColumns}
+                      tableRows={tableRows}>
+                    </Table>
+                  </>
+                ) : (
+                  <>
+                    <NoContentDisplay text={text} />
+                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
+                  </>
+                )
+              }
+            </>
+            ):(
+            <>
+                <NoContentDisplay 
+                    text={"Não há nenhuma tabela criada."} 
+                    link={"/admin/tables"} 
+                    linkText={"clique para começar"}    
+                />
+            </>
             )
-            }
-          </>
-          ):(
-          <>
-            <NoContentDisplay 
-                text={"Não há nenhuma tabela criada."} 
-                link={"/admin/tables"} 
-                linkText={"clique para começar"}    
-            />
-          </>
-          )
-      }
+        }
     </>
   )
 }

@@ -11,6 +11,27 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import Field from '@/interfaces/Field';
 interface CollectionInfo {
   collectionName: string,
@@ -94,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Mobile
+ 
       <div className={sty.mobileSidebar}>
         <div className={sty.mobileContentSidebar}>
           <div className={sty.mobileSidebarItems}>
@@ -110,16 +131,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <div className="p-4 pb-0">
                     <div className="flex items-center justify-center space-x-2">
                       <div className={sty.mobileDrawerContent}>
-                        {itens.map((content, index) => (
-                          <Button
-                            variant="outline"
-                            className={sty.mobileButtonDrawerContent}
-                            key={index}
-                            onClick={onButtonClick}
-                          >
-                            {content}
-                          </Button>
-                        ))}
+                        
+                         
+                      
 
                         
                         {showSelect && (
@@ -146,10 +160,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                   </DrawerFooter>
                 </div>
               </DrawerContent>
-            </Drawer> */}
-          {/* </div>
+            </Drawer> 
+          </div>
         </div>
-      </div> */}
+      </div> 
     </>
   );
 };

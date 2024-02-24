@@ -64,8 +64,8 @@
 }
 
 .checkbox:checked {
-    background-color: #0063da;
-    border: solid 1px #0063da;
+    background-color: #000000;
+    border: solid 1px #5f5f5f;
 
 }
 
