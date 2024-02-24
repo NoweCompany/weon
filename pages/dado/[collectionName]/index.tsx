@@ -5,7 +5,6 @@ import { useState } from 'react';
 export default function DadosCollectionNameParam() {
     const router = useRouter();
     const { collectionName } = router.query
-    const [collectionsInfos, setCollectionInfos] = useState(null);
 
     return (
         <>

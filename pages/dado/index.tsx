@@ -38,6 +38,7 @@ export default function Dados({ collectionNameUrl }: DadosProps)  {
 
 
   useEffect(() => {
+    console.log(collectionsInfos);
     if(!collectionsInfos) loadSideBarOptions()
   }, []);
 
@@ -53,7 +54,7 @@ async function loadSideBarOptions(){
         .then((info: CollectionInfo[] | {error: string}) => {
           if('error' in info) return messaging.send(info.error, false)
 
-          setCollectionInfos(info)
+          setCollectionInfos(info)          
         })
         .catch((error) => messaging.send(error, false))
   } catch (error: any) {
@@ -81,54 +82,50 @@ function generateTable(collectionName: string, collectionsInfos: CollectionInfo[
 }
 
 function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string){
-  router.push(`/dado/${collectionName}`)
   setCollectionName(collectionName)
-
 }
 
 return (
     <>
-        <NavBar />
-        {
-          
-          collectionsInfos ?(
-            <>
-              {
-                
-                existCollection ? (
-                  <>
-                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-                    <FloatNav title={collectionName}
-                    buttonContent={buttonContent}
-                    placeholderSelect="Exportação"
-                    labelSelect="Execel"
-                    showSelect={true}
-                    showSearch={true} /> 
-                    <NoContentDisplay text={text} />
-                    <Table  
-                      collectionName={collectionName}
-                      tableColumns={tableColumns}
-                      tableRows={tableRows}>
-                    </Table>
-                  </>
-                ) : (
-                  <>
-                    <NoContentDisplay text={text} />
-                    <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-                  </>
-                )
-              }
-            </>
-            ):(
-            <>
-                <NoContentDisplay 
-                    text={"Não há nenhuma tabela criada."} 
-                    link={"/admin/tables"} 
-                    linkText={"clique para começar"}    
-                />
-            </>
+      <NavBar />
+      {
+        collectionsInfos ? (
+          <>
+            {
+            existCollection ? (
+              <>
+                <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
+                <FloatNav title={collectionName}
+                buttonContent={buttonContent}
+                placeholderSelect="Exportação"
+                labelSelect="Execel"
+                showSelect={true}
+                showSearch={true} /> 
+                <NoContentDisplay text={text} />
+                <Table  
+                  collectionName={collectionName}
+                  tableColumns={tableColumns}
+                  tableRows={tableRows}>
+                </Table>
+              </>
+            ) : (
+              <>
+                <NoContentDisplay text={text} />
+                <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
+              </>
             )
-        }
+            }
+          </>
+          ):(
+          <>
+            <NoContentDisplay 
+                text={"Não há nenhuma tabela criada."} 
+                link={"/admin/tables"} 
+                linkText={"clique para começar"}    
+            />
+          </>
+          )
+      }
     </>
   )
 }
