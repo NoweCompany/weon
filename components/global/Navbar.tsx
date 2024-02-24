@@ -6,9 +6,10 @@ import { User, ArrowLeft, AlignJustify } from 'lucide-react';
 
 interface NavProps {
     adminPages?: boolean;
+    dataPages?: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ adminPages }) => {
+const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
     const [showDrawer, setShowDrawer] = useState(false);
     const router = useRouter();
 
@@ -28,7 +29,7 @@ const Nav: React.FC<NavProps> = ({ adminPages }) => {
                     <div className={sty.navItenContainer}>
                         <div className={sty.navItem}>
                             <Link href="/dado">
-                                <div className={isActive('/dado')}>Dados</div>
+                                <div className={dataPages ? sty.activeLink : ''}>Dados</div>
                             </Link>
                         </div>
                         <div className={sty.navItem}>

@@ -88,7 +88,7 @@ function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, Mouse
 
 return (
     <>
-        <NavBar />
+        <NavBar dataPages={true}/>
         {
           
           collectionsInfos ?(
