@@ -1,13 +1,14 @@
 import NavBar from "../../components/global/Navbar"
-import FloatNav from "../../components/global/FloatNav"
+import FloatNavDados from "../../components/FloatNavDados"
 import DataSideBar from "../../components/sidebar/DataSidebar"
 import NoContentDisplay from "../../components/global/NoContentDisplay";
+import Table from '@/components/Table';
+import DataForms from '@/components/DataForms';
 
-import React, { Component, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 import Field from '@/interfaces/Field';
-import Table from '@/components/Table';
+import ButtonContent from '@/interfaces/ButtonContent';
 
 import { collection, value } from '@/apiRequests';
 import { messaging } from '@/services/';
@@ -25,17 +26,15 @@ interface DadosProps {
 }
 
 export default function Dados({ collectionNameUrl }: DadosProps)  {
-  const router = useRouter();
-  const buttonContent = ["Adicionar", "Deletar"];
-
   const [text, setText] = useState("Selecione uma tabela para começar.")
   const [collectionsInfos, setCollectionInfos] = useState<CollectionInfo[] | null>(null);
+  const [method, setMethod] = useState<"POST" | "PUT">("POST")
 
   const [collectionName, setCollectionName] = useState<string>(collectionNameUrl || '')
   const [existCollection, setExistCollection] = useState(false)
   const [tableColumns, setTableColumns] = useState<tableColumnsType>([])
   const [tableRows, setTableRows] = useState<tableRowsType>([])
-
+  const [showFormData, setShowFormData] = useState<boolean>(false)
 
   useEffect(() => {
     console.log(collectionsInfos);
@@ -85,6 +84,24 @@ function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, Mouse
   setCollectionName(collectionName)
 }
 
+function onButtonClickAdd(): void{
+  setShowFormData(true)
+}
+function onButtonClickDel(): void{
+  console.log('Del');
+}
+
+const buttonContentTable: ButtonContent[] = [
+  {
+    name: 'Adicionar',
+    functionOnClick: onButtonClickAdd,
+  },
+  {
+    name: 'Deletear',
+    functionOnClick: onButtonClickDel,
+  }
+]
+
 return (
     <>
         <NavBar dataPages={true}/>
@@ -97,18 +114,26 @@ return (
                 existCollection ? (
                   <>
                     <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
-                    <FloatNav title={collectionName}
-                    buttonContent={buttonContent}
-                    placeholderSelect="Exportação"
-                    labelSelect="Execel"
-                    showSelect={true}
-                    showSearch={true} /> 
-                    <NoContentDisplay text={text} />
-                    <Table  
-                      collectionName={collectionName}
-                      tableColumns={tableColumns}
-                      tableRows={tableRows}>
-                    </Table>
+                      {/* Renderiza o formulário se showFormData for verdadeiro */}
+                      {showFormData ? (
+                        <DataForms 
+                          fields={tableColumns}
+                          collectionName={collectionName}
+                          method={method}
+                          setShowFormData={setShowFormData}
+                        />
+                      ) : (
+                        <>
+                          <FloatNavDados 
+                            title={collectionName}
+                            buttonContent={buttonContentTable}/>  
+                          <Table  
+                            collectionName={collectionName}
+                            tableColumns={tableColumns}
+                            tableRows={tableRows}>
+                          </Table>
+                        </>
+                      )}
                   </>
                 ) : (
                   <>

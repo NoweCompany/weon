@@ -32,4 +32,32 @@ export default class Values extends ApiConfig {
       this.messagingService.send('Falha na conexão com o servidor', false);
     }
   };
+
+  public async postApi(collectionName: string, values: any[]) {
+    try {
+      const response = await fetch(this.url + `/value`,
+        {
+          method: "POST",
+          headers:{ 
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
+          body: JSON.stringify({ // Converta o array para uma string JSON
+            collectionName,
+            values
+          })
+        });
+        
+      const data = await response.json();
+      
+      if(response.status !== 200){
+        return { error: data.error }
+      }
+      
+      return data;
+    } catch (e) {
+      console.log(e);      
+      this.messagingService.send('Falha na conexão com o servidor', false);
+    }
+  };
 }
