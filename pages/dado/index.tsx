@@ -95,10 +95,12 @@ const buttonContentTable: ButtonContent[] = [
   {
     name: 'Adicionar',
     functionOnClick: onButtonClickAdd,
+    variantType: "outline",
   },
   {
-    name: 'Deletear',
+    name: 'Deletar',
     functionOnClick: onButtonClickDel,
+    variantType: "destructive",
   }
 ]
 

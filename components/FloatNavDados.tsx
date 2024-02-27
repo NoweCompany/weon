@@ -43,11 +43,15 @@ import ButtonContent from '@/interfaces/ButtonContent';
 interface FloatNavDadosProps {
   title: string;
   buttonContent: ButtonContent[]
+  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
+  variantType?: string;
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   title,
-  buttonContent
+  buttonContent,
+  variant,
+  variantType,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -80,7 +84,7 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
               buttonContent.map((content, index) => {
                 const { name, className, id, functionOnClick} = content
                 return  (
-                  <Button key={index} className={className} id={id} onClick={functionOnClick ? functionOnClick : () => {}}>
+                  <Button key={index} className={className} variant={variantType} id={id} onClick={functionOnClick ? functionOnClick : () => {}}>
                     {name}
                   </Button>
                 )

@@ -47,12 +47,14 @@ interface FloatNavProps {
   showSelect?: boolean;
   showSearch?: boolean;
   onButtonClick?: () => void;
+  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null;
   itens?: string[]; 
 }
 
 const FloatNav: React.FC<FloatNavProps> = ({
   title,
   buttonContent,
+  variant,
   placeholderSelect,
   labelSelect,
   showSelect,
@@ -88,7 +90,7 @@ const FloatNav: React.FC<FloatNavProps> = ({
           </CardHeader>
           <div className={sty.buttonContainer}>
             {buttonContent.map((content, index) => (
-              <Button key={index} onClick={onButtonClick}>
+              <Button key={index} variant={variant} onClick={onButtonClick}>
                 {content}
               </Button>
             ))}
@@ -160,10 +162,10 @@ const FloatNav: React.FC<FloatNavProps> = ({
 
                           {buttonContent.map((content, index) => (
                             <Button
-                              variant="outline"
                               className={sty.mobileButtonDrawerContent}
                               key={index}
                               onClick={onButtonClick}
+                              variant={variant}
                             >
                               {content}
                             </Button>
