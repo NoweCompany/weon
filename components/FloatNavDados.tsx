@@ -40,18 +40,16 @@ import {
 } from "@/components/ui/card";
 
 import ButtonContent from '@/interfaces/ButtonContent';
+
 interface FloatNavDadosProps {
   title: string;
   buttonContent: ButtonContent[]
-  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
   variantType?: string;
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   title,
   buttonContent,
-  variant,
-  variantType,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -82,9 +80,9 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
           <div className={sty.buttonContainer}>
             {
               buttonContent.map((content, index) => {
-                const { name, className, id, functionOnClick} = content
+                const { name, className, id, functionOnClick, variant} = content
                 return  (
-                  <Button key={index} className={className} variant={variantType} id={id} onClick={functionOnClick ? functionOnClick : () => {}}>
+                  <Button key={index} className={className} variant={variant ? variant : undefined} id={id} onClick={functionOnClick ? functionOnClick : () => {}}>
                     {name}
                   </Button>
                 )
