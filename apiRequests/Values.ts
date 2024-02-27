@@ -60,4 +60,59 @@ export default class Values extends ApiConfig {
       this.messagingService.send('Falha na conexão com o servidor', false);
     }
   };
+
+  public async deleteApi(collectionName: string, valuesId: any[], permanent: boolean) {
+    try {
+      const response = await fetch(this.url + `/value/${collectionName}/${permanent}`,
+        {
+          method: "DELETE",
+          headers:{ 
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
+          body: JSON.stringify({ // Converta o array para uma string JSON
+            valuesId
+          })
+        });
+        
+      const data = await response.json();
+      
+      if(response.status !== 200){
+        return { error: data.error }
+      }
+      
+      return data;
+    } catch (e) {
+      console.log(e);      
+      this.messagingService.send('Falha na conexão com o servidor', false);
+    }
+  };
+
+  public async updateApi(collectionName: string, value: {[key: string]: any}, id: string) {
+    try {
+      const response = await fetch(this.url + `/value/${id}`,
+        {
+          method: "PUT",
+          headers:{ 
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
+          body: JSON.stringify({ // Converta o array para uma string JSON
+            collectionName: collectionName,
+            values: value
+          })
+        });
+        
+      const data = await response.json();
+      
+      if(response.status !== 200){
+        return { error: data.error }
+      }
+      
+      return data;
+    } catch (e) {
+      console.log(e);      
+      this.messagingService.send('Falha na conexão com o servidor', false);
+    }
+  };
 }

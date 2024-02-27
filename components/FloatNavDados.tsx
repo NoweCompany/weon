@@ -80,9 +80,20 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
           <div className={sty.buttonContainer}>
             {
               buttonContent.map((content, index) => {
-                const { name, className, id, functionOnClick, variant} = content
+                const { name, className, disabled, id, functionOnClick, variant} = content
                 return  (
-                  <Button key={index} className={className} variant={variant ? variant : undefined} id={id} onClick={functionOnClick ? functionOnClick : () => {}}>
+                  <Button 
+                    key={index} 
+                    className={className} 
+                    variant={variant ? variant : undefined} 
+                    id={id} 
+                    onClick={(event) => {
+                      functionOnClick ? 
+                        functionOnClick(event):
+                        () => {}
+                    }}
+                    disabled={disabled}
+                  >
                     {name}
                   </Button>
                 )

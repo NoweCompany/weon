@@ -18,40 +18,43 @@ interface DataFormProps {
   fields: Field[],
   collectionName: string,
   method: "POST" | "PUT",
+  setMethod: React.Dispatch<React.SetStateAction<"POST" | "PUT">>
   setShowFormData: React.Dispatch<React.SetStateAction<boolean>>
+  formValue: {_id: string, [key: string]: any} | null
+  setFormValue: React.Dispatch<React.SetStateAction<any>>
 }
 
-export default function DataForm({ fields, method, collectionName, setShowFormData }: DataFormProps) {
+export default function DataForm(
+  { method, setMethod, formValue, setFormValue, fields, collectionName, setShowFormData }: DataFormProps) 
+{
+
+  function cleanInputs(){
+    const form = document.querySelector('.cardForm') as HTMLFormElement
+    const inputs = form.querySelectorAll('input') as NodeListOf<HTMLInputElement>
+    for(const input of Array.from(inputs)){
+      input.value = ''
+    }
+  }
 
   function onButtonClickBack(): void{
     setShowFormData(false)
+    setMethod("POST")
+    setFormValue({})
   }
+  
   function onButtonClickSave(): void{
-    
     const form = document.querySelector('.cardForm')
     const inputs = form?.querySelectorAll('input')
 
     if(!inputs || inputs.length <= 0) return messaging.send('Não há campos criados para cadastrar', false)
-
-    let newData: {[key: string]: any} = {}
-    let allInputsAreEmpty = true
-
-    for (const input of Array.from(inputs)) {
-      const { id, type } = input
-      const isCheckBox = type === "checkbox"
-      let value
-      isCheckBox ? 
-        value = input.checked:
-        value = input.value
-
-      if(value || isCheckBox) allInputsAreEmpty = false
-
-      newData[id] = value
-    }
-    console.log(newData);
+    const allInputsAreEmpty = !formValue || Object.entries(formValue).every(entrie => { 
+      if(entrie[0] === "_id") return true
+      return !entrie[1] 
+    })
     if(allInputsAreEmpty) return messaging.send('Ao menos um campo deve ser preenchido.', false)
 
-    value.postApi(collectionName, [newData])
+    if(method === 'POST'){
+      value.postApi(collectionName, [formValue])
       .then(response => {
         if(response.error) return messaging.send(response.error, false)
         return messaging.send('Cadastro realizado com sucesso', true)
@@ -59,6 +62,26 @@ export default function DataForm({ fields, method, collectionName, setShowFormDa
       .catch((error) => {
         return messaging.send(error, false)
       })
+      .finally(() => {
+        setFormValue({})
+        cleanInputs()
+      })
+    }else{
+      const { _id, ...formDataValue} = formValue 
+      value.updateApi(collectionName, formDataValue, _id)
+      .then(response => {
+        if(response.error) return messaging.send(response.error, false)
+        return messaging.send('Cadastro realizado com sucesso', true)
+      })
+      .catch((error) => {
+        return messaging.send(error, false)
+      })
+      .finally(() => {
+        setMethod("POST")
+        setShowFormData(false)
+        setFormValue({})
+      })
+    }
   }
 
   const buttonContentForm: ButtonContent[] = [
@@ -84,14 +107,27 @@ export default function DataForm({ fields, method, collectionName, setShowFormDa
             <ScrollArea className={sty.scrollArea}>
               <form className="cardForm">
                 <div className={sty.formContent}>
-                  {fields && fields.map((field, index) => (
+                  {
+                  fields && fields.map((field, index) => (
                     <div className={sty.inputGroup} key={index}>
                       <div className={sty.fragmentInput}>
                         <Label htmlFor={field.originalName}>{field.currentName}</Label>
-                        <Input id={field.originalName} placeholder={field.currentName} />
+                        <Input 
+                          id={field.originalName} 
+                          value={formValue ? formValue[field.originalName] : null} 
+                          onChange={(e) => {
+                            const { value: currentValue } = e.target;
+                            setFormValue((prevFormValue: any) => ({
+                              ...prevFormValue,
+                              [field.originalName]: currentValue
+                            }));
+                          }}
+                          placeholder={field.currentName} 
+                        />
                       </div>
                     </div>
-                  ))}
+                  ))
+                  }
                 </div>
               </form>
             </ScrollArea>

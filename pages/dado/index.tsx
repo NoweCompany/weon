@@ -27,13 +27,17 @@ interface DadosProps {
 
 export default function Dados({ collectionNameUrl }: DadosProps)  {
   const [text, setText] = useState("Selecione uma tabela para começar.")
-  const [collectionsInfos, setCollectionInfos] = useState<CollectionInfo[] | null>(null);
   const [method, setMethod] = useState<"POST" | "PUT">("POST")
-
+  
+  const [collectionsInfos, setCollectionInfos] = useState<CollectionInfo[] | null>(null);
   const [collectionName, setCollectionName] = useState<string>(collectionNameUrl || '')
   const [existCollection, setExistCollection] = useState(false)
+
   const [tableColumns, setTableColumns] = useState<tableColumnsType>([])
   const [tableRows, setTableRows] = useState<tableRowsType>([])
+  const [rowsSelected, setRowsSelected] = useState<{[key: string]: boolean}>({})
+
+  const [formValue, setFormValue] = useState<Data | null>(null)
   const [showFormData, setShowFormData] = useState<boolean>(false)
 
   useEffect(() => {
@@ -45,20 +49,20 @@ export default function Dados({ collectionNameUrl }: DadosProps)  {
     if(collectionName && collectionsInfos){
       generateTable(collectionName, collectionsInfos)    
     }
-  }, [collectionName, collectionsInfos])
+  }, [collectionName, collectionsInfos, showFormData])
 
 async function loadSideBarOptions(){
-  try {
-    collection.getApi()
-        .then((info: CollectionInfo[] | {error: string}) => {
-          if('error' in info) return messaging.send(info.error, false)
+  collection.getApi()
+      .then((info: CollectionInfo[] | {error: string}) => {
+        
+        if(info && 'error' in info) return messaging.send(info.error, false)
 
-          setCollectionInfos(info)          
-        })
-        .catch((error) => messaging.send(error, false))
-  } catch (error: any) {
-    messaging.send(error, false);
-  }
+        setCollectionInfos(info)          
+      })
+      .catch((error) => {
+        console.log(error)
+        messaging.send(error, false)
+      })
 }
 
 function generateTable(collectionName: string, collectionsInfos: CollectionInfo[]){
@@ -73,7 +77,7 @@ function generateTable(collectionName: string, collectionsInfos: CollectionInfo[
 
   value.getApi(collectionName)
     .then(fieldsInfo => {
-        if('error' in fieldsInfo) return messaging.send(fieldsInfo.error, false)
+        if(fieldsInfo?.error) return messaging.send(fieldsInfo.error, false)
         setTableRows(fieldsInfo)
     })
     .catch(error => messaging.send(error, false))
@@ -84,11 +88,52 @@ function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, Mouse
   setCollectionName(collectionName)
 }
 
+function onCLickInRow(e: React.MouseEvent<HTMLTableRowElement>): void{
+  const tdClicked = e.target as HTMLTableCellElement
+  const tr = tdClicked.parentElement as HTMLTableRowElement
+
+  const idDocument = tr.id
+  const tds = tr.querySelectorAll('td')
+
+  const value = Array.from(tds).reduce((ac: { [key: string]: string }, td) => {
+    const originalName = td.id
+    if(!originalName) return ac
+    
+    ac[originalName] = td.innerText;
+    return ac;
+  }, {});
+  value._id = idDocument
+  
+  setFormValue(value as Data)
+  setMethod('PUT')
+  setShowFormData(true)
+}
+
 function onButtonClickAdd(): void{
   setShowFormData(true)
 }
+
 function onButtonClickDel(): void{
-  console.log('Del');
+  const valueIds = Object.entries(rowsSelected).reduce((ac: string[], [id, isSelected]: [string, boolean]) => {
+    if (isSelected) return [...ac, id];
+    return ac;
+  }, []);
+
+  value.deleteApi(collectionName, valueIds, false)
+    .then(response => {   
+      if(response?.error ) {
+        const { error } = response
+        if(Array.isArray(error)) error.forEach((error: string) => messaging.send(error, false))
+        else return messaging.send(error , false)
+      }
+
+      const newRows = tableRows.filter(row => !valueIds.includes(row._id))
+      setRowsSelected({})
+      setTableRows(newRows);
+
+      return messaging.send('Valores deletados com sucesso', true)
+    })
+    .catch(error => messaging.send(error, false))
 }
 
 const buttonContentTable: ButtonContent[] = [
@@ -100,6 +145,7 @@ const buttonContentTable: ButtonContent[] = [
     name: 'Deletar',
     functionOnClick: onButtonClickDel,
     variant: "secondary",
+    disabled: Object.keys(rowsSelected).length <= 0
   }
 ]
 
@@ -118,9 +164,12 @@ return (
                       {/* Renderiza o formulário se showFormData for verdadeiro */}
                       {showFormData ? (
                         <DataForms 
+                          formValue={formValue}
+                          setFormValue={setFormValue}
                           fields={tableColumns}
                           collectionName={collectionName}
                           method={method}
+                          setMethod={setMethod}
                           setShowFormData={setShowFormData}
                         />
                       ) : (
@@ -129,9 +178,11 @@ return (
                             title={collectionName}
                             buttonContent={buttonContentTable}/>  
                           <Table  
-                            collectionName={collectionName}
+                            onCLickInRow={onCLickInRow}
                             tableColumns={tableColumns}
-                            tableRows={tableRows}>
+                            tableRows={tableRows}
+                            setRowsSelected={setRowsSelected}
+                            rowsSelected={rowsSelected}>
                           </Table>
                         </>
                       )}
