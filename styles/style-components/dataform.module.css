@@ -50,7 +50,6 @@
     margin-top: .5rem;
     gap: 2rem;
     flex-basis: calc(25% - 1rem);
-
 }
 
 .inputGroupCheckBox{
@@ -60,7 +59,10 @@
 .scrollArea {
     overflow-y: auto; 
     max-height: 400px; 
-  }
+}
+
+
+
 
 @media (max-width: 600px){
     .inputGroup{

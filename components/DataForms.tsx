@@ -88,12 +88,38 @@ export default function DataForm(
     {
       name: 'Voltar',
       functionOnClick: onButtonClickBack,
+      variant: "secondary"
     },
     {
       name: 'Salvar',
       functionOnClick: onButtonClickSave,
     }
   ]
+
+   const transformType = (type: string) =>{
+        switch (type) {
+            case 'string':
+                return 'text'
+
+            case 'number':
+                return 'number'
+
+            case 'double':
+                return 'number'
+    
+            case 'date':
+                return 'date'
+
+            case 'int':
+                return 'number'
+            
+            case 'bool':
+                return 'checkbox'
+
+            default:
+                return 'text'
+        }
+    }
 
   return (
     <>
@@ -112,8 +138,10 @@ export default function DataForm(
                     <div className={sty.inputGroup} key={index}>
                       <div className={sty.fragmentInput}>
                         <Label htmlFor={field.originalName}>{field.currentName}</Label>
-                        <Input 
+                        <Input
+                          className={sty.input} 
                           id={field.originalName} 
+                          type={transformType(field.type)} 
                           value={formValue ? formValue[field.originalName] : null} 
                           onChange={(e) => {
                             const { value: currentValue } = e.target;

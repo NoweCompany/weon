@@ -131,7 +131,7 @@ function onButtonClickDel(): void{
       setRowsSelected({})
       setTableRows(newRows);
 
-      return messaging.send('Valores deletados com sucesso', true)
+      return messaging.send('Valor deletado', true)
     })
     .catch(error => messaging.send(error, false))
 }
@@ -144,7 +144,6 @@ const buttonContentTable: ButtonContent[] = [
   {
     name: 'Deletar',
     functionOnClick: onButtonClickDel,
-    variant: "secondary",
     disabled: Object.keys(rowsSelected).length <= 0
   }
 ]

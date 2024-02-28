@@ -2,8 +2,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    overflow: auto;
+    margin: 0 auto;
+    padding: 3px;
+    overflow-x: auto;
+    width: 50%;
 }
 
 .caption {
@@ -17,15 +19,13 @@
     color: #fff;
     font-family: bold;
     text-transform: uppercase;
-    padding: 12px;
+    padding: 3px;
     border-radius: 5px;
-    
 }
 
 .allCheck {
     background-color: #000000;
     border-radius: 5px;
-
 }
 
 .tableBody {
@@ -33,7 +33,7 @@
     margin-top: 1rem;
     border-collapse: separate; 
     border-spacing: 5px;
-
+    width: 100%;
 }
 
 .tableRow:nth-child(odd) {

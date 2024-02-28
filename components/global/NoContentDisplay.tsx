@@ -11,7 +11,7 @@ export default function NoContentDisplay(props: Props){
         
         <div className={sty.noContentDisplayContainer}>
             <h1 className={sty.noContentDisplayText}> {text} 
-            <Link className={sty.description} href={link || "/"}>{linkText}</Link> </h1>
+            <Link className={sty.description} href={link || "/"}> {linkText}</Link> </h1>
         </div>
     )
 }

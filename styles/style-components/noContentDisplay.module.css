@@ -17,6 +17,8 @@
 .description{
     font-size: 1rem;
     font-family: bold;
+    color: #0062da59;
+    text-decoration: underline;
 }
 
 @media (max-width:600px){
