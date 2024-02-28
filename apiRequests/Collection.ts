@@ -1,13 +1,10 @@
-import Messaging from '@/services/Messaging';
 import ApiConfig from './apiConfig';
 import Auth from '@/services/Auth';
 
 export default class Collection extends ApiConfig {
-  private messagingService
   private auth
-  constructor(messagingService: Messaging, auth: Auth){
+  constructor(auth: Auth){
     super()
-    this.messagingService = messagingService
     this.auth = auth
   }
 
@@ -17,6 +14,7 @@ export default class Collection extends ApiConfig {
         {
           headers:{ 
             "Content-Type": "application/json",
+            "Cache-Control": 'max-age=10000',
             "authorization": `Bearer ${this.auth.getToken()}`
           },
         });
@@ -30,7 +28,7 @@ export default class Collection extends ApiConfig {
       return data.response;
     } catch (e) {
       console.log(e);      
-      this.messagingService.send('Falha na conexão com o servidor', false);
+      return { error: 'Falha na conexão com o servidor'}
     }
   };
 }

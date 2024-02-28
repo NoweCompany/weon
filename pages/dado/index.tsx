@@ -4,13 +4,15 @@ import DataSideBar from "../../components/sidebar/DataSidebar"
 import NoContentDisplay from "../../components/global/NoContentDisplay";
 import Table from '@/components/Table';
 import DataForms from '@/components/DataForms';
+import FormUpload from '@/components/FormUpload';
 
 import React, { useEffect, useState } from 'react';
 
 import Field from '@/interfaces/Field';
 import ButtonContent from '@/interfaces/ButtonContent';
+import { SelectContentProtocol } from '@/interfaces/SelectContent'
 
-import { collection, value } from '@/apiRequests';
+import { collection, value, download } from '@/apiRequests';
 import { messaging } from '@/services/';
 interface CollectionInfo {
     collectionName: string,
@@ -38,18 +40,19 @@ export default function Dados({ collectionNameUrl }: DadosProps)  {
   const [rowsSelected, setRowsSelected] = useState<{[key: string]: boolean}>({})
 
   const [formValue, setFormValue] = useState<Data | null>(null)
+  const [showFormUpload, setShowFormUpload] = useState<boolean>(false)
   const [showFormData, setShowFormData] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log(collectionsInfos);
     if(!collectionsInfos) loadSideBarOptions()
   }, []);
 
   useEffect(() => {
-    if(collectionName && collectionsInfos){
+    //&& !showFormData essa condição diz que somente quando o form for fechado deve-se chamar a função
+    if(collectionName && collectionsInfos && !showFormData && !showFormUpload){
       generateTable(collectionName, collectionsInfos)    
     }
-  }, [collectionName, collectionsInfos, showFormData])
+  }, [collectionName, collectionsInfos, showFormData, showFormUpload])
 
 async function loadSideBarOptions(){
   collection.getApi()
@@ -136,6 +139,40 @@ function onButtonClickDel(): void{
     .catch(error => messaging.send(error, false))
 }
 
+function onButtonClickExport():void {
+  download.postApi(collectionName)
+    .then(response => {   
+      if(response?.error ) {
+        const { error } = response
+        return messaging.send(error , false)
+      }
+      
+      window.location.assign(response.url)
+      
+      return messaging.send('🤡', true)
+    })
+    .catch(error => messaging.send(error, false))
+}
+function onButtonClickImport():void {
+  console.log('Importar')
+  setShowFormUpload(true)
+}
+
+function onButtonClickExportModel():void {
+  download.getApi(collectionName)
+    .then(response => {   
+      if(response?.error ) {
+        const { error } = response
+        return messaging.send(error , false)
+      }
+      
+      window.location.assign(response.url)
+      
+      return messaging.send('🤡', true)
+    })
+    .catch(error => messaging.send(error, false))
+}
+
 const buttonContentTable: ButtonContent[] = [
   {
     name: 'Adicionar',
@@ -148,6 +185,27 @@ const buttonContentTable: ButtonContent[] = [
   }
 ]
 
+const selectContent: SelectContentProtocol = {
+  placeholder: "Export and Inport",
+  selecteOptions: [
+    {
+      name: 'Importar',
+      variant: "default",
+      functionOnClick: onButtonClickImport
+    },
+    {
+      name: 'Exportar',
+      variant: "default",
+      functionOnClick: onButtonClickExport
+    },
+    {
+      name: 'Exportar modelo',
+      variant: "default",
+      functionOnClick: onButtonClickExportModel
+    }
+  ]
+} 
+
 return (
     <>
         <NavBar dataPages={true}/>
@@ -156,12 +214,12 @@ return (
           collectionsInfos ?(
             <>
               {
-                
                 existCollection ? (
                   <>
                     <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
                       {/* Renderiza o formulário se showFormData for verdadeiro */}
-                      {showFormData ? (
+                      {
+                      showFormData ? (
                         <DataForms 
                           formValue={formValue}
                           setFormValue={setFormValue}
@@ -173,16 +231,30 @@ return (
                         />
                       ) : (
                         <>
-                          <FloatNavDados 
-                            title={collectionName}
-                            buttonContent={buttonContentTable}/>  
-                          <Table  
-                            onCLickInRow={onCLickInRow}
-                            tableColumns={tableColumns}
-                            tableRows={tableRows}
-                            setRowsSelected={setRowsSelected}
-                            rowsSelected={rowsSelected}>
-                          </Table>
+                          {
+                            showFormUpload ? (
+                              <>
+                                <FormUpload 
+                                  collectionName={collectionName}
+                                  setShowFormUpload={setShowFormUpload}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <FloatNavDados 
+                                title={collectionName}
+                                buttonContent={buttonContentTable}
+                                selectContent={selectContent}/> 
+                                <Table  
+                                  onCLickInRow={onCLickInRow}
+                                  tableColumns={tableColumns}
+                                  tableRows={tableRows}
+                                  setRowsSelected={setRowsSelected}
+                                  rowsSelected={rowsSelected}>
+                                </Table>
+                              </>
+                            )
+                          }
                         </>
                       )}
                   </>

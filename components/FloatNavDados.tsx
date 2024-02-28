@@ -40,16 +40,18 @@ import {
 } from "@/components/ui/card";
 
 import ButtonContent from '@/interfaces/ButtonContent';
-
+import { SelectContentProtocol } from '@/interfaces/SelectContent'
 interface FloatNavDadosProps {
-  title: string;
+  title: string
   buttonContent: ButtonContent[]
+  selectContent?: SelectContentProtocol
   variantType?: string;
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   title,
   buttonContent,
+  selectContent,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -99,18 +101,30 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                 )
               })
             }
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder='placeholderSelect'/>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>labelSelect</SelectLabel>
-                  <SelectItem value="download">Baixar</SelectItem>
-                  <SelectItem value="upload">Upload</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            {
+              selectContent && <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder={selectContent.placeholder}/>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {
+                      selectContent.selecteOptions.map((option) => (
+                        <SelectLabel 
+                          key={option.name}
+                          onClick={(e) => option.functionOnClick ?
+                            option.functionOnClick(e):
+                            () => {}
+                          }
+                        >
+                          {option.name}
+                        </SelectLabel>
+                      ))
+                    }
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            }
           </div>
         </Card>
       </div>

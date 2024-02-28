@@ -1,11 +1,8 @@
-import Messaging from '@/services/Messaging';
 import ApiConfig from './apiConfig';
 
 export default class Token extends ApiConfig {
-  private messagingService
-  constructor(messagingService: Messaging){
+  constructor(){
     super()
-    this.messagingService = messagingService
   }
 
   public async postApi(email: string, password: string) {

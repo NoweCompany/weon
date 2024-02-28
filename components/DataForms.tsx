@@ -96,7 +96,7 @@ export default function DataForm(
     }
   ]
 
-   const transformType = (type: string) =>{
+  const transformType = (type: string) =>{
         switch (type) {
             case 'string':
                 return 'text'
