@@ -46,6 +46,32 @@ export default function Table(props: PropsTable) {
     setSelectedAll(allSelected);
   };
 
+  function formaterData(data: string, type: string){
+    switch (type) {
+      case 'string':
+        return String(data)
+    case 'date':
+        return formaterDate(new Date(data))
+      default:
+        return String(data)
+    }
+  }
+
+  function adicionaZero(numero: number) {
+    if (numero < 10) {
+      return '0' + numero;
+    }
+    return numero;
+  }
+
+  function formaterDate(data: Date) {
+    var dia = adicionaZero(data.getDate());
+    var mes = adicionaZero(data.getMonth() + 1); // Os meses começam do zero, então adicionamos 1
+    var ano = data.getFullYear();
+  
+    return dia + '/' + mes + '/' + ano
+  }
+
 return (
   <div className={sty.containerMobile}> 
   <div className={sty.containerMain}>
@@ -79,9 +105,12 @@ return (
             </td>
             {tableColumns.map((fieldinf: Field, index) => {
               const microDataInOrder = headerOrder[index];
-              const microDataValue = currentData[microDataInOrder];
+              const microDataValue = formaterData(currentData[microDataInOrder], fieldinf.type)
+              
               return (
-                <td key={microDataInOrder} id={fieldinf.originalName} className={sty.tableCell}>{microDataValue}</td>
+                <td key={microDataInOrder} id={fieldinf.originalName} className={sty.tableCell}>
+                  {microDataValue}
+                </td>
               );
             })}
           </tr>
