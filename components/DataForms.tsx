@@ -96,30 +96,27 @@ export default function DataForm(
     }
   ]
 
-  const transformType = (type: string) =>{
-        switch (type) {
-            case 'string':
-                return 'text'
+const transformType = (type: string) => {
+  switch (type) {
+    case 'string':
+        return { type: 'text' };
 
-            case 'number':
-                return 'number'
+    case 'double':
+        return { type: 'number', step:"0.0001" }; // Permitir valores decimais
 
-            case 'double':
-                return 'number'
-    
-            case 'date':
-                return 'date'
+    case 'date':
+        return { type: 'date' };
 
-            case 'int':
-                return 'number'
-            
-            case 'bool':
-                return 'checkbox'
+    case 'long':
+        return { type: 'number', step: '1' }; // Somente inteiros
 
-            default:
-                return 'text'
-        }
-    }
+    case 'bool':
+        return { type: 'checkbox' };
+
+    default:
+        return { type: 'text' };
+  }
+};
 
   return (
     <>
@@ -134,27 +131,32 @@ export default function DataForm(
               <form className="cardForm">
                 <div className={sty.formContent}>
                   {
-                  fields && fields.map((field, index) => (
-                    <div className={sty.inputGroup} key={index}>
-                      <div className={sty.fragmentInput}>
-                        <Label htmlFor={field.originalName}>{field.currentName}</Label>
-                        <Input
-                          className={sty.input} 
-                          id={field.originalName} 
-                          type={transformType(field.type)} 
-                          value={formValue ? formValue[field.originalName] : null} 
-                          onChange={(e) => {
-                            const { value: currentValue } = e.target;
-                            setFormValue((prevFormValue: any) => ({
-                              ...prevFormValue,
-                              [field.originalName]: currentValue
-                            }));
-                          }}
-                          placeholder={field.currentName} 
-                        />
+                  fields && fields.map((field, index) => {
+                    const { step, type} = transformType(field.type)
+                    console.log(field.type, step, type)                    
+                    return (
+                      <div className={sty.inputGroup} key={index}>
+                        <div className={sty.fragmentInput}>
+                          <Label htmlFor={field.originalName}>{field.currentName}</Label>
+                          <Input
+                            className={sty.input} 
+                            id={field.originalName} 
+                            type={type} 
+                            step={step}
+                            value={formValue ? formValue[field.originalName] : null} 
+                            onChange={(e) => {
+                              const { value: currentValue } = e.target;
+                              setFormValue((prevFormValue: any) => ({
+                                ...prevFormValue,
+                                [field.originalName]: currentValue
+                              }));
+                            }}
+                            placeholder={field.currentName} 
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    )
+                  })
                   }
                 </div>
               </form>
