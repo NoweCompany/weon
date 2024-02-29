@@ -1,4 +1,6 @@
 import sty from "../styles/style-components/dataform.module.css";
+import {useRef, useEffect} from 'react'
+
 import {
   Card,
   CardContent,
@@ -28,11 +30,24 @@ export default function DataForm(
   { method, setMethod, formValue, setFormValue, fields, collectionName, setShowFormData }: DataFormProps) 
 {
 
+  const firstInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() =>{
+    if(firstInputRef.current){
+      firstInputRef.current.focus()
+    }
+  }, [])
+
   function cleanInputs(){
     const form = document.querySelector('.cardForm') as HTMLFormElement
     const inputs = form.querySelectorAll('input') as NodeListOf<HTMLInputElement>
     for(const input of Array.from(inputs)){
       input.value = ''
+    }
+
+    const firstInput = form.querySelector('input')
+    if(firstInput){
+      firstInput.focus()
     }
   }
 
@@ -152,6 +167,7 @@ const transformType = (type: string) => {
                               }));
                             }}
                             placeholder={field.currentName} 
+                             ref={index === 0 ? firstInputRef: null} //foca no primerio input do formulario
                           />
                         </div>
                       </div>
