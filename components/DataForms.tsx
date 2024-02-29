@@ -3,8 +3,6 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import Field from '@/interfaces/Field';
@@ -13,6 +11,8 @@ import ButtonContent from '@/interfaces/ButtonContent';
 
 import { value } from '../apiRequests/'
 import { messaging } from '@/services/';
+import { ChangeEvent } from 'react';
+import InputFormData from './InputFormData';
 
 interface DataFormProps {
   fields: Field[],
@@ -46,6 +46,9 @@ export default function DataForm(
     const form = document.querySelector('.cardForm')
     const inputs = form?.querySelectorAll('input')
 
+    console.log(formValue)
+    
+
     if(!inputs || inputs.length <= 0) return messaging.send('Não há campos criados para cadastrar', false)
     const allInputsAreEmpty = !formValue || Object.entries(formValue).every(entrie => { 
       if(entrie[0] === "_id") return true
@@ -53,10 +56,20 @@ export default function DataForm(
     })
     if(allInputsAreEmpty) return messaging.send('Ao menos um campo deve ser preenchido.', false)
 
+    for (const field of fields) {
+      const { required, type, currentName, originalName } = field
+
+      if(type === 'bool') continue
+      if(required && !formValue[originalName]){
+        return messaging.send(`O campo ${currentName} é obrigatório.`, false)
+      }
+    }
+
     if(method === 'POST'){
       value.postApi(collectionName, [formValue])
       .then(response => {
         if(response.error) return messaging.send(response.error, false)
+        cleanInputs()
         return messaging.send('Cadastro realizado com sucesso', true)
       })
       .catch((error) => {
@@ -64,7 +77,6 @@ export default function DataForm(
       })
       .finally(() => {
         setFormValue({})
-        cleanInputs()
       })
     }else{
       const { _id, ...formDataValue} = formValue 
@@ -96,27 +108,24 @@ export default function DataForm(
     }
   ]
 
-const transformType = (type: string) => {
-  switch (type) {
-    case 'string':
-        return { type: 'text' };
+  function onChangeInput(e: ChangeEvent<HTMLInputElement>, field: Field){
+    console.log(formValue)
+    
+    let currentValue = (type: string) => {
+      if(type === "bool") {
+        const checkbox = e.target.checked
+        return checkbox
+      }
+      else{
+        return e.target.value || ''
+      }
+    }
 
-    case 'double':
-        return { type: 'number', step:"0.0001" }; // Permitir valores decimais
-
-    case 'date':
-        return { type: 'date' };
-
-    case 'long':
-        return { type: 'number', step: '1' }; // Somente inteiros
-
-    case 'bool':
-        return { type: 'checkbox' };
-
-    default:
-        return { type: 'text' };
+    setFormValue((prevFormValue: any) => ({
+      ...prevFormValue,
+      [field.originalName]: currentValue(field.type)
+    }))
   }
-};
 
   return (
     <>
@@ -132,30 +141,18 @@ const transformType = (type: string) => {
                 <div className={sty.formContent}>
                   {
                   fields && fields.map((field, index) => {
-                    const { step, type} = transformType(field.type)
-                    console.log(field.type, step, type)                    
-                    return (
-                      <div className={sty.inputGroup} key={index}>
-                        <div className={sty.fragmentInput}>
-                          <Label htmlFor={field.originalName}>{field.currentName}</Label>
-                          <Input
-                            className={sty.input} 
-                            id={field.originalName} 
-                            type={type} 
-                            step={step}
-                            value={formValue ? formValue[field.originalName] : null} 
-                            onChange={(e) => {
-                              const { value: currentValue } = e.target;
-                              setFormValue((prevFormValue: any) => ({
-                                ...prevFormValue,
-                                [field.originalName]: currentValue
-                              }));
-                            }}
-                            placeholder={field.currentName} 
-                          />
-                        </div>
+                  
+                  return (
+                    <div className={sty.inputGroup} key={index}>
+                      <div className={sty.fragmentInput}>
+                        <InputFormData
+                          field={field}
+                          formValue={formValue}
+                          onChangeInput={onChangeInput}
+                        />
                       </div>
-                    )
+                    </div>
+                  )
                   })
                   }
                 </div>

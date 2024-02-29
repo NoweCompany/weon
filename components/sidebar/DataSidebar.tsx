@@ -96,11 +96,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             </CommandDialog>
           </div>
           <div className={sty.sidebarItems}>
+          <h1 className='mb-5 text-3xl'>Tabelas</h1>
             <Tooltip className="toolTip" placement="top" content=" Ctrl + S">
               <Button className={sty.buttonSearch} onClick={toggleDialog}>
                 Pesquisar
               </Button>
             </Tooltip>
+            
               {collectionsInfo.map((collectionInfo, index) => (
                 <Button 
                   className={sty.sidebarItems} 

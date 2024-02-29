@@ -153,6 +153,7 @@ function onButtonClickExport():void {
     })
     .catch(error => messaging.send(error, false))
 }
+
 function onButtonClickImport():void {
   console.log('Importar')
   setShowFormUpload(true)
@@ -175,13 +176,13 @@ function onButtonClickExportModel():void {
 
 const buttonContentTable: ButtonContent[] = [
   {
-    name: 'Adicionar',
-    functionOnClick: onButtonClickAdd,
-  },
-  {
     name: 'Deletar',
     functionOnClick: onButtonClickDel,
     disabled: Object.keys(rowsSelected).length <= 0
+  },
+  {
+    name: 'Adicionar',
+    functionOnClick: onButtonClickAdd,
   }
 ]
 
@@ -219,7 +220,7 @@ return (
                     <DataSideBar collectionsInfo={collectionsInfos} handleClickInCollectionBtn={handleClickInCollectionBtn} />
                       {/* Renderiza o formulário se showFormData for verdadeiro */}
                       {
-                      showFormData ? (
+                        showFormData ? (
                         <DataForms 
                           formValue={formValue}
                           setFormValue={setFormValue}

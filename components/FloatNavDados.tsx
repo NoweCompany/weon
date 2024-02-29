@@ -81,27 +81,6 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
           </CardHeader>
           <div className={sty.buttonContainer}>
             {
-              buttonContent.map((content, index) => {
-                const { name, className, disabled, id, functionOnClick, variant} = content
-                return  (
-                  <Button 
-                    key={index} 
-                    className={className} 
-                    variant={variant ? variant : undefined} 
-                    id={id} 
-                    onClick={(event) => {
-                      functionOnClick ? 
-                        functionOnClick(event):
-                        () => {}
-                    }}
-                    disabled={disabled}
-                  >
-                    {name}
-                  </Button>
-                )
-              })
-            }
-            {
               selectContent && <Select>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder={selectContent.placeholder}/>
@@ -124,6 +103,27 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                   </SelectGroup>
                 </SelectContent>
               </Select>
+            }
+            {
+              buttonContent.map((content, index) => {
+                const { name, className, disabled, id, functionOnClick, variant} = content
+                return  (
+                  <Button 
+                    key={index} 
+                    className={className} 
+                    variant={variant ? variant : undefined} 
+                    id={id} 
+                    onClick={(event) => {
+                      functionOnClick ? 
+                        functionOnClick(event):
+                        () => {}
+                    }}
+                    disabled={disabled}
+                  >
+                    {name}
+                  </Button>
+                )
+              })
             }
           </div>
         </Card>
