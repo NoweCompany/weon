@@ -22,15 +22,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 import Field from '@/interfaces/Field';
 interface CollectionInfo {
@@ -60,8 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   const toggleDialog = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
-
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {

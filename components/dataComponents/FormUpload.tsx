@@ -2,7 +2,6 @@ import sty from "../../styles/style-components/uploadForm.module.css"
 
 import FloatNavDados from '../dataComponents/FloatNavDados';
 import ButtonContent from '@/interfaces/ButtonContent';
-import BreadCrumber from "../global/BreadCrumber";
 
 import {
   Card,
@@ -82,9 +81,6 @@ export default function DataForm(
     }
   ]
 
-  const screen = "Tabelas";
-  const page = [collectionName, "Upload"];
-  const route = "none"
 
   return (
     <>

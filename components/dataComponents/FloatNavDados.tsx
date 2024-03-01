@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import sty from '../../styles/style-components/floatnav.module.css';
+import BreadCrumber from "../global/BreadCrumber";
 
 import { MoveDown, Plus } from 'lucide-react';
 
@@ -26,6 +27,7 @@ import {
   CommandDialog,
   CommandInput,
   CommandList,
+  CommandItem,
   CommandEmpty,
   CommandGroup,
 } from '@/components/ui/command';
@@ -42,11 +44,22 @@ import {
 
 import ButtonContent from '@/interfaces/ButtonContent';
 import { SelectContentProtocol } from '@/interfaces/SelectContent'
+
+import Field from '@/interfaces/Field';
+
+interface CollectionInfo {
+  collectionName: string,
+  fields: Field[]
+}
+
 interface FloatNavDadosProps {
   title: string
   buttonContent: ButtonContent[]
   selectContent?: SelectContentProtocol
   variantType?: string;
+  collectionName: string,
+  fields: Field[]
+
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
@@ -72,8 +85,15 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  const screen = "Tabelas";
+  const page = [title];
+  const route = "none"
+
   return (
     <>
+
+      <BreadCrumber screen={screen} route={route} page={page} />
+
       {/* Desktop */}
       <div className={sty.containerDesktop}>
         <Card className={sty.card}>
@@ -131,14 +151,18 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
       </div>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Procurar" />
-        <CommandList>
-          <CommandEmpty>Nada encontrado...</CommandEmpty>
-          <CommandGroup heading="tabelas">
-
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+              <CommandInput placeholder="Procurar" />
+              <CommandList>
+                <CommandEmpty>Nada encontrado...</CommandEmpty>
+                <CommandGroup heading="tabelas">
+                  {/* {
+                    collectionName.map((collectionName, index) => (
+                      <CommandItem key={index}>{collectionName.collectionName}</CommandItem>
+                    ))
+                  } */}
+                </CommandGroup>
+              </CommandList>
+            </CommandDialog>
 
       {/* Mobile */}
       <div className={sty.containerMobile}>
