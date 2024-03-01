@@ -7,7 +7,7 @@ export default function adminHistory() {
     const buttonContent = ["Filtrar"]
     return (
         <>
-            <BreadCrumber page={BreadCrumberRoute} />
+            <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
             <Navbar adminPages={true} />
             <Sidebar routeHistory={true} />
             <FloatNav title="Histórico" buttonContent={buttonContent} />

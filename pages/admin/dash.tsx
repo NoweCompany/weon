@@ -7,7 +7,7 @@ export default function adminDash(){
     const BreadCrumberRoute = ["Route"]
     return(
         <>
-        <BreadCrumber page={BreadCrumberRoute} />
+        <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
         <Navbar adminPages={true}/>
         <Sidebar routeDash={true}/>
         <FloatNav title="Dashboard" buttonContent={buttonContent}/>

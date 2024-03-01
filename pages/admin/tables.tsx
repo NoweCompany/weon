@@ -11,7 +11,7 @@ export default function adminTables() {
             <Navbar adminPages={true} />
             <Sidebar routeTable={true} />
             <FloatNav title="Tabelas" buttonContent={buttonContent} />
-            <BreadCrumber page={BreadCrumberRoute} />
+            <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
         </>
     )
 }

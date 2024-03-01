@@ -8,7 +8,7 @@ export default function adminTables(){
     const caminho = ["usuário", "Criar Usuário"]
     return(
         <>
-        <BreadCrumber page={caminho} />
+        <BreadCrumber page={caminho} screen={''} route={''} />
         <Navbar adminPages={true}/>
         <Sidebar routeUsers={true}/>
         <FloatNav title="Usuários" buttonContent={buttonContent}/>

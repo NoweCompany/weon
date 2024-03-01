@@ -7,7 +7,7 @@ export default function adminTrash(){
     const BreadCrumberRoute = ["Lixeira"]
     return(
         <>
-        <BreadCrumber page={BreadCrumberRoute} />
+        <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
         <Navbar adminPages={true}/>
         <Sidebar routeTrash={true}/>
         <FloatNav title="Lixeira" buttonContent={buttonContent}/>
