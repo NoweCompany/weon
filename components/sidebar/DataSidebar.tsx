@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import sty from '../../styles/style-components/dataSidebar.module.css';
 import { Button } from '@/components/ui/button';
-import { Tooltip} from '@nextui-org/react';
+import { Tooltip } from '@nextui-org/react';
+import { MoveDown, Plus } from 'lucide-react';
 import {
   CommandDialog,
   CommandInput,
@@ -18,19 +19,9 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 import Field from '@/interfaces/Field';
 interface CollectionInfo {
@@ -47,21 +38,19 @@ interface SidebarProps {
   onButtonClick?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ 
+const Sidebar: React.FC<SidebarProps> = ({
   collectionsInfo,
   placeholderSelect,
   labelSelect,
   showSelect,
   handleClickInCollectionBtn,
-  onButtonClick 
+  onButtonClick
 }) => {
   const [open, setOpen] = useState(false);
 
   const toggleDialog = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-  
-  
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -96,34 +85,32 @@ const Sidebar: React.FC<SidebarProps> = ({
             </CommandDialog>
           </div>
           <div className={sty.sidebarItems}>
-          <h1 className='mb-5 text-3xl'>Tabelas</h1>
             <Tooltip className="toolTip" placement="top" content=" Ctrl + S">
               <Button className={sty.buttonSearch} onClick={toggleDialog}>
                 Pesquisar
               </Button>
             </Tooltip>
-            
-              {collectionsInfo.map((collectionInfo, index) => (
-                <Button 
-                  className={sty.sidebarItems} 
-                  variant="outline" 
-                  key={index}
-                  onClick={(e) => handleClickInCollectionBtn(e, collectionInfo.collectionName)}  
-                >
-                  {collectionInfo.collectionName}
-                </Button>
-              ))}
+            {collectionsInfo.map((collectionInfo, index) => (
+              <Button
+                className={sty.sidebarItems}
+                variant="outline"
+                key={index}
+                onClick={(e) => handleClickInCollectionBtn(e, collectionInfo.collectionName)}
+              >
+                {collectionInfo.collectionName}
+              </Button>
+            ))}
           </div>
         </div>
       </div>
 
- 
+
       <div className={sty.mobileSidebar}>
         <div className={sty.mobileContentSidebar}>
           <div className={sty.mobileSidebarItems}>
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className={sty.mobileButtonAction}>Dados</Button>
+                <Button className={sty.mobileButtonAction}><Plus /></Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
@@ -133,39 +120,23 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <div className="p-4 pb-0">
                     <div className="flex items-center justify-center space-x-2">
                       <div className={sty.mobileDrawerContent}>
-                        
-                         
-                      
-
-                        
-                        {showSelect && (
-                          <Select>
-                            <SelectTrigger className="w-[180px]">
-                              <SelectValue placeholder={placeholderSelect} />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectLabel>{labelSelect}</SelectLabel>
-                                <SelectItem value="download"> Baixar</SelectItem>
-                                <SelectItem value="upload"> Upload</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                        )}
+                        <Button className={sty.mobileButtonDrawerContent} onClick={toggleDialog}>
+                          Pesquisar
+                        </Button>
                       </div>
                     </div>
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button>Fechar</Button>
+                      <Button variant="ghost"> <MoveDown /> </Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>
               </DrawerContent>
-            </Drawer> 
+            </Drawer>
           </div>
         </div>
-      </div> 
+      </div>
     </>
   );
 };

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import sty from '../styles/style-components/floatnav.module.css';
+import sty from '../../styles/style-components/floatnav.module.css';
+import BreadCrumber from "../global/BreadCrumber";
+
+import { MoveDown, Plus } from 'lucide-react';
+
 import {
   Select,
   SelectContent,
   SelectGroup,
-  SelectItem,
   SelectLabel,
   SelectTrigger,
   SelectValue
@@ -24,9 +27,9 @@ import {
   CommandDialog,
   CommandInput,
   CommandList,
+  CommandItem,
   CommandEmpty,
   CommandGroup,
-  CommandItem,
 } from '@/components/ui/command';
 
 import {
@@ -41,11 +44,22 @@ import {
 
 import ButtonContent from '@/interfaces/ButtonContent';
 import { SelectContentProtocol } from '@/interfaces/SelectContent'
+
+import Field from '@/interfaces/Field';
+
+interface CollectionInfo {
+  collectionName: string,
+  fields: Field[]
+}
+
 interface FloatNavDadosProps {
   title: string
   buttonContent: ButtonContent[]
   selectContent?: SelectContentProtocol
   variantType?: string;
+  collectionName: string,
+  fields: Field[]
+
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
@@ -71,8 +85,15 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  const screen = "Tabelas";
+  const page = [title];
+  const route = "none"
+
   return (
     <>
+
+      <BreadCrumber screen={screen} route={route} page={page} />
+
       {/* Desktop */}
       <div className={sty.containerDesktop}>
         <Card className={sty.card}>
@@ -83,17 +104,17 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             {
               selectContent && <Select>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder={selectContent.placeholder}/>
+                  <SelectValue placeholder={selectContent.placeholder} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     {
                       selectContent.selecteOptions.map((option) => (
-                        <SelectLabel 
+                        <SelectLabel
                           key={option.name}
                           onClick={(e) => option.functionOnClick ?
-                            option.functionOnClick(e):
-                            () => {}
+                            option.functionOnClick(e) :
+                            () => { }
                           }
                         >
                           {option.name}
@@ -106,17 +127,17 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             }
             {
               buttonContent.map((content, index) => {
-                const { name, className, disabled, id, functionOnClick, variant} = content
-                return  (
-                  <Button 
-                    key={index} 
-                    className={className} 
-                    variant={variant ? variant : undefined} 
-                    id={id} 
+                const { name, className, disabled, id, functionOnClick, variant } = content
+                return (
+                  <Button
+                    key={index}
+                    className={className}
+                    variant={variant ? variant : undefined}
+                    id={id}
                     onClick={(event) => {
-                      functionOnClick ? 
-                        functionOnClick(event):
-                        () => {}
+                      functionOnClick ?
+                        functionOnClick(event) :
+                        () => { }
                     }}
                     disabled={disabled}
                   >
@@ -130,14 +151,18 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
       </div>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Procurar" />
-        <CommandList>
-          <CommandEmpty>Nada encontrado...</CommandEmpty>
-          <CommandGroup heading="tabelas">
-
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+              <CommandInput placeholder="Procurar" />
+              <CommandList>
+                <CommandEmpty>Nada encontrado...</CommandEmpty>
+                <CommandGroup heading="tabelas">
+                  {/* {
+                    collectionName.map((collectionName, index) => (
+                      <CommandItem key={index}>{collectionName.collectionName}</CommandItem>
+                    ))
+                  } */}
+                </CommandGroup>
+              </CommandList>
+            </CommandDialog>
 
       {/* Mobile */}
       <div className={sty.containerMobile}>
@@ -152,7 +177,7 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             <div className={sty.mobileSidebarItems}>
               <Drawer>
                 <DrawerTrigger asChild>
-                  <Button className={sty.mobileButtonAction}>abas</Button>
+                  <Button className={sty.mobileButtonAction}><Plus /></Button>
                 </DrawerTrigger>
                 <DrawerContent>
                   <div className="mx-auto w-full max-w-sm">
@@ -168,24 +193,32 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                           >
                             Pesquisar
                           </Button>
-                            <Select>
-                              <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="placeholderSelect"/>
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectGroup>
-                                  <SelectLabel>labelSelect</SelectLabel>
-                                  <SelectItem value="download">Baixar</SelectItem>
-                                  <SelectItem value="upload">Upload</SelectItem>
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select>
+
+                          {buttonContent.map((content, index) => {
+                            const { name, className, disabled, id, functionOnClick, variant } = content
+                            return (
+                              <Button
+                                key={index}
+                                className={className}
+                                variant={variant ? variant : undefined}
+                                id={id}
+                                onClick={(event) => {
+                                  functionOnClick ?
+                                    functionOnClick(event) :
+                                    () => { }
+                                }}
+                                disabled={disabled}
+                              >
+                                {name}
+                              </Button>
+                            )
+                          })}
                         </div>
                       </div>
                     </div>
                     <DrawerFooter>
                       <DrawerClose asChild>
-                        <Button>Fechar</Button>
+                        <Button variant="ghost"> <MoveDown/></Button>
                       </DrawerClose>
                     </DrawerFooter>
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import sty from "../styles/style-components/table.module.css";
-import Field from '../interfaces/Field';
-import Pagination from '@/components/Pagination'
+import sty from "../../styles/style-components/table.module.css";
+import Field from '../../interfaces/Field';
+import Pagination from '@/components/dataComponents/Pagination'
 
 type Data = { _id: string; [key: string]: any };
 

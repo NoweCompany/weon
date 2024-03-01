@@ -1,4 +1,4 @@
-import sty from "../styles/style-components/dataform.module.css";
+import sty from "../../styles/style-components/dataform.module.css";
 import {useRef, useEffect} from 'react'
 
 import {
@@ -11,7 +11,7 @@ import Field from '@/interfaces/Field';
 import FloatNavDados from './FloatNavDados';
 import ButtonContent from '@/interfaces/ButtonContent';
 
-import { value } from '../apiRequests/'
+import { value } from '../../apiRequests/'
 import { messaging } from '@/services/';
 import { ChangeEvent } from 'react';
 import InputFormData from './InputFormData';

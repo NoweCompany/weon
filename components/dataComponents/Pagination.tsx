@@ -1,12 +1,9 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "./ui/pagination"
+} from "../ui/pagination"
 import React, { useEffect, useState } from 'react';
 
 type Data = { _id: string; [key: string]: any };

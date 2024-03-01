@@ -1,10 +1,10 @@
 import NavBar from "../../components/global/Navbar"
-import FloatNavDados from "../../components/FloatNavDados"
+import FloatNavDados from "../../components/dataComponents/FloatNavDados"
 import DataSideBar from "../../components/sidebar/DataSidebar"
 import NoContentDisplay from "../../components/global/NoContentDisplay";
-import Table from '@/components/Table';
-import DataForms from '@/components/DataForms';
-import FormUpload from '@/components/FormUpload';
+import Table from '@/components/dataComponents/Table';
+import DataForms from '@/components/dataComponents/DataForms';
+import FormUpload from '@/components/dataComponents/FormUpload';
 
 import React, { useEffect, useState } from 'react';
 
@@ -169,7 +169,7 @@ function onButtonClickExportModel():void {
       
       window.location.assign(response.url)
       
-      return messaging.send('🤡', true)
+      return messaging.send('Exportado com sucesso', true)
     })
     .catch(error => messaging.send(error, false))
 }
@@ -187,7 +187,7 @@ const buttonContentTable: ButtonContent[] = [
 ]
 
 const selectContent: SelectContentProtocol = {
-  placeholder: "Export and Inport",
+  placeholder: "Arquivo",
   selecteOptions: [
     {
       name: 'Importar',
@@ -201,7 +201,7 @@ const selectContent: SelectContentProtocol = {
     },
     {
       name: 'Exportar modelo',
-      variant: "default",
+      variant: "secondary",
       functionOnClick: onButtonClickExportModel
     }
   ]
