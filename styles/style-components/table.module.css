@@ -8,6 +8,17 @@
     width: 50%;
 }
 
+.containerColumn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 3px;
+    overflow-x: auto;
+    width: 100%;
+}
+
 .caption {
     font-size: 1.2em;
     font-weight: bold;
