@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import sty from "../styles/style-components/table.module.css"
-import Field from '../interfaces/Field'
+import sty from "../../styles/style-components/table.module.css"
+import Field from '../../interfaces/Field'
 
 type Data = { _id: string; [key: string]: any };
 

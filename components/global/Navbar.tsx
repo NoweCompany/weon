@@ -29,7 +29,7 @@ const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
                     <div className={sty.navItenContainer}>
                         <div className={sty.navItem}>
                             <Link href="/dado">
-                                <div className={dataPages ? sty.activeLink : ''}>Dados</div>
+                                <div className={dataPages ? sty.activeLink : ''}>Tabelas</div>
                             </Link>
                         </div>
                         <div className={sty.navItem}>
@@ -67,7 +67,7 @@ const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
                         </div>
                         <div className={sty.drawerItem}>
                             <Link href="/dado">
-                                <div className={dataPages ? sty.activeLink : ''}>Dados</div>
+                                <div className={dataPages ? sty.activeLink : ''}>Tabelas</div>
                             </Link>
                         </div>
                         <div className={sty.drawerItem}>

@@ -1,4 +1,4 @@
-import sty from "../styles/style-components/dataform.module.css";
+import sty from "../../styles/style-components/dataform.module.css";
 import Field from '@/interfaces/Field';
 import React, { ChangeEvent } from 'react';
 import { Input } from "@/components/ui/input";

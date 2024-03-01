@@ -1,0 +1,138 @@
+.cardBody{
+    display: grid;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    width: 50%;
+    margin: 1rem auto;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.textContainer{
+    display: grid;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+}
+
+.title{
+    font-family: bold;
+    font-size: 2rem;
+    color: #000;
+    text-align: center;
+
+}
+
+.subtitle{
+    color: #c2c2c2;
+    font-size: 1rem;
+    margin-top: -20px;
+    text-align: center;
+
+}
+
+.destaque{
+    color: rgba(48, 113, 192, 0.719);
+}
+
+.buttonSelectArchive{
+ background-color: #E5E5E5;
+ padding: 15px;
+ display: grid;
+ align-items: center;
+ justify-content: center;
+ margin: 1rem auto;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: all .1s ease-in-out;
+}
+
+.buttonSelectArchive:hover{
+  background-color: #e5e5e5ce;
+}
+
+.cardContent{
+    display: grid;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconCloud{
+    color: #000;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+
+.iconCloud:hover{
+    color: #0063da;
+}
+
+.needHelp{
+    color: #c2c2c2;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.needHelp:hover{
+    color: #0063da;
+}
+
+.helpTitle{
+    color: #000000;
+    font-family: extrabold;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.helpModalTitle{
+    color: #000000;
+    margin-bottom: .5rem;
+    font-family: bold;
+}
+
+.helpModalContent{
+    color: #464646;
+    text-align: justify;
+}
+
+.close{
+    color: #c2c2c2;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+
+.close:hover{
+    color: #000000;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media (max-width:600px) {
+    .cardBody{
+        width: 90%;
+        margin-top: 5rem;
+        padding: 60px;
+    }
+ 
+    .title{
+        font-size: 1.5rem;
+    }
+    
+    .subtitle{
+        color: #c2c2c2;
+        text-align: center;
+    }
+    
+}

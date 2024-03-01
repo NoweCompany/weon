@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import sty from '../styles/style-components/floatnav.module.css';
+import sty from '../../styles/style-components/floatnav.module.css';
+
+import { MoveDown, Plus } from 'lucide-react';
+
 import {
   Select,
   SelectContent,
   SelectGroup,
-  SelectItem,
   SelectLabel,
   SelectTrigger,
   SelectValue
@@ -26,7 +28,6 @@ import {
   CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandItem,
 } from '@/components/ui/command';
 
 import {
@@ -83,17 +84,17 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             {
               selectContent && <Select>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder={selectContent.placeholder}/>
+                  <SelectValue placeholder={selectContent.placeholder} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     {
                       selectContent.selecteOptions.map((option) => (
-                        <SelectLabel 
+                        <SelectLabel
                           key={option.name}
                           onClick={(e) => option.functionOnClick ?
-                            option.functionOnClick(e):
-                            () => {}
+                            option.functionOnClick(e) :
+                            () => { }
                           }
                         >
                           {option.name}
@@ -106,17 +107,17 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             }
             {
               buttonContent.map((content, index) => {
-                const { name, className, disabled, id, functionOnClick, variant} = content
-                return  (
-                  <Button 
-                    key={index} 
-                    className={className} 
-                    variant={variant ? variant : undefined} 
-                    id={id} 
+                const { name, className, disabled, id, functionOnClick, variant } = content
+                return (
+                  <Button
+                    key={index}
+                    className={className}
+                    variant={variant ? variant : undefined}
+                    id={id}
                     onClick={(event) => {
-                      functionOnClick ? 
-                        functionOnClick(event):
-                        () => {}
+                      functionOnClick ?
+                        functionOnClick(event) :
+                        () => { }
                     }}
                     disabled={disabled}
                   >
@@ -152,7 +153,7 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
             <div className={sty.mobileSidebarItems}>
               <Drawer>
                 <DrawerTrigger asChild>
-                  <Button className={sty.mobileButtonAction}>abas</Button>
+                  <Button className={sty.mobileButtonAction}><Plus /></Button>
                 </DrawerTrigger>
                 <DrawerContent>
                   <div className="mx-auto w-full max-w-sm">
@@ -168,24 +169,32 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                           >
                             Pesquisar
                           </Button>
-                            <Select>
-                              <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="placeholderSelect"/>
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectGroup>
-                                  <SelectLabel>labelSelect</SelectLabel>
-                                  <SelectItem value="download">Baixar</SelectItem>
-                                  <SelectItem value="upload">Upload</SelectItem>
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select>
+
+                          {buttonContent.map((content, index) => {
+                            const { name, className, disabled, id, functionOnClick, variant } = content
+                            return (
+                              <Button
+                                key={index}
+                                className={className}
+                                variant={variant ? variant : undefined}
+                                id={id}
+                                onClick={(event) => {
+                                  functionOnClick ?
+                                    functionOnClick(event) :
+                                    () => { }
+                                }}
+                                disabled={disabled}
+                              >
+                                {name}
+                              </Button>
+                            )
+                          })}
                         </div>
                       </div>
                     </div>
                     <DrawerFooter>
                       <DrawerClose asChild>
-                        <Button>Fechar</Button>
+                        <Button variant="ghost"> <MoveDown/></Button>
                       </DrawerClose>
                     </DrawerFooter>
                   </div>
