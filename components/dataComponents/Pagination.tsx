@@ -61,13 +61,16 @@ export default function PaginationComponent({
             !pagesItens.includes(1) && (
             <>
               <PaginationItem 
-                className={`${currentPage===1 ? 'bg-gray-900' : 'bg-blue-500'} hover:bg-white-500 cursor-pointer rounded-md text-white`}
                 onClick={() => {
                   setCurrentPage(1)
                   setPagesItens(Array.from({length: 10}, (_, i) => i+1)) 
               }}
               >
-              <PaginationLink>{1}</PaginationLink>
+              <PaginationLink
+                className={`${currentPage===1 ? 'bg-gray-900' : 'bg-blue-500 hover:bg-white-500'} cursor-pointer rounded-md text-white`}
+              >
+                {1}
+              </PaginationLink>
               </PaginationItem>
               <PaginationItem><PaginationLink>...</PaginationLink></PaginationItem>
             </>
@@ -81,7 +84,6 @@ export default function PaginationComponent({
 
               return (
                 <PaginationItem 
-                  className={`${currentPage===item ? 'bg-gray-900' : 'bg-blue-500'} hover:bg-blue-700 cursor-pointer rounded-md text-white`}
                   onClick={() => { 
                     setCurrentPage(item)  
                     
@@ -99,7 +101,11 @@ export default function PaginationComponent({
                     }        
                   }} key={index}
                 >
-                  <PaginationLink className='hover:bg-blue-700 hover:text-white'>{item}</PaginationLink>
+                  <PaginationLink 
+                  className={`${currentPage===item ? 'bg-gray-900' : 'bg-blue-500'} hover:bg-blue-700 cursor-pointer rounded-md text-white`}  
+                  >
+                    {item}
+                  </PaginationLink>
                 </PaginationItem>
               )
             })
@@ -110,13 +116,16 @@ export default function PaginationComponent({
               <>
               <PaginationItem><PaginationLink>...</PaginationLink></PaginationItem>
                 <PaginationItem 
-                  className={`${currentPage===tableRows.length ? 'bg-gray-900' : 'bg-blue-500'} hover:bg-white-500 cursor-pointer rounded-md text-white`}
                   onClick={() => {
                     setCurrentPage(pages)
                     setPagesItens(Array.from({length: 10}, (_, i) => pages - i).reverse()) 
                 }}
                 >
-                <PaginationLink>{pages}</PaginationLink>
+                <PaginationLink 
+                  className={`${currentPage===tableRows.length ? 'bg-gray-900 hover:bg-gray-900' : 'bg-blue-500 hover:bg-white-500'}  cursor-pointer rounded-md text-white`}
+                >
+                  {pages}
+                </PaginationLink>
                 </PaginationItem>
               </>
             )

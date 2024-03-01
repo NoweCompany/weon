@@ -47,19 +47,10 @@ import { SelectContentProtocol } from '@/interfaces/SelectContent'
 
 import Field from '@/interfaces/Field';
 
-interface CollectionInfo {
-  collectionName: string,
-  fields: Field[]
-}
-
 interface FloatNavDadosProps {
   title: string
   buttonContent: ButtonContent[]
   selectContent?: SelectContentProtocol
-  variantType?: string;
-  collectionName: string,
-  fields: Field[]
-
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({

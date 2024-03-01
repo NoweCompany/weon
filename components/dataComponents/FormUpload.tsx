@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -22,10 +21,9 @@ import {
 } from "@/components/ui/dialog"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
 
 import { UploadCloud } from 'lucide-react';
-
+import BreadCrumber from "../global/BreadCrumber"
 import { upload } from '@/apiRequests/'
 import { messaging } from '@/services';
 
@@ -84,8 +82,6 @@ export default function DataForm(
 
   return (
     <>
-    <BreadCrumber screen={screen} route={route} page={page} />
-
       <FloatNavDados
         title={collectionName}
         buttonContent={buttonContentForm}
@@ -121,17 +117,17 @@ export default function DataForm(
         <DialogHeader>
           <DialogTitle className={sty.helpTitle}>Ajuda com importação de arquivo.</DialogTitle>
         </DialogHeader>
-         <ScrollArea> 
-         <h1 className={sty.helpModalTitle}>1. Erro na importação </h1>
-         <h2 className={sty.helpModalContent}>Clique em "Baixar Modelo" para iniciar.
-           Após o download, preencha a tabela conforme 
-           necessário e tente novamente. Certifique-se 
-           de que os títulos da planilha sejam idênticos
-           aos da tabela, observando maiúsculas e minúsculas.
-           O sucesso do processo depende da atenção às etapas 
-           iniciais.
-           </h2>
-         </ScrollArea>
+          <ScrollArea> 
+          <h1 className={sty.helpModalTitle}>1. Erro na importação </h1>
+          <h2 className={sty.helpModalContent}>{`Clique em "Baixar Modelo" para iniciar.
+            Após o download, preencha a tabela conforme 
+            necessário e tente novamente. Certifique-se 
+            de que os títulos da planilha sejam idênticos
+            aos da tabela, observando maiúsculas e minúsculas.
+            O sucesso do processo depende da atenção às etapas 
+            iniciais.`}
+          </h2>
+        </ScrollArea>
         <DialogFooter>
         <DialogTrigger asChild>
         <h1 className={sty.close}>Entendi</h1>
