@@ -5,6 +5,7 @@ import NoContentDisplay from "../../components/global/NoContentDisplay";
 import Table from '@/components/dataComponents/Table';
 import DataForms from '@/components/dataComponents/DataForms';
 import FormUpload from '@/components/dataComponents/FormUpload';
+import SearchBar from "@/components/dataComponents/SearchBar";
 
 import React, { useEffect, useState } from 'react';
 
@@ -238,7 +239,7 @@ return (
                                 <FormUpload 
                                   collectionName={collectionName}
                                   setShowFormUpload={setShowFormUpload}
-                                />
+                                  />
                               </>
                             ) : (
                               <>
@@ -246,6 +247,7 @@ return (
                                 title={collectionName}
                                 buttonContent={buttonContentTable}
                                 selectContent={selectContent}/> 
+                                  <SearchBar/>
                                 <Table  
                                   onCLickInRow={onCLickInRow}
                                   tableColumns={tableColumns}

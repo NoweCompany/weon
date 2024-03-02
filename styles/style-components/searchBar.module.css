@@ -1,0 +1,23 @@
+.card {
+    width: 60%;
+    max-width: 700px;
+    height: 10%;
+    max-height: 60px;
+    padding: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: .5rem;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  
+  .CardTitle {
+      font-size: 1rem;
+      color: #7a7a7a;
+      margin-left: 1rem;
+      align-items: start;
+      display: flex;
+  }
+  
