@@ -1,0 +1,33 @@
+.comment{
+    font-size: .8rem;
+    color: #c4c4c4;
+    font-family: bold;
+    margin-top: 1rem;
+}
+
+.navegationButton{
+    color: #c6c6c6;
+    transition: all .1s ease-in-out;
+}
+
+.navegationButton:hover{
+    color: #000;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.paginationButton{
+    border: solid 1px #e6e6e6;
+    cursor: pointer;
+}
+
+.paginationItemSelect{
+    background-color: #c7c7c7;
+}
+
+.paginationContent{
+    margin-top: 1rem;
+    
+}
