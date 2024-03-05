@@ -150,7 +150,7 @@ function onButtonClickExport():void {
       
       window.location.assign(response.url)
       
-      return messaging.send('🤡', true)
+      return messaging.send('Exportação realizada com sucesso!', true)
     })
     .catch(error => messaging.send(error, false))
 }

@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import sty from "../../styles/style-components/tableListagem.module.css";
 import Pagination from '@/components/dataComponents/Pagination'
+
+import CollectionInfo from '@/interfaces/CollectionInfo';
 import Field from '@/interfaces/Field';
-
-type Data = { _id: string; [key: string]: any };
-
 interface PropsTable {
-  tableRows: Field[];
+  tableColumns: string[];
+  tableRows: CollectionInfo[];
   onCLickInRow: (e: React.MouseEvent<HTMLTableRowElement>) => void;
-  rowsSelected: { [key: string]: any };
 }
 
 export default function TableListagem(props: PropsTable) {
-  const { onCLickInRow, tableColumns, tableRows } = props;
+  const { onCLickInRow, tableRows, tableColumns } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -28,24 +27,29 @@ export default function TableListagem(props: PropsTable) {
         <table className={`${sty.tableBody}`}>
           <thead>
             <tr className={sty.tableRow}>
-              {tableColumns.map((fieldinf: string, i) => {
-                return <th key={i} className={sty.tableHeader}>{i}</th>;
+              {tableColumns.map((header, i) => {
+                return ( 
+                  <th key={i} className={sty.tableHeader}>
+                    {header}
+                  </th>)
               })}
             </tr>
           </thead>
           <tbody className={sty.tbody}>
-            {currentRows.map((currentData: Field) => (
-              <tr key={currentData.originalName} id={currentData.currentName} onClick={(e) => onCLickInRow(e)} className={sty.tableRow}>
-                {tableColumns.map((fieldinf: Field, index) => {
-                  const microDataInOrder = fieldinf.originalName;
-                  const microDataValue = formaterData(currentData[microDataInOrder], fieldinf.type);
-
+            {currentRows.map((clInf, i) => (
+              <tr key={i} id={clInf.collectionName} onClick={(e) => onCLickInRow(e)} className={sty.tableRow}>
+                <td id={clInf.collectionName} className={sty.tableCell}>
+                  {clInf.collectionName}
+                </td>
+                {
+                clInf.fields.map((field: Field) => {
                   return (
-                    <td key={microDataInOrder} id={fieldinf.originalName} className={sty.tableCell}>
-                      {microDataValue}
+                    <td key={field.originalName} id={field.originalName} className={sty.tableCell}>
+                      {field.currentName}
                     </td>
                   );
-                })}
+                })
+                }
               </tr>
             ))}
           </tbody>
@@ -57,7 +61,7 @@ export default function TableListagem(props: PropsTable) {
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          tableRows={tableRows}
+          rows={tableRows.length}
         />
         )
       }

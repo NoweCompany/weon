@@ -8,27 +8,26 @@ import React, { useEffect, useState } from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 
 import sty from "../../styles/style-components/pagination.module.css";
-type Data = { _id: string; [key: string]: any };
 interface Props {
-  tableRows: Data[];
+  rows: number;
   rowsPerPage: number;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function PaginationComponent({
-  tableRows,
+  rows,
   rowsPerPage,
   currentPage,
   setCurrentPage,
 }: Props) {
   useEffect(() => {
-    const totalPages = Math.ceil(tableRows.length / rowsPerPage);
+    const totalPages = Math.ceil(rows / rowsPerPage);
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(startPage + 4, totalPages);
 
     setPagesItens(Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i));
-  }, [tableRows, currentPage, rowsPerPage]);
+  }, [rows, currentPage, rowsPerPage]);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -67,7 +66,7 @@ export default function PaginationComponent({
             <a
               className={sty.navegationButton}
               onClick={() => {
-                const totalPages = Math.ceil(tableRows.length / rowsPerPage);
+                const totalPages = Math.ceil(rows / rowsPerPage);
                 if (currentPage >= totalPages) return;
                 setCurrentPage(currentPage + 1);
               }}
@@ -80,7 +79,7 @@ export default function PaginationComponent({
       <div>
         <p className={sty.comment}>
           <span>{indexOfFirstRow + 1}</span> - <span>{indexOfLastRow}</span> de{" "}
-          <span>{tableRows.length}</span> resultados
+          <span>{rows}</span> resultados
         </p>
       </div>
     </>

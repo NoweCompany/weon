@@ -126,7 +126,7 @@ export default function Table(props: PropsTable) {
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          tableRows={tableRows}
+          rows={tableRows.length}
         />
         )
       }
