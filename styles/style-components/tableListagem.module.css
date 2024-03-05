@@ -1,0 +1,89 @@
+.containerMain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 3px;
+    overflow-x: auto;
+    width: 50%;
+}
+
+.containerColumn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 3px;
+    overflow-x: auto;
+    width: 100%;
+}
+
+
+.tableHeader {
+    background-color: #000000;
+    color: #fff;
+    font-family: bold;
+    text-transform: uppercase;
+    padding: 3px;
+}
+
+.tableBody {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.tableRow:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
+.tableRow:hover{
+    color: #0063da;
+    cursor: pointer;
+}
+
+.tableHeader,
+.tableCell {
+    padding: 12px;
+    text-align: start;
+}
+
+.tbody {
+    background-color: #ffffff;
+
+}
+
+.tableContent {
+    overflow: auto;
+}
+
+
+@media (max-width: 600px) {
+    .tableHeader,
+    .tableCell {
+        padding: 5px; 
+        text-align: center;
+    }
+
+    .tableHeader,
+    .tableCell {
+        padding: 5px; 
+    }
+
+    .tableBody {
+        width: auto;
+        overflow-x: auto;
+        max-width: 100%;
+
+    }
+
+    .containerMain {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        overflow-x: auto;
+        width: 95%;
+    }
+}
