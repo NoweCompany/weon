@@ -41,9 +41,9 @@ export default function TableListagem(props: PropsTable) {
                   {collectionInfo.collectionName}
                 </td>
                 {
-                tableColumns.map((column, i) => {
+                  
+                (tableColumns.slice(1)).map((column, i) => {
                   const field = collectionInfo?.fields[i]
-                  console.log(field)                  
                   return (
                     <td key={field?.originalName} id={field?.originalName} className={sty.tableCell}>
                       {

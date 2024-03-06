@@ -23,9 +23,7 @@ export default function AdminTables() {
     },[])
 
     useEffect(() => {
-        if(collectionInfo){
-            console.log(collectionInfo)
-        
+        if(collectionInfo){        
             const rows = collectionInfo
             setTableRows(rows)
 
@@ -50,7 +48,6 @@ export default function AdminTables() {
                 setCollectionInfos(info)          
             })
             .catch((error) => {
-                console.log(error)
                 messaging.send(error, false)
             })
     }
