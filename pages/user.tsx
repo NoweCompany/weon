@@ -13,17 +13,12 @@ export default function CardWithForm() {
   return (
     <>
       <Navbar />
-
-
-
       <Card className={sty.card}>
         <CardHeader className={sty.cardHeader}>
           <CardTitle className={sty.title}>Informações do Usuário</CardTitle>
           <CardDescription>Veja suas informações</CardDescription>
         </CardHeader>
         <CardContent>
-
-
           <div className={sty.cardContent}>
             <div className={sty.tooltipArea}>
               <TooltipProvider>
@@ -86,7 +81,7 @@ export default function CardWithForm() {
         </CardContent>
       </Card>
 
-      <Card className={sty.card}>
+      {/* <Card className={sty.card}>
         <CardHeader className={sty.cardHeader}>
           <CardTitle className={sty.title}>Temas</CardTitle>
           <CardDescription>deixe a casa como preferir</CardDescription>
@@ -111,7 +106,7 @@ export default function CardWithForm() {
             </div>
           </RadioGroup>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <div className={sty.margin}></div>
 
