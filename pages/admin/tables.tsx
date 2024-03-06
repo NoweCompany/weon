@@ -65,6 +65,7 @@ export default function AdminTables() {
         {
             name: 'voltar',
             functionOnClick: onButtonClickBack,
+            variant: 'secondary'
         }
     ]
 
