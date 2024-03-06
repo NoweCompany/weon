@@ -1,6 +1,6 @@
 import Navbar from "../../components/global/Navbar"
 import Sidebar from "../../components/sidebar/AdminSidebar"
-import FloatNav from "../../components/global/FloatNav"
+import FloatNavTables from "../../components/adminComponents/FloatNavTables"
 import BreadCrumber from "@/components/global/BreadCrumber"
 
 import TableListagem from "./../../components/adminComponents/TableListagem";
@@ -9,14 +9,15 @@ import { messaging } from "@/services";
 import { useEffect, useState } from "react";
 import CollectionInfo from '@/interfaces/CollectionInfo';
 import NoContentDisplay from '@/components/global/NoContentDisplay';
+import ButtonContent from '@/interfaces/ButtonContent';
 
 export default function AdminTables() {
-    const buttonContent = ["Criar"]
     const BreadCrumberRoute = ["Tabelas"]
 
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
+    const [showFormFields, setShowFormFields] = useState<boolean>(false)
 
     useEffect(() => {
         getCollections()
@@ -52,24 +53,67 @@ export default function AdminTables() {
             })
     }
 
+    function onButtonClickAdd(){
+        setShowFormFields(true)
+    }
+
+    function onButtonClickBack(){
+        setShowFormFields(false)
+    }
+
+    const buttonContentNavFields: ButtonContent[] = [
+        {
+            name: 'voltar',
+            functionOnClick: onButtonClickBack,
+        }
+    ]
+
+    const buttonContentNavTables: ButtonContent[] = [
+        {
+            name: 'Adicionar',
+            functionOnClick: onButtonClickAdd,
+        }
+    ]
+
     return (
         <>
             <Navbar adminPages={true} />
             <Sidebar routeTable={true} />
-            <FloatNav title="Tabelas" buttonContent={buttonContent} />
             <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
             {
-                (collectionInfo?.length >= 1 &&  collectionInfo) ? (
-                    <TableListagem
-                        tableColumns={tableColumns}
-                        tableRows={tableRows}
-                        onCLickInRow={() => {}}
-                    />
+                showFormFields ? (
+                    <>
+                        <FloatNavTables 
+                        title="Campos" 
+                        buttonContent={buttonContentNavFields} 
+                        />
+                        <NoContentDisplay
+                        text={`Form Campos`}
+                        />
+                    </>
                 ) : (
-                    <NoContentDisplay
+                    <>
+                    {
+                    (collectionInfo?.length >= 1 &&  collectionInfo) ? (
+                        <>
+                            <FloatNavTables 
+                            title="Tabelas" 
+                            buttonContent={buttonContentNavTables} 
+                            />
+                            <TableListagem
+                            tableColumns={tableColumns}
+                            tableRows={tableRows}
+                            onCLickInRow={() => {}}
+                            />
+                        </>
+                    ) : (
+                        <NoContentDisplay
                         text={`Não há nenhuma tabela criada. \n 
                         Clique em criar para registar uma nova tabela.`}
-                    />
+                        />
+                    )
+                    }
+                    </>
                 )
             }
         </>
