@@ -16,7 +16,7 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ page, screen, route }) => {
                     <Link href={route}>{screen}</Link>
                 </BreadcrumbItem>
                 {page.map((pageItem, index) => (
-                    <BreadcrumbItem key={index}>{pageItem}</BreadcrumbItem>
+                    <BreadcrumbItem key={`${index}_${pageItem}`}>{pageItem}</BreadcrumbItem>
                 ))}
             </Breadcrumbs>
         </div>

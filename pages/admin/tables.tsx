@@ -8,6 +8,7 @@ import { collection } from '@/apiRequests';
 import { messaging } from "@/services";
 import { useEffect, useState } from "react";
 import CollectionInfo from '@/interfaces/CollectionInfo';
+import NoContentDisplay from '@/components/global/NoContentDisplay';
 
 export default function AdminTables() {
     const buttonContent = ["Criar"]
@@ -68,7 +69,10 @@ export default function AdminTables() {
                         onCLickInRow={() => {}}
                     />
                 ) : (
-                    <h1>Não há nenhuma tabela criada</h1>
+                    <NoContentDisplay
+                        text={`Não há nenhuma tabela criada. \n 
+                        Clique em criar para registar uma nova tabela.`}
+                    />
                 )
             }
         </>

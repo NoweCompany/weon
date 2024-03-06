@@ -1,4 +1,4 @@
-import { Field } from 'react-hook-form';
+import Field from '@/interfaces/Field';
 
 interface CollectionInfo {
     collectionName: string
