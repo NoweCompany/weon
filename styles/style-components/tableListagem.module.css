@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding: 3px;
+    padding: 2px;
     overflow-x: auto;
     width: 50%;
 }
@@ -14,7 +14,6 @@
     justify-content: center;
     flex-direction: column;
     margin: 0 auto;
-    padding: 3px;
     overflow-x: auto;
     width: 100%;
 }
@@ -25,7 +24,6 @@
     color: #fff;
     font-family: bold;
     text-transform: uppercase;
-    padding: 3px;
 }
 
 .tableBody {
@@ -44,8 +42,8 @@
 
 .tableHeader,
 .tableCell {
-    padding: 12px;
-    text-align: start;
+    padding: 10px;
+    text-align: center;
 }
 
 .tbody {
