@@ -33,5 +33,6 @@ export default class Auth{
   logout(): void{
     document.cookie = 'token=;max-age=0; path=/'
     window.localStorage.removeItem('weonDataUser')
+    window.location.href = '/'
   }
 }
