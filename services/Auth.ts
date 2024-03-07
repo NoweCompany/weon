@@ -17,7 +17,6 @@ export default class Auth{
   setToken(token: string): void{
     const maxAge = 60 * 60 * 24 * 7
     document.cookie = `token=${token};max-age=${maxAge}; path=/`;
-    
   }
   
   getUserData(): userData | null{
@@ -29,5 +28,10 @@ export default class Auth{
   setUserData(userData: userData): void{
     const jsonDataUser = JSON.stringify(userData)
     window.localStorage.setItem('weonDataUser', jsonDataUser)
+  }
+
+  logout(): void{
+    document.cookie = 'token=;max-age=0; path=/'
+    window.localStorage.removeItem('weonDataUser')
   }
 }

@@ -1,15 +1,43 @@
+import React from "react";
 import sty from "../styles/Style-Pages/user.module.css"
 import Navbar from "../components/global/Navbar"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
-import { Mails, Building2, TerminalSquare, Palette } from 'lucide-react';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import Link from "next/link"
-export default function CardWithForm() {
+import { Mails, Building2, TerminalSquare } from 'lucide-react';
+import Auth from "@/services/Auth";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+const user: React.FC = () => {
+  const auth = new Auth()
+
+  const handleLogout = () => {
+    auth.logout()
+  }
+
   return (
     <>
       <Navbar />
@@ -73,43 +101,16 @@ export default function CardWithForm() {
                   Em futuros acessos à Weon, será necessário inserir novamente suas credenciais. Certifique-se de ter as informações de login à mão na próxima vez que precisar acessar.          </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                <Button variant="destructive">Encerrar</Button>         
-                     </AlertDialogFooter>
+                <AlertDialogCancel>
+                  Cancelar
+                </AlertDialogCancel>
+                <Button onClick={handleLogout} variant="destructive">Encerrar</Button>
+              </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </CardContent>
       </Card>
-
-      {/* <Card className={sty.card}>
-        <CardHeader className={sty.cardHeader}>
-          <CardTitle className={sty.title}>Temas</CardTitle>
-          <CardDescription>deixe a casa como preferir</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <RadioGroup defaultValue="option-one">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-one" id="option-one" />
-              <Label className={sty.option} htmlFor="option-one">Light</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-two" id="option-two" />
-              <Label className={sty.option} htmlFor="option-two">Night</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-three" id="option-two" />
-              <Label className={sty.option} htmlFor="option-two">Red</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-four" id="option-two" />
-              <Label className={sty.option} htmlFor="option-two">Blue</Label>
-            </div>
-          </RadioGroup>
-        </CardContent>
-      </Card> */}
-
-      <div className={sty.margin}></div>
-
     </>
   )
 }
+export default user
