@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import CollectionInfo from '@/interfaces/CollectionInfo';
 import NoContentDisplay from '@/components/global/NoContentDisplay';
 import ButtonContent from '@/interfaces/ButtonContent';
+import { FormFields } from '@/components/adminComponents/FormFields';
 
 export default function AdminTables() {
     const BreadCrumberRoute = ["Tabelas"]
@@ -57,17 +58,6 @@ export default function AdminTables() {
         setShowFormFields(true)
     }
 
-    function onButtonClickBack(){
-        setShowFormFields(false)
-    }
-
-    const buttonContentNavFields: ButtonContent[] = [
-        {
-            name: 'voltar',
-            functionOnClick: onButtonClickBack,
-            variant: 'secondary'
-        }
-    ]
 
     const buttonContentNavTables: ButtonContent[] = [
         {
@@ -84,12 +74,8 @@ export default function AdminTables() {
             {
                 showFormFields ? (
                     <>
-                        <FloatNavTables 
-                        title="Campos" 
-                        buttonContent={buttonContentNavFields} 
-                        />
-                        <NoContentDisplay
-                        text={`Form Campos`}
+                        <FormFields
+                        setShowFormFields={setShowFormFields}
                         />
                     </>
                 ) : (

@@ -48,11 +48,16 @@ import ButtonContent from '@/interfaces/ButtonContent';
 interface FloatNavTablesProps {
   title: string
   buttonContent: ButtonContent[]
+  input: {
+    value: string,
+    tittle: string
+  }
 }
 
 const FloatNavTables: React.FC<FloatNavTablesProps> = ({
   title,
-  buttonContent
+  buttonContent,
+  input
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -87,6 +92,10 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
           <CardHeader className={sty.cardHeader}>
             <CardTitle className={sty.cardTitle}>{title}</CardTitle>
           </CardHeader>
+          <div className='flex items-left flex-col'>
+            <label htmlFor="collectionName">{input.tittle}</label>
+            <input type="text" id='collectionName' value={input.value}/>
+          </div>
           <div className={sty.buttonContainer}>
             {
               buttonContent.map((content, index) => {
