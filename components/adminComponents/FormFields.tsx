@@ -2,24 +2,13 @@ import ButtonContent from '@/interfaces/ButtonContent';
 import FloatNavFields from './FloatNavFields';
 
 interface FormFields {
-  setShowFormFields: React.Dispatch<React.SetStateAction<boolean>>
+  buttonContentNavFields: ButtonContent[]
 }
 
 export function FormFields({
-  setShowFormFields
+  buttonContentNavFields
 }: FormFields) {
 
-  function onButtonClickBack(){
-    setShowFormFields(false)
-  } 
-
-  const buttonContentNavFields: ButtonContent[] = [
-    {
-        name: 'voltar',
-        functionOnClick: onButtonClickBack,
-        variant: 'secondary'
-    }
-  ]
 
   return (
     <form action="">

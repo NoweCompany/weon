@@ -1,20 +1,23 @@
+//Componentes
 import Navbar from "../../components/global/Navbar"
 import Sidebar from "../../components/sidebar/AdminSidebar"
 import FloatNavTables from "../../components/adminComponents/FloatNavTables"
 import BreadCrumber from "@/components/global/BreadCrumber"
-
 import TableListagem from "./../../components/adminComponents/TableListagem";
-import { collection } from '@/apiRequests';
-import { messaging } from "@/services";
-import { useEffect, useState } from "react";
-import CollectionInfo from '@/interfaces/CollectionInfo';
 import NoContentDisplay from '@/components/global/NoContentDisplay';
-import ButtonContent from '@/interfaces/ButtonContent';
 import { FormFields } from '@/components/adminComponents/FormFields';
 
-export default function AdminTables() {
-    const BreadCrumberRoute = ["Tabelas"]
+//Interfaces
+import CollectionInfo from '@/interfaces/CollectionInfo';
+import ButtonContent from '@/interfaces/ButtonContent';
 
+//Services
+import { messaging } from "@/services";
+import { collection } from '@/apiRequests';
+
+import { useEffect, useState } from "react";
+
+function useAdminTables() {
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
@@ -58,11 +61,31 @@ export default function AdminTables() {
         setShowFormFields(true)
     }
 
+    function onButtonClickBack(){
+        setShowFormFields(false)
+    } 
+    
 
+    return {collectionInfo, tableColumns, tableRows, showFormFields, onButtonClickAdd, onButtonClickBack}
+}
+
+
+export default function AdminTables() {
+    const {collectionInfo, tableColumns, tableRows, showFormFields, onButtonClickAdd, onButtonClickBack} = useAdminTables()
+    
+    const BreadCrumberRoute = ["Tabelas"]
     const buttonContentNavTables: ButtonContent[] = [
         {
             name: 'Adicionar',
             functionOnClick: onButtonClickAdd,
+        }
+    ]
+
+    const buttonContentNavFields: ButtonContent[] = [
+        {
+            name: 'voltar',
+            functionOnClick: onButtonClickBack,
+            variant: 'secondary'
         }
     ]
 
@@ -75,7 +98,7 @@ export default function AdminTables() {
                 showFormFields ? (
                     <>
                         <FormFields
-                        setShowFormFields={setShowFormFields}
+                        buttonContentNavFields={buttonContentNavFields}
                         />
                     </>
                 ) : (
