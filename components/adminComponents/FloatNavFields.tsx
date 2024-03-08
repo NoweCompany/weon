@@ -43,7 +43,7 @@ import {
 } from "@/components/ui/card";
 
 import ButtonContent from '@/interfaces/ButtonContent';
-
+import { Input } from "@/components/ui/input"
 
 interface FloatNavTablesProps {
   title: string
@@ -92,10 +92,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
           <CardHeader className={sty.cardHeader}>
             <CardTitle className={sty.cardTitle}>{title}</CardTitle>
           </CardHeader>
-          <div className='flex items-left flex-col'>
-            <label htmlFor="collectionName">{input.tittle}</label>
-            <input type="text" id='collectionName' value={input.value}/>
-          </div>
+            <Input className={sty.input} type="text" id='collectionName' placeholder={input.tittle} value={input.value}/>
           <div className={sty.buttonContainer}>
             {
               buttonContent.map((content, index) => {
