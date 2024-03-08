@@ -35,6 +35,18 @@
     margin: 0 auto;
 }
 
+.contentHeader{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.input{
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  align-items: start;
+}
 
 @media (max-width:600px){
   .containerMobile{
