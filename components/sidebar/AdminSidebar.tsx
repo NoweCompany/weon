@@ -11,11 +11,10 @@ interface SideBarProps {
     routeHistory?: boolean;
     routeTrash?: boolean;
     routeDash?: boolean;
-    routeLog?: boolean;
 }
 
 export default function Sidebar(props: SideBarProps) {
-    const { routeUsers, routeTable, routeHistory, routeTrash, routeDash, routeLog } = props
+    const { routeUsers, routeTable, routeHistory, routeTrash, routeDash } = props
 
     return (
         <>

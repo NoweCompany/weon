@@ -27,11 +27,11 @@ export default function SearchBar() {
                         <h1> Buscar por </h1>
                     </CardTitle>
                     <CardHeader className={sty.cardHeader}>
-                        <Input className="w-[200px]" type="text" placeholder="elemento" />
+                        <Input className={sty.input} type="text" placeholder="elemento" />
                     </CardHeader>
                     <div className={sty.buttonContainer}>
                         <Select>
-                            <SelectTrigger className="w-[300px]">
+                            <SelectTrigger className={sty.select}>
                                 <SelectValue placeholder="Campos" />
                             </SelectTrigger>
                             <SelectContent>
