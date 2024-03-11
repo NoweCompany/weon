@@ -46,17 +46,28 @@ import ButtonContent from '@/interfaces/ButtonContent';
 import { SelectContentProtocol } from '@/interfaces/SelectContent'
 
 import Field from '@/interfaces/Field';
+interface CollectionInfo {
+  collectionName: string,
+  fields: Field[]
+}
 
 interface FloatNavDadosProps {
   title: string
+  collectionsInfo: CollectionInfo[]
   buttonContent: ButtonContent[]
   selectContent?: SelectContentProtocol
+  handleClickInCollectionBtn: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string) => void;
+  onButtonClick?: () => void;
 }
 
 const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   title,
   buttonContent,
   selectContent,
+  collectionsInfo,
+  handleClickInCollectionBtn,
+  onButtonClick
+
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -144,13 +155,16 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
       <CommandDialog open={open} onOpenChange={setOpen}>
               <CommandInput placeholder="Procurar" />
               <CommandList>
-                <CommandEmpty>Nada encontrado...</CommandEmpty>
                 <CommandGroup heading="tabelas">
-                  {/* {
-                    collectionName.map((collectionName, index) => (
-                      <CommandItem key={index}>{collectionName.collectionName}</CommandItem>
+                {
+                    collectionsInfo?.map((collectionInfo, index) => (
+                      <Button key={index} 
+                      className={sty.mapButton}
+                      variant="ghost"                  
+                       onClick={(ev) => handleClickInCollectionBtn(ev, collectionInfo.collectionName)}> 
+                      {collectionInfo.collectionName}</Button>
                     ))
-                  } */}
+                  }
                 </CommandGroup>
               </CommandList>
             </CommandDialog>
@@ -180,28 +194,24 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                         <div className={sty.mobileDrawerContent}>
                           <Button
                             className={sty.mobileButtonDrawerContent}
-                            onClick={toggleDialog}
-                          >
-                            Pesquisar
-                          </Button>
+                             onClick={toggleDialog}> Pesquisar  </Button>
 
                           {buttonContent.map((content, index) => {
-                            const { name, className, disabled, id, functionOnClick, variant } = content
+                            const { name, className, id, functionOnClick, variant } = content
                             return (
                               <Button
-                                key={index}
-                                className={className}
-                                variant={variant ? variant : undefined}
-                                id={id}
-                                onClick={(event) => {
-                                  functionOnClick ?
-                                    functionOnClick(event) :
-                                    () => { }
-                                }}
-                                disabled={disabled}
-                              >
-                                {name}
-                              </Button>
+                              key={index}
+                              className={className}
+                              variant={variant ? variant : undefined}
+                              id={id}
+                              onClick={(event) => {
+                                functionOnClick ?
+                                  functionOnClick(event) :
+                                  () => { }
+                              }}
+                            >
+                              {name}
+                            </Button>
                             )
                           })}
                         </div>

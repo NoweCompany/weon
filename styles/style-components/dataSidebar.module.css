@@ -60,6 +60,11 @@
     width: 130px;
 }
 
+.mapButton{
+  display: grid;
+}
+
+
 @media (max-width: 600px){
     .desktopSidebar{
         display: none;

@@ -73,11 +73,14 @@ const Sidebar: React.FC<SidebarProps> = ({
             <CommandDialog open={open} onOpenChange={setOpen}>
               <CommandInput placeholder="Procurar" />
               <CommandList>
-                <CommandEmpty>Nada encontrado...</CommandEmpty>
                 <CommandGroup heading="tabelas">
                   {
                     collectionsInfo.map((collectionInfo, index) => (
-                      <CommandItem key={index}>{collectionInfo.collectionName}</CommandItem>
+                      <Button key={index} 
+                      className={sty.mapButton}
+                      variant="ghost"                  
+                       onClick={(ev) => handleClickInCollectionBtn(ev, collectionInfo.collectionName)}> 
+                      {collectionInfo.collectionName}</Button>
                     ))
                   }
                 </CommandGroup>
