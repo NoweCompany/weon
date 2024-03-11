@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5rem;
     height: 100vh;
 }
 
@@ -11,11 +12,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     max-width: 400px;
     border-radius: 10px;
     padding: 20px;
-    border: solid 1px #e6e6e6;
     margin: 1rem auto;
     height: 25rem;
 }
@@ -75,11 +75,11 @@
 }
 
 .img {
-    width: 30%;
+    width: 100%;
+    max-width: 600px;
     height: auto;
-    margin: 2rem auto;
+    margin-left: 10rem;
 }
-
 
 .background {
     margin: 0;
@@ -99,7 +99,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(to left, #0063da 50%, #0063da 50%);
+        background: linear-gradient(to left, #000000 50%, #000000 50%);
     }
 
     .img {
@@ -111,12 +111,8 @@
 
     .mainform {
         width: 100%;
-        max-width: 400px;
-        padding: 30px;
         height: auto;
     }
-    
-    
 }
 
 @media (max-width:600px) {
