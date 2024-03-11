@@ -15,13 +15,16 @@ import ButtonContent from '@/interfaces/ButtonContent';
 import { messaging } from "@/services";
 import { collection } from '@/apiRequests';
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import TableFields from '@/interfaces/TableFields';
 
 function useAdminTables() {
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
     const [showFormFields, setShowFormFields] = useState<boolean>(false)
+    const [tableFields, setTableFields] = useState<TableFields[]>([])
+    const [tableSelectedName, setTableSelectedName] = useState<string>('')
 
     useEffect(() => {
         getCollections()
@@ -59,20 +62,99 @@ function useAdminTables() {
 
     function onButtonClickAdd(){
         setShowFormFields(true)
+        const newTableFields: TableFields = {
+            name: '',
+            type: '',
+            required: false,
+            deleteValidationLevel: 'none',
+            state: 'register'
+        }
+        setTableFields([newTableFields])
     }
 
     function onButtonClickBack(){
         setShowFormFields(false)
+        setTableFields([])
     } 
-    
 
-    return {collectionInfo, tableColumns, tableRows, showFormFields, onButtonClickAdd, onButtonClickBack}
+    function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+        e.preventDefault()
+        
+        const collectionName = tableSelectedName
+        for(const field of tableFields){
+            console.log(field);
+            
+        }
+    } 
+
+    function onButtonClickAddField(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+        e.preventDefault()
+        const newTableFields: TableFields = {
+            name: '',
+            type: '',
+            required: false,
+            deleteValidationLevel: 'none',
+            state: 'register'
+        }
+
+        setTableFields([...tableFields, newTableFields])
+    } 
+
+    function onClickInRow(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, collectionInfo: CollectionInfo){
+        const newTableField: TableFields[] = collectionInfo.fields.map((field) => {
+            return {
+                name: field.currentName,
+                type: field.type,
+                required: field.required,
+                deleteValidationLevel: 'confirm',
+                state: 'updating'
+            }
+        }) 
+
+        setTableSelectedName(collectionInfo.collectionName)
+        setTableFields(newTableField)
+        setShowFormFields(true)
+    }
+
+    return {collectionInfo,
+        tableColumns,
+        tableRows,
+        showFormFields,
+        tableFields,
+        setTableFields,
+        tableSelectedName,
+        setTableSelectedName,
+        onClickInRow,
+        onButtonClickAddField,
+        onButtonClickSave,
+        onButtonClickAdd, 
+        onButtonClickBack
+    }
 }
 
 
 export default function AdminTables() {
-    const {collectionInfo, tableColumns, tableRows, showFormFields, onButtonClickAdd, onButtonClickBack} = useAdminTables()
+    const { 
+        collectionInfo,
+        tableColumns,
+        tableRows,
+        showFormFields,
+        tableFields,
+        tableSelectedName,
+        setTableSelectedName,
+        setTableFields,
+        onButtonClickAdd,
+        onClickInRow,
+        onButtonClickBack,
+        onButtonClickSave,
+        onButtonClickAddField
+    } = useAdminTables()
     
+    useEffect(() => {
+        console.log(tableFields);
+        
+    }, [tableFields])
+
     const BreadCrumberRoute = ["Tabelas"]
     const buttonContentNavTables: ButtonContent[] = [
         {
@@ -84,13 +166,13 @@ export default function AdminTables() {
     const buttonContentNavFields: ButtonContent[] = [
         {
             name: 'Salvar',
-            functionOnClick: () => {},
+            functionOnClick: onButtonClickSave,
             variant: 'outline',
             id: "save"
         },
         {
             name: 'Adicionar novo campo',
-            functionOnClick: () => {},
+            functionOnClick: onButtonClickAddField,
             variant: 'default',
         },
         {
@@ -110,6 +192,10 @@ export default function AdminTables() {
                     <>
                         <FormFields
                         buttonContentNavFields={buttonContentNavFields}
+                        tableFields={tableFields}
+                        setTableSelectedName={setTableSelectedName}
+                        tableSelectedName={tableSelectedName}
+                        setTableFields={setTableFields}
                         />
                     </>
                 ) : (
@@ -124,7 +210,7 @@ export default function AdminTables() {
                             <TableListagem
                             tableColumns={tableColumns}
                             tableRows={tableRows}
-                            onCLickInRow={() => {}}
+                            onCLickInRow={onClickInRow}
                             />
                         </>
                     ) : (

@@ -1,5 +1,5 @@
-import ApiConfig from './apiConfig';
-import Auth from '@/services/Auth';
+import ApiConfig from './apiConfig'
+import Auth from '@/services/Auth'
 
 export default class Collection extends ApiConfig {
   private auth
@@ -17,18 +17,43 @@ export default class Collection extends ApiConfig {
             "Cache-Control": 'max-age=10000',
             "authorization": `Bearer ${this.auth.getToken()}`
           },
-        });
+        })
 
-      const data = await response.json();
+      const data = await response.json()
       
       if(response.status !== 200){
         return { error: data.error }
       }
       
-      return data.response;
+      return data.response
     } catch (e) {
-      console.log(e);      
+      console.log(e)      
       return { error: 'Falha na conexão com o servidor'}
     }
-  };
+  }
+  public async postApi(collectionName: string) {
+    try {
+      const response = await fetch(this.url + '/collection',
+        {
+          method: 'POST',
+          headers:{
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
+          body: JSON.stringify({
+            collectionName: collectionName
+          })
+        })
+
+      const data = await response.json()
+      
+      if(response.status !== 200){
+        return { error: data.error }
+      }
+      
+      return data
+    } catch (e) {
+      console.log(e)      
+      return { error: 'Falha na conexão com o servidor'}
+    }
+  }
 }

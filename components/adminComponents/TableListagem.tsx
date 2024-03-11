@@ -6,7 +6,7 @@ import CollectionInfo from '@/interfaces/CollectionInfo'
 interface PropsTable {
   tableColumns: string[]
   tableRows: CollectionInfo[]
-  onCLickInRow: (e: React.MouseEvent<HTMLTableRowElement>) => void
+  onCLickInRow: (e: React.MouseEvent<HTMLTableRowElement>, collectionInfo: CollectionInfo) => void
 }
 
 export default function TableListagem(props: PropsTable) {
@@ -36,7 +36,11 @@ export default function TableListagem(props: PropsTable) {
           </thead>
           <tbody className={sty.tbody}>
             {currentRows.map((collectionInfo, i) => (
-              <tr key={`${collectionInfo.collectionName}_${i}`} id={collectionInfo.collectionName} onClick={(e) => onCLickInRow(e)} className={sty.tableRow}>
+              <tr 
+              key={`${collectionInfo.collectionName}_${i}`} 
+              id={collectionInfo.collectionName} 
+              onClick={(e) => onCLickInRow(e, collectionInfo)} 
+              className={sty.tableRow}>
                 <td id={collectionInfo.collectionName} className={sty.tableCell}>
                   {collectionInfo.collectionName}
                 </td>

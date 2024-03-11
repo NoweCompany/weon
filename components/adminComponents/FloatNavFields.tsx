@@ -40,8 +40,9 @@ interface FloatNavTablesProps {
   title: string
   buttonContent: ButtonContent[]
   input: {
+    tittle: string,
     value: string,
-    tittle: string
+    onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void
   }
 }
 
@@ -83,7 +84,14 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
           <CardHeader className={sty.cardHeader}>
             <CardTitle className={sty.cardTitle}>{title}</CardTitle>
           </CardHeader>
-            <Input className={sty.input} type="text" id='collectionName' placeholder={input.tittle} value={input.value}/>
+            <Input 
+            className={sty.input} 
+            type="text" 
+            id='collectionName' 
+            placeholder={input.tittle} 
+            value={input.value}
+            onChange={(e) => input.onChangeInput(e)}
+            />
           <div className={sty.buttonContainer}>
             {
               buttonContent.map((content, index) => {
