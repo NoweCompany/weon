@@ -53,10 +53,10 @@ interface CollectionInfo {
 
 interface FloatNavDadosProps {
   title: string
-  collectionsInfo: CollectionInfo[]
+  collectionsInfo?: CollectionInfo[]
   buttonContent: ButtonContent[]
   selectContent?: SelectContentProtocol
-  handleClickInCollectionBtn: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string) => void;
+  handleClickInCollectionBtn?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string) => void;
   onButtonClick?: () => void;
 }
 
@@ -64,10 +64,8 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   title,
   buttonContent,
   selectContent,
-  collectionsInfo,
-  handleClickInCollectionBtn,
-  onButtonClick
-
+  collectionsInfo = [],
+  handleClickInCollectionBtn = () => {},
 }) => {
   const [open, setOpen] = useState(false);
 

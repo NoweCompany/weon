@@ -156,7 +156,6 @@ export default function DataForm(
                 <div className={sty.formContent}>
                   {
                   fields && fields.map((field, index) => {
-                  
                   return (
                     <div className={sty.inputGroup} key={index}>
                       <div className={sty.fragmentInput}>
