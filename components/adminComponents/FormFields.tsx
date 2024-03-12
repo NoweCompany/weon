@@ -48,8 +48,9 @@ export function FormFields({
     setTableFields(newTableFields );
   }
 
-  function onClickDel(e: React.ChangeEvent<HTMLElement>){
-  const td = e.target.parentElement
+  function onClickDel(e: React.MouseEvent<HTMLHeadingElement, MouseEvent>){
+  const btnDel = e.target as HTMLElement
+  const td = btnDel.parentElement
   const tr = td?.parentElement
 
   tr?.remove()
