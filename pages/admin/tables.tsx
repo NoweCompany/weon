@@ -10,13 +10,15 @@ import { FormFields } from '@/components/adminComponents/FormFields';
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
 import ButtonContent from '@/interfaces/ButtonContent';
+import TableSelected from '@/interfaces/TableSelected';
+import TableFields from '@/interfaces/TableFields';
 
 //Services
 import { messaging } from "@/services";
 import { collection } from '@/apiRequests';
 
 import React, { useEffect, useState } from "react";
-import TableFields from '@/interfaces/TableFields';
+import FloatNavFields from '@/components/adminComponents/FloatNavFields';
 
 function useAdminTables() {
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
@@ -24,7 +26,7 @@ function useAdminTables() {
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
     const [showFormFields, setShowFormFields] = useState<boolean>(false)
     const [tableFields, setTableFields] = useState<TableFields[]>([])
-    const [tableSelectedName, setTableSelectedName] = useState<string>('')
+    const [tableSelectedName, setTableSelectedName] = useState<TableSelected>({currentName: '', tableName: ''})
 
     useEffect(() => {
         getCollections()
@@ -67,7 +69,8 @@ function useAdminTables() {
             type: '',
             required: false,
             deleteValidationLevel: 'none',
-            state: 'register'
+            state: 'register',
+            wasChanged: true
         }
         setTableFields([newTableFields])
     }
@@ -75,15 +78,19 @@ function useAdminTables() {
     function onButtonClickBack(){
         setShowFormFields(false)
         setTableFields([])
+        setTableSelectedName({
+            currentName: '',
+            tableName: ''
+        })
     } 
 
     function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault()
         
-        const collectionName = tableSelectedName
+        const collectionName = tableSelectedName.currentName || tableSelectedName.tableName
         for(const field of tableFields){
-            console.log(field);
-            
+            if(!field.wasChanged) continue
+            console.log(field)
         }
     } 
 
@@ -94,7 +101,8 @@ function useAdminTables() {
             type: '',
             required: false,
             deleteValidationLevel: 'none',
-            state: 'register'
+            state: 'register',
+            wasChanged: true
         }
 
         setTableFields([...tableFields, newTableFields])
@@ -107,13 +115,24 @@ function useAdminTables() {
                 type: field.type,
                 required: field.required,
                 deleteValidationLevel: 'confirm',
-                state: 'updating'
+                state: 'updating',
+                wasChanged: false
             }
         }) 
 
-        setTableSelectedName(collectionInfo.collectionName)
+        setTableSelectedName({
+            currentName: collectionInfo.collectionName,
+            tableName: collectionInfo.collectionName
+        })
         setTableFields(newTableField)
         setShowFormFields(true)
+    }
+    
+    function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {
+        setTableSelectedName({
+            currentName: e.target.value,
+            tableName: tableSelectedName.tableName
+        })
     }
 
     return {collectionInfo,
@@ -126,6 +145,7 @@ function useAdminTables() {
         setTableSelectedName,
         onClickInRow,
         onButtonClickAddField,
+        onChangeInputNameCollection,
         onButtonClickSave,
         onButtonClickAdd, 
         onButtonClickBack
@@ -146,14 +166,17 @@ export default function AdminTables() {
         onButtonClickAdd,
         onClickInRow,
         onButtonClickBack,
+        onChangeInputNameCollection,
         onButtonClickSave,
         onButtonClickAddField
     } = useAdminTables()
     
     useEffect(() => {
         console.log(tableFields);
+        console.log(tableSelectedName);
         
-    }, [tableFields])
+
+    }, [tableFields, tableSelectedName])
 
     const BreadCrumberRoute = ["Tabelas"]
     const buttonContentNavTables: ButtonContent[] = [
@@ -189,15 +212,23 @@ export default function AdminTables() {
             <BreadCrumber page={BreadCrumberRoute} screen={''} route={''} />
             {
                 showFormFields ? (
-                    <>
+                    <form>
+                        <FloatNavFields
+                        title="Tabela"
+                        buttonContent={buttonContentNavFields}
+                        input={{
+                            value: tableSelectedName.currentName,
+                            tittle: 'Nome da tabela',
+                            onChangeInput: onChangeInputNameCollection
+                        }}
+                        />
                         <FormFields
-                        buttonContentNavFields={buttonContentNavFields}
                         tableFields={tableFields}
                         setTableSelectedName={setTableSelectedName}
                         tableSelectedName={tableSelectedName}
                         setTableFields={setTableFields}
                         />
-                    </>
+                    </form>
                 ) : (
                     <>
                     {

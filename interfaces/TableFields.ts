@@ -4,4 +4,5 @@ export default interface TableFields {
   required: boolean,
   deleteValidationLevel: 'none' | 'confirm'
   state: 'register' | 'updating'
+  wasChanged: boolean
 }

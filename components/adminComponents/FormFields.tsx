@@ -1,10 +1,7 @@
-import ButtonContent from '@/interfaces/ButtonContent';
-import FloatNavFields from './FloatNavFields';
 import TableFields from '@/interfaces/TableFields';
-import { Dispatch, SetStateAction } from 'react';
-import { setMaxIdleHTTPParsers } from 'http';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import sty from "../../styles/style-components/formfield.module.css"
-import { X, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 
 import {
   Card,
@@ -29,28 +26,30 @@ import {
 import { Input } from "@/components/ui/input"
 
 import { SelectValue } from '@radix-ui/react-select';
+import TableSelected from '@/interfaces/TableSelected';
 
 interface FormFields {
-  buttonContentNavFields: ButtonContent[],
   tableFields: TableFields[]
   setTableFields: Dispatch<SetStateAction<TableFields[]>>
-  tableSelectedName: string
-  setTableSelectedName: Dispatch<SetStateAction<string>>
+  tableSelectedName: TableSelected
+  setTableSelectedName: Dispatch<SetStateAction<TableSelected>>
 }
 
 export function FormFields({
-  buttonContentNavFields,
   tableFields,
   setTableFields,
   tableSelectedName,
   setTableSelectedName
 }: FormFields) {
 
+  const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
+
   function onChangeFieldName(e: React.ChangeEvent<HTMLInputElement>, index: number) {
     const { value } = e.target;
-
+    
     const newTableFields = [...tableFields]
-    newTableFields[index] = { ...newTableFields[index], name: value }
+    const nameWithoutChange = fieldsWithoutChange[index].name
+    newTableFields[index] = { ...newTableFields[index], name: value, wasChanged: value !== nameWithoutChange}
 
     setTableFields(newTableFields);
   }
@@ -59,7 +58,8 @@ export function FormFields({
     const { value } = e.target;
 
     const newTableFields = [...tableFields]
-    newTableFields[index] = { ...newTableFields[index], type: value }
+    const typeWithoutChange = fieldsWithoutChange[index].type
+    newTableFields[index] = { ...newTableFields[index], type: value, wasChanged: value !== typeWithoutChange }
 
     setTableFields(newTableFields);
   }
@@ -68,8 +68,9 @@ export function FormFields({
     const { checked } = e.target;
 
     const newTableFields = [...tableFields]
-    newTableFields[index] = { ...newTableFields[index], required: checked }
+    const requiredWithoutChange = fieldsWithoutChange[index].required
 
+    newTableFields[index] = { ...newTableFields[index], required: checked, wasChanged: requiredWithoutChange !==  checked}
     setTableFields(newTableFields);
   }
 
@@ -80,74 +81,52 @@ export function FormFields({
 
     tr?.remove();
   }
-
-  function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {
-    setTableSelectedName(e.target.value)
-  }
-
   return (
-    <form action="">
-      <FloatNavFields
-        title="Tabela"
-        buttonContent={buttonContentNavFields}
-        input={{
-          value: tableSelectedName,
-          tittle: 'Nome da tabela',
-          onChangeInput: onChangeInputNameCollection
-        }}
-      />
+    <Card className={sty.tableContainer}>
+      <table className={sty.tableMain} id="titulotabela">
+        <thead>
+          <tr className={sty.titleTable}>
+            <th className={sty.columnHeader}>Nome</th>
+            <th className={sty.columnHeader}>Tipo</th>
+            <th className={sty.columnHeader}>Obrigatório</th>
+          </tr>
+        </thead>
+        <tbody className="tbody" id="tbody">
+          {tableFields.map((tableField, i) => (
+            <tr key={i}>
+              <td>
+                <Input className={sty.input} type="text" onChange={(e) => onChangeFieldName(e, i)} value={tableField.name} />
+              </td>
+              <td>
+              <select
+                onChange={(e) => onChangeType(e, i)}
+                className="block p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+              >
+                <option value="string" selected={tableField.type === 'string'}>Texto pequeno</option>
+                <option value="long" selected={tableField.type === 'long'}>Números inteiros</option>
+                <option value="double" selected={tableField.type === 'double'}>Números decimais</option>
+                <option value="bool" selected={tableField.type === 'bool'}>Sim ou não</option>
+                <option value="date" selected={tableField.type === 'date'}>Data</option>
+              </select>
 
-      <Card className={sty.tableContainer}>
-        <table className={sty.tableMain} id="titulotabela">
-          <thead>
-            <tr className={sty.titleTable}>
-              <th className={sty.columnHeader}>Nome</th>
-              <th className={sty.columnHeader}>Tipo</th>
-              <th className={sty.columnHeader}>Obrigatório</th>
+              </td>
+              <td>
+                <input className={sty.checkbox} type='checkbox' onChange={(e) => onChangeRequired(e, i)} checked={tableField.required} />
+              </td>
+              <td>
+                <TooltipProvider >
+                  <Tooltip >
+                    <TooltipTrigger><span onClick={onClickDel}> <Trash className={sty.deletButton} /></span></TooltipTrigger>
+                    <TooltipContent side="right">
+                      apagar campo
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </td>
             </tr>
-          </thead>
-          <tbody className="tbody" id="tbody">
-            {tableFields.map((tableField, i) => (
-              <tr key={i}>
-                <td>
-                  <Input className={sty.input} type="text" onChange={(e) => onChangeFieldName(e, i)} value={tableField.name} />
-                </td>
-                <td>
-                  <Select >
-                    <SelectTrigger className={sty.inputSelect}>
-                      <select className="w-500" onChange={(e) => onChangeType(e, i)} />
-                      <SelectValue placeholder="Tipo do campo"></SelectValue>
-                    </SelectTrigger>
-                    <SelectGroup>
-                      <SelectContent>
-                        <SelectItem value="string" selected={tableField.type === 'string' ? true : false}>Texto pequeno</SelectItem>
-                        <SelectItem value="long" selected={tableField.type === 'long' ? true : false}>Números inteiros</SelectItem>
-                        <SelectItem value="double" selected={tableField.type === 'double' ? true : false}>Números decimais</SelectItem>
-                        <SelectItem value="boll" selected={tableField.type === 'boll' ? true : false}>Sim ou não</SelectItem>
-                        <SelectItem value="date" selected={tableField.type === 'date' ? true : false}>Data</SelectItem>
-                      </SelectContent>
-                    </SelectGroup>
-                  </Select>
-                </td>
-                <td>
-                  <input className={sty.checkbox} type='checkbox' onChange={(e) => onChangeRequired(e, i)} checked={tableField.required} />
-                </td>
-                <td>
-
-                  <TooltipProvider >
-                    <Tooltip >
-                      <TooltipTrigger><span onClick={onClickDel}> <Trash className={sty.deletButton} /></span></TooltipTrigger>
-                      <TooltipContent side="right">
-                        apagar campo
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-    </form>
+          ))}
+        </tbody>
+      </table>
+    </Card>
   )
 }
