@@ -1,4 +1,4 @@
 export default class ApiConfig{
-  protected url = "https://hmlg.apiweon.nowecompany.com.br"
+  protected url = process.env.NEXT_PUBLIC_API_URL;
   // protected url = "http://localhost:3300"
 }
