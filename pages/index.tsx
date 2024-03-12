@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Button } from "@/components/ui/button";
 import sty from "../styles/Form-login/formlogin.module.css";
@@ -76,13 +77,10 @@ export default function FormLogin() {
                         </div>
                     </div>
 
-
-
-
                     <Button type="submit">Acessar</Button>
                 </form>
 
-                <img className={sty.img} src="/img/black.png" alt="" />
+                <Image className={sty.img} width={300} height={200} src="/img/black.png" alt="" />
                 <IconeNowe />
             </div>
         </div>

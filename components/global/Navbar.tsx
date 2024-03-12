@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import sty from '../../styles/style-components/navbar.module.css';
@@ -24,7 +25,7 @@ const Nav: React.FC<NavProps> = ({ adminPages, dataPages }) => {
             <nav className={`${sty.navBody} ${showDrawer ? sty.open : ''}`}>
                 <div className={sty.navItems}>
                     <Link href="/home">
-                        <img className={sty.navImg} src="/Img/white.png" alt="Logo" />
+                        <Image className={sty.navImg} src="/Img/white.png" width={100} height={0} alt="Logo" />
                     </Link>
                     <div className={sty.navItenContainer}>
                         <div className={sty.navItem}>
