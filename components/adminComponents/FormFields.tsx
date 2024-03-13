@@ -81,6 +81,7 @@ export function FormFields({
         </thead>
         <tbody className="tbody" id="tbody">
           {tableFields.map((tableField, i) => (
+            
             <tr key={i} className={tableField.wasChanged ? sty.fieldChanged : sty.fieldWithoutChanged}>
               <td>
                 <Input className={sty.input} type="text" onChange={(e) => onChangeFieldName(e, i)} value={tableField.name} />

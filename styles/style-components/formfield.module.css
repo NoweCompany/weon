@@ -9,11 +9,11 @@
 }
 
 .fieldWithoutChanged{
-    border: 3px solid white;
+    border-left: 3px solid white;
 }
 
 .fieldChanged{
-    border: 3px solid red;
+    border-left: 3px solid #0063da;
 }
 
 .tableContainer{

@@ -260,15 +260,15 @@ export default function AdminTables() {
 
     const buttonContentNavFields: ButtonContent[] = [
         {
-            name: 'Salvar',
-            functionOnClick: onButtonClickSave,
-            variant: 'outline',
-            id: "save"
-        },
-        {
-            name: 'Adicionar novo campo',
+            name: 'novo campo',
             functionOnClick: onButtonClickAddField,
             variant: 'default',
+        },
+        {
+            name: 'Salvar',
+            functionOnClick: onButtonClickSave,
+            variant: 'save',
+            id: "save"
         },
         {
             name: 'voltar',

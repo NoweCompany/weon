@@ -3,7 +3,7 @@ export default interface Button {
   id?: string;
   className?: string;
   disabled?: boolean;
-  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
+  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" |"save" | null | undefined;
   functionOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void; // Corrigindo a tipagem da função
 }
 
