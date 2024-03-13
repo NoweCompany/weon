@@ -8,14 +8,6 @@ import {
 } from "@/components/ui/card"
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select"
-
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -25,21 +17,14 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { SelectValue } from '@radix-ui/react-select';
-import TableSelected from '@/interfaces/TableSelected';
-
 interface FormFields {
   tableFields: TableFields[]
   setTableFields: Dispatch<SetStateAction<TableFields[]>>
-  tableSelectedName: TableSelected
-  setTableSelectedName: Dispatch<SetStateAction<TableSelected>>
 }
 
 export function FormFields({
   tableFields,
   setTableFields,
-  tableSelectedName,
-  setTableSelectedName
 }: FormFields) {
 
   const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
@@ -48,7 +33,7 @@ export function FormFields({
     const { value } = e.target;
     
     const newTableFields = [...tableFields]
-    const nameWithoutChange = fieldsWithoutChange[index].name
+    const nameWithoutChange = fieldsWithoutChange[index]?.name || ''
     newTableFields[index] = { ...newTableFields[index], name: value, wasChanged: value !== nameWithoutChange}
 
     setTableFields(newTableFields);
@@ -58,7 +43,7 @@ export function FormFields({
     const { value } = e.target;
 
     const newTableFields = [...tableFields]
-    const typeWithoutChange = fieldsWithoutChange[index].type
+    const typeWithoutChange = fieldsWithoutChange[index]?.type || ''
     newTableFields[index] = { ...newTableFields[index], type: value, wasChanged: value !== typeWithoutChange }
 
     setTableFields(newTableFields);
@@ -68,7 +53,7 @@ export function FormFields({
     const { checked } = e.target;
 
     const newTableFields = [...tableFields]
-    const requiredWithoutChange = fieldsWithoutChange[index].required
+    const requiredWithoutChange = fieldsWithoutChange[index]?.required || false
 
     newTableFields[index] = { ...newTableFields[index], required: checked, wasChanged: requiredWithoutChange !==  checked}
     setTableFields(newTableFields);
@@ -81,6 +66,9 @@ export function FormFields({
 
     tr?.remove();
   }
+
+  const fieldTypes = ['string', 'long', 'double', 'bool', 'date'];
+
   return (
     <Card className={sty.tableContainer}>
       <table className={sty.tableMain} id="titulotabela">
@@ -93,7 +81,7 @@ export function FormFields({
         </thead>
         <tbody className="tbody" id="tbody">
           {tableFields.map((tableField, i) => (
-            <tr key={i}>
+            <tr key={i} className={tableField.wasChanged ? sty.fieldChanged : sty.fieldWithoutChanged}>
               <td>
                 <Input className={sty.input} type="text" onChange={(e) => onChangeFieldName(e, i)} value={tableField.name} />
               </td>
@@ -102,6 +90,7 @@ export function FormFields({
                 onChange={(e) => onChangeType(e, i)}
                 className="block p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
               >
+                <option selected={!fieldTypes.includes(tableField.type)}>Selecione um tipo</option>
                 <option value="string" selected={tableField.type === 'string'}>Texto pequeno</option>
                 <option value="long" selected={tableField.type === 'long'}>Números inteiros</option>
                 <option value="double" selected={tableField.type === 'double'}>Números decimais</option>

@@ -8,6 +8,14 @@
     background-color: #ececec; 
 }
 
+.fieldWithoutChanged{
+    border: 3px solid white;
+}
+
+.fieldChanged{
+    border: 3px solid red;
+}
+
 .tableContainer{
     display: flex;
     align-items: center;

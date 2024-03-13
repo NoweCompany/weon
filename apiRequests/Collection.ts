@@ -37,6 +37,7 @@ export default class Collection extends ApiConfig {
         {
           method: 'POST',
           headers:{
+            "Content-Type": "application/json",
             "authorization": `Bearer ${this.auth.getToken()}`
           },
           body: JSON.stringify({
@@ -46,13 +47,12 @@ export default class Collection extends ApiConfig {
 
       const data = await response.json()
       
-      if(response.status !== 200){
+      if(response.status !== 200){     
         return { error: data.error }
       }
       
       return data
-    } catch (e) {
-      console.log(e)      
+    } catch (e) {    
       return { error: 'Falha na conexão com o servidor'}
     }
   }

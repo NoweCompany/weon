@@ -10,15 +10,16 @@ import { FormFields } from '@/components/adminComponents/FormFields';
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
 import ButtonContent from '@/interfaces/ButtonContent';
-import TableSelected from '@/interfaces/TableSelected';
+import TableName from '@/interfaces/TableName';
 import TableFields from '@/interfaces/TableFields';
 
 //Services
 import { messaging } from "@/services";
-import { collection } from '@/apiRequests';
+import { collection, field } from '@/apiRequests';
 
 import React, { useEffect, useState } from "react";
 import FloatNavFields from '@/components/adminComponents/FloatNavFields';
+import { table } from 'console';
 
 function useAdminTables() {
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
@@ -26,9 +27,14 @@ function useAdminTables() {
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
     const [showFormFields, setShowFormFields] = useState<boolean>(false)
     const [tableFields, setTableFields] = useState<TableFields[]>([])
-    const [tableSelectedName, setTableSelectedName] = useState<TableSelected>({currentName: '', tableName: ''})
+    const [tableName, setTableName] = useState<TableName>(
+        {
+            currentTableName: '',
+            tableSelected: ''
+        })
 
     useEffect(() => {
+        setTableFields([])
         getCollections()
     },[])
 
@@ -66,6 +72,7 @@ function useAdminTables() {
         setShowFormFields(true)
         const newTableFields: TableFields = {
             name: '',
+            originalName: '',
             type: '',
             required: false,
             deleteValidationLevel: 'none',
@@ -78,21 +85,84 @@ function useAdminTables() {
     function onButtonClickBack(){
         setShowFormFields(false)
         setTableFields([])
-        setTableSelectedName({
-            currentName: '',
-            tableName: ''
+        setTableName({
+            currentTableName: '',
+            tableSelected: ''
         })
     } 
 
-    function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
-        e.preventDefault()
-        
-        const collectionName = tableSelectedName.currentName || tableSelectedName.tableName
-        for(const field of tableFields){
-            if(!field.wasChanged) continue
-            console.log(field)
+    async function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+    
+        const collectionName = tableName.currentTableName;
+        let collectionError = false;
+    
+        if ((tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected) {
+            console.log('Atualiza o nome da tabela para => ' + tableName.currentTableName);
+        } else if (!tableName.tableSelected) {
+            try {
+                const response = await collection.postApi(collectionName);
+                if (response && response?.error) {
+                    collectionError = true;
+                    console.log(collectionError);
+                    return messaging.send(response.error, false);
+                }
+                setTableName({
+                    currentTableName: collectionName,
+                    tableSelected: collectionName,
+                })
+                messaging.send(`Tabela ${collectionName} criada com sucesso.`, true);
+            } catch (error: any) {
+                collectionError = true;
+                return messaging.send(error, false);
+            }
         }
-    } 
+    
+        if (collectionError) return;
+    
+        for (let i = 0; i < tableFields.length; i++) {
+            const tablefield = tableFields[i];
+            if (!tablefield.wasChanged) continue;
+            console.log(tablefield);
+            if (tablefield.state === 'register') {
+                try {
+                    const response = await field.postApi(collectionName, tablefield.name, {
+                        type: tablefield.type,
+                        description: '',
+                        required: tablefield.required
+                    });
+                    if (response && response?.error) return messaging.send(response.error, false);
+
+                    const newTableFields = [...tableFields]
+                    newTableFields[i] = { ...newTableFields[i], state: 'updating', wasChanged: false}
+                    setTableFields(newTableFields)
+
+                    messaging.send('Alterações salvas com sucesso', true);
+                } catch (error: any) {
+                    return messaging.send(error.toString(), false);
+                }
+            } else if (tablefield.state === 'updating') {
+                try {
+                    const response = await field.putApi(collectionName, tablefield.originalName, {
+                        newFieldName: tablefield.name,
+                        fieldRequired: tablefield.required,
+                        type: tablefield.type,
+                        description: ''
+                    });
+                    if (response && response?.error) return messaging.send(response.error, false);
+
+                    const newTableFields = [...tableFields]
+                    newTableFields[i] = { ...newTableFields[i], wasChanged: false}
+                    setTableFields(newTableFields)
+
+                    messaging.send('Alterações salvas com sucesso', true);
+                } catch (error: any) {
+                    return messaging.send(error.toString(), false);
+                }
+            }
+        }
+    }
+    
 
     function onButtonClickAddField(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault()
@@ -101,6 +171,7 @@ function useAdminTables() {
             type: '',
             required: false,
             deleteValidationLevel: 'none',
+            originalName: '',
             state: 'register',
             wasChanged: true
         }
@@ -112,6 +183,7 @@ function useAdminTables() {
         const newTableField: TableFields[] = collectionInfo.fields.map((field) => {
             return {
                 name: field.currentName,
+                originalName: field.originalName,
                 type: field.type,
                 required: field.required,
                 deleteValidationLevel: 'confirm',
@@ -120,18 +192,18 @@ function useAdminTables() {
             }
         }) 
 
-        setTableSelectedName({
-            currentName: collectionInfo.collectionName,
-            tableName: collectionInfo.collectionName
+        setTableName({
+            currentTableName: collectionInfo.collectionName,
+            tableSelected: collectionInfo.collectionName
         })
         setTableFields(newTableField)
         setShowFormFields(true)
     }
     
     function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {
-        setTableSelectedName({
-            currentName: e.target.value,
-            tableName: tableSelectedName.tableName
+        setTableName({
+            currentTableName: e.target.value,
+            tableSelected: tableName.tableSelected
         })
     }
 
@@ -141,8 +213,8 @@ function useAdminTables() {
         showFormFields,
         tableFields,
         setTableFields,
-        tableSelectedName,
-        setTableSelectedName,
+        tableName,
+        setTableName,
         onClickInRow,
         onButtonClickAddField,
         onChangeInputNameCollection,
@@ -160,8 +232,8 @@ export default function AdminTables() {
         tableRows,
         showFormFields,
         tableFields,
-        tableSelectedName,
-        setTableSelectedName,
+        setTableName,
+        tableName,
         setTableFields,
         onButtonClickAdd,
         onClickInRow,
@@ -173,10 +245,10 @@ export default function AdminTables() {
     
     useEffect(() => {
         console.log(tableFields);
-        console.log(tableSelectedName);
+        console.log(tableName);
         
 
-    }, [tableFields, tableSelectedName])
+    }, [tableFields, tableName])
 
     const BreadCrumberRoute = ["Tabelas"]
     const buttonContentNavTables: ButtonContent[] = [
@@ -217,33 +289,29 @@ export default function AdminTables() {
                         title="Tabela"
                         buttonContent={buttonContentNavFields}
                         input={{
-                            value: tableSelectedName.currentName,
+                            value: tableName.currentTableName,
                             tittle: 'Nome da tabela',
                             onChangeInput: onChangeInputNameCollection
                         }}
                         />
                         <FormFields
                         tableFields={tableFields}
-                        setTableSelectedName={setTableSelectedName}
-                        tableSelectedName={tableSelectedName}
                         setTableFields={setTableFields}
                         />
                     </form>
                 ) : (
                     <>
+                    <FloatNavTables 
+                    title="Tabelas" 
+                    buttonContent={buttonContentNavTables} 
+                    />
                     {
                     (collectionInfo?.length >= 1 &&  collectionInfo) ? (
-                        <>
-                            <FloatNavTables 
-                            title="Tabelas" 
-                            buttonContent={buttonContentNavTables} 
-                            />
-                            <TableListagem
-                            tableColumns={tableColumns}
-                            tableRows={tableRows}
-                            onCLickInRow={onClickInRow}
-                            />
-                        </>
+                        <TableListagem
+                        tableColumns={tableColumns}
+                        tableRows={tableRows}
+                        onCLickInRow={onClickInRow}
+                        />
                     ) : (
                         <NoContentDisplay
                         text={`Não há nenhuma tabela criada. \n 
