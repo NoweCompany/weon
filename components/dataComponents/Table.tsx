@@ -120,9 +120,10 @@ export default function Table(props: PropsTable) {
           </tbody>
         </table>
       </div>
+      <div className={sty.containerMobilePagination}>
       {
         (tableRows.length / rowsPerPage) > 1 && (
-          <Pagination
+          <Pagination 
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
@@ -130,6 +131,7 @@ export default function Table(props: PropsTable) {
         />
         )
       }
+    </div>
     </div>
   );
 }

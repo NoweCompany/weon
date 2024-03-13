@@ -141,4 +141,9 @@
         overflow-x: auto;
         width: 95%;
     }
+
+    .containerMobilePagination{
+        margin-bottom: 5rem;
+
+    }
 }
