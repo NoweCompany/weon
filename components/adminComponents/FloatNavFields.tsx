@@ -94,7 +94,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
             />
           <div className={sty.buttonContainer}>
             {
-              buttonContent.map((content, index) => {
+              buttonContent && buttonContent.map((content, index) => {
                 const { name, className, disabled, id, functionOnClick, variant } = content
                 return (
                   <Button
@@ -162,7 +162,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
                             Pesquisar
                           </Button>
 
-                          {buttonContent.map((content, index) => {
+                          {buttonContent && buttonContent.map((content, index) => {
                             const { name, className, disabled, id, functionOnClick, variant } = content
                             return (
                               <Button

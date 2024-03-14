@@ -20,7 +20,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
 import ButtonContent from '@/interfaces/ButtonContent';
@@ -36,7 +35,7 @@ import FloatNavFields from '@/components/adminComponents/FloatNavFields';
 import { table } from 'console';
 
 function useAdminTables() {
-    const [dialogOpen, setDialogOpen] = useState(false)
+    const [Dialog, setDialog] = useState(false)
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
@@ -222,12 +221,12 @@ function useAdminTables() {
         })
     }
 
-    function openDialog(){
-        setDialogOpen(true)
+    function dialogOpen(){
+        setDialog(true)
     }
 
-    function C(){
-        setDialogOpen(false)
+    function dialogClose(){
+        setDialog(false)
     }
 
     return {
@@ -244,10 +243,11 @@ function useAdminTables() {
         onChangeInputNameCollection,
         onButtonClickSave,
         onButtonClickAdd,
-        onButtonClickBack
+        onButtonClickBack,
+        dialogOpen,
+        dialogClose
     }
 }
-
 
 export default function AdminTables() {
     const {
@@ -264,7 +264,9 @@ export default function AdminTables() {
         onButtonClickBack,
         onChangeInputNameCollection,
         onButtonClickSave,
-        onButtonClickAddField
+        onButtonClickAddField,
+        dialogOpen,
+        dialogClose
     } = useAdminTables()
 
     useEffect(() => {
@@ -290,7 +292,7 @@ export default function AdminTables() {
         },
         {
             name: 'deletar',
-            functionOnClick: openDialog,
+            functionOnClick: dialogOpen,
             variant: 'destructive',
         },
         {
@@ -366,7 +368,7 @@ export default function AdminTables() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <Button variant="secondary">cancelar</Button>
-                        <Button onClick={closeD} variant="destructive">deletar</Button>
+                        <Button onClick={dialogClose} variant="destructive">deletar</Button>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
