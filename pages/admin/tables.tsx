@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input"
+
 
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
@@ -35,7 +37,12 @@ import FloatNavFields from '@/components/adminComponents/FloatNavFields';
 import { table } from 'console';
 
 function useAdminTables() {
-    const [Dialog, setDialog] = useState(false)
+    const [open, setOpen] = useState(false);
+
+    const toggleDialog = () => {
+        setOpen((prevOpen) => !prevOpen);
+      };
+
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
@@ -221,14 +228,6 @@ function useAdminTables() {
         })
     }
 
-    function dialogOpen(){
-        setDialog(true)
-    }
-
-    function dialogClose(){
-        setDialog(false)
-    }
-
     return {
         collectionInfo,
         tableColumns,
@@ -244,8 +243,7 @@ function useAdminTables() {
         onButtonClickSave,
         onButtonClickAdd,
         onButtonClickBack,
-        dialogOpen,
-        dialogClose
+        toggleDialog
     }
 }
 
@@ -265,8 +263,8 @@ export default function AdminTables() {
         onChangeInputNameCollection,
         onButtonClickSave,
         onButtonClickAddField,
-        dialogOpen,
-        dialogClose
+        toggleDialog,
+        
     } = useAdminTables()
 
     useEffect(() => {
@@ -292,7 +290,7 @@ export default function AdminTables() {
         },
         {
             name: 'deletar',
-            functionOnClick: dialogOpen,
+            functionOnClick: toggleDialog,
             variant: 'destructive',
         },
         {
@@ -355,7 +353,7 @@ export default function AdminTables() {
             }
 
             {/* alert confirmação para delete */}
-            <AlertDialog>
+            <AlertDialog open={open} onOpenChange={setOpen}>
                 <AlertDialogTrigger>Open</AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
@@ -363,15 +361,17 @@ export default function AdminTables() {
                         <AlertDialogDescription>
                             Essa ação irá mover essa tabela e os dados
                             diretamente para a lixeira, para confirmar 
-                            sua deleção favor reescreva {tableName.currentTableName}
+                            sua deleção favor reescreva <span> (nome tabela) </span> 
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <Button variant="secondary">cancelar</Button>
-                        <Button onClick={dialogClose} variant="destructive">deletar</Button>
+                        <Input placeholder="Reescreva aqui"></Input>
+                        <AlertDialogCancel> Cancelar </AlertDialogCancel>
+                        <Button variant="destructive">Deletar</Button>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
+
         </>
     )
 }
