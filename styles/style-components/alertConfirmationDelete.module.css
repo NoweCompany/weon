@@ -1,0 +1,23 @@
+.cardcontainer{
+    padding: 30px;
+}
+
+.title{
+    font-size: 1.5rem;
+    font-family: bold;
+    margin: .5rem auto;
+}
+
+.description{
+    margin-bottom: 1rem;
+}
+
+.footer{
+    display: flex;
+    gap: .5rem;
+}
+
+.span{
+    font-family: bold;
+    user-select: none;
+}

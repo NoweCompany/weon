@@ -6,21 +6,13 @@ import BreadCrumber from "@/components/global/BreadCrumber"
 import TableListagem from "./../../components/adminComponents/TableListagem";
 import NoContentDisplay from '@/components/global/NoContentDisplay';
 import { FormFields } from '@/components/adminComponents/FormFields';
+import sty from "../../styles/style-components/alertConfirmationDelete.module.css"
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+    CommandDialog,
+} from "@/components/ui/command"
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
-
 
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
@@ -41,7 +33,18 @@ function useAdminTables() {
 
     const toggleDialog = () => {
         setOpen((prevOpen) => !prevOpen);
-      };
+    };
+
+    React.useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+        }
+        document.addEventListener("keydown", down)
+        return () => document.removeEventListener("keydown", down)
+    }, [])
 
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
@@ -243,7 +246,9 @@ function useAdminTables() {
         onButtonClickSave,
         onButtonClickAdd,
         onButtonClickBack,
-        toggleDialog
+        toggleDialog,
+        open,
+        setOpen
     }
 }
 
@@ -264,7 +269,9 @@ export default function AdminTables() {
         onButtonClickSave,
         onButtonClickAddField,
         toggleDialog,
-        
+        open,
+        setOpen
+
     } = useAdminTables()
 
     useEffect(() => {
@@ -352,25 +359,25 @@ export default function AdminTables() {
                 )
             }
 
-            {/* alert confirmação para delete */}
-            <AlertDialog open={open} onOpenChange={setOpen}>
-                <AlertDialogTrigger>Open</AlertDialogTrigger>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Deseja deletar essa tabela?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            Essa ação irá mover essa tabela e os dados
-                            diretamente para a lixeira, para confirmar 
-                            sua deleção favor reescreva <span> (nome tabela) </span> 
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <Input placeholder="Reescreva aqui"></Input>
-                        <AlertDialogCancel> Cancelar </AlertDialogCancel>
-                        <Button variant="destructive">Deletar</Button>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+        <CommandDialog open={open} onOpenChange={setOpen}>
+            <div className={sty.cardcontainer}>
+                <div className={sty.cardtitle}>
+                  <h1 className={sty.title}> Deseja apagar essa tabela?</h1> 
+                </div>
+            <div className={sty.header}>
+                <h1 className={sty.description}>
+                    Essa ação irá mover essa tabela e os dados
+                    diretamente para a lixeira, para confirmar
+                    sua deleção reescreva <span className={sty.span}> "{tableName.currentTableName}" </span>
+                </h1>
+            </div>
+            <div className={sty.footer}>
+                <Input placeholder="Digite o nome da tabela aqui!"></Input>
+                <Button variant="secondary"> cancelar </Button>
+                <Button variant="destructive"> sim, deletar. </Button>
+            </div>
+            </div>
+        </CommandDialog>
 
         </>
     )
