@@ -6,6 +6,13 @@ import BreadCrumber from "@/components/global/BreadCrumber"
 import TableListagem from "./../../components/adminComponents/TableListagem";
 import NoContentDisplay from '@/components/global/NoContentDisplay';
 import { FormFields } from '@/components/adminComponents/FormFields';
+import sty from "../../styles/style-components/alertConfirmationDelete.module.css"
+import {
+    CommandDialog,
+} from "@/components/ui/command"
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input"
 
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo';
@@ -22,6 +29,23 @@ import FloatNavFields from '@/components/adminComponents/FloatNavFields';
 import { table } from 'console';
 
 function useAdminTables() {
+    const [open, setOpen] = useState(false);
+
+    const toggleDialog = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    React.useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+        }
+        document.addEventListener("keydown", down)
+        return () => document.removeEventListener("keydown", down)
+    }, [])
+
     const [collectionInfo, setCollectionInfos] = useState<CollectionInfo[]>([])
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
@@ -36,39 +60,39 @@ function useAdminTables() {
     useEffect(() => {
         setTableFields([])
         getCollections()
-    },[])
+    }, [])
 
     useEffect(() => {
-        if(collectionInfo){        
+        if (collectionInfo) {
             const rows = collectionInfo
             setTableRows(rows)
 
             let numberOfColumns = 1
             collectionInfo.forEach((vl) => {
                 const numberOfFields = vl.fields.length
-                if(numberOfFields > numberOfColumns) numberOfColumns = numberOfFields
+                if (numberOfFields > numberOfColumns) numberOfColumns = numberOfFields
             }, [])
 
-            const arrNumberOfColumns = Array.from({length: numberOfColumns}, (_, vl) => {
+            const arrNumberOfColumns = Array.from({ length: numberOfColumns }, (_, vl) => {
                 return 'Campo ' + String(vl + 1)
             })
             arrNumberOfColumns.unshift('Tabelas')
             setTableColumns(arrNumberOfColumns)
         }
-    }, [ collectionInfo ])
+    }, [collectionInfo])
 
-    function getCollections(){
+    function getCollections() {
         collection.getApi()
-            .then((info: any[] | {error: string}) => {
-                if(info && 'error' in info) return messaging.send(info.error, false)
-                setCollectionInfos(info)          
+            .then((info: any[] | { error: string }) => {
+                if (info && 'error' in info) return messaging.send(info.error, false)
+                setCollectionInfos(info)
             })
             .catch((error) => {
                 messaging.send(error, false)
             })
     }
 
-    function onButtonClickAdd(){
+    function onButtonClickAdd() {
         setShowFormFields(true)
         const newTableFields: TableFields = {
             name: '',
@@ -82,7 +106,7 @@ function useAdminTables() {
         setTableFields([newTableFields])
     }
 
-    function onButtonClickBack(){
+    function onButtonClickBack() {
         setShowFormFields(false)
         setTableFields([])
         getCollections()
@@ -90,14 +114,14 @@ function useAdminTables() {
             currentTableName: '',
             tableSelected: ''
         })
-    } 
+    }
 
     async function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
-    
+
         const collectionName = tableName.currentTableName;
         let collectionError = false;
-    
+
         if ((tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected) {
             console.log('Atualiza o nome da tabela para => ' + tableName.currentTableName);
         } else if (!tableName.tableSelected) {
@@ -118,9 +142,9 @@ function useAdminTables() {
                 return messaging.send(error, false);
             }
         }
-    
+
         if (collectionError) return;
-    
+
         for (let i = 0; i < tableFields.length; i++) {
             const tablefield = tableFields[i];
             if (!tablefield.wasChanged) continue;
@@ -168,9 +192,9 @@ function useAdminTables() {
             }
         }
     }
-    
 
-    function onButtonClickAddField(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+
+    function onButtonClickAddField(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
         const newTableFields: TableFields = {
             name: '',
@@ -183,9 +207,9 @@ function useAdminTables() {
         }
 
         setTableFields([...tableFields, newTableFields])
-    } 
+    }
 
-    function onClickInRow(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, collectionInfo: CollectionInfo){
+    function onClickInRow(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, collectionInfo: CollectionInfo) {
         const newTableField: TableFields[] = collectionInfo.fields.map((field) => {
             return {
                 name: field.currentName,
@@ -196,7 +220,7 @@ function useAdminTables() {
                 state: 'updating',
                 wasChanged: false
             }
-        }) 
+        })
 
         setTableName({
             currentTableName: collectionInfo.collectionName,
@@ -205,7 +229,7 @@ function useAdminTables() {
         setTableFields(newTableField)
         setShowFormFields(true)
     }
-    
+
     function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {
         setTableName({
             currentTableName: e.target.value,
@@ -213,7 +237,8 @@ function useAdminTables() {
         })
     }
 
-    return {collectionInfo,
+    return {
+        collectionInfo,
         tableColumns,
         tableRows,
         showFormFields,
@@ -225,14 +250,16 @@ function useAdminTables() {
         onButtonClickAddField,
         onChangeInputNameCollection,
         onButtonClickSave,
-        onButtonClickAdd, 
-        onButtonClickBack
+        onButtonClickAdd,
+        onButtonClickBack,
+        toggleDialog,
+        open,
+        setOpen
     }
 }
 
-
 export default function AdminTables() {
-    const { 
+    const {
         collectionInfo,
         tableColumns,
         tableRows,
@@ -246,13 +273,17 @@ export default function AdminTables() {
         onButtonClickBack,
         onChangeInputNameCollection,
         onButtonClickSave,
-        onButtonClickAddField
+        onButtonClickAddField,
+        toggleDialog,
+        open,
+        setOpen
+
     } = useAdminTables()
-    
+
     useEffect(() => {
         console.log(tableFields);
         console.log(tableName);
-        
+
 
     }, [tableFields, tableName])
 
@@ -269,6 +300,11 @@ export default function AdminTables() {
             name: 'novo campo',
             functionOnClick: onButtonClickAddField,
             variant: 'default',
+        },
+        {
+            name: 'deletar',
+            functionOnClick: toggleDialog,
+            variant: 'destructive',
         },
         {
             name: 'Salvar',
@@ -292,42 +328,63 @@ export default function AdminTables() {
                 showFormFields ? (
                     <form>
                         <FloatNavFields
-                        title="Tabela"
-                        buttonContent={buttonContentNavFields}
-                        input={{
-                            value: tableName.currentTableName,
-                            tittle: 'Nome da tabela',
-                            onChangeInput: onChangeInputNameCollection
-                        }}
+                            title="Tabela"
+                            buttonContent={buttonContentNavFields}
+                            input={{
+                                value: tableName.currentTableName,
+                                tittle: 'Nome da tabela',
+                                onChangeInput: onChangeInputNameCollection
+                            }}
                         />
                         <FormFields
-                        tableFields={tableFields}
-                        setTableFields={setTableFields}
+                            tableFields={tableFields}
+                            setTableFields={setTableFields}
                         />
                     </form>
                 ) : (
                     <>
-                    <FloatNavTables 
-                    title="Tabelas" 
-                    buttonContent={buttonContentNavTables} 
-                    />
-                    {
-                    (collectionInfo?.length >= 1 &&  collectionInfo) ? (
-                        <TableListagem
-                        tableColumns={tableColumns}
-                        tableRows={tableRows}
-                        onCLickInRow={onClickInRow}
+                        <FloatNavTables
+                            title="Tabelas"
+                            buttonContent={buttonContentNavTables}
                         />
-                    ) : (
-                        <NoContentDisplay
-                        text={`Não há nenhuma tabela criada. \n 
+                        {
+                            (collectionInfo?.length >= 1 && collectionInfo) ? (
+                                <TableListagem
+                                    tableColumns={tableColumns}
+                                    tableRows={tableRows}
+                                    onCLickInRow={onClickInRow}
+                                />
+                            ) : (
+                                <NoContentDisplay
+                                    text={`Não há nenhuma tabela criada. \n 
                         Clique em criar para registar uma nova tabela.`}
-                        />
-                    )
-                    }
+                                />
+                            )
+                        }
                     </>
                 )
             }
+
+        <CommandDialog open={open} onOpenChange={setOpen}>
+            <div className={sty.cardcontainer}>
+                <div className={sty.cardtitle}>
+                  <h1 className={sty.title}> Deseja apagar essa tabela?</h1> 
+                </div>
+            <div className={sty.header}>
+                <h1 className={sty.description}>
+                    Essa ação irá mover essa tabela e os dados
+                    diretamente para a lixeira, para confirmar
+                    sua deleção reescreva <span className={sty.span}> "{tableName.currentTableName}" </span>
+                </h1>
+            </div>
+            <div className={sty.footer}>
+                <Input placeholder="Digite o nome da tabela aqui!"></Input>
+                <Button variant="secondary"> cancelar </Button>
+                <Button variant="destructive"> sim, deletar. </Button>
+            </div>
+            </div>
+        </CommandDialog>
+
         </>
     )
 }
