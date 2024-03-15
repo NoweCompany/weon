@@ -56,6 +56,7 @@ export default class Collection extends ApiConfig {
       return { error: 'Falha na conexão com o servidor'}
     }
   }
+
   public async putApi(collectionName: string, newCollectionName: string) {
     try {
       const response = await fetch(this.url + '/collection',
@@ -68,6 +69,32 @@ export default class Collection extends ApiConfig {
           body: JSON.stringify({
             collectionName: collectionName,
             newName: newCollectionName
+          })
+        })
+
+      const data = await response.json()
+      
+      if(response.status !== 200){     
+        return { error: data.error }
+      }
+      
+      return data
+    } catch (e) {    
+      return { error: 'Falha na conexão com o servidor'}
+    }
+  }
+
+  public async deleteApi(collectionName: string) {
+    try {
+      const response = await fetch(this.url + '/collection',
+        {
+          method: 'DELETE',
+          headers:{
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${this.auth.getToken()}`
+          },
+          body: JSON.stringify({
+            collectionName: collectionName,
           })
         })
 

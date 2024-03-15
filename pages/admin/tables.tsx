@@ -30,10 +30,6 @@ import FloatNavFields from '@/components/adminComponents/FloatNavFields'
 function useAdminTables() {
     const [open, setOpen] = useState(false)
 
-    const toggleDialog = () => {
-        setOpen((prevOpen) => !prevOpen)
-    }
-
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
             if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -49,6 +45,7 @@ function useAdminTables() {
     const [tableColumns, setTableColumns] = useState<string[]>([])
     const [tableRows, setTableRows] = useState<CollectionInfo[]>([])
     const [showFormFields, setShowFormFields] = useState<boolean>(false)
+    const [inputDeletTable, setInputDeletTable] = useState<string>('')
     const [tableFields, setTableFields] = useState<TableFields[]>([])
     const [tableName, setTableName] = useState<TableName>(
         {
@@ -80,16 +77,17 @@ function useAdminTables() {
         }
     }, [collectionInfo])
 
+    
     function getCollections() {
         collection.getApi()
-            .then((info: any[] | { error: string }) => {
-                if (info && 'error' in info) return messaging.send(info.error, false)
-                setCollectionInfos(info)
-            })
-            .catch((error) => {
-                messaging.send(error, false)
-            })
-    }
+        .then((info: any[] | { error: string }) => {
+            if (info && 'error' in info) return messaging.send(info.error, false)
+            setCollectionInfos(info)
+    })
+    .catch((error) => {
+        messaging.send(error, false)
+    })
+}
 
     function onButtonClickAdd() {
         setShowFormFields(true)
@@ -113,6 +111,39 @@ function useAdminTables() {
             currentTableName: '',
             tableSelected: ''
         })
+    }
+    
+    async function onButtonClickDeleteTable(event: React.MouseEvent<HTMLButtonElement>){
+        
+
+        if(inputDeletTable !== tableName.tableSelected) return messaging.send('Ecreva o nome da tabela corretamente!', false)
+
+        try {
+            const response = await collection.deleteApi(tableName.tableSelected)
+            if (response && response?.error) {
+                return messaging.send(response.error, false)
+            }
+            
+            getCollections()
+            setShowFormFields(false)
+            setInputDeletTable('')
+            event.preventDefault()
+            setOpen((prevOpen) => !prevOpen)
+            messaging.send(`Tabela ${tableName.tableSelected} excluída com sucesso!`, true)
+        } catch (error: any) {
+            return messaging.send(error, false)
+        }
+
+    }
+
+    function onChangeInputDeletTable(e: React.ChangeEvent<HTMLInputElement>){
+        const input = e.target as HTMLInputElement
+        setInputDeletTable(input.value)
+    }
+
+    function onButtonClickCancelRemoveTable(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault()
+        setOpen(false)
     }
 
     async function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -249,6 +280,11 @@ function useAdminTables() {
         })
     }
 
+    const onClickDeleteButtonNav = (e:any) => {
+        e.preventDefault()
+        setOpen((prevOpen) => !prevOpen)
+    }
+
     return {
         collectionInfo,
         tableColumns,
@@ -261,10 +297,14 @@ function useAdminTables() {
         onClickInRow,
         onButtonClickAddField,
         onChangeInputNameCollection,
+        onButtonClickDeleteTable,
         onButtonClickSave,
         onButtonClickAdd,
         onButtonClickBack,
-        toggleDialog,
+        inputDeletTable,
+        onClickDeleteButtonNav,
+        onButtonClickCancelRemoveTable,
+        onChangeInputDeletTable,
         open,
         setOpen
     }
@@ -277,6 +317,7 @@ export default function AdminTables() {
         tableRows,
         showFormFields,
         tableFields,
+        inputDeletTable,
         setTableName,
         tableName,
         setTableFields,
@@ -286,8 +327,11 @@ export default function AdminTables() {
         onChangeInputNameCollection,
         onButtonClickSave,
         onButtonClickAddField,
-        toggleDialog,
+        onButtonClickDeleteTable,
+        onClickDeleteButtonNav,
         open,
+        onButtonClickCancelRemoveTable,
+        onChangeInputDeletTable,
         setOpen
 
     } = useAdminTables()
@@ -315,7 +359,7 @@ export default function AdminTables() {
         },
         {
             name: 'deletar',
-            functionOnClick: toggleDialog,
+            functionOnClick: onClickDeleteButtonNav,
             variant: 'destructive',
         },
         {
@@ -390,9 +434,9 @@ export default function AdminTables() {
                 </h1>
             </div>
             <div className={sty.footer}>
-                <Input placeholder="Digite o nome da tabela aqui!"></Input>
-                <Button variant="secondary"> cancelar </Button>
-                <Button variant="destructive"> sim, deletar. </Button>
+                <Input onChange={onChangeInputDeletTable} value={inputDeletTable} placeholder="Digite o nome da tabela aqui!"></Input>
+                <Button variant="secondary" onClick={onButtonClickCancelRemoveTable}> cancelar </Button>
+                <Button variant="destructive" onClick={onButtonClickDeleteTable}> sim, deletar. </Button>
             </div>
             </div>
         </CommandDialog>
