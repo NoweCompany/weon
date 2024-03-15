@@ -31,10 +31,14 @@ export function FormFields({
 
   function onChangeFieldName(e: React.ChangeEvent<HTMLInputElement>, index: number) {
     const { value } = e.target;
-    
     const newTableFields = [...tableFields]
     const nameWithoutChange = fieldsWithoutChange[index]?.name || ''
-    newTableFields[index] = { ...newTableFields[index], name: value, wasChanged: value !== nameWithoutChange}
+    console.log(!!nameWithoutChange)    
+    newTableFields[index] = { 
+      ...newTableFields[index],
+      name: value,
+      wasChanged: value !== nameWithoutChange||!nameWithoutChange
+    }
 
     setTableFields(newTableFields);
   }
@@ -55,7 +59,11 @@ export function FormFields({
     const newTableFields = [...tableFields]
     const requiredWithoutChange = fieldsWithoutChange[index]?.required || false
 
-    newTableFields[index] = { ...newTableFields[index], required: checked, wasChanged: requiredWithoutChange !==  checked}
+    newTableFields[index] = { 
+      ...newTableFields[index], 
+      required: checked, 
+      wasChanged: requiredWithoutChange !==  checked || !requiredWithoutChange
+    }
     setTableFields(newTableFields);
   }
 

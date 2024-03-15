@@ -85,6 +85,7 @@ function useAdminTables() {
     function onButtonClickBack(){
         setShowFormFields(false)
         setTableFields([])
+        getCollections()
         setTableName({
             currentTableName: '',
             tableSelected: ''
@@ -123,7 +124,6 @@ function useAdminTables() {
         for (let i = 0; i < tableFields.length; i++) {
             const tablefield = tableFields[i];
             if (!tablefield.wasChanged) continue;
-            console.log(tablefield);
             if (tablefield.state === 'register') {
                 try {
                     const response = await field.postApi(collectionName, tablefield.name, {
@@ -134,7 +134,12 @@ function useAdminTables() {
                     if (response && response?.error) return messaging.send(response.error, false);
 
                     const newTableFields = [...tableFields]
-                    newTableFields[i] = { ...newTableFields[i], state: 'updating', wasChanged: false}
+                    newTableFields[i] = { 
+                        ...newTableFields[i],
+                        state: 'updating',
+                        wasChanged: false
+                    }
+
                     setTableFields(newTableFields)
 
                     messaging.send('Alterações salvas com sucesso', true);
@@ -152,6 +157,7 @@ function useAdminTables() {
                     if (response && response?.error) return messaging.send(response.error, false);
 
                     const newTableFields = [...tableFields]
+                    
                     newTableFields[i] = { ...newTableFields[i], wasChanged: false}
                     setTableFields(newTableFields)
 
