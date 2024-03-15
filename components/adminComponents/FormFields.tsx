@@ -1,8 +1,6 @@
 import ButtonContent from '@/interfaces/ButtonContent';
-import FloatNavFields from './FloatNavFields';
 import TableFields from '@/interfaces/TableFields';
-import { Dispatch, SetStateAction } from 'react';
-import { setMaxIdleHTTPParsers } from 'http';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import sty from "../../styles/style-components/formfield.module.css"
 import { X, Trash } from 'lucide-react';
@@ -31,19 +29,13 @@ import { Input } from "@/components/ui/input"
 import { SelectValue } from '@radix-ui/react-select';
 
 interface FormFields {
-  buttonContentNavFields: ButtonContent[],
   tableFields: TableFields[]
   setTableFields: Dispatch<SetStateAction<TableFields[]>>
-  tableSelectedName: string
-  setTableSelectedName: Dispatch<SetStateAction<string>>
 }
 
 export function FormFields({
-  buttonContentNavFields,
   tableFields,
   setTableFields,
-  tableSelectedName,
-  setTableSelectedName
 }: FormFields) {
 
   const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
@@ -60,15 +52,6 @@ export function FormFields({
     }
 
     setTableFields(newTableFields);
-  }
-
-  function onChangeType(e: React.ChangeEvent<HTMLSelectElement>, index: number) {
-    const { value } = e.target;
-
-    const newTableFields = [...tableFields]
-    newTableFields[index] = {...newTableFields[index], name: value} 
-  
-    setTableFields(newTableFields );
   }
 
   function onChangeType(e: React.ChangeEvent<HTMLSelectElement>, index: number){
@@ -102,10 +85,6 @@ export function FormFields({
   tr?.remove()
   }
 
-  function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {   
-    setTableSelectedName(e.target.value)
-  }
-  
   return (
     <div className="flex justify-center"> 
       <form action="">

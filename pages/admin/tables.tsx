@@ -3,37 +3,36 @@ import Navbar from "../../components/global/Navbar"
 import Sidebar from "../../components/sidebar/AdminSidebar"
 import FloatNavTables from "../../components/adminComponents/FloatNavTables"
 import BreadCrumber from "@/components/global/BreadCrumber"
-import TableListagem from "./../../components/adminComponents/TableListagem";
-import NoContentDisplay from '@/components/global/NoContentDisplay';
-import { FormFields } from '@/components/adminComponents/FormFields';
+import TableListagem from "./../../components/adminComponents/TableListagem"
+import NoContentDisplay from '@/components/global/NoContentDisplay'
+import { FormFields } from '@/components/adminComponents/FormFields'
 import sty from "../../styles/style-components/alertConfirmationDelete.module.css"
 import {
     CommandDialog,
 } from "@/components/ui/command"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 //Interfaces
-import CollectionInfo from '@/interfaces/CollectionInfo';
-import ButtonContent from '@/interfaces/ButtonContent';
-import TableName from '@/interfaces/TableName';
-import TableFields from '@/interfaces/TableFields';
+import CollectionInfo from '@/interfaces/CollectionInfo'
+import ButtonContent from '@/interfaces/ButtonContent'
+import TableName from '@/interfaces/TableName'
+import TableFields from '@/interfaces/TableFields'
 
 //Services
-import { messaging } from "@/services";
-import { collection, field } from '@/apiRequests';
+import { messaging } from "@/services"
+import { collection, field } from '@/apiRequests'
 
-import React, { useEffect, useState } from "react";
-import FloatNavFields from '@/components/adminComponents/FloatNavFields';
-import { table } from 'console';
+import React, { useEffect, useState } from "react"
+import FloatNavFields from '@/components/adminComponents/FloatNavFields'
 
 function useAdminTables() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     const toggleDialog = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+        setOpen((prevOpen) => !prevOpen)
+    }
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
@@ -117,45 +116,58 @@ function useAdminTables() {
     }
 
     async function onButtonClickSave(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        e.preventDefault();
+        e.preventDefault()
 
-        const collectionName = tableName.currentTableName;
-        let collectionError = false;
-
-        if ((tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected) {
-            console.log('Atualiza o nome da tabela para => ' + tableName.currentTableName);
-        } else if (!tableName.tableSelected) {
+        const collectionName = tableName.currentTableName
+        let collectionError = false
+        const tableNameWasChanged = (tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected
+        if (tableNameWasChanged) {
             try {
-                const response = await collection.postApi(collectionName);
+                const response = await collection.putApi(tableName.tableSelected, tableName.currentTableName)
                 if (response && response?.error) {
-                    collectionError = true;
-                    console.log(collectionError);
-                    return messaging.send(response.error, false);
+                    collectionError = true
+                    return messaging.send(response.error, false)
                 }
                 setTableName({
                     currentTableName: collectionName,
                     tableSelected: collectionName,
                 })
-                messaging.send(`Tabela ${collectionName} criada com sucesso.`, true);
+                messaging.send(`Tabela ${tableName.tableSelected} alterada com sucesso para ${tableName.currentTableName}.`, true)
             } catch (error: any) {
-                collectionError = true;
-                return messaging.send(error, false);
+                collectionError = true
+                return messaging.send(error, false)
+            }
+        } else if (!tableName.tableSelected) {
+            try {
+                const response = await collection.postApi(collectionName)
+                if (response && response?.error) {
+                    collectionError = true
+                    return messaging.send(response.error, false)
+                }
+                setTableName({
+                    currentTableName: collectionName,
+                    tableSelected: collectionName,
+                })
+                messaging.send(`Tabela ${collectionName} criada com sucesso.`, true)
+            } catch (error: any) {
+                collectionError = true
+                return messaging.send(error, false)
             }
         }
 
-        if (collectionError) return;
+        if (collectionError) return
 
         for (let i = 0; i < tableFields.length; i++) {
-            const tablefield = tableFields[i];
-            if (!tablefield.wasChanged) continue;
+            const tablefield = tableFields[i]
+            if (!tablefield.wasChanged) continue
             if (tablefield.state === 'register') {
                 try {
                     const response = await field.postApi(collectionName, tablefield.name, {
                         type: tablefield.type,
                         description: '',
                         required: tablefield.required
-                    });
-                    if (response && response?.error) return messaging.send(response.error, false);
+                    })
+                    if (response && response?.error) return messaging.send(response.error, false)
 
                     const newTableFields = [...tableFields]
                     newTableFields[i] = { 
@@ -166,9 +178,9 @@ function useAdminTables() {
 
                     setTableFields(newTableFields)
 
-                    messaging.send('Alterações salvas com sucesso', true);
+                    messaging.send('Alterações salvas com sucesso', true)
                 } catch (error: any) {
-                    return messaging.send(error.toString(), false);
+                    return messaging.send(error.toString(), false)
                 }
             } else if (tablefield.state === 'updating') {
                 try {
@@ -177,17 +189,17 @@ function useAdminTables() {
                         fieldRequired: tablefield.required,
                         type: tablefield.type,
                         description: ''
-                    });
-                    if (response && response?.error) return messaging.send(response.error, false);
+                    })
+                    if (response && response?.error) return messaging.send(response.error, false)
 
                     const newTableFields = [...tableFields]
                     
                     newTableFields[i] = { ...newTableFields[i], wasChanged: false}
                     setTableFields(newTableFields)
 
-                    messaging.send('Alterações salvas com sucesso', true);
+                    messaging.send('Alterações salvas com sucesso', true)
                 } catch (error: any) {
-                    return messaging.send(error.toString(), false);
+                    return messaging.send(error.toString(), false)
                 }
             }
         }
@@ -281,8 +293,8 @@ export default function AdminTables() {
     } = useAdminTables()
 
     useEffect(() => {
-        console.log(tableFields);
-        console.log(tableName);
+        console.log(tableFields)
+        console.log(tableName)
 
 
     }, [tableFields, tableName])
@@ -368,13 +380,13 @@ export default function AdminTables() {
         <CommandDialog open={open} onOpenChange={setOpen}>
             <div className={sty.cardcontainer}>
                 <div className={sty.cardtitle}>
-                  <h1 className={sty.title}> Deseja apagar essa tabela?</h1> 
+                    <h1 className={sty.title}> Deseja apagar essa tabela?</h1> 
                 </div>
             <div className={sty.header}>
                 <h1 className={sty.description}>
                     Essa ação irá mover essa tabela e os dados
                     diretamente para a lixeira, para confirmar
-                    sua deleção reescreva <span className={sty.span}> "{tableName.currentTableName}" </span>
+                    sua deleção reescreva <span className={sty.span}> {`'${tableName.currentTableName}'`} </span>
                 </h1>
             </div>
             <div className={sty.footer}>
