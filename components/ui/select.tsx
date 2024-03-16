@@ -115,7 +115,7 @@ const SelectLabel = React.forwardRef<
 SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 interface SelectItemProps{
-  value: string;
+  value?: string;
   selected?: boolean;
   className?: string,
   children?: string,

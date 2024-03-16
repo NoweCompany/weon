@@ -27,8 +27,6 @@ import {
   CommandDialog,
   CommandInput,
   CommandList,
-  CommandItem,
-  CommandEmpty,
   CommandGroup,
 } from '@/components/ui/command';
 
@@ -72,18 +70,6 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
   const toggleDialog = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === '' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        toggleDialog();
-      }
-    };
-
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
 
   const screen = "Tabelas";
   const page = [title];
@@ -159,7 +145,7 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                       <Button key={index} 
                       className={sty.mapButton}
                       variant="ghost"                  
-                       onClick={(ev) => handleClickInCollectionBtn(ev, collectionInfo.collectionName)}> 
+                      onClick={(ev) => handleClickInCollectionBtn(ev, collectionInfo.collectionName)}> 
                       {collectionInfo.collectionName}</Button>
                     ))
                   }
@@ -192,8 +178,7 @@ const FloatNavDados: React.FC<FloatNavDadosProps> = ({
                         <div className={sty.mobileDrawerContent}>
                           <Button
                             className={sty.mobileButtonDrawerContent}
-                             onClick={toggleDialog}> Pesquisar  </Button>
-
+                            onClick={toggleDialog}> Pesquisar  </Button>
                           {buttonContent.map((content, index) => {
                             const { name, className, id, functionOnClick, variant } = content
                             return (

@@ -192,17 +192,14 @@ const selectContent: SelectContentProtocol = {
   selecteOptions: [
     {
       name: 'Importar',
-      variant: "default",
       functionOnClick: onButtonClickImport
     },
     {
       name: 'Exportar',
-      variant: "default",
       functionOnClick: onButtonClickExport
     },
     {
       name: 'Exportar modelo',
-      variant: "secondary",
       functionOnClick: onButtonClickExportModel
     }
   ]
