@@ -8,24 +8,24 @@ import {
 } from "@/components/ui/card"
 
 import { Input } from "@/components/ui/input"
+import { field } from '@/apiRequests';
+import TableName from '@/interfaces/TableName';
+import { messaging } from '@/services';
 
 interface FormFields {
   tableFields: TableFields[]
   setTableFields: Dispatch<SetStateAction<TableFields[]>>
+  tableName: TableName,
 }
-
-interface OptionItem{
-  buttonContent: ButtonContent[]
-
-} 
 
 export function FormFields({
   tableFields,
   setTableFields,
+  tableName,
 }: FormFields) {
 
   const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
-
+  
   function onChangeFieldName(e: React.ChangeEvent<HTMLInputElement>, index: number) {
     const { value } = e.target;
     const newTableFields = [...tableFields]
@@ -42,8 +42,17 @@ export function FormFields({
 
   function onChangeType(e: React.ChangeEvent<HTMLSelectElement>, index: number) {
     const { value } = e.target;
+
     const newTableFields = [...tableFields];
-    newTableFields[index] = { ...newTableFields[index], type: value };
+    const typeWithoutChange = fieldsWithoutChange[index]?.type || false
+
+    newTableFields[index] = { 
+      ...newTableFields[index],
+      type: value,
+      wasChanged: typeWithoutChange !==  value || !typeWithoutChange
+    };
+    console.log(newTableFields);
+    
     setTableFields(newTableFields);
   }
 
@@ -61,16 +70,33 @@ export function FormFields({
     setTableFields(newTableFields);
   }
 
-  function onClickDel(e: React.MouseEvent<HTMLHeadingElement, MouseEvent>){
-  const btnDel = e.target as HTMLElement
-  const td = btnDel.parentElement
-  const tr = td?.parentElement
-  tr?.remove()
+  function onClickDel(e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, tableField: TableFields){
+    const currentField = tableField
+    
+    if(currentField.deleteValidationLevel === 'confirm'){
+      field.deleteApi(tableName.tableSelected, currentField.originalName, currentField.name)
+        .then((info) => {
+          if (info?.error) return messaging.send(info.error, false)
+          return messaging.send(`Campo ${currentField.name} foi excluído com sucesso`, true)
+        })
+        .catch((error) => {
+          messaging.send(error, false)
+        })
+    }   
+    
+    const btnDel = e.target as HTMLElement
+    const td = btnDel.parentElement
+    const tr = td?.parentElement
+  
+    tr?.remove()
   }
+
+  const fieldTypes = ['string', 'long', 'double', 'bool', 'date'];
+
   return (
     <div className="flex justify-center"> 
       <form action="">
-<Card className={sty.tableContainer}>
+        <Card className={sty.tableContainer}>
         <table className={sty.tableMain} id="titulotabela">
           <thead>
             <tr className={sty.titleTable}>
@@ -90,6 +116,7 @@ export function FormFields({
                 onChange={(e) => onChangeType(e, i)}
                 className="block p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
               >
+                <option selected={!fieldTypes.includes(tableField.type)}>Selecione um tipo</option>
                 <option value="string" selected={tableField.type === 'string'}>Texto pequeno</option>
                 <option value="long" selected={tableField.type === 'long'}>Números inteiros</option>
                 <option value="double" selected={tableField.type === 'double'}>Números decimais</option>
@@ -101,7 +128,9 @@ export function FormFields({
                   <input className={sty.checkbox} type='checkbox' onChange={(e) => onChangeRequired(e, i)} checked={tableField.required} />
                 </td>
                 <td>
-                  <div className={sty.deletButton} onClick={(e) => onClickDel(e)}> Apagar </div>
+                  <div 
+                  className={sty.deletButton}   
+                  onClick={(e) => onClickDel(e, tableField)}> Apagar </div>
                 </td>
               </tr>
             ))}

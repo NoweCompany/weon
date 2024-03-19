@@ -13,6 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import FloatNavFields from '@/components/adminComponents/FloatNavFields'
 
 //Interfaces
 import CollectionInfo from '@/interfaces/CollectionInfo'
@@ -25,7 +26,6 @@ import { messaging } from "@/services"
 import { collection, field } from '@/apiRequests'
 
 import React, { useEffect, useState } from "react"
-import FloatNavFields from '@/components/adminComponents/FloatNavFields'
 
 function useAdminTables() {
     const [open, setOpen] = useState(false)
@@ -127,6 +127,7 @@ function useAdminTables() {
             getCollections()
             setShowFormFields(false)
             setInputDeletTable('')
+            setTableName({currentTableName: "", tableSelected: ""})
             event.preventDefault()
             setOpen((prevOpen) => !prevOpen)
             messaging.send(`Tabela ${tableName.tableSelected} excluída com sucesso!`, true)
@@ -201,12 +202,9 @@ function useAdminTables() {
                     if (response && response?.error) return messaging.send(response.error, false)
 
                     const newTableFields = [...tableFields]
-                    newTableFields[i] = { 
-                        ...newTableFields[i],
-                        state: 'updating',
-                        wasChanged: false
-                    }
-
+                    newTableFields[i].state = 'updating'
+                    newTableFields[i].deleteValidationLevel = 'confirm'
+                    newTableFields[i].wasChanged = false
                     setTableFields(newTableFields)
 
                     messaging.send('Alterações salvas com sucesso', true)
@@ -225,7 +223,7 @@ function useAdminTables() {
 
                     const newTableFields = [...tableFields]
                     
-                    newTableFields[i] = { ...newTableFields[i], wasChanged: false}
+                    newTableFields[i].wasChanged = false
                     setTableFields(newTableFields)
 
                     messaging.send('Alterações salvas com sucesso', true)
@@ -235,7 +233,6 @@ function useAdminTables() {
             }
         }
     }
-
 
     function onButtonClickAddField(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault()
@@ -337,8 +334,8 @@ export default function AdminTables() {
     } = useAdminTables()
 
     useEffect(() => {
-        console.log(tableFields)
-        console.log(tableName)
+        // console.log(tableFields)
+        // console.log(tableName)
 
 
     }, [tableFields, tableName])
@@ -395,6 +392,7 @@ export default function AdminTables() {
                         <FormFields
                             tableFields={tableFields}
                             setTableFields={setTableFields}
+                            tableName={tableName}
                         />
                     </form>
                 ) : (
