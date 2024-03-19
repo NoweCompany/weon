@@ -115,7 +115,8 @@ export function FormFields({
                 <select
                 onChange={(e) => onChangeType(e, i)}
                 className="block p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              >
+                disabled={tableField.existValues}
+                >
                 <option selected={!fieldTypes.includes(tableField.type)}>Selecione um tipo</option>
                 <option value="string" selected={tableField.type === 'string'}>Texto pequeno</option>
                 <option value="long" selected={tableField.type === 'long'}>Números inteiros</option>

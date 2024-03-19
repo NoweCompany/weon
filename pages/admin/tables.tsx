@@ -23,7 +23,7 @@ import TableFields from '@/interfaces/TableFields'
 
 //Services
 import { messaging } from "@/services"
-import { collection, field } from '@/apiRequests'
+import { collection, field, value } from '@/apiRequests'
 
 import React, { useEffect, useState } from "react"
 
@@ -98,6 +98,7 @@ function useAdminTables() {
             required: false,
             deleteValidationLevel: 'none',
             state: 'register',
+            existValues: false,
             wasChanged: true
         }
         setTableFields([newTableFields])
@@ -243,14 +244,27 @@ function useAdminTables() {
             deleteValidationLevel: 'none',
             originalName: '',
             state: 'register',
+            existValues: false,
             wasChanged: true
         }
 
         setTableFields([...tableFields, newTableFields])
     }
 
-    function onClickInRow(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, collectionInfo: CollectionInfo) {
-        const newTableField: TableFields[] = collectionInfo.fields.map((field) => {
+    async function onClickInRow(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, collectionInfo: CollectionInfo) {
+        let lastValue: {[key: string]: any} | null
+        try {
+            const data = await value.getApi(collectionInfo.collectionName)
+        
+            if(data?.error) return messaging.send(data?.error, false)
+        
+            lastValue = data[data.length - 1]
+        } catch (error) {
+        console.log(error);
+        return messaging.send('Erro ao validar valores existente no campo!', false)
+        }
+
+        const newTableField: TableFields[] = collectionInfo.fields.map((field) => {      
             return {
                 name: field.currentName,
                 originalName: field.originalName,
@@ -258,6 +272,7 @@ function useAdminTables() {
                 required: field.required,
                 deleteValidationLevel: 'confirm',
                 state: 'updating',
+                existValues: lastValue ? !!lastValue[field.originalName] : false,
                 wasChanged: false
             }
         })

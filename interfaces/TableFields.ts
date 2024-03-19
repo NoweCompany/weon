@@ -3,7 +3,8 @@ export default interface TableFields {
   originalName: string,
   type: string,
   required: boolean,
+  existValues: boolean
+  wasChanged: boolean
   deleteValidationLevel: 'none' | 'confirm'
   state: 'register' | 'updating'
-  wasChanged: boolean
 }
