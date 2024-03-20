@@ -70,7 +70,7 @@ export function FormFields({
     setTableFields(newTableFields);
   }
 
-  function onClickDel(e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, tableField: TableFields){
+  function onClickDel(e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, tableField: TableFields, index: number){
     const currentField = tableField
     
     if(currentField.deleteValidationLevel === 'confirm'){
@@ -83,12 +83,9 @@ export function FormFields({
           messaging.send(error, false)
         })
     }   
-    
-    const btnDel = e.target as HTMLElement
-    const td = btnDel.parentElement
-    const tr = td?.parentElement
-  
-    tr?.remove()
+    const newTableFields = [...tableFields]
+    newTableFields.splice(index, 1)
+    setTableFields(newTableFields)
   }
 
   const fieldTypes = ['string', 'long', 'double', 'bool', 'date'];
@@ -128,10 +125,8 @@ export function FormFields({
                 <td>
                   <input className={sty.checkbox} type='checkbox' onChange={(e) => onChangeRequired(e, i)} checked={tableField.required} />
                 </td>
-                <td>
-                  <div 
-                  className={sty.deletButton}   
-                  onClick={(e) => onClickDel(e, tableField)}> Apagar </div>
+                <td onClick={(e) => onClickDel(e, tableField, i)}>
+                  <div className={sty.deletButton}> Apagar </div>
                 </td>
               </tr>
             ))}
