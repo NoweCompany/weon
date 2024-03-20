@@ -1,5 +1,3 @@
-import ButtonContent from '@/interfaces/ButtonContent';
-import TableFields from '@/interfaces/TableFields';
 import { Dispatch, SetStateAction, useState } from 'react';
 import sty from "../../styles/style-components/formfield.module.css"
 
@@ -9,6 +7,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { field } from '@/apiRequests';
+import TableFields from '@/interfaces/TableFields';
 import TableName from '@/interfaces/TableName';
 import { messaging } from '@/services';
 
@@ -61,11 +60,12 @@ export function FormFields({
 
     const newTableFields = [...tableFields]
     const requiredWithoutChange = fieldsWithoutChange[index]?.required || false
-
+    console.log(requiredWithoutChange);
+    
     newTableFields[index] = { 
       ...newTableFields[index], 
       required: checked, 
-      wasChanged: requiredWithoutChange !==  checked || !requiredWithoutChange
+      wasChanged: requiredWithoutChange !==  checked
     }
     setTableFields(newTableFields);
   }

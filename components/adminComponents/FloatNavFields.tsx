@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import sty from '../../styles/style-components/floatnav.module.css';
-import BreadCrumber from "../global/BreadCrumber";
+import React, { useState, useEffect } from 'react'
+import sty from '../../styles/style-components/floatnav.module.css'
+import BreadCrumber from "../global/BreadCrumber"
 
-import { MoveDown, Plus } from 'lucide-react';
+import { MoveDown, Plus } from 'lucide-react'
 
 import {
   Drawer,
@@ -12,7 +12,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from '@/components/ui/drawer';
+} from '@/components/ui/drawer'
 
 import {
   CommandDialog,
@@ -21,20 +21,21 @@ import {
   CommandItem,
   CommandEmpty,
   CommandGroup,
-} from '@/components/ui/command';
+} from '@/components/ui/command'
 
 import {
   Button
-} from '@/components/ui/button';
+} from '@/components/ui/button'
 
 import {
   Card,
   CardHeader,
   CardTitle
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 
-import ButtonContent from '@/interfaces/ButtonContent';
+import ButtonContent from '@/interfaces/ButtonContent'
 import { Input } from "@/components/ui/input"
+import { value } from '@/apiRequests'
 
 interface FloatNavTablesProps {
   title: string
@@ -51,26 +52,27 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
   buttonContent,
   input
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [inputWithoutChange, setInputWithoutChange] = useState(input.value)
 
   const toggleDialog = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+    setOpen((prevOpen) => !prevOpen)
+  }
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === '' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        toggleDialog();
+        e.preventDefault()
+        toggleDialog()
       }
-    };
+    }
 
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
 
-  const screen = "Tabelas";
-  const page = [title];
+  const screen = "Tabelas"
+  const page = [title]
   const route = "none"
 
   return (
@@ -85,7 +87,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
             <CardTitle className={sty.cardTitle}>{title}</CardTitle>
           </CardHeader>
             <Input 
-            className={sty.input} 
+            className={ input.value === inputWithoutChange ? sty.input : sty.inputChanged} 
             type="text" 
             id='collectionName' 
             placeholder={input.tittle} 
@@ -197,7 +199,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default FloatNavTables;
+export default FloatNavTables
