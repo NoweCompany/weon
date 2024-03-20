@@ -35,29 +35,32 @@ import {
 
 import ButtonContent from '@/interfaces/ButtonContent'
 import { Input } from "@/components/ui/input"
-import { value } from '@/apiRequests'
+import TableName from '@/interfaces/TableName'
 
 interface FloatNavTablesProps {
-  title: string
+  tittle: string
   buttonContent: ButtonContent[]
   input: {
     tittle: string,
-    value: string,
+    value: TableName,
     onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void
   }
 }
 
 const FloatNavTables: React.FC<FloatNavTablesProps> = ({
-  title,
+  tittle,
   buttonContent,
   input
 }) => {
   const [open, setOpen] = useState(false)
-  const [inputWithoutChange, setInputWithoutChange] = useState(input.value)
 
   const toggleDialog = () => {
     setOpen((prevOpen) => !prevOpen)
   }
+
+  useEffect(() => {
+    console.log(input.value)    
+  }, [input])
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -72,7 +75,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
   }, [])
 
   const screen = "Tabelas"
-  const page = [title]
+  const page = [tittle]
   const route = "none"
 
   return (
@@ -84,14 +87,14 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
       <div className={sty.containerDesktop}>
         <Card className={sty.card}>
           <CardHeader className={sty.cardHeader}>
-            <CardTitle className={sty.cardTitle}>{title}</CardTitle>
+            <CardTitle className={sty.cardTitle}>{tittle}</CardTitle>
           </CardHeader>
             <Input 
-            className={ input.value === inputWithoutChange ? sty.input : sty.inputChanged} 
+            className={ input.value.currentTableName === input.value.tableSelected ? sty.input : sty.inputChanged} 
             type="text" 
             id='collectionName' 
             placeholder={input.tittle} 
-            value={input.value}
+            value={input.value.currentTableName}
             onChange={(e) => input.onChangeInput(e)}
             />
           <div className={sty.buttonContainer}>
@@ -138,7 +141,7 @@ const FloatNavTables: React.FC<FloatNavTablesProps> = ({
       <div className={sty.containerMobile}>
         <Card className={sty.card}>
           <CardHeader className={sty.cardHeader}>
-            <CardTitle className={sty.cardTitle}>{title}</CardTitle>
+            <CardTitle className={sty.cardTitle}>{tittle}</CardTitle>
           </CardHeader>
         </Card>
 

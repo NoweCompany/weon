@@ -396,11 +396,11 @@ export default function AdminTables() {
                 showFormFields ? (
                     <form>
                         <FloatNavFields
-                            title="Tabela"
+                            tittle="Tabela"
                             buttonContent={buttonContentNavFields}
                             input={{
-                                value: tableName.currentTableName,
                                 tittle: 'Nome da tabela',
+                                value: tableName,
                                 onChangeInput: onChangeInputNameCollection
                             }}
                         />
