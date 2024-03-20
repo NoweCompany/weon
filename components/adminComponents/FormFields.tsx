@@ -26,10 +26,10 @@ export function FormFields({
   const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
   
   function onChangeFieldName(e: React.ChangeEvent<HTMLInputElement>, index: number) {
-    const { value } = e.target;
+    const value  = e.target.value.trim();
     const newTableFields = [...tableFields]
     const nameWithoutChange = fieldsWithoutChange[index]?.name || ''
-    console.log(!!nameWithoutChange)    
+
     newTableFields[index] = { 
       ...newTableFields[index],
       name: value,
@@ -117,7 +117,7 @@ export function FormFields({
                 className="block p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
                 disabled={tableField.existValues}
                 >
-                <option selected={!fieldTypes.includes(tableField.type)}>Selecione um tipo</option>
+                <option value="" selected={!fieldTypes.includes(tableField.type)}>Selecione um tipo</option>
                 <option value="string" selected={tableField.type === 'string'}>Texto pequeno</option>
                 <option value="long" selected={tableField.type === 'long'}>Números inteiros</option>
                 <option value="double" selected={tableField.type === 'double'}>Números decimais</option>

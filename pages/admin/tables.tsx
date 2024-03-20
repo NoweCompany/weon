@@ -154,8 +154,9 @@ function useAdminTables() {
         const collectionName = tableName.currentTableName
         let collectionError = false
         const tableNameWasChanged = (tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected
-        if (tableNameWasChanged) {
-            try {
+        try {
+            if(!tableName.currentTableName ) return messaging.send("O nome da tabela deve ser um nome valido!", false)
+            if (tableNameWasChanged) {
                 const response = await collection.putApi(tableName.tableSelected, tableName.currentTableName)
                 if (response && response?.error) {
                     collectionError = true
@@ -166,12 +167,7 @@ function useAdminTables() {
                     tableSelected: collectionName,
                 })
                 messaging.send(`Tabela ${tableName.tableSelected} alterada com sucesso para ${tableName.currentTableName}.`, true)
-            } catch (error: any) {
-                collectionError = true
-                return messaging.send(error, false)
-            }
-        } else if (!tableName.tableSelected) {
-            try {
+            } else if (!tableName.tableSelected) {
                 const response = await collection.postApi(collectionName)
                 if (response && response?.error) {
                     collectionError = true
@@ -182,19 +178,26 @@ function useAdminTables() {
                     tableSelected: collectionName,
                 })
                 messaging.send(`Tabela ${collectionName} criada com sucesso.`, true)
-            } catch (error: any) {
-                collectionError = true
-                return messaging.send(error, false)
             }
-        }
 
-        if (collectionError) return
+            if (collectionError) return
 
-        for (let i = 0; i < tableFields.length; i++) {
-            const tablefield = tableFields[i]
-            if (!tablefield.wasChanged) continue
-            if (tablefield.state === 'register') {
-                try {
+            for (let i = 0; i < tableFields.length; i++) {
+                const tablefield = tableFields[i]
+                
+                if (!tablefield.wasChanged) continue
+                console.log(tablefield.name)
+                
+                if(!tablefield.name)  {
+                    messaging.send(`O nome do ${i + 1}° campo não é válido!`, false)
+                    continue
+                }
+                else if(!tablefield.type) {
+                    messaging.send(`O campo '${tablefield.name}' deve selecionar um tipo!'`, false)
+                    continue
+                }
+                
+                if (tablefield.state === 'register') {         
                     const response = await field.postApi(collectionName, tablefield.name, {
                         type: tablefield.type,
                         description: '',
@@ -208,12 +211,8 @@ function useAdminTables() {
                     newTableFields[i].wasChanged = false
                     setTableFields(newTableFields)
 
-                    messaging.send('Alterações salvas com sucesso', true)
-                } catch (error: any) {
-                    return messaging.send(error.toString(), false)
-                }
-            } else if (tablefield.state === 'updating') {
-                try {
+                    messaging.send(`Campo ${tablefield.name} registrado com sucesso!`, true)
+                } else if (tablefield.state === 'updating') {
                     const response = await field.putApi(collectionName, tablefield.originalName, {
                         newFieldName: tablefield.name,
                         fieldRequired: tablefield.required,
@@ -227,11 +226,12 @@ function useAdminTables() {
                     newTableFields[i].wasChanged = false
                     setTableFields(newTableFields)
 
-                    messaging.send('Alterações salvas com sucesso', true)
-                } catch (error: any) {
-                    return messaging.send(error.toString(), false)
+                    messaging.send(`Campo ${tablefield.name} alterado com sucesso!`, true)
                 }
             }
+        } catch (error: any) {
+            collectionError = true
+            return messaging.send(error, false)
         }
     }
 
@@ -287,7 +287,7 @@ function useAdminTables() {
 
     function onChangeInputNameCollection(e: React.ChangeEvent<HTMLInputElement>) {
         setTableName({
-            currentTableName: e.target.value,
+            currentTableName: e.target.value.trim(),
             tableSelected: tableName.tableSelected
         })
     }
