@@ -156,6 +156,12 @@ function useAdminTables() {
         const tableNameWasChanged = (tableName.tableSelected !== tableName.currentTableName) && tableName.tableSelected
         try {
             if(!tableName.currentTableName ) return messaging.send("O nome da tabela deve ser um nome valido!", false)
+            else if(
+                tableFields.length === 0 || 
+                (tableFields.length === 1 && (
+                    !tableFields[0].name || !tableFields[0].type
+                ))) return messaging.send("A tabela deve constar ao menos um campo", false)
+
             if (tableNameWasChanged) {
                 const response = await collection.putApi(tableName.tableSelected, tableName.currentTableName)
                 if (response && response?.error) {
