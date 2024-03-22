@@ -7,12 +7,7 @@ import TableListagem from "./../../components/adminComponents/TableListagem"
 import NoContentDisplay from '@/components/global/NoContentDisplay'
 import { FormFields } from '@/components/adminComponents/FormFields'
 import sty from "../../styles/style-components/alertConfirmationDelete.module.css"
-import {
-    CommandDialog,
-} from "@/components/ui/command"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import FloatNavFields from '@/components/adminComponents/FloatNavFields'
 
 //Interfaces
@@ -440,25 +435,7 @@ export default function AdminTables() {
                 )
             }
 
-        <CommandDialog open={open} onOpenChange={setOpen}>
-            <div className={sty.cardcontainer}>
-                <div className={sty.cardtitle}>
-                    <h1 className={sty.title}> Deseja apagar essa tabela?</h1> 
-                </div>
-            <div className={sty.header}>
-                <h1 className={sty.description}>
-                    Essa ação irá mover essa tabela e os dados
-                    diretamente para a lixeira, para confirmar
-                    sua deleção reescreva <span className={sty.span}> {`'${tableName.currentTableName}'`} </span>
-                </h1>
-            </div>
-            <div className={sty.footer}>
-                <Input onChange={onChangeInputDeletTable} value={inputDeletTable} placeholder="Digite o nome da tabela aqui!"></Input>
-                <Button variant="secondary" onClick={onButtonClickCancelRemoveTable}> cancelar </Button>
-                <Button variant="destructive" onClick={onButtonClickDeleteTable}> sim, deletar. </Button>
-            </div>
-            </div>
-        </CommandDialog>
+       
 
         </>
     )
