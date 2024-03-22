@@ -1,45 +1,48 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import sty from "../../styles/style-components/alertConfirmationDelete.module.css"
-import { useState } from "react"
+import React, { useState } from "react"
 import {
     CommandDialog,
 } from "@/components/ui/command"
 
 interface props{
     description: string,
-    span: string
-}
-export default function alertValidationDelete({ description, span }: props) {
-    const [inputDeletTable, setInputDeletTable] = useState("")
-    const [open, setOpen] = useState(false)
+    span: string,
+    open: boolean,
+    inputDelet: string
+    onChangeInputDelet: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onButtonClickCancelRemove: (e: React.MouseEvent<HTMLButtonElement>) => void
+    onButtonClickDelete: (e: React.MouseEvent<HTMLButtonElement>) => void
 
-    const onChangeInputDeletTable = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputDeletTable(event.target.value);
-    };
-    
-    const onButtonClickCancelRemoveTable = () => {
-        setOpen(false);
-    };
-    
-    //nao sei como implemetna pra deletar elementos 
+}
+export default function AlertValidationDelete(
+    { 
+        description,
+        span,
+        open,
+        inputDelet,
+        onChangeInputDelet,
+        onButtonClickCancelRemove,
+        onButtonClickDelete,
+    }: props) {
     
     return (
         <>
-            <CommandDialog open={open} onOpenChange={setOpen}>
+            <CommandDialog open={open}>
                 <div className={sty.cardcontainer}>
                     <div className={sty.cardtitle}>
                         <h1 className={sty.title}> Deseja apagar essa tabela?</h1>
                     </div>
                     <div className={sty.header}>
                         <h1 className={sty.description}>
-                            {description} <span className={sty.span}> {span} </span>
+                            {description} <span className={sty.span}> {`"${span}"`} </span>
                         </h1>
                     </div>
                     <div className={sty.footer}>
-                        <Input onChange={onChangeInputDeletTable} value={inputDeletTable} placeholder="Digite o nome da tabela aqui"></Input>
-                        <Button variant="secondary" onClick={onButtonClickCancelRemoveTable}> cancelar </Button>
-                        <Button variant="destructive"> sim, deletar. </Button>
+                        <Input onChange={onChangeInputDelet} value={inputDelet} placeholder="Digite o nome da tabela aqui"></Input>
+                        <Button variant="secondary" onClick={onButtonClickCancelRemove}> cancelar </Button>
+                        <Button variant="destructive" onClick={onButtonClickDelete}> sim, deletar. </Button>
                     </div>
                 </div>
             </CommandDialog>

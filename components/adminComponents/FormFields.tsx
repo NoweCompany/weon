@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import sty from "../../styles/style-components/formfield.module.css"
 
 import {
@@ -10,6 +10,8 @@ import { field } from '@/apiRequests';
 import TableFields from '@/interfaces/TableFields';
 import TableName from '@/interfaces/TableName';
 import { messaging } from '@/services';
+import AlertValidationDelete from '../alerts/AlertValidation';
+import { Field } from 'react-hook-form';
 
 interface FormFields {
   tableFields: TableFields[]
@@ -24,6 +26,9 @@ export function FormFields({
 }: FormFields) {
 
   const [fieldsWithoutChange, setFieldsWithoutChange] = useState<TableFields[]>(tableFields)
+  const [inputDeletField, setInputDeletField] = useState<string>('')
+  const [showPopupDelete, setShowPopupDelete] = useState<boolean>(false)
+  const [fieldSelected, setFieldSelected] = useState<TableFields>()
   
   function onChangeFieldName(e: React.ChangeEvent<HTMLInputElement>, index: number) {
     const value  = e.target.value.trim();
@@ -74,18 +79,45 @@ export function FormFields({
     const currentField = tableField
     
     if(currentField.deleteValidationLevel === 'confirm'){
-      field.deleteApi(tableName.tableSelected, currentField.originalName, currentField.name)
-        .then((info) => {
-          if (info?.error) return messaging.send(info.error, false)
-          return messaging.send(`Campo ${currentField.name} foi excluído com sucesso`, true)
-        })
-        .catch((error) => {
-          messaging.send(error, false)
-        })
+      setFieldSelected(currentField)
+      setShowPopupDelete(true)
+      return
     }   
     const newTableFields = [...tableFields]
     newTableFields.splice(index, 1)
     setTableFields(newTableFields)
+  }
+
+  function onButtonClickDeleteField(){
+    if(!fieldSelected) return messaging.send('Não há nenhum campo selecionado!', false)
+    if(inputDeletField !== fieldSelected.name) return messaging.send('Ecreva o nome da tabela corretamente!', false)
+
+    field.deleteApi(tableName.tableSelected, fieldSelected.originalName, fieldSelected.name)
+        .then((info) => {
+          if (info?.error) return messaging.send(info.error, false)
+
+          setInputDeletField('')
+          setShowPopupDelete(false)
+          const newTableFields = [...tableFields]
+          const indexRemovedField = newTableFields.findIndex((field) => field.name === fieldSelected.name)
+          newTableFields.splice(indexRemovedField, 1)
+          setTableFields(newTableFields)
+          setFieldsWithoutChange(newTableFields)
+
+          return messaging.send(`Campo ${fieldSelected.name} foi excluído com sucesso`, true)
+        })
+        .catch((error) => {
+          messaging.send(error, false)
+        })
+  }
+
+  function onButtonClickCancelRemoveField(){
+    setShowPopupDelete(false)
+  }
+
+  function onChangeInputDeletField(e: React.ChangeEvent<HTMLInputElement>): void{
+    const value = String(e.target.value).trim()
+    setInputDeletField(value)
   }
 
   const fieldTypes = ['string', 'long', 'double', 'bool', 'date'];
@@ -133,7 +165,18 @@ export function FormFields({
           </tbody>
         </table>
       </Card>
-    </form>
+      </form>
+      <AlertValidationDelete
+        description='Essa ação irá mover este campo e os dados
+        diretamente para a lixeira, para confirmar
+        sua deleção reescreva '
+        span={fieldSelected?.name || ''}
+        inputDelet={inputDeletField}
+        onButtonClickCancelRemove={onButtonClickCancelRemoveField}
+        onChangeInputDelet={onChangeInputDeletField}
+        onButtonClickDelete={onButtonClickDeleteField}
+        open={showPopupDelete}
+      />
     </div>
   )
 }

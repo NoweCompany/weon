@@ -21,6 +21,7 @@ import { messaging } from "@/services"
 import { collection, field, value } from '@/apiRequests'
 
 import React, { useEffect, useState } from "react"
+import AlertValidationDelete from '@/components/alerts/AlertValidation'
 
 function useAdminTables() {
     const [open, setOpen] = useState(false)
@@ -72,7 +73,6 @@ function useAdminTables() {
         }
     }, [collectionInfo])
 
-    
     function getCollections() {
         collection.getApi()
         .then((info: any[] | { error: string }) => {
@@ -82,7 +82,7 @@ function useAdminTables() {
     .catch((error) => {
         messaging.send(error, false)
     })
-}
+    }
 
     function onButtonClickAdd() {
         setShowFormFields(true)
@@ -373,6 +373,7 @@ export default function AdminTables() {
         {
             name: 'deletar',
             functionOnClick: onClickDeleteButtonNav,
+            disabled: !(!!tableName.tableSelected),
             variant: 'destructive',
         },
         {
@@ -396,6 +397,21 @@ export default function AdminTables() {
             {
                 showFormFields ? (
                     <form>
+                        {
+                            open && (
+                                <AlertValidationDelete
+                                description='Essa ação irá mover essa tabela e os dados
+                                diretamente para a lixeira, para confirmar
+                                sua deleção reescreva '
+                                span={tableName.tableSelected}
+                                inputDelet={inputDeletTable}
+                                onButtonClickCancelRemove={onButtonClickCancelRemoveTable}
+                                onChangeInputDelet={onChangeInputDeletTable}
+                                onButtonClickDelete={onButtonClickDeleteTable}
+                                open={open}
+                            />
+                            )
+                        }
                         <FloatNavFields
                             tittle="Tabela"
                             buttonContent={buttonContentNavFields}
@@ -426,17 +442,14 @@ export default function AdminTables() {
                                 />
                             ) : (
                                 <NoContentDisplay
-                                    text={`Não há nenhuma tabela criada. \n 
-                        Clique em criar para registar uma nova tabela.`}
+                                text={`Não há nenhuma tabela criada. \n 
+                                Clique em criar para registar uma nova tabela.`}
                                 />
                             )
                         }
                     </>
                 )
             }
-
-       
-
         </>
     )
 }
