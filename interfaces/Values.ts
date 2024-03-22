@@ -1,0 +1,1 @@
+export type Value = { _id: string; [key: string]: any };

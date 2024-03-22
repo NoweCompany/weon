@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import Field from '@/interfaces/Field';
 import ButtonContent from '@/interfaces/ButtonContent';
 import { SelectContentProtocol } from '@/interfaces/SelectContent'
+import { Value } from '@/interfaces/Values';
 
 import { collection, value, download } from '@/apiRequests';
 import { messaging } from '@/services/';
@@ -19,11 +20,7 @@ interface CollectionInfo {
     collectionName: string,
     fields: Field[]
 }
-type Data = { _id: string; [key: string]: any };
-
 type tableColumnsType = Field[];
-type tableRowsType = Data[];
-
 interface DadosProps {
   collectionNameUrl?: string
 }
@@ -37,10 +34,10 @@ export default function Dados({ collectionNameUrl }: DadosProps)  {
   const [existCollection, setExistCollection] = useState(false)
 
   const [tableColumns, setTableColumns] = useState<tableColumnsType>([])
-  const [tableRows, setTableRows] = useState<tableRowsType>([])
+  const [tableRows, setTableRows] = useState<Value[]>([])
   const [rowsSelected, setRowsSelected] = useState<{[key: string]: boolean}>({})
 
-  const [formValue, setFormValue] = useState<Data | null>(null)
+  const [formValue, setFormValue] = useState<Value | null>(null)
   const [showFormUpload, setShowFormUpload] = useState<boolean>(false)
   const [showFormData, setShowFormData] = useState<boolean>(false)
 
@@ -64,7 +61,6 @@ async function loadSideBarOptions(){
         setCollectionInfos(info)          
       })
       .catch((error) => {
-        console.log(error)
         messaging.send(error, false)
       })
 }
@@ -76,16 +72,16 @@ function generateTable(collectionName: string, collectionsInfos: CollectionInfo[
   if(!currentCollection) {
     return setText(`A tabela ${collectionName} não existe, selecione uma tabela existente.`) 
   }
-  setExistCollection(true)
-  setTableColumns(currentCollection?.fields)
-
+  setText('')
+  
   value.getApi(collectionName)
-    .then(fieldsInfo => {
-        if(fieldsInfo?.error) return messaging.send(fieldsInfo.error, false)
-        setTableRows(fieldsInfo)
+  .then(fieldsInfo => {
+    if(fieldsInfo?.error) return messaging.send(fieldsInfo.error, false)
+      setExistCollection(true)
+      setTableRows(fieldsInfo)
+      setTableColumns(currentCollection?.fields)
     })
     .catch(error => messaging.send(error, false))
-  setText('')
 }
 
 function handleClickInCollectionBtn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, collectionName: string){
@@ -108,7 +104,7 @@ function onCLickInRow(e: React.MouseEvent<HTMLTableRowElement>): void{
   }, {});
   value._id = idDocument
   
-  setFormValue(value as Data)
+  setFormValue(value as Value)
   setMethod('PUT')
   setShowFormData(true)
 }
@@ -156,7 +152,6 @@ function onButtonClickExport():void {
 }
 
 function onButtonClickImport():void {
-  console.log('Importar')
   setShowFormUpload(true)
 }
 
@@ -244,7 +239,11 @@ return (
                                 title={collectionName}
                                 buttonContent={buttonContentTable}
                                 selectContent={selectContent}/> 
-                                  <SearchBar/>
+                                <SearchBar 
+                                  tableColumns={tableColumns}
+                                  tableRows={tableRows}
+                                  setTableRows={setTableRows}
+                                  />
                                 <Table  
                                   onCLickInRow={onCLickInRow}
                                   tableColumns={tableColumns}
