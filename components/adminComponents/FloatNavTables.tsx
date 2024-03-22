@@ -5,15 +5,6 @@ import BreadCrumber from "../global/BreadCrumber";
 import { MoveDown, Plus } from 'lucide-react';
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
-
-import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
