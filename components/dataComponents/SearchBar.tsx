@@ -35,12 +35,17 @@ export default function SearchBar({
     const [tableRowOriginal, setTableRowOriginal] = useState<Value[]>(tableRows)
     const [fieldSelected, setFieldSelected] = useState<string>('');
 
+    useEffect(() => {
+        setTableRowOriginal(tableRows)      
+    }, [tableColumns])
+
     function onChageInputValue(e: React.ChangeEvent<HTMLInputElement>){
         if(!fieldSelected) return
         const inputvalue = String((e.target.value).trim())
         
         if(inputvalue){
-            const arrFiltred = tableRows.filter((value) => {
+            console.log(inputvalue, tableRows)            
+            const arrFiltred = tableRowOriginal.filter((value) => {
                 const valueTableRow = String(value[fieldSelected]).trim()
                 
                 if(valueTableRow.includes(inputvalue)){
