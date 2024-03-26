@@ -35,6 +35,7 @@ export default function Dados({ collectionNameUrl }: DadosProps)  {
 
   const [tableColumns, setTableColumns] = useState<tableColumnsType>([])
   const [tableRows, setTableRows] = useState<Value[]>([])
+  const [tableRowsWithoutChange, setTableRowsWithoutChange] = useState(tableRows)
   const [rowsSelected, setRowsSelected] = useState<{[key: string]: boolean}>({})
 
   const [formValue, setFormValue] = useState<Value | null>(null)
@@ -79,6 +80,7 @@ function generateTable(collectionName: string, collectionsInfos: CollectionInfo[
     if(fieldsInfo?.error) return messaging.send(fieldsInfo.error, false)
       setExistCollection(true)
       setTableRows(fieldsInfo)
+      setTableRowsWithoutChange(fieldsInfo)
       setTableColumns(currentCollection?.fields)
     })
     .catch(error => messaging.send(error, false))
@@ -130,6 +132,7 @@ function onButtonClickDel(): void{
       const newRows = tableRows.filter(row => !valueIds.includes(row._id))
       setRowsSelected({})
       setTableRows(newRows);
+      setTableRowsWithoutChange(newRows);
 
       return messaging.send('Valor deletado', true)
     })
@@ -247,7 +250,9 @@ return (
                                 <Table  
                                   onCLickInRow={onCLickInRow}
                                   tableColumns={tableColumns}
+                                  tableRowsWithoutChange={tableRowsWithoutChange}
                                   tableRows={tableRows}
+                                  setTableRows={setTableRows}
                                   setRowsSelected={setRowsSelected}
                                   rowsSelected={rowsSelected}>
                                 </Table>

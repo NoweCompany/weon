@@ -26,6 +26,18 @@
 }
 
 .tableHeader {
+    
+}
+
+.tableHeader div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.5em;
+}
+
+.thTableHeader {
     background-color: #000000;
     color: #fff;
     font-family: bold;

@@ -43,8 +43,7 @@ export default function SearchBar({
         if(!fieldSelected) return
         const inputvalue = String((e.target.value).trim())
         
-        if(inputvalue){
-            console.log(inputvalue, tableRows)            
+        if(inputvalue){           
             const arrFiltred = tableRowOriginal.filter((value) => {
                 const valueTableRow = String(value[fieldSelected]).trim()
                 
@@ -68,13 +67,13 @@ export default function SearchBar({
         <div className={sty.containerDesktop}>
             <Card className={sty.card}>
                 <CardTitle className={sty.CardTitle}>
-                    <h1> Buscar por </h1>
+                    Buscar por
                 </CardTitle>
                 <CardHeader className={sty.cardHeader}>
                     <Input onChange={onChageInputValue} className={sty.input} type="text" placeholder="Valor" />
                 </CardHeader>
                 <CardTitle className={sty.CardTitle}>
-                    <h1> no campo </h1>
+                    no campo
                 </CardTitle>
                 <div className={sty.buttonContainer}>
                     <Select onValueChange={onChageSelectValue}>
